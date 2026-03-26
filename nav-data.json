@@ -1,0 +1,43 @@
+{
+  "updated_at": "2026-03-26T11:45:47.771Z",
+  "date": "2026-03-26",
+  "count": 9,
+  "funds": {
+    "KFGGSSF": {
+      "nav": 7.1544,
+      "nav_date": "2026-03-23"
+    },
+    "KF-LATAM": {
+      "nav": 9.763,
+      "nav_date": "2026-03-24"
+    },
+    "KKP EQ THAI ESG": {
+      "nav": 8.5462,
+      "nav_date": "2026-03-25"
+    },
+    "KKP GB THAI ESG": {
+      "nav": 10.8196,
+      "nav_date": "2026-03-25"
+    },
+    "KT-BOND": {
+      "nav": 10.7178,
+      "nav_date": "2026-03-24"
+    },
+    "K-VIETNAM-SSF": {
+      "nav": 12.4136,
+      "nav_date": "2026-03-25"
+    },
+    "SCBCOMP": {
+      "nav": 7.7405,
+      "nav_date": "2026-03-23"
+    },
+    "TLA-GEQ": {
+      "nav": 10.8217,
+      "nav_date": "2026-03-25"
+    },
+    "TLFVMR-ASIAX": {
+      "nav": 11.5203,
+      "nav_date": "2026-03-25"
+    }
+  }
+}
