@@ -1,38 +1,64 @@
 /**
- * fetch-nav.js v4 — Auto-match fund names
- * 
- * First run: dumps all SEC fund names to sec-funds.json so you can 
- * verify name mapping. Subsequent runs: fetches NAV for matched funds.
+ * fetch-nav.js v5 — Hardcoded proj_id map, runs in ~2 minutes
+ * Only needs SEC_KEY_DAILYINFO secret.
  *
- * GitHub Secrets required:
- *   SEC_KEY_FACTSHEET  — Fund Factsheet API key  
- *   SEC_KEY_DAILYINFO  — Fund Daily Info API key
+ * proj_ids verified from SEC database scan on 2026-03-27
  */
 
 const https = require('https');
 const fs    = require('fs');
 
-const KEY_FS = process.env.SEC_KEY_FACTSHEET;
 const KEY_DI = process.env.SEC_KEY_DAILYINFO;
 const BASE   = 'api.sec.or.th';
 
-if (!KEY_FS || !KEY_DI) {
-  console.error('ERROR: SEC_KEY_FACTSHEET and SEC_KEY_DAILYINFO must be set');
+if (!KEY_DI) {
+  console.error('ERROR: SEC_KEY_DAILYINFO must be set');
   process.exit(1);
 }
 
-// Your app's fund names (from the debug log)
-const APP_FUNDS = [
-  'ABGDD-SSF', 'ASP-ThaiESG', 'B-FUTURESSF', 'B-INNOTECHSSF',
-  'ES-GINNO-SSF', 'K-CHANGE-SSF', 'KFCMEGASSF', 'KFGGSSF',
-  'KF-LATAM', 'K-GOLD-A(A)', 'KKP EMXCN-H-SSF', 'KKP EQ THAI ESG',
-  'KKP GB THAI ESG', 'KKP US500-UH-SSF', 'KT-BOND', 'K-VIETNAM-SSF',
-  'MEGA10CHINA-SSF', 'ONE-UGG-ASSF', 'PRINCIPAL iPROPEN-SSF',
-  'SCBAXJ(SSF)', 'SCBCHA-SSF', 'SCBCHA(SSFE)', 'SCBCOMP',
-  'SCBCTECH(SSFE)', 'SCBEUROPE(SSF)', 'SCBEUROPE(SSFE)', 'SCBGOLDH-SSF',
-  'SCBNDQ(SSF)', 'SCBNEXT(SSFE)', 'SCBS&P500(SSFA)', 'SCBVIET(SSFA)',
-  'SCBVIET(SSFE)', 'SCBWORLD(SSFE)', 'TDSThaiESG-A', 'TISCOCHA-SSF',
-  'TLA-GEQ', 'TLFVMR-ASIAX', 'UCHINA-SSF', 'UGIS-SSF', 'UOBSA-SSF'
+// [app_fund_name, proj_id]
+// UOBSA-SSF excluded — not found in SEC Factsheet API (may be too new)
+// Update manually via NAV 📝 button in app
+const FUND_MAP = [
+  ['ABGDD-SSF',             'M0020_2539'],
+  ['ASP-ThaiESG',           'M0804_2566'],
+  ['B-FUTURESSF',           'M0053_2563'],
+  ['B-INNOTECHSSF',         'M0078_2565'],
+  ['ES-GINNO-SSF',          'M0479_2563'],
+  ['K-CHANGE-SSF',          'M0131_2562'],
+  ['KFCMEGASSF',            'M0397_2565'],
+  ['KFGGSSF',               'M0379_2564'],
+  ['KF-LATAM',              'M0028_2553'],
+  ['K-GOLD-A(A)',           'M0447_2551'],
+  ['KKP EQ THAI ESG',       'M0851_2566'],
+  ['KKP GB THAI ESG',       'M0840_2566'],
+  ['KKP EMXCN-H-SSF',      'M0077_2567'],
+  ['KKP US500-UH-SSF',      'M0301_2567'],
+  ['KT-BOND',               'M0758_2554'],
+  ['K-VIETNAM-SSF',         'M0511_2565'],
+  ['MEGA10CHINA-SSF',       'M0595_2565'],
+  ['ONE-UGG-ASSF',          'M0717_2558'],
+  ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],
+  ['SCBAXJ(SSF)',           'M0513_2564'],
+  ['SCBCHA-SSF',            'M0341_2564'],
+  ['SCBCHA(SSFE)',          'M0341_2564'],
+  ['SCBCOMP',               'M0882_2554'],
+  ['SCBCTECH(SSFE)',        'M0120_2564'],
+  ['SCBEUROPE(SSF)',        'M0274_2564'],
+  ['SCBEUROPE(SSFE)',       'M0274_2564'],
+  ['SCBGOLDH-SSF',          'M0396_2564'],
+  ['SCBNDQ(SSF)',           'M0311_2564'],
+  ['SCBNEXT(SSFE)',         'M0163_2564'],
+  ['SCBS&P500(SSFA)',       'M0357_2564'],
+  ['SCBVIET(SSFA)',         'M0539_2564'],
+  ['SCBVIET(SSFE)',         'M0539_2564'],
+  ['SCBWORLD(SSFE)',        'M0465_2564'],
+  ['TDSThaiESG-A',         'M0793_2567'],
+  ['TISCOCHA-SSF',         'M0258_2562'],
+  ['TLA-GEQ',              'M0563_2568'],
+  ['TLFVMR-ASIAX',         'M0096_2567'],
+  ['UCHINA-SSF',           'M0628_2563'],
+  ['UGIS-SSF',             'M0002_2560'],
 ];
 
 function get(path, key) {
@@ -62,106 +88,56 @@ function dateStr(daysAgo) {
   return d.toISOString().split('T')[0];
 }
 
-// Fuzzy match: find closest SEC name for an app fund name
-function fuzzyMatch(appName, secNames) {
-  const appUp = appName.toUpperCase();
-  // 1. Exact match
-  if (secNames[appUp]) return appUp;
-  // 2. SEC name starts with app name
-  for (const sn of Object.keys(secNames)) {
-    if (sn.startsWith(appUp) || appUp.startsWith(sn)) return sn;
-  }
-  // 3. App name without spaces/special chars
-  const appClean = appUp.replace(/[\s\-\(\)]/g, '');
-  for (const sn of Object.keys(secNames)) {
-    if (sn.replace(/[\s\-\(\)]/g, '') === appClean) return sn;
+async function fetchNAV(projId) {
+  for (let i = 0; i <= 7; i++) {
+    const date = dateStr(i);
+    const r = await get(`/FundDailyInfo/${projId}/dailynav/${date}`, KEY_DI);
+    if (r.status === 204 || r.status === 404 || !r.data) continue;
+    if (r.status === 200 && r.data) {
+      const d = Array.isArray(r.data) ? r.data[0] : r.data;
+      const navVal  = parseFloat(d.last_val || d.nav_value || d.nav || 0);
+      const navDate = (d.nav_date || date).substring(0, 10);
+      if (navVal > 0) return { nav: navVal, nav_date: navDate };
+    }
+    await sleep(30);
   }
   return null;
 }
 
 async function main() {
-  console.log('Building fund map from SEC database...');
+  console.log(`Fetching NAV for ${FUND_MAP.length} funds...`);
+  console.log('Start:', new Date().toISOString());
 
-  const amcR = await get('/FundFactsheet/fund/amc', KEY_FS);
-  if (!amcR.data || !Array.isArray(amcR.data)) {
-    console.error('Cannot fetch AMC list:', amcR.status);
-    process.exit(1);
-  }
-  console.log(`${amcR.data.length} AMCs`);
-
-  // Build complete name→projId map
-  const secFunds = {}; // UPPER_NAME → proj_id
-  for (const amc of amcR.data) {
-    if (!amc.unique_id) continue;
-    const r = await get(`/FundFactsheet/fund/amc/${amc.unique_id}`, KEY_FS);
-    if (r.status === 200 && Array.isArray(r.data)) {
-      for (const f of r.data) {
-        if (f.proj_abbr_name && f.proj_id) {
-          secFunds[f.proj_abbr_name.toUpperCase()] = {
-            proj_id: f.proj_id,
-            name: f.proj_abbr_name
-          };
-        }
-      }
-    }
-    await sleep(80);
-  }
-  console.log(`SEC fund database: ${Object.keys(secFunds).length} funds`);
-
-  // Match app funds to SEC funds
-  const matched = {};
-  const unmatched = [];
-
-  for (const appName of APP_FUNDS) {
-    const secKey = fuzzyMatch(appName, secFunds);
-    if (secKey) {
-      matched[appName] = secFunds[secKey];
-      console.log(`  MATCH: ${appName} → ${secFunds[secKey].name} (${secFunds[secKey].proj_id})`);
-    } else {
-      unmatched.push(appName);
-      console.log(`  NO MATCH: ${appName}`);
-    }
-  }
-
-  console.log(`\nMatched: ${Object.keys(matched).length}, Unmatched: ${unmatched.length}`);
-  if (unmatched.length > 0) {
-    console.log('Unmatched funds:', unmatched.join(', '));
-  }
-
-  // Fetch NAV for matched funds
   const navData = {};
-  let updated = 0;
+  let updated = 0; let failed = 0;
 
-  for (const [appName, fund] of Object.entries(matched)) {
-    for (let i = 0; i <= 7; i++) {
-      const date = dateStr(i);
-      const r = await get(`/FundDailyInfo/${fund.proj_id}/dailynav/${date}`, KEY_DI);
-      if (r.status === 204 || r.status === 404 || !r.data) continue;
-      if (r.status === 200 && r.data) {
-        const d = Array.isArray(r.data) ? r.data[0] : r.data;
-        const navVal  = parseFloat(d.last_val || d.nav_value || d.nav || 0);
-        const navDate = (d.nav_date || date).substring(0, 10);
-        if (navVal > 0) {
-          // Store under UPPERCASE key so app can find it
-          navData[appName.toUpperCase()] = { nav: navVal, nav_date: navDate };
-          console.log(`  ✓ ${appName}: ${navVal} (${navDate})`);
-          updated++;
-          break;
-        }
-      }
-      await sleep(50);
+  for (const [name, projId] of FUND_MAP) {
+    const result = await fetchNAV(projId);
+    if (result) {
+      navData[name.toUpperCase()] = result;
+      console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date})`);
+      updated++;
+    } else {
+      console.log(`  ✗ ${name}: no NAV data`);
+      failed++;
     }
     await sleep(80);
   }
 
-  console.log(`\nDone: ${updated} NAVs fetched`);
+  console.log(`\nDone: ${updated} updated, ${failed} failed`);
+  console.log('End:', new Date().toISOString());
+
+  // Preserve existing entries (e.g. UOBSA-SSF updated manually)
+  let existing = {};
+  try {
+    existing = JSON.parse(fs.readFileSync('nav-data.json', 'utf8')).funds || {};
+  } catch(e) {}
 
   const output = {
     updated_at: new Date().toISOString(),
     date: dateStr(0),
     count: updated,
-    unmatched: unmatched,
-    funds: navData
+    funds: { ...existing, ...navData }
   };
 
   fs.writeFileSync('nav-data.json', JSON.stringify(output, null, 2));
