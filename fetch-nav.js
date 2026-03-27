@@ -1,35 +1,59 @@
 /**
- * fetch-nav.js v11 — Same approach as Cloudflare Worker (confirmed working)
- * Step 1: Scan AMC list to find proj_id by exact fund name match
- * Step 2: Fetch NAV by proj_id + date
- * This is exactly what the Worker does and it works.
- *
- * GitHub Secrets: SEC_KEY_FACTSHEET, SEC_KEY_DAILYINFO
+ * fetch-nav.js v13 — Updated with correct proj_ids from full SEC dump
+ * GitHub Secrets: SEC_KEY_DAILYINFO
  */
 
 const https = require('https');
 const fs    = require('fs');
 
-const KEY_FS = process.env.SEC_KEY_FACTSHEET;
 const KEY_DI = process.env.SEC_KEY_DAILYINFO;
 const BASE   = 'api.sec.or.th';
 
-if (!KEY_FS || !KEY_DI) {
-  console.error('ERROR: Both SEC_KEY_FACTSHEET and SEC_KEY_DAILYINFO must be set');
-  process.exit(1);
-}
+if (!KEY_DI) { console.error('ERROR: SEC_KEY_DAILYINFO must be set'); process.exit(1); }
 
-const FUND_NAMES = [
-  'ABGDD-SSF', 'ASP-ThaiESG', 'B-FUTURESSF', 'B-INNOTECHSSF',
-  'ES-GINNO-SSF', 'K-CHANGE-SSF', 'KFCMEGASSF', 'KFGGSSF',
-  'KF-LATAM', 'K-GOLD-A(A)', 'KKP EMXCN-H-SSF', 'KKP EQ THAI ESG',
-  'KKP GB THAI ESG', 'KKP US500-UH-SSF', 'KT-BOND', 'K-VIETNAM-SSF',
-  'MEGA10CHINA-SSF', 'ONE-UGG-ASSF', 'PRINCIPAL iPROPEN-SSF',
-  'SCBAXJ(SSF)', 'SCBCHA-SSF', 'SCBCHA(SSFE)', 'SCBCOMP',
-  'SCBCTECH(SSFE)', 'SCBEUROPE(SSF)', 'SCBEUROPE(SSFE)', 'SCBGOLDH-SSF',
-  'SCBNDQ(SSF)', 'SCBNEXT(SSFE)', 'SCBS&P500(SSFA)', 'SCBVIET(SSFA)',
-  'SCBVIET(SSFE)', 'SCBWORLD(SSFE)', 'TDSThaiESG-A', 'TISCOCHA-SSF',
-  'TLA-GEQ', 'TLFVMR-ASIAX', 'UCHINA-SSF', 'UGIS-SSF', 'UOBSA-SSF'
+// All proj_ids verified from full SEC AMC dump on 2026-03-27
+// Format: [app_fund_name, proj_id, sec_name_for_reference]
+const FUND_MAP = [
+  ['ABGDD-SSF',             'M0250_2564'],  // ABGDD-M (closest — SSF not in DB)
+  ['ASP-ThaiESG',           'M0804_2566'],
+  ['B-FUTURESSF',           'M0053_2563'],
+  ['B-INNOTECHSSF',         'M0078_2565'],
+  ['ES-GINNO-SSF',          'M0038_2564'],  // T-ES-GINNO-SSF (FIXED from M0479_2563)
+  ['K-CHANGE-SSF',          'M0131_2562'],  // K-CHANGE
+  ['KFCMEGASSF',            'M0397_2565'],
+  ['KFGGSSF',               'M0379_2564'],
+  ['KF-LATAM',              'M0028_2553'],
+  ['K-GOLD-A(A)',           'M0447_2551'],
+  ['KKP EQ THAI ESG',       'M0851_2566'],
+  ['KKP GB THAI ESG',       'M0840_2566'],
+  ['KKP EMXCN-H-SSF',      'M0077_2567'],  // KKP EMXCN-H FUND
+  ['KKP US500-UH-SSF',      'M0301_2567'],  // KKP US500-UH FUND
+  ['KT-BOND',               'M0758_2554'],
+  ['K-VIETNAM-SSF',         'M0511_2565'],
+  ['MEGA10CHINA-SSF',       'M0682_2566'],  // MEGA10CHINA (FIXED from M0595_2565)
+  ['ONE-UGG-ASSF',          'M0717_2558'],  // ONE-UGG
+  ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],  // PRINCIPAL iPROPEN
+  ['SCBAXJ(SSF)',           'M0513_2564'],  // SCBAXJ
+  ['SCBCHA-SSF',            'M0005_2558'],  // SCBCHAFUND
+  ['SCBCHA(SSFE)',          'M0005_2558'],  // SCBCHAFUND
+  ['SCBCOMP',               'M0882_2554'],
+  ['SCBCTECH(SSFE)',        'M0120_2564'],
+  ['SCBEUROPE(SSF)',        'M0274_2564'],
+  ['SCBEUROPE(SSFE)',       'M0274_2564'],
+  ['SCBGOLDH-SSF',          'M0856_2553'],  // SCBGOLDHFUND (FIXED from M0396_2564)
+  ['SCBNDQ(SSF)',           'M0311_2564'],
+  ['SCBNEXT(SSFE)',         'M0163_2564'],
+  ['SCBS&P500(SSFA)',       'M0643_2555'],  // SCBS&P500FUND
+  ['SCBVIET(SSFA)',         'M0539_2564'],
+  ['SCBVIET(SSFE)',         'M0539_2564'],
+  ['SCBWORLD(SSFE)',        'M0465_2564'],
+  ['TDSThaiESG-A',         'M0793_2567'],  // TDSThaiESG
+  ['TISCOCHA-SSF',         'M0258_2562'],  // TISCOCHA
+  ['TLA-GEQ',              'M0563_2568'],
+  ['TLFVMR-ASIAX',         'M0096_2567'],
+  ['UCHINA-SSF',           'M0533_2561'],  // UCHINA-M (FIXED from M0628_2563)
+  ['UGIS-SSF',             'M0002_2560'],  // UGIS
+  ['UOBSA-SSF',            'M0233_2550'],  // UOBSA-M
 ];
 
 function get(path, key) {
@@ -41,12 +65,12 @@ function get(path, key) {
       let body = '';
       res.on('data', d => body += d);
       res.on('end', () => {
-        try { resolve({ status: res.statusCode, ok: res.statusCode === 200, data: body ? JSON.parse(body) : null }); }
-        catch(e) { resolve({ status: res.statusCode, ok: false, data: null }); }
+        try { resolve({ status: res.statusCode, data: body ? JSON.parse(body) : null }); }
+        catch(e) { resolve({ status: res.statusCode, data: null }); }
       });
     });
-    req.on('error', e => resolve({ status: 0, ok: false, data: null }));
-    req.setTimeout(12000, () => { req.destroy(); resolve({ status: 0, ok: false, data: null }); });
+    req.on('error', () => resolve({ status: 0, data: null }));
+    req.setTimeout(10000, () => { req.destroy(); resolve({ status: 0, data: null }); });
     req.end();
   });
 }
@@ -58,42 +82,12 @@ function dateStr(daysAgo) {
   return d.toISOString().split('T')[0];
 }
 
-async function buildProjIdMap() {
-  console.log('Building proj_id map from AMC list...');
-  const amcR = await get('/FundFactsheet/fund/amc', KEY_FS);
-  if (!amcR.ok || !Array.isArray(amcR.data)) {
-    throw new Error('Cannot fetch AMC list: ' + amcR.status);
-  }
-  console.log(`${amcR.data.length} AMCs found`);
-
-  const needed = new Set(FUND_NAMES.map(n => n.toUpperCase()));
-  const projMap = {}; // UPPER_NAME → proj_id
-
-  for (const amc of amcR.data) {
-    if (!amc.unique_id) continue;
-    const r = await get(`/FundFactsheet/fund/amc/${amc.unique_id}`, KEY_FS);
-    if (r.ok && Array.isArray(r.data)) {
-      for (const f of r.data) {
-        const nameUp = (f.proj_abbr_name || '').toUpperCase();
-        if (needed.has(nameUp) && f.proj_id && !projMap[nameUp]) {
-          projMap[nameUp] = f.proj_id;
-          console.log(`  Found: ${f.proj_abbr_name} → ${f.proj_id}`);
-        }
-      }
-    }
-    await sleep(80);
-  }
-
-  console.log(`proj_id map: ${Object.keys(projMap).length}/${FUND_NAMES.length} funds found`);
-  return projMap;
-}
-
 async function fetchNAV(projId) {
   for (let i = 0; i <= 7; i++) {
     const date = dateStr(i);
     const r = await get(`/FundDailyInfo/${projId}/dailynav/${date}`, KEY_DI);
     if (r.status === 204 || r.status === 404 || !r.data) continue;
-    if (r.ok && r.data) {
+    if (r.status === 200 && r.data) {
       const d = Array.isArray(r.data) ? r.data[0] : r.data;
       const nav  = parseFloat(d.last_val || d.nav_value || d.nav || 0);
       const date2 = (d.nav_date || date).substring(0, 10);
@@ -105,10 +99,8 @@ async function fetchNAV(projId) {
 }
 
 async function main() {
-  console.log(`Fetching NAV for ${FUND_NAMES.length} funds (Worker method)...`);
+  console.log(`Fetching NAV for ${FUND_MAP.length} funds...`);
   console.log('Start:', new Date().toISOString());
-
-  const projMap = await buildProjIdMap();
 
   let existing = {};
   try { existing = JSON.parse(fs.readFileSync('nav-data.json', 'utf8')).funds || {}; }
@@ -117,20 +109,14 @@ async function main() {
   const navData = {};
   let updated = 0; let failed = 0;
 
-  for (const name of FUND_NAMES) {
-    const projId = projMap[name.toUpperCase()];
-    if (!projId) {
-      console.log(`  ✗ ${name}: proj_id not found in AMC list`);
-      failed++;
-      continue;
-    }
+  for (const [name, projId] of FUND_MAP) {
     const result = await fetchNAV(projId);
     if (result) {
       navData[name.toUpperCase()] = result;
-      console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date}) [${projId}]`);
+      console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date})`);
       updated++;
     } else {
-      console.log(`  ✗ ${name}: no NAV data [${projId}]`);
+      console.log(`  ✗ ${name}: no NAV data`);
       failed++;
     }
     await sleep(80);
