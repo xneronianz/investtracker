@@ -71,10 +71,6 @@ async function buildProjIdMap() {
 
   for (const amc of amcR.data) {
     if (!amc.unique_id) continue;
-    if (Object.keys(projMap).length >= needed.size) {
-      console.log('All funds found, stopping AMC scan early');
-      break;
-    }
     const r = await get(`/FundFactsheet/fund/amc/${amc.unique_id}`, KEY_FS);
     if (r.ok && Array.isArray(r.data)) {
       for (const f of r.data) {
