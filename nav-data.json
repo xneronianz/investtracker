@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-03-27T06:03:02.465Z",
+  "updated_at": "2026-03-27T06:39:42.310Z",
   "date": "2026-03-27",
-  "count": 37,
+  "count": 40,
   "funds": {
     "ABGDD-SSF": {
       "nav": 11.203,
@@ -128,7 +128,7 @@
       "nav_date": "2026-03-25"
     },
     "UCHINA-SSF": {
-      "nav": 7.3729,
+      "nav": 3.9131,
       "nav_date": "2026-03-25"
     },
     "UGIS-SSF": {
@@ -144,11 +144,11 @@
       "nav_date": "2026-03-25"
     },
     "SCBGOLDH-SSF": {
-      "nav": 19.9179,
-      "nav_date": "2026-03-26"
+      "nav": 6.8171,
+      "nav_date": "2026-03-25"
     },
     "SCBCHA-SSF": {
-      "nav": 9.1701,
+      "nav": 7.7832,
       "nav_date": "2026-03-26"
     },
     "SCBCHA(SSFE)": {
