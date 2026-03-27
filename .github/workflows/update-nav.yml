@@ -2,13 +2,8 @@ name: Update NAV Data
 
 on:
   schedule:
-    - cron: '0 1 * * 1-5'
+    - cron: '0 1 * * 1-5'  # 8am Bangkok (UTC+7) Mon-Fri
   workflow_dispatch:
-    inputs:
-      mode:
-        description: 'nav=update NAV | probe=find SCBGOLDH+ABGDD proj_ids'
-        required: false
-        default: 'nav'
 
 jobs:
   update-nav:
@@ -20,22 +15,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Probe missing proj_ids
-        if: github.event.inputs.mode == 'probe'
-        env:
-          SEC_KEY_FACTSHEET: ${{ secrets.SEC_KEY_FACTSHEET }}
-          SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
-        run: node probe-projids.js
-
-      - name: Fetch NAV data
-        if: github.event.inputs.mode != 'probe'
+      - name: Fetch NAV data from SEC Thailand
         env:
           SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
         run: node fetch-nav.js
-
-      - name: Commit nav-data.json
-        if: github.event.inputs.mode != 'probe'
+      - name: Commit and push nav-data.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
