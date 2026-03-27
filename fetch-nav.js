@@ -1,79 +1,43 @@
 /**
- * fetch-nav.js v7 — Hardcoded proj_id map, runs in ~2 minutes
- * Only needs SEC_KEY_DAILYINFO secret.
- * proj_ids verified from SEC database scan 2026-03-27
+ * fetch-nav.js v8 — Uses fund.sec.or.th/public/api (no key needed)
+ * Fetches NAV by fund_class_name directly — works for SSF/SSFE share classes
+ * No API key required. Runs server-side in GitHub Actions (no CORS issue).
  */
 
 const https = require('https');
 const fs    = require('fs');
 
-const KEY_DI = process.env.SEC_KEY_DAILYINFO;
-const BASE   = 'api.sec.or.th';
-
-if (!KEY_DI) {
-  console.error('ERROR: SEC_KEY_DAILYINFO must be set');
-  process.exit(1);
-}
-
-// [app_fund_name, proj_id]
-const FUND_MAP = [
-  ['ABGDD-SSF',             'M0020_2539'],
-  ['ASP-ThaiESG',           'M0804_2566'],
-  ['B-FUTURESSF',           'M0053_2563'],
-  ['B-INNOTECHSSF',         'M0078_2565'],
-  ['ES-GINNO-SSF',          'M0479_2563'],
-  ['K-CHANGE-SSF',          'M0131_2562'],
-  ['KFCMEGASSF',            'M0397_2565'],
-  ['KFGGSSF',               'M0379_2564'],
-  ['KF-LATAM',              'M0028_2553'],
-  ['K-GOLD-A(A)',           'M0447_2551'],
-  ['KKP EQ THAI ESG',       'M0851_2566'],
-  ['KKP GB THAI ESG',       'M0840_2566'],
-  ['KKP EMXCN-H-SSF',      'M0077_2567'],
-  ['KKP US500-UH-SSF',      'M0301_2567'],
-  ['KT-BOND',               'M0758_2554'],
-  ['K-VIETNAM-SSF',         'M0511_2565'],
-  ['MEGA10CHINA-SSF',       'M0595_2565'],
-  ['ONE-UGG-ASSF',          'M0717_2558'],
-  ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],
-  ['SCBAXJ(SSF)',           'M0513_2564'],
-  ['SCBCHA-SSF',            'M0005_2558'],
-  ['SCBCHA(SSFE)',          'M0005_2558'],
-  ['SCBCOMP',               'M0882_2554'],
-  ['SCBCTECH(SSFE)',        'M0120_2564'],
-  ['SCBEUROPE(SSF)',        'M0274_2564'],
-  ['SCBEUROPE(SSFE)',       'M0274_2564'],
-  ['SCBGOLDH-SSF',          'M0396_2564'],
-  ['SCBNDQ(SSF)',           'M0311_2564'],
-  ['SCBNEXT(SSFE)',         'M0163_2564'],
-  ['SCBS&P500(SSFA)',       'M0643_2555'],
-  ['SCBVIET(SSFA)',         'M0539_2564'],
-  ['SCBVIET(SSFE)',         'M0539_2564'],
-  ['SCBWORLD(SSFE)',        'M0465_2564'],
-  ['TDSThaiESG-A',         'M0793_2567'],
-  ['TISCOCHA-SSF',         'M0258_2562'],
-  ['TLA-GEQ',              'M0563_2568'],
-  ['TLFVMR-ASIAX',         'M0096_2567'],
-  ['UCHINA-SSF',           'M0628_2563'],
-  ['UGIS-SSF',             'M0002_2560'],
-  ['UOBSA-SSF',            'M0233_2550'],  // trying parent fund proj_id
+// All 40 funds by their exact fund_class_name in SEC database
+const FUND_NAMES = [
+  'ABGDD-SSF', 'ASP-ThaiESG', 'B-FUTURESSF', 'B-INNOTECHSSF',
+  'ES-GINNO-SSF', 'K-CHANGE-SSF', 'KFCMEGASSF', 'KFGGSSF',
+  'KF-LATAM', 'K-GOLD-A(A)', 'KKP EMXCN-H-SSF', 'KKP EQ THAI ESG',
+  'KKP GB THAI ESG', 'KKP US500-UH-SSF', 'KT-BOND', 'K-VIETNAM-SSF',
+  'MEGA10CHINA-SSF', 'ONE-UGG-ASSF', 'PRINCIPAL iPROPEN-SSF',
+  'SCBAXJ(SSF)', 'SCBCHA-SSF', 'SCBCHA(SSFE)', 'SCBCOMP',
+  'SCBCTECH(SSFE)', 'SCBEUROPE(SSF)', 'SCBEUROPE(SSFE)', 'SCBGOLDH-SSF',
+  'SCBNDQ(SSF)', 'SCBNEXT(SSFE)', 'SCBS&P500(SSFA)', 'SCBVIET(SSFA)',
+  'SCBVIET(SSFE)', 'SCBWORLD(SSFE)', 'TDSThaiESG-A', 'TISCOCHA-SSF',
+  'TLA-GEQ', 'TLFVMR-ASIAX', 'UCHINA-SSF', 'UGIS-SSF', 'UOBSA-SSF'
 ];
 
-function get(path, key) {
+const BASE = 'fund.sec.or.th';
+
+function get(path) {
   return new Promise((resolve) => {
     const req = https.request({
       hostname: BASE, path, method: 'GET',
-      headers: { 'Ocp-Apim-Subscription-Key': key, 'accept': 'application/json' }
+      headers: { 'accept': 'application/json' }
     }, res => {
       let body = '';
       res.on('data', d => body += d);
       res.on('end', () => {
         try { resolve({ status: res.statusCode, data: body ? JSON.parse(body) : null }); }
-        catch(e) { resolve({ status: res.statusCode, data: null }); }
+        catch(e) { resolve({ status: res.statusCode, data: null, raw: body.substring(0,100) }); }
       });
     });
-    req.on('error', () => resolve({ status: 0, data: null }));
-    req.setTimeout(10000, () => { req.destroy(); resolve({ status: 0, data: null }); });
+    req.on('error', e => resolve({ status: 0, data: null, err: e.message }));
+    req.setTimeout(15000, () => { req.destroy(); resolve({ status: 0, data: null, err: 'timeout' }); });
     req.end();
   });
 }
@@ -86,24 +50,42 @@ function dateStr(daysAgo) {
   return d.toISOString().split('T')[0];
 }
 
-async function fetchNAV(projId) {
-  for (let i = 0; i <= 7; i++) {
-    const date = dateStr(i);
-    const r = await get(`/FundDailyInfo/${projId}/dailynav/${date}`, KEY_DI);
-    if (r.status === 204 || r.status === 404 || !r.data) continue;
-    if (r.status === 200 && r.data) {
-      const d = Array.isArray(r.data) ? r.data[0] : r.data;
-      const navVal  = parseFloat(d.last_val || d.nav_value || d.nav || 0);
-      const navDate = (d.nav_date || date).substring(0, 10);
-      if (navVal > 0) return { nav: navVal, nav_date: navDate };
-    }
-    await sleep(30);
+async function fetchFundNAV(name) {
+  // Step 1: get proj_id via fund_class_name search
+  const encoded = encodeURIComponent(name);
+  const profileR = await get(`/public/api/v2/fund/general-info/profiles?fund_class_name=${encoded}`);
+
+  if (!profileR.data || !Array.isArray(profileR.data) || !profileR.data.length) {
+    return { error: `profile not found (status ${profileR.status})` };
   }
-  return null;
+
+  // Find exact match on fund_class_name
+  const match = profileR.data.find(p =>
+    (p.fund_class_name || '').toUpperCase() === name.toUpperCase()
+  ) || profileR.data[0];
+
+  const projId = match.proj_id;
+  if (!projId) return { error: 'no proj_id in profile' };
+
+  // Step 2: get daily NAV
+  const navR = await get(`/public/api/v2/fund/daily-info/profiles?proj_id=${encodeURIComponent(projId)}&fund_class_name=${encoded}`);
+
+  if (!navR.data || !Array.isArray(navR.data) || !navR.data.length) {
+    return { error: `no NAV data (status ${navR.status})` };
+  }
+
+  // Sort by date descending, take latest
+  navR.data.sort((a, b) => (b.nav_date || b.date || '').localeCompare(a.nav_date || a.date || ''));
+  const latest = navR.data[0];
+  const navVal  = parseFloat(latest.last_val || latest.nav_value || latest.nav || 0);
+  const navDate = (latest.nav_date || latest.date || '').substring(0, 10);
+
+  if (!navVal || !navDate) return { error: 'invalid NAV value' };
+  return { nav: navVal, nav_date: navDate };
 }
 
 async function main() {
-  console.log(`Fetching NAV for ${FUND_MAP.length} funds...`);
+  console.log(`Fetching NAV for ${FUND_NAMES.length} funds via fund.sec.or.th...`);
   console.log('Start:', new Date().toISOString());
 
   let existing = {};
@@ -113,17 +95,17 @@ async function main() {
   const navData = {};
   let updated = 0; let failed = 0;
 
-  for (const [name, projId] of FUND_MAP) {
-    const result = await fetchNAV(projId);
-    if (result) {
-      navData[name.toUpperCase()] = result;
+  for (const name of FUND_NAMES) {
+    const result = await fetchFundNAV(name);
+    if (result.nav) {
+      navData[name.toUpperCase()] = { nav: result.nav, nav_date: result.nav_date };
       console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date})`);
       updated++;
     } else {
-      console.log(`  ✗ ${name}: no NAV data (proj_id: ${projId})`);
+      console.log(`  ✗ ${name}: ${result.error}`);
       failed++;
     }
-    await sleep(80);
+    await sleep(200); // 200ms between requests
   }
 
   console.log(`\nDone: ${updated} updated, ${failed} failed`);
