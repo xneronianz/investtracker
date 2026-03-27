@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'nav=update NAV | dump=dump all AMC fund names'
+        description: 'nav=update NAV | probe=find SCBGOLDH+ABGDD proj_ids'
         required: false
         default: 'nav'
 
@@ -21,20 +21,21 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Dump all AMC fund names
-        if: github.event.inputs.mode == 'dump'
+      - name: Probe missing proj_ids
+        if: github.event.inputs.mode == 'probe'
         env:
           SEC_KEY_FACTSHEET: ${{ secrets.SEC_KEY_FACTSHEET }}
-        run: node find-ssf-projids.js
+          SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
+        run: node probe-projids.js
 
       - name: Fetch NAV data
-        if: github.event.inputs.mode != 'dump'
+        if: github.event.inputs.mode != 'probe'
         env:
           SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
         run: node fetch-nav.js
 
       - name: Commit nav-data.json
-        if: github.event.inputs.mode != 'dump'
+        if: github.event.inputs.mode != 'probe'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
