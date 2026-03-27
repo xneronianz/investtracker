@@ -1,13 +1,23 @@
 /**
- * fetch-nav.js v8 — Uses fund.sec.or.th/public/api (no key needed)
- * Fetches NAV by fund_class_name directly — works for SSF/SSFE share classes
- * No API key required. Runs server-side in GitHub Actions (no CORS issue).
+ * fetch-nav.js v9
+ * Uses api.sec.or.th FundDailyInfo with fund_name parameter directly
+ * This endpoint supports share class names like ABGDD-SSF, SCBCHA-SSF etc.
+ *
+ * GitHub Secrets required:
+ *   SEC_KEY_DAILYINFO  — Fund Daily Info API key
  */
 
 const https = require('https');
 const fs    = require('fs');
 
-// All 40 funds by their exact fund_class_name in SEC database
+const KEY_DI = process.env.SEC_KEY_DAILYINFO;
+const BASE   = 'api.sec.or.th';
+
+if (!KEY_DI) {
+  console.error('ERROR: SEC_KEY_DAILYINFO must be set');
+  process.exit(1);
+}
+
 const FUND_NAMES = [
   'ABGDD-SSF', 'ASP-ThaiESG', 'B-FUTURESSF', 'B-INNOTECHSSF',
   'ES-GINNO-SSF', 'K-CHANGE-SSF', 'KFCMEGASSF', 'KFGGSSF',
@@ -21,71 +31,48 @@ const FUND_NAMES = [
   'TLA-GEQ', 'TLFVMR-ASIAX', 'UCHINA-SSF', 'UGIS-SSF', 'UOBSA-SSF'
 ];
 
-const BASE = 'fund.sec.or.th';
-
-function get(path) {
+function get(path, key) {
   return new Promise((resolve) => {
     const req = https.request({
       hostname: BASE, path, method: 'GET',
-      headers: { 'accept': 'application/json' }
+      headers: { 'Ocp-Apim-Subscription-Key': key, 'accept': 'application/json' }
     }, res => {
       let body = '';
       res.on('data', d => body += d);
       res.on('end', () => {
         try { resolve({ status: res.statusCode, data: body ? JSON.parse(body) : null }); }
-        catch(e) { resolve({ status: res.statusCode, data: null, raw: body.substring(0,100) }); }
+        catch(e) { resolve({ status: res.statusCode, data: null }); }
       });
     });
     req.on('error', e => resolve({ status: 0, data: null, err: e.message }));
-    req.setTimeout(15000, () => { req.destroy(); resolve({ status: 0, data: null, err: 'timeout' }); });
+    req.setTimeout(12000, () => { req.destroy(); resolve({ status: 0, data: null, err: 'timeout' }); });
     req.end();
   });
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
 function dateStr(daysAgo) {
   const d = new Date();
   d.setDate(d.getDate() - daysAgo);
   return d.toISOString().split('T')[0];
 }
 
-async function fetchFundNAV(name) {
-  // Step 1: get proj_id via fund_class_name search
+async function fetchByFundName(name) {
+  // Use the v2 endpoint that accepts fund_name (share class name)
   const encoded = encodeURIComponent(name);
-  const profileR = await get(`/public/api/v2/fund/general-info/profiles?fund_class_name=${encoded}`);
-
-  if (!profileR.data || !Array.isArray(profileR.data) || !profileR.data.length) {
-    return { error: `profile not found (status ${profileR.status})` };
+  const r = await get(`/FundDailyInfo/v2/fund/daily-info/nav?fund_name=${encoded}`, KEY_DI);
+  if (r.status === 200 && Array.isArray(r.data) && r.data.length > 0) {
+    r.data.sort((a, b) => (b.nav_date||b.date||'').localeCompare(a.nav_date||a.date||''));
+    const d = r.data[0];
+    const nav  = parseFloat(d.last_val || d.nav_value || d.nav || 0);
+    const date = (d.nav_date || d.date || '').substring(0, 10);
+    if (nav > 0 && date) return { nav, nav_date: date };
   }
-
-  // Find exact match on fund_class_name
-  const match = profileR.data.find(p =>
-    (p.fund_class_name || '').toUpperCase() === name.toUpperCase()
-  ) || profileR.data[0];
-
-  const projId = match.proj_id;
-  if (!projId) return { error: 'no proj_id in profile' };
-
-  // Step 2: get daily NAV
-  const navR = await get(`/public/api/v2/fund/daily-info/profiles?proj_id=${encodeURIComponent(projId)}&fund_class_name=${encoded}`);
-
-  if (!navR.data || !Array.isArray(navR.data) || !navR.data.length) {
-    return { error: `no NAV data (status ${navR.status})` };
-  }
-
-  // Sort by date descending, take latest
-  navR.data.sort((a, b) => (b.nav_date || b.date || '').localeCompare(a.nav_date || a.date || ''));
-  const latest = navR.data[0];
-  const navVal  = parseFloat(latest.last_val || latest.nav_value || latest.nav || 0);
-  const navDate = (latest.nav_date || latest.date || '').substring(0, 10);
-
-  if (!navVal || !navDate) return { error: 'invalid NAV value' };
-  return { nav: navVal, nav_date: navDate };
+  return null;
 }
 
 async function main() {
-  console.log(`Fetching NAV for ${FUND_NAMES.length} funds via fund.sec.or.th...`);
+  console.log(`Fetching NAV for ${FUND_NAMES.length} funds via FundDailyInfo v2...`);
   console.log('Start:', new Date().toISOString());
 
   let existing = {};
@@ -96,20 +83,19 @@ async function main() {
   let updated = 0; let failed = 0;
 
   for (const name of FUND_NAMES) {
-    const result = await fetchFundNAV(name);
-    if (result.nav) {
-      navData[name.toUpperCase()] = { nav: result.nav, nav_date: result.nav_date };
+    const result = await fetchByFundName(name);
+    if (result) {
+      navData[name.toUpperCase()] = result;
       console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date})`);
       updated++;
     } else {
-      console.log(`  ✗ ${name}: ${result.error}`);
+      console.log(`  ✗ ${name}: not found`);
       failed++;
     }
-    await sleep(200); // 200ms between requests
+    await sleep(150);
   }
 
   console.log(`\nDone: ${updated} updated, ${failed} failed`);
-  console.log('End:', new Date().toISOString());
 
   const output = {
     updated_at: new Date().toISOString(),
