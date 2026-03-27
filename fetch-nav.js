@@ -1,6 +1,7 @@
 /**
- * fetch-nav.js v6 — SEC API for 39 funds + Finnomena scrape for UOBSA-SSF
- * Runs in ~2 minutes. Only needs SEC_KEY_DAILYINFO secret.
+ * fetch-nav.js v7 — Hardcoded proj_id map, runs in ~2 minutes
+ * Only needs SEC_KEY_DAILYINFO secret.
+ * proj_ids verified from SEC database scan 2026-03-27
  */
 
 const https = require('https');
@@ -14,7 +15,7 @@ if (!KEY_DI) {
   process.exit(1);
 }
 
-// Verified proj_id map from SEC database scan 2026-03-27
+// [app_fund_name, proj_id]
 const FUND_MAP = [
   ['ABGDD-SSF',             'M0020_2539'],
   ['ASP-ThaiESG',           'M0804_2566'],
@@ -36,8 +37,8 @@ const FUND_MAP = [
   ['ONE-UGG-ASSF',          'M0717_2558'],
   ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],
   ['SCBAXJ(SSF)',           'M0513_2564'],
-  ['SCBCHA-SSF',            'M0341_2564'],
-  ['SCBCHA(SSFE)',          'M0341_2564'],
+  ['SCBCHA-SSF',            'M0005_2558'],
+  ['SCBCHA(SSFE)',          'M0005_2558'],
   ['SCBCOMP',               'M0882_2554'],
   ['SCBCTECH(SSFE)',        'M0120_2564'],
   ['SCBEUROPE(SSF)',        'M0274_2564'],
@@ -45,7 +46,7 @@ const FUND_MAP = [
   ['SCBGOLDH-SSF',          'M0396_2564'],
   ['SCBNDQ(SSF)',           'M0311_2564'],
   ['SCBNEXT(SSFE)',         'M0163_2564'],
-  ['SCBS&P500(SSFA)',       'M0357_2564'],
+  ['SCBS&P500(SSFA)',       'M0643_2555'],
   ['SCBVIET(SSFA)',         'M0539_2564'],
   ['SCBVIET(SSFE)',         'M0539_2564'],
   ['SCBWORLD(SSFE)',        'M0465_2564'],
@@ -55,11 +56,7 @@ const FUND_MAP = [
   ['TLFVMR-ASIAX',         'M0096_2567'],
   ['UCHINA-SSF',           'M0628_2563'],
   ['UGIS-SSF',             'M0002_2560'],
-];
-
-// Funds to fetch from Finnomena (not in SEC Factsheet API)
-const FINNOMENA_FUNDS = [
-  'UOBSA-SSF',
+  ['UOBSA-SSF',            'M0233_2550'],  // trying parent fund proj_id
 ];
 
 function get(path, key) {
@@ -79,106 +76,6 @@ function get(path, key) {
     req.setTimeout(10000, () => { req.destroy(); resolve({ status: 0, data: null }); });
     req.end();
   });
-}
-
-// Fetch a URL and return the HTML body
-function fetchHtml(url) {
-  return new Promise((resolve) => {
-    const urlObj = new URL(url);
-    const req = https.request({
-      hostname: urlObj.hostname,
-      path: urlObj.pathname + urlObj.search,
-      method: 'GET',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; NAV-fetcher/1.0)',
-        'Accept': 'text/html,application/xhtml+xml',
-        'Accept-Language': 'th,en;q=0.9'
-      }
-    }, res => {
-      // Follow redirect
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        fetchHtml(res.headers.location).then(resolve);
-        return;
-      }
-      let body = '';
-      res.on('data', d => body += d);
-      res.on('end', () => resolve({ status: res.statusCode, body }));
-    });
-    req.on('error', () => resolve({ status: 0, body: '' }));
-    req.setTimeout(15000, () => { req.destroy(); resolve({ status: 0, body: '' }); });
-    req.end();
-  });
-}
-
-// Extract NAV from Finnomena fund page
-// Tries multiple patterns since the page uses React/SSR
-async function fetchFinnomenaNAV(fundName) {
-  const url = `https://www.finnomena.com/fund/${encodeURIComponent(fundName)}`;
-  console.log(`  Fetching Finnomena: ${url}`);
-  const res = await fetchHtml(url);
-
-  if (!res.body) {
-    console.log(`  Finnomena: empty response for ${fundName}`);
-    return null;
-  }
-
-  // Pattern 1: JSON-LD or script data with nav
-  // Pattern 2: meta tags
-  // Pattern 3: text pattern like "13.5052" near date pattern
-  const body = res.body;
-
-  // Try to find NAV in JSON embedded in page (Next.js __NEXT_DATA__)
-  const nextDataMatch = body.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
-  if (nextDataMatch) {
-    try {
-      const nextData = JSON.parse(nextDataMatch[1]);
-      // Navigate the Next.js data structure to find NAV
-      const pageProps = nextData?.props?.pageProps;
-      if (pageProps) {
-        // Try various paths where NAV might be stored
-        const nav = pageProps?.fund?.nav ||
-                    pageProps?.fundData?.nav ||
-                    pageProps?.initialData?.nav ||
-                    pageProps?.data?.nav;
-        const navDate = pageProps?.fund?.nav_date ||
-                        pageProps?.fundData?.nav_date ||
-                        pageProps?.initialData?.nav_date ||
-                        pageProps?.data?.nav_date;
-        if (nav && parseFloat(nav) > 0) {
-          console.log(`  Finnomena Next.js data: ${nav} (${navDate})`);
-          return { nav: parseFloat(nav), nav_date: (navDate || '').substring(0, 10) };
-        }
-        // Try to find nav anywhere in the props
-        const str = JSON.stringify(pageProps);
-        const navMatch = str.match(/"nav[_\s]?(?:value|price|unit)?"\s*:\s*"?([\d.]+)"?/i);
-        if (navMatch) {
-          console.log(`  Finnomena JSON pattern: ${navMatch[1]}`);
-          return { nav: parseFloat(navMatch[1]), nav_date: '' };
-        }
-      }
-    } catch(e) {
-      console.log(`  Finnomena JSON parse error: ${e.message}`);
-    }
-  }
-
-  // Fallback: regex scan for NAV-like number near the fund name
-  // Look for patterns like: 13.5052 or "nav":"13.5052"
-  const navPatterns = [
-    /"nav"\s*:\s*"?([\d]{1,3}\.[\d]{2,6})"?/,
-    /"last_val"\s*:\s*"?([\d]{1,3}\.[\d]{2,6})"?/,
-    /"navValue"\s*:\s*"?([\d]{1,3}\.[\d]{2,6})"?/,
-    /"unitPrice"\s*:\s*"?([\d]{1,3}\.[\d]{2,6})"?/,
-  ];
-  for (const pattern of navPatterns) {
-    const m = body.match(pattern);
-    if (m && parseFloat(m[1]) > 0) {
-      console.log(`  Finnomena regex: ${m[1]}`);
-      return { nav: parseFloat(m[1]), nav_date: '' };
-    }
-  }
-
-  console.log(`  Finnomena: could not extract NAV for ${fundName}`);
-  return null;
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -206,19 +103,16 @@ async function fetchNAV(projId) {
 }
 
 async function main() {
-  console.log(`Fetching NAV for ${FUND_MAP.length} funds from SEC + ${FINNOMENA_FUNDS.length} from Finnomena`);
+  console.log(`Fetching NAV for ${FUND_MAP.length} funds...`);
   console.log('Start:', new Date().toISOString());
 
-  // Load existing data to preserve entries
   let existing = {};
-  try {
-    existing = JSON.parse(fs.readFileSync('nav-data.json', 'utf8')).funds || {};
-  } catch(e) {}
+  try { existing = JSON.parse(fs.readFileSync('nav-data.json', 'utf8')).funds || {}; }
+  catch(e) {}
 
   const navData = {};
   let updated = 0; let failed = 0;
 
-  // SEC API funds
   for (const [name, projId] of FUND_MAP) {
     const result = await fetchNAV(projId);
     if (result) {
@@ -226,25 +120,10 @@ async function main() {
       console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date})`);
       updated++;
     } else {
-      console.log(`  ✗ ${name}: no NAV data`);
+      console.log(`  ✗ ${name}: no NAV data (proj_id: ${projId})`);
       failed++;
     }
     await sleep(80);
-  }
-
-  // Finnomena funds
-  for (const name of FINNOMENA_FUNDS) {
-    const result = await fetchFinnomenaNAV(name);
-    if (result && result.nav > 0) {
-      // Use today's date if nav_date not found
-      if (!result.nav_date) result.nav_date = dateStr(0);
-      navData[name.toUpperCase()] = result;
-      console.log(`  ✓ ${name} (Finnomena): ${result.nav} (${result.nav_date})`);
-      updated++;
-    } else {
-      console.log(`  ✗ ${name} (Finnomena): failed`);
-      failed++;
-    }
   }
 
   console.log(`\nDone: ${updated} updated, ${failed} failed`);
@@ -261,7 +140,4 @@ async function main() {
   console.log('nav-data.json written');
 }
 
-main().catch(e => {
-  console.error('Fatal:', e.message);
-  process.exit(1);
-});
+main().catch(e => { console.error('Fatal:', e.message); process.exit(1); });
