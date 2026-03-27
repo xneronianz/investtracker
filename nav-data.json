@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-03-27T03:00:58.886Z",
+  "updated_at": "2026-03-27T03:17:45.436Z",
   "date": "2026-03-27",
-  "count": 36,
+  "count": 40,
   "funds": {
     "ABGDD-SSF": {
       "nav": 86.5415,
@@ -145,6 +145,22 @@
     },
     "SCBGOLDH-SSF": {
       "nav": 6.8171,
+      "nav_date": "2026-03-25"
+    },
+    "SCBCHA-SSF": {
+      "nav": 10.3825,
+      "nav_date": "2026-03-26"
+    },
+    "SCBCHA(SSFE)": {
+      "nav": 7.7832,
+      "nav_date": "2026-03-26"
+    },
+    "SCBS&P500(SSFA)": {
+      "nav": 27.2332,
+      "nav_date": "2026-03-25"
+    },
+    "UOBSA-SSF": {
+      "nav": 13.5096,
       "nav_date": "2026-03-25"
     }
   }
