@@ -1,73 +1,84 @@
 /**
- * probe-projids.js v4 — Brute force scan near parent proj_ids
- * SCBGOLDH parent: M0856_2553 → scan M0xxx_2564 range for NAV ~17.0167
- * ABGDD parent: M0250_2564 → scan nearby for NAV ~11.1788
- * SCBCHA parent: M0005_2558 → scan M0xxx_2564 range for NAV ~9.1684
- *
- * Strategy: The SSF share classes were created around 2563-2565 (2020-2022)
- * Scan proj_ids in that year range for the target NAV values
+ * probe-projids.js v5 — Try SEC API v1 endpoint with fund_class_name
+ * The v2 returned 404 but maybe v1 works differently
+ * Also try the secopendata.sec.or.th endpoint
  */
 const https = require('https');
 const KEY_DI = process.env.SEC_KEY_DAILYINFO;
-const BASE = 'api.sec.or.th';
+const KEY_FS = process.env.SEC_KEY_FACTSHEET;
 
-function get(path, key) {
+function get(hostname, path, key) {
   return new Promise((resolve) => {
-    const req = https.request({
-      hostname: BASE, path, method: 'GET',
-      headers: { 'Ocp-Apim-Subscription-Key': key, 'accept': 'application/json' }
-    }, res => {
+    const headers = { 'accept': 'application/json' };
+    if (key) headers['Ocp-Apim-Subscription-Key'] = key;
+    const req = https.request({ hostname, path, method: 'GET', headers }, res => {
       let body = '';
       res.on('data', d => body += d);
       res.on('end', () => {
-        try { resolve({ status: res.statusCode, data: body ? JSON.parse(body) : null }); }
-        catch(e) { resolve({ status: res.statusCode, data: null }); }
+        try { resolve({ status: res.statusCode, data: body ? JSON.parse(body) : null, raw: body.substring(0,200) }); }
+        catch(e) { resolve({ status: res.statusCode, data: null, raw: body.substring(0,200) }); }
       });
     });
-    req.on('error', () => resolve({ status: 0, data: null }));
-    req.setTimeout(8000, () => { req.destroy(); resolve({ status: 0, data: null }); });
+    req.on('error', e => resolve({ status: 0, data: null, raw: e.message }));
+    req.setTimeout(10000, () => { req.destroy(); resolve({ status: 0, data: null, raw: 'timeout' }); });
     req.end();
   });
 }
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-const DATE = '2026-03-25';
-const TARGETS = [
-  { name: 'SCBGOLDH-SSF', nav: 17.0167 },
-  { name: 'ABGDD-SSF',    nav: 11.1788 },
-  { name: 'SCBCHA-SSF',   nav: 9.1684  },
-];
+async function main() {
+  const BASE = 'api.sec.or.th';
+  const testFund = 'SCBCHA-SSF';
+  const encoded = encodeURIComponent(testFund);
 
-async function scanRange(yearSuffix, startNum, endNum) {
-  console.log(`\nScanning M0xxx_${yearSuffix} range ${startNum}–${endNum}...`);
-  for (let n = startNum; n <= endNum; n++) {
-    const projId = `M${String(n).padStart(4,'0')}_${yearSuffix}`;
-    const r = await get(`/FundDailyInfo/${projId}/dailynav/${DATE}`, KEY_DI);
+  console.log(`Testing various endpoints for fund: ${testFund}\n`);
+
+  const endpoints = [
+    // v1 endpoints
+    [`/FundDailyInfo/v1/fund/daily-info/nav?fund_name=${encoded}`, KEY_DI],
+    [`/FundDailyInfo/v1/fund/daily-info/nav?fund_class_name=${encoded}`, KEY_DI],
+    // Different path formats
+    [`/FundDailyInfo/fund/nav?fund_name=${encoded}`, KEY_DI],
+    [`/FundDailyInfo/fund/nav?fund_class_name=${encoded}`, KEY_DI],
+    // Factsheet endpoints
+    [`/FundFactsheet/fund/nav?fund_name=${encoded}`, KEY_FS],
+    [`/FundFactsheet/v2/fund/nav?fund_name=${encoded}`, KEY_FS],
+    // Try secopendata subdomain
+  ];
+
+  for (const [path, key] of endpoints) {
+    const r = await get(BASE, path, key);
+    console.log(`${path.split('?')[0]}: status=${r.status} raw=${r.raw}`);
+  }
+
+  // Try secopendata.sec.or.th
+  console.log('\nTrying secopendata.sec.or.th...');
+  const r1 = await get('secopendata.sec.or.th', `/api/fund/nav?fund_class_name=${encoded}`, KEY_DI);
+  console.log(`secopendata /api/fund/nav: status=${r1.status} raw=${r1.raw}`);
+
+  const r2 = await get('secopendata.sec.or.th', `/sec-open-apis/fund/nav?fund_class_name=${encoded}`, KEY_DI);
+  console.log(`secopendata /sec-open-apis/fund/nav: status=${r2.status} raw=${r2.raw}`);
+
+  // Also try the old approach with a range of proj_ids but wider
+  // SCBCHA-SSF target: 9.1684 — try 2566+ range which we haven't scanned
+  console.log('\nScanning M0xxx_2566 range 1-200 for SCBCHA-SSF (9.1684)...');
+  const DATE = '2026-03-25';
+  for (let n = 1; n <= 200; n++) {
+    const projId = `M${String(n).padStart(4,'0')}_2566`;
+    const r = await get(BASE, `/FundDailyInfo/${projId}/dailynav/${DATE}`, KEY_DI);
     if (r.status === 200 && r.data) {
       const d = Array.isArray(r.data) ? r.data[0] : r.data;
       const nav = parseFloat(d.last_val || 0);
       if (nav > 0) {
-        for (const t of TARGETS) {
-          if (Math.abs(nav - t.nav) < 0.005) {
-            console.log(`  *** MATCH ${t.name}: ${projId} NAV=${nav}`);
-          }
-        }
+        if (Math.abs(nav - 9.1684) < 0.005) console.log(`*** MATCH SCBCHA-SSF: ${projId} NAV=${nav}`);
+        if (Math.abs(nav - 17.0167) < 0.005) console.log(`*** MATCH SCBGOLDH-SSF: ${projId} NAV=${nav}`);
+        if (Math.abs(nav - 11.1788) < 0.005) console.log(`*** MATCH ABGDD-SSF: ${projId} NAV=${nav}`);
+        if (Math.abs(nav - 7.3504) < 0.005) console.log(`*** MATCH UCHINA-SSF: ${projId} NAV=${nav}`);
+        if (Math.abs(nav - 12.6199) < 0.005) console.log(`*** MATCH MEGA10CHINA-SSF: ${projId} NAV=${nav}`);
+        if (Math.abs(nav - 18.1796) < 0.005) console.log(`*** MATCH K-CHANGE-SSF: ${projId} NAV=${nav}`);
       }
     }
-    await sleep(40);
+    await new Promise(r => setTimeout(r, 40));
   }
-}
-
-async function main() {
-  console.log('Brute-force scanning for SSF proj_ids...');
-  console.log(`Target NAVs on ${DATE}:`);
-  TARGETS.forEach(t => console.log(`  ${t.name}: ${t.nav}`));
-
-  // SCB SSF funds were registered around 2563-2565 (2020-2022)
-  // SCBGOLDH-SSF, SCBCHA-SSF likely in 2564 range
-  await scanRange('2563', 1, 600);
-  await scanRange('2564', 1, 600);
-  await scanRange('2565', 1, 300);
 
   console.log('\nDone');
 }
