@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'nav=update | find=missing funds | uob=UOB funds | scb=SCB funds'
+        description: 'nav=update | find=missing | uob=UOB | scb=SCB | ssf=all SSF funds'
         required: false
         default: 'nav'
 
@@ -38,6 +38,12 @@ jobs:
         env:
           SEC_KEY_FACTSHEET: ${{ secrets.SEC_KEY_FACTSHEET }}
         run: node find-scb-funds.js
+
+      - name: Find SSF funds
+        if: github.event.inputs.mode == 'ssf'
+        env:
+          SEC_KEY_FACTSHEET: ${{ secrets.SEC_KEY_FACTSHEET }}
+        run: node find-ssf-funds.js
 
       - name: Fetch NAV data from SEC Thailand
         if: github.event.inputs.mode == 'nav' || github.event.inputs.mode == ''
