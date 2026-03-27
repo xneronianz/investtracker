@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 1 * * 1-5'
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'nav=update NAV | dump=dump all AMC fund names'
+        required: false
+        default: 'nav'
 
 jobs:
   update-nav:
@@ -15,12 +20,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Fetch NAV data from SEC Thailand
+
+      - name: Dump all AMC fund names
+        if: github.event.inputs.mode == 'dump'
         env:
           SEC_KEY_FACTSHEET: ${{ secrets.SEC_KEY_FACTSHEET }}
+        run: node find-ssf-projids.js
+
+      - name: Fetch NAV data
+        if: github.event.inputs.mode != 'dump'
+        env:
           SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
         run: node fetch-nav.js
-      - name: Commit and push nav-data.json
+
+      - name: Commit nav-data.json
+        if: github.event.inputs.mode != 'dump'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
