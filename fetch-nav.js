@@ -18,7 +18,7 @@ const FUND_MAP = [
   ['ASP-ThaiESG',           'M0804_2566'],
   ['B-FUTURESSF',           'M0053_2563'],
   ['B-INNOTECHSSF',         'M0078_2565'],
-  ['ES-GINNO-SSF',          'M0038_2564'],  // T-ES-GINNO-SSF (FIXED from M0479_2563)
+  ['ES-GINNO-SSF',          'M0479_2563'],  // ES-GINNO parent (T-ES-GINNO-SSF M0038_2564 has no data)
   ['K-CHANGE-SSF',          'M0131_2562'],  // K-CHANGE
   ['KFCMEGASSF',            'M0397_2565'],
   ['KFGGSSF',               'M0379_2564'],
