@@ -1,23 +1,21 @@
 /**
- * fetch-nav.js v10
- * Uses FundDailyInfo v2 fund_name endpoint with FACTSHEET key
- * (Cloudflare Worker confirmed this works with SEC_KEY_FACTSHEET)
+ * fetch-nav.js v11 — Same approach as Cloudflare Worker (confirmed working)
+ * Step 1: Scan AMC list to find proj_id by exact fund name match
+ * Step 2: Fetch NAV by proj_id + date
+ * This is exactly what the Worker does and it works.
  *
- * GitHub Secrets required:
- *   SEC_KEY_FACTSHEET  — Fund Factsheet API key (used for v2 NAV lookup)
- *   SEC_KEY_DAILYINFO  — Fund Daily Info API key (fallback)
+ * GitHub Secrets: SEC_KEY_FACTSHEET, SEC_KEY_DAILYINFO
  */
 
 const https = require('https');
 const fs    = require('fs');
 
-// Try both keys — the v2 endpoint may need either one
 const KEY_FS = process.env.SEC_KEY_FACTSHEET;
 const KEY_DI = process.env.SEC_KEY_DAILYINFO;
 const BASE   = 'api.sec.or.th';
 
-if (!KEY_FS && !KEY_DI) {
-  console.error('ERROR: SEC_KEY_FACTSHEET or SEC_KEY_DAILYINFO must be set');
+if (!KEY_FS || !KEY_DI) {
+  console.error('ERROR: Both SEC_KEY_FACTSHEET and SEC_KEY_DAILYINFO must be set');
   process.exit(1);
 }
 
@@ -43,12 +41,12 @@ function get(path, key) {
       let body = '';
       res.on('data', d => body += d);
       res.on('end', () => {
-        try { resolve({ status: res.statusCode, data: body ? JSON.parse(body) : null }); }
-        catch(e) { resolve({ status: res.statusCode, data: null }); }
+        try { resolve({ status: res.statusCode, ok: res.statusCode === 200, data: body ? JSON.parse(body) : null }); }
+        catch(e) { resolve({ status: res.statusCode, ok: false, data: null }); }
       });
     });
-    req.on('error', e => resolve({ status: 0, data: null }));
-    req.setTimeout(12000, () => { req.destroy(); resolve({ status: 0, data: null }); });
+    req.on('error', e => resolve({ status: 0, ok: false, data: null }));
+    req.setTimeout(12000, () => { req.destroy(); resolve({ status: 0, ok: false, data: null }); });
     req.end();
   });
 }
@@ -60,65 +58,90 @@ function dateStr(daysAgo) {
   return d.toISOString().split('T')[0];
 }
 
-async function fetchNAV(name) {
-  const encoded = encodeURIComponent(name);
-  const path = `/FundDailyInfo/v2/fund/daily-info/nav?fund_name=${encoded}`;
+async function buildProjIdMap() {
+  console.log('Building proj_id map from AMC list...');
+  const amcR = await get('/FundFactsheet/fund/amc', KEY_FS);
+  if (!amcR.ok || !Array.isArray(amcR.data)) {
+    throw new Error('Cannot fetch AMC list: ' + amcR.status);
+  }
+  console.log(`${amcR.data.length} AMCs found`);
 
-  // Try Factsheet key first, then DailyInfo key
-  const keys = [KEY_FS, KEY_DI].filter(Boolean);
-  for (const key of keys) {
-    const r = await get(path, key);
-    if (r.status === 200 && Array.isArray(r.data) && r.data.length > 0) {
-      r.data.sort((a, b) => (b.nav_date||b.date||'').localeCompare(a.nav_date||a.date||''));
-      const d = r.data[0];
+  const needed = new Set(FUND_NAMES.map(n => n.toUpperCase()));
+  const projMap = {}; // UPPER_NAME → proj_id
+
+  for (const amc of amcR.data) {
+    if (!amc.unique_id) continue;
+    if (Object.keys(projMap).length >= needed.size) {
+      console.log('All funds found, stopping AMC scan early');
+      break;
+    }
+    const r = await get(`/FundFactsheet/fund/amc/${amc.unique_id}`, KEY_FS);
+    if (r.ok && Array.isArray(r.data)) {
+      for (const f of r.data) {
+        const nameUp = (f.proj_abbr_name || '').toUpperCase();
+        if (needed.has(nameUp) && f.proj_id && !projMap[nameUp]) {
+          projMap[nameUp] = f.proj_id;
+          console.log(`  Found: ${f.proj_abbr_name} → ${f.proj_id}`);
+        }
+      }
+    }
+    await sleep(80);
+  }
+
+  console.log(`proj_id map: ${Object.keys(projMap).length}/${FUND_NAMES.length} funds found`);
+  return projMap;
+}
+
+async function fetchNAV(projId) {
+  for (let i = 0; i <= 7; i++) {
+    const date = dateStr(i);
+    const r = await get(`/FundDailyInfo/${projId}/dailynav/${date}`, KEY_DI);
+    if (r.status === 204 || r.status === 404 || !r.data) continue;
+    if (r.ok && r.data) {
+      const d = Array.isArray(r.data) ? r.data[0] : r.data;
       const nav  = parseFloat(d.last_val || d.nav_value || d.nav || 0);
-      const date = (d.nav_date || d.date || '').substring(0, 10);
-      if (nav > 0 && date) return { nav, nav_date: date, key_used: key === KEY_FS ? 'FS' : 'DI' };
+      const date2 = (d.nav_date || date).substring(0, 10);
+      if (nav > 0) return { nav, nav_date: date2 };
     }
-    // Log first fund's response for debugging
-    if (name === 'KFGGSSF') {
-      console.log(`  DEBUG ${name}: status=${r.status} data=${JSON.stringify(r.data).substring(0,100)}`);
-    }
+    await sleep(30);
   }
   return null;
 }
 
 async function main() {
-  console.log(`Fetching NAV for ${FUND_NAMES.length} funds...`);
-  console.log(`Keys available: FS=${!!KEY_FS} DI=${!!KEY_DI}`);
+  console.log(`Fetching NAV for ${FUND_NAMES.length} funds (Worker method)...`);
   console.log('Start:', new Date().toISOString());
+
+  const projMap = await buildProjIdMap();
 
   let existing = {};
   try { existing = JSON.parse(fs.readFileSync('nav-data.json', 'utf8')).funds || {}; }
   catch(e) {}
 
-  // First test with KFGGSSF to see what response we get
-  console.log('\nTesting KFGGSSF first...');
-  const test = await fetchNAV('KFGGSSF');
-  console.log('Test result:', test ? `NAV=${test.nav} date=${test.nav_date} key=${test.key_used}` : 'FAILED');
-
-  if (!test) {
-    console.log('ERROR: Cannot fetch even KFGGSSF. Check API key subscription.');
-    process.exit(1);
-  }
-
   const navData = {};
   let updated = 0; let failed = 0;
 
   for (const name of FUND_NAMES) {
-    const result = await fetchNAV(name);
+    const projId = projMap[name.toUpperCase()];
+    if (!projId) {
+      console.log(`  ✗ ${name}: proj_id not found in AMC list`);
+      failed++;
+      continue;
+    }
+    const result = await fetchNAV(projId);
     if (result) {
-      navData[name.toUpperCase()] = { nav: result.nav, nav_date: result.nav_date };
-      console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date})`);
+      navData[name.toUpperCase()] = result;
+      console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date}) [${projId}]`);
       updated++;
     } else {
-      console.log(`  ✗ ${name}: not found`);
+      console.log(`  ✗ ${name}: no NAV data [${projId}]`);
       failed++;
     }
-    await sleep(150);
+    await sleep(80);
   }
 
   console.log(`\nDone: ${updated} updated, ${failed} failed`);
+  console.log('End:', new Date().toISOString());
 
   const output = {
     updated_at: new Date().toISOString(),
