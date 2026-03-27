@@ -16,6 +16,8 @@ jobs:
         with:
           node-version: '20'
       - name: Fetch NAV data from SEC Thailand
+        env:
+          SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
         run: node fetch-nav.js
       - name: Commit and push nav-data.json
         run: |
