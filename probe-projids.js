@@ -4,7 +4,7 @@
  */
 const https = require('https');
 const KEY_DI = process.env.SEC_KEY_DAILYINFO;
-const KEY_FS = process.env.SEC_KEY_FACTSHEET;
+const KEY_DI = process.env.SEC_KEY_FACTSHEET;
 const BASE = 'api.sec.or.th';
 
 function get(path, key) {
@@ -47,8 +47,8 @@ async function main() {
       [`/FundDailyInfo/v2/fund/search?fund_name=${enc}`, KEY_DI],
       [`/FundDailyInfo/fund/info?fund_name=${enc}`, KEY_DI],
       // Try FundFactsheet with fund name directly
-      [`/FundFactsheet/fund?fund_name=${enc}`, KEY_FS],
-      [`/FundFactsheet/fund/search?fund_name=${enc}`, KEY_FS],
+      [`/FundFactsheet/fund?fund_name=${enc}`, KEY_DI],
+      [`/FundFactsheet/fund/search?fund_name=${enc}`, KEY_DI],
       // Try the fund class specific endpoint
       [`/FundDailyInfo/fund/class?fund_name=${enc}`, KEY_DI],
     ];
