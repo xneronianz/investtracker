@@ -25,6 +25,7 @@ jobs:
         if: github.event.inputs.mode == 'probe'
         env:
           SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
+          SEC_KEY_FACTSHEET: ${{ secrets.SEC_KEY_FACTSHEET }}
         run: node probe-projids.js
 
       - name: Fetch NAV data
