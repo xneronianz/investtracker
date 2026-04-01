@@ -14,8 +14,9 @@ const BASE   = 'api.sec.or.th';
 
 if (!KEY_DI) { console.error('ERROR: SEC_KEY_DAILYINFO must be set'); process.exit(1); }
 
+// Funds excluded (SEC API returns wrong NAV — update manually in app):
+// ABGDD-SSF, SCBCHA-SSF, SCBCHA(SSFE), SCBGOLDH-SSF, UCHINA-SSF
 const FUND_MAP = [
-  ['ABGDD-SSF',             'M0250_2564'],  // ABGDD-M (SSF class not in SEC API)
   ['ASP-ThaiESG',           'M0804_2566'],
   ['B-FUTURESSF',           'M0053_2563'],
   ['B-INNOTECHSSF',         'M0078_2565'],
@@ -35,13 +36,10 @@ const FUND_MAP = [
   ['ONE-UGG-ASSF',          'M0717_2558'],
   ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],  // iPROPEN parent
   ['SCBAXJ(SSF)',           'M0513_2564'],
-  ['SCBCHA-SSF',            'M0005_2558'],  // SCBCHAFUND parent
-  ['SCBCHA(SSFE)',          'M0005_2558'],
   ['SCBCOMP',               'M0882_2554'],
   ['SCBCTECH(SSFE)',        'M0120_2564'],
   ['SCBEUROPE(SSF)',        'M0274_2564'],
   ['SCBEUROPE(SSFE)',       'M0274_2564'],
-  ['SCBGOLDH-SSF',          'M0396_2564'],  // best available (SEC has no exact SSF class)
   ['SCBNDQ(SSF)',           'M0311_2564'],
   ['SCBNEXT(SSFE)',         'M0163_2564'],
   ['SCBS&P500(SSFA)',       'M0643_2555'],
@@ -52,7 +50,6 @@ const FUND_MAP = [
   ['TISCOCHA-SSF',         'M0258_2562'],  // TISCOCHA parent
   ['TLA-GEQ',              'M0563_2568'],
   ['TLFVMR-ASIAX',         'M0096_2567'],
-  ['UCHINA-SSF',           'M0628_2563'],  // UCHINA parent (best available)
   ['UGIS-SSF',             'M0002_2560'],  // UGIS parent
   ['UOBSA-SSF',            'M0233_2550'],
 ];
