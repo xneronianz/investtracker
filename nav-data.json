@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-04-06T16:11:23.233Z",
-  "date": "2026-04-06",
+  "updated_at": "2026-04-07T17:37:01.799Z",
+  "date": "2026-04-07",
   "count": 35,
   "funds": {
     "ABGDD-SSF": {
@@ -80,7 +80,7 @@
       "nav_date": "2026-04-01"
     },
     "SCBCTECH(SSFE)": {
-      "nav": 4.5889,
+      "nav": 4.4029,
       "nav_date": "2026-04-02"
     },
     "SCBEUROPE(SSF)": {
@@ -96,7 +96,7 @@
       "nav_date": "2026-04-02"
     },
     "SCBNEXT(SSFE)": {
-      "nav": 6.6543,
+      "nav": 6.7913,
       "nav_date": "2026-04-02"
     },
     "SCBVIET(SSFA)": {
