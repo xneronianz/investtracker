@@ -20,7 +20,6 @@ const FUND_MAP = [
   ['ASP-ThaiESG',           'M0804_2566'],
   ['B-FUTURESSF',           'M0053_2563'],
   ['B-INNOTECHSSF',         'M0078_2565'],
-  ['ES-GINNO-SSF',          'M0479_2563'],  // ES-GINNO parent
   ['K-CHANGE-SSF',          'M0131_2562'],  // K-CHANGE parent
   ['KFCMEGASSF',            'M0397_2565'],
   ['KFGGSSF',               'M0379_2564'],
@@ -44,7 +43,6 @@ const FUND_MAP = [
   ['SCBNEXT(SSFE)',         'M0163_2564'],
   ['SCBS&P500(SSFA)',       'M0643_2555'],
   ['SCBVIET(SSFA)',         'M0539_2564'],
-  ['SCBVIET(SSFE)',         'M0539_2564'],
   ['SCBWORLD(SSFE)',        'M0465_2564'],
   ['TDSThaiESG-A',         'M0793_2567'],
   ['TISCOCHA-SSF',         'M0258_2562'],  // TISCOCHA parent
