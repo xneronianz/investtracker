@@ -29,21 +29,21 @@
                 <p class="text-indigo-600 font-bold tracking-wide">● Wealth Analytics Engine | <span id="saveStatus" class="text-emerald-500 font-black">Auto-saved locally</span> <span id="syncStatus" class="text-slate-400 font-bold text-xs" style="color: rgb(13, 148, 136);">☁ Synced 11:42:27 AM</span></p>
             </div>
             <div class="grid grid-cols-2 gap-2 w-full">
-                <button onclick="openGlobalTx()" class="bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">💱 Log Transaction</button>
-                <button onclick="openAllTransactionsModal()" class="bg-slate-800 hover:bg-slate-900 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">📜 Tx Log</button>
-                <button onclick="openAddModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">➕ Add Fund</button>
-                <button onclick="openSecNavModal()" id="secNavBtn" class="bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">🔄 Auto NAV</button>
+                <button onclick="openGlobalTx()" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#f59e0b,#f97316);">💱 Log Transaction</button>
+                <button onclick="openAllTransactionsModal()" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#fb923c,#ef4444);">📜 Tx Log</button>
+                <button onclick="openAddModal()" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#22c55e,#10b981);">➕ Add Fund</button>
+                <button onclick="openSecNavModal()" id="secNavBtn" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#14b8a6,#06b6d4);">🔄 Auto NAV</button>
                 <div class="flex gap-[2px]">
-                    <button onclick="applyFavoriteFilter()" class="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-l-xl font-bold shadow transition-all text-xs flex-1 text-center">⭐ Favorites</button>
-                    <button onclick="openFavoritesModal()" class="bg-purple-500 hover:bg-purple-600 text-white px-3 py-3 rounded-r-xl font-bold shadow transition-all text-xs" title="Configure">⚙️</button>
+                    <button onclick="applyFavoriteFilter()" class="text-white py-3 rounded-l-xl font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#a855f7,#8b5cf6);">⭐ Favorites</button>
+                    <button onclick="openFavoritesModal()" class="text-white px-3 py-3 rounded-r-xl font-bold shadow-md transition-all text-xs" style="background:#7c3aed;" title="Configure">⚙️</button>
                 </div>
-                <button onclick="clearAllFilters()" class="bg-rose-100 hover:bg-rose-200 text-rose-700 py-3 rounded-xl font-bold transition-all text-xs text-center">✕ Clear Filters</button>
-                <button onclick="openTaxSavings()" class="bg-violet-600 hover:bg-violet-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">🧾 Tax Savings</button>
-                <button onclick="openSimulatorModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">📈 Simulator</button>
-                <button onclick="openGistModal()" id="gSyncBtn" class="bg-teal-500 hover:bg-teal-600 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">☁️ GitHub Sync</button>
-                <button onclick="openPagesModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">🚀 GitHub Pages</button>
-                <button onclick="saveToFile()" class="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">💾 Backup HTML</button>
-                <button onclick="exportToCSV()" class="bg-indigo-500 hover:bg-indigo-600 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">📥 Export Excel</button>
+                <button onclick="clearAllFilters()" class="py-3 rounded-xl font-bold transition-all text-xs text-center" style="background:linear-gradient(135deg,#fce7f3,#fdf2f8);color:#db2777;border:2px solid #f9a8d4;">✕ Clear Filters</button>
+                <button onclick="openTaxSavings()" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">🧾 Tax Savings</button>
+                <button onclick="openSimulatorModal()" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">📈 Simulator</button>
+                <button onclick="openGistModal()" id="gSyncBtn" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#10b981,#0ea5e9);">☁️ GitHub Sync</button>
+                <button onclick="openPagesModal()" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">🚀 GitHub Pages</button>
+                <button onclick="saveToFile()" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#f59e0b,#eab308);">💾 Backup HTML</button>
+                <button onclick="exportToCSV()" class="text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#ec4899,#f43f5e);">📥 Export Excel</button>
             </div>
         </div>
 
@@ -272,7 +272,7 @@
                             <th class="p-5 text-right text-indigo-600 font-bold sortable" onclick="sortTable('nav')">Latest NAV ↕</th>
 <th class="p-5 text-center" id="navPctHeader">
                                 <div class="flex flex-col items-center gap-1">
-                                    <select id="navPctSelect" onchange="navPctKey=this.value; renderAll();" class="text-[10px] font-black bg-indigo-50 border border-indigo-200 rounded-lg px-1 py-0.5 text-indigo-600 cursor-pointer outline-none">
+                                    <select id="navPctSelect" onchange="navPctKey=this.value; filterData(); renderAll();" class="text-[10px] font-black bg-indigo-50 border border-indigo-200 rounded-lg px-1 py-0.5 text-indigo-600 cursor-pointer outline-none">
                                         <option value="1D" selected>1D</option>
                                         <option value="1W">1W</option>
                                         <option value="1M">1M</option>
@@ -2747,6 +2747,14 @@
 
         function setChartTimeframe(tf) {
             chartTimeframe = tf;
+            // Sync % NAV change column to same timeframe
+            const validNavKeys = ['1D','1W','1M','3M','6M','1Y','3Y','5Y','10Y'];
+            if (validNavKeys.includes(tf)) {
+                navPctKey = tf;
+                const npSel = document.getElementById('navPctSelect');
+                if (npSel) npSel.value = tf;
+                filterData(); // recompute navPct for all funds
+            }
             document.querySelectorAll('.tf-btn').forEach(btn => {
                 btn.className = "tf-btn px-3 py-1 text-[10px] font-bold rounded-lg text-slate-500 hover:text-indigo-600 transition-all";
             });
@@ -2755,6 +2763,7 @@
                 activeBtn.className = "tf-btn px-3 py-1 text-[10px] font-bold rounded-lg bg-white text-indigo-600 shadow-sm transition-all";
             }
             updatePortfolioHistoryChart();
+            renderAll();
         }
 
         function loadFromLocalStorage() {
