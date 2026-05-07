@@ -39,6 +39,7 @@
                 </div>
                 <button onclick="clearAllFilters()" class="bg-rose-100 hover:bg-rose-200 text-rose-700 py-3 rounded-xl font-bold transition-all text-xs text-center">✕ Clear Filters</button>
                 <button onclick="openTaxSavings()" class="bg-violet-600 hover:bg-violet-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">🧾 Tax Savings</button>
+                <button onclick="openSimulatorModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">📈 Simulator</button>
                 <button onclick="openGistModal()" id="gSyncBtn" class="bg-teal-500 hover:bg-teal-600 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">☁️ GitHub Sync</button>
                 <button onclick="openPagesModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">🚀 GitHub Pages</button>
                 <button onclick="saveToFile()" class="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold shadow transition-all text-xs text-center">💾 Backup HTML</button>
@@ -2727,6 +2728,7 @@
             renderAssetToggleButtons();
             updatePortfolioHistoryChart();
             renderAll();
+            saveToLocalStorage();
         }
 
         function renderAssetToggleButtons() {
@@ -2760,31 +2762,50 @@
                 const storedData = localStorage.getItem('portfolioMasterData');
                 if (storedData) {
                     const parsed = JSON.parse(storedData);
-                    // Only restore localStorage if it belongs to THIS exact file version.
-                    // This means: same device, same file — session changes are preserved.
-                    // A new backup (new DATA_VERSION timestamp) always wins over old localStorage.
                     if (parsed.version && parsed.version === DATA_VERSION) {
                         allFunds               = parsed.allFunds.map(f => ({...f, dividends: f.dividends || [], transactions: f.transactions || []}));
                         if (parsed.targetPercentages)       targetPercentages       = parsed.targetPercentages;
                         if (parsed.taxSavings)              taxSavings              = parsed.taxSavings;
                         if (parsed.favoriteExcludedAssets)  favoriteExcludedAssets  = parsed.favoriteExcludedAssets;
                         if (parsed.favoriteExcludedPortfolios) favoriteExcludedPortfolios = parsed.favoriteExcludedPortfolios;
+                        if (parsed.chartExcludedAssets)     chartExcludedAssets     = new Set(parsed.chartExcludedAssets);
+                        if (parsed.simulatorSettings) {
+                            const s = parsed.simulatorSettings;
+                            if (document.getElementById('sim_return'))   document.getElementById('sim_return').value   = s.annualReturn ?? 7;
+                            if (document.getElementById('sim_years'))    document.getElementById('sim_years').value    = s.years ?? 20;
+                            if (document.getElementById('sim_monthly'))  document.getElementById('sim_monthly').value  = s.monthly ?? 0;
+                            if (document.getElementById('sim_target'))   document.getElementById('sim_target').value   = s.target ?? 18000000;
+                            if (document.getElementById('sim_inflation')) document.getElementById('sim_inflation').value = s.inflation ?? 3;
+                            if (document.getElementById('sim_fee'))      document.getElementById('sim_fee').value      = s.fee ?? 1.5;
+                        }
                         const statusLabel = document.getElementById('saveStatus');
                         if (statusLabel) {
                             statusLabel.innerText = 'Auto-saved locally';
                             statusLabel.className = statusLabel.className.replace('text-amber-500','text-emerald-500');
                         }
-                        return; // loaded from localStorage — done
+                        return;
                     }
                 }
             } catch(e) { }
-            // No matching localStorage found — use baked data, then save it
             saveToLocalStorage();
         }
         
         function saveToLocalStorage() {
             try {
-                const dataToSave = { version: DATA_VERSION, allFunds, targetPercentages, taxSavings, favoriteExcludedAssets, favoriteExcludedPortfolios }; // version ties this save to this exact file
+                const simSettings = {
+                    annualReturn: parseFloat(document.getElementById('sim_return')?.value) || 7,
+                    years:        parseInt(document.getElementById('sim_years')?.value)    || 20,
+                    monthly:      parseFloat(document.getElementById('sim_monthly')?.value) || 0,
+                    target:       parseFloat(document.getElementById('sim_target')?.value)  || 18000000,
+                    inflation:    parseFloat(document.getElementById('sim_inflation')?.value) || 3,
+                    fee:          parseFloat(document.getElementById('sim_fee')?.value)     || 1.5,
+                };
+                const dataToSave = {
+                    version: DATA_VERSION, allFunds, targetPercentages, taxSavings,
+                    favoriteExcludedAssets, favoriteExcludedPortfolios,
+                    chartExcludedAssets: [...chartExcludedAssets],
+                    simulatorSettings: simSettings
+                };
                 localStorage.setItem('portfolioMasterData', JSON.stringify(dataToSave));
                 const statusLabel = document.getElementById('saveStatus');
                 statusLabel.innerText = "Saving...";
@@ -2794,9 +2815,8 @@
                     statusLabel.classList.replace('text-amber-500', 'text-emerald-500');
                 }, 600);
             } catch (e) { }
-            // Auto-push to GitHub Gist if configured
             if (typeof gistCfg !== "undefined" && gistCfg.token && gistCfg.gistId) {
-                gistPush(true); // silent = no alert
+                gistPush(true);
             }
         }
 
@@ -5194,6 +5214,250 @@
         }
 
         filterData();
-    </script>
+    
+        // ========== WEALTH SIMULATOR ==========
+        function autoRunSimulation() {
+            // Only auto-run if results panel is already visible
+            if (!document.getElementById('simSummary').classList.contains('hidden')) {
+                runSimulation();
+            }
+        }
 
+        function openSimulatorModal() {
+            // Auto-fill current value from chart-filtered funds
+            const filtered = filteredFunds.filter(f => !chartExcludedAssets.has(f.assetClass));
+            const curVal = filtered.reduce((s, f) => {
+                if ((f.invested || 0) < 0) return s;
+                return s + (f.units || 0) * (f.nav || 0);
+            }, 0);
+            document.getElementById('sim_current').value = Math.round(curVal);
+            document.getElementById('simSummary').classList.add('hidden');
+            document.getElementById('simulatorModal').classList.add('active');
+        }
+
+        let simChartObj = null;
+
+        function runSimulation() {
+            const P = parseFloat(document.getElementById('sim_current').value) || 0;
+            const annualReturn = parseFloat(document.getElementById('sim_return').value) / 100;
+            const years = parseInt(document.getElementById('sim_years').value) || 20;
+            const monthly = parseFloat(document.getElementById('sim_monthly').value) || 0;
+            const target = parseFloat(document.getElementById('sim_target').value) || 0;
+            const inflation = parseFloat(document.getElementById('sim_inflation').value) / 100;
+            const fee = parseFloat(document.getElementById('sim_fee').value) / 100;
+
+            const netReturn = annualReturn - fee;
+            const realReturn = netReturn - inflation;
+            const monthlyRate = netReturn / 12;
+
+            // Build year-by-year projection
+            const labels = [], nominalVals = [], realVals = [], contributedVals = [];
+            let nomVal = P;
+            let realVal = P;
+            let totalIn = P;
+            let targetYear = null;
+
+            const startYear = new Date().getFullYear();
+            labels.push(startYear.toString());
+            nominalVals.push(Math.round(nomVal));
+            realVals.push(Math.round(realVal));
+            contributedVals.push(Math.round(totalIn));
+
+            for (let y = 1; y <= years; y++) {
+                // Compound monthly
+                for (let m = 0; m < 12; m++) {
+                    nomVal = nomVal * (1 + monthlyRate) + monthly;
+                    realVal = realVal * (1 + (realReturn / 12)) + monthly;
+                    totalIn += monthly;
+                }
+                labels.push((startYear + y).toString());
+                nominalVals.push(Math.round(nomVal));
+                realVals.push(Math.round(realVal));
+                contributedVals.push(Math.round(totalIn));
+
+                if (target > 0 && targetYear === null && nomVal >= target) {
+                    targetYear = startYear + y;
+                }
+            }
+
+            // Summary
+            const fmt = v => '฿' + Math.round(v).toLocaleString();
+            document.getElementById('simFinalVal').innerText = fmt(nomVal);
+            document.getElementById('simFinalReal').innerText = 'Real: ' + fmt(realVal) + ' (inflation-adj)';
+            document.getElementById('simTotalIn').innerText = fmt(totalIn);
+            document.getElementById('simTotalGain').innerText = 'Gain: ' + fmt(nomVal - totalIn);
+
+            if (target > 0) {
+                const pct = Math.min((nomVal / target * 100), 999).toFixed(1);
+                const el = document.getElementById('simTargetPct');
+                el.innerText = pct + '%';
+                el.className = 'text-xl font-black ' + (nomVal >= target ? 'text-emerald-400' : 'text-rose-400');
+                document.getElementById('simTargetYear').innerText = targetYear ? 'Reached in ' + targetYear + ' (yr ' + (targetYear - startYear) + ')' : 'Not reached in ' + years + '-yr period';
+            } else {
+                document.getElementById('simTargetPct').innerText = 'N/A';
+                document.getElementById('simTargetYear').innerText = 'Set a target above';
+            }
+            document.getElementById('simEffReturn').innerText = (realReturn * 100).toFixed(2) + '%';
+
+            // Chart
+            if (simChartObj) simChartObj.destroy();
+            const ctx = document.getElementById('simChart').getContext('2d');
+
+            // Target line dataset
+            const targetData = target > 0 ? labels.map(() => target) : null;
+
+            const datasets = [
+                {
+                    label: 'Projected Value',
+                    data: nominalVals,
+                    borderColor: '#22d3ee',
+                    backgroundColor: 'rgba(34,211,238,0.15)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#22d3ee',
+                },
+                {
+                    label: 'Total Contributed',
+                    data: contributedVals,
+                    borderColor: '#34d399',
+                    backgroundColor: 'rgba(52,211,153,0.08)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderDash: [4,4],
+                },
+                {
+                    label: 'Real Value (inflation-adj)',
+                    data: realVals,
+                    borderColor: '#a78bfa',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderDash: [6,3],
+                }
+            ];
+
+            if (targetData) datasets.push({
+                label: 'Target',
+                data: targetData,
+                borderColor: '#f59e0b',
+                backgroundColor: 'transparent',
+                fill: false,
+                pointRadius: 0,
+                borderWidth: 2,
+                borderDash: [8,4],
+            });
+
+            simChartObj = new Chart(ctx, {
+                type: 'line',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { labels: { color: '#94a3b8', font: { size: 10 }, boxWidth: 12 } },
+                        tooltip: {
+                            backgroundColor: '#1e293b',
+                            titleColor: '#e2e8f0',
+                            bodyColor: '#94a3b8',
+                            callbacks: {
+                                label: ctx => ctx.dataset.label + ': ฿' + ctx.parsed.y.toLocaleString()
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } },
+                        y: {
+                            ticks: {
+                                color: '#64748b', font: { size: 9 },
+                                callback: v => v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1e3 ? (v/1e3).toFixed(0)+'K' : v
+                            },
+                            grid: { color: '#1e293b' }
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('simSummary').classList.remove('hidden');
+        }
+
+        </script>
+
+
+    <!-- Wealth Simulator Modal -->
+    <div id="simulatorModal" class="modal" style="z-index: 2500;">
+        <div class="bg-slate-900 p-6 rounded-[2rem] shadow-2xl w-full max-w-lg text-white" style="max-height:92vh;overflow-y:auto;">
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="text-xl font-black text-cyan-400">📈 Wealth Simulator</h2>
+                <button onclick="closeModal('simulatorModal')" class="text-slate-400 font-black hover:text-rose-400 text-xl">✕</button>
+            </div>
+            <p class="text-[10px] text-slate-400 mb-4">Projects future portfolio value based on compound growth. Current value reflects active chart filters.</p>
+
+            <!-- Inputs -->
+            <div class="grid grid-cols-2 gap-3 mb-5">
+                <div class="col-span-2">
+                    <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Current Portfolio Value (฿)</label>
+                    <input type="number" id="sim_current" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm" placeholder="Auto-filled from filters">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Expected Annual Return (%)</label>
+                    <input type="number" id="sim_return" value="7" step="0.5" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Investment Period (Years)</label>
+                    <input type="number" id="sim_years" value="20" min="1" max="50" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Monthly Contribution (฿)</label>
+                    <input type="number" id="sim_monthly" value="0" step="1000" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Target Wealth (฿) <span class="text-slate-500 normal-case font-normal">(optional)</span></label>
+                    <input type="number" id="sim_target" value="18000000" step="100000" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Inflation Rate (%)</label>
+                    <input type="number" id="sim_inflation" value="3" step="0.5" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Annual Fee (%)</label>
+                    <input type="number" id="sim_fee" value="1.5" step="0.1" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                </div>
+            </div>
+            <button onclick="runSimulation()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white py-3 rounded-xl font-black shadow-lg mb-5 transition-all">▶ Run Projection</button>
+
+            <!-- Results Summary -->
+            <div id="simSummary" class="hidden mb-5">
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-slate-800 rounded-xl p-4">
+                        <p class="text-[9px] uppercase text-slate-400 font-black mb-1">Projected Value</p>
+                        <p class="text-xl font-black text-cyan-400" id="simFinalVal">—</p>
+                        <p class="text-[9px] text-slate-500 mt-1" id="simFinalReal">Real value (inflation-adj)</p>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4">
+                        <p class="text-[9px] uppercase text-slate-400 font-black mb-1">Total Contributed</p>
+                        <p class="text-xl font-black text-emerald-400" id="simTotalIn">—</p>
+                        <p class="text-[9px] text-slate-500 mt-1" id="simTotalGain">Total gain</p>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4">
+                        <p class="text-[9px] uppercase text-slate-400 font-black mb-1">Target Achievement</p>
+                        <p class="text-xl font-black" id="simTargetPct">—</p>
+                        <p class="text-[9px] text-slate-500 mt-1" id="simTargetYear">Year target reached</p>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4">
+                        <p class="text-[9px] uppercase text-slate-400 font-black mb-1">Effective Return</p>
+                        <p class="text-xl font-black text-violet-400" id="simEffReturn">—</p>
+                        <p class="text-[9px] text-slate-500 mt-1">After fees & inflation</p>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="bg-slate-800 rounded-xl p-4">
+                    <canvas id="simChart" height="220"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </body></html>
