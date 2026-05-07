@@ -2718,6 +2718,10 @@
 
         let chartTimeframe = 'ALL'; // Default Timeframe
         let chartExcludedAssets = new Set(['Real Estate', 'Insurance', 'Provident', 'Cash']); // Hidden by default
+        let simulatorSettings = {
+            annualReturn: 7, years: 20, monthly: 0,
+            target: 18000000, inflation: 3, fee: 1.5
+        };
 
         function toggleChartAsset(cls) {
             if (chartExcludedAssets.has(cls)) {
@@ -2778,6 +2782,7 @@
                         if (parsed.favoriteExcludedAssets)  favoriteExcludedAssets  = parsed.favoriteExcludedAssets;
                         if (parsed.favoriteExcludedPortfolios) favoriteExcludedPortfolios = parsed.favoriteExcludedPortfolios;
                         if (parsed.chartExcludedAssets)     chartExcludedAssets     = new Set(parsed.chartExcludedAssets);
+                        if (parsed.simulatorSettings)       simulatorSettings       = parsed.simulatorSettings;
                         const statusLabel = document.getElementById('saveStatus');
                         if (statusLabel) {
                             statusLabel.innerText = 'Auto-saved locally';
@@ -2792,19 +2797,12 @@
         
         function saveToLocalStorage() {
             try {
-                const simSettings = {
-                    annualReturn: parseFloat(document.getElementById('sim_return')?.value) || 7,
-                    years:        parseInt(document.getElementById('sim_years')?.value)    || 20,
-                    monthly:      parseFloat(document.getElementById('sim_monthly')?.value) || 0,
-                    target:       parseFloat(document.getElementById('sim_target')?.value)  || 18000000,
-                    inflation:    parseFloat(document.getElementById('sim_inflation')?.value) || 3,
-                    fee:          parseFloat(document.getElementById('sim_fee')?.value)     || 1.5,
-                };
+                // Save simulator settings from JS variable (always up to date)
                 const dataToSave = {
                     version: DATA_VERSION, allFunds, targetPercentages, taxSavings,
                     favoriteExcludedAssets, favoriteExcludedPortfolios,
                     chartExcludedAssets: [...chartExcludedAssets],
-                    simulatorSettings: simSettings
+                    simulatorSettings: simulatorSettings
                 };
                 localStorage.setItem('portfolioMasterData', JSON.stringify(dataToSave));
                 const statusLabel = document.getElementById('saveStatus');
@@ -4643,14 +4641,6 @@
         }
 
         function gistGetPayload() {
-            const simSettings = {
-                annualReturn: parseFloat(document.getElementById('sim_return')?.value) || 7,
-                years:        parseInt(document.getElementById('sim_years')?.value)    || 20,
-                monthly:      parseFloat(document.getElementById('sim_monthly')?.value) || 0,
-                target:       parseFloat(document.getElementById('sim_target')?.value)  || 18000000,
-                inflation:    parseFloat(document.getElementById('sim_inflation')?.value) || 3,
-                fee:          parseFloat(document.getElementById('sim_fee')?.value)     || 1.5,
-            };
             return JSON.stringify({
                 version:  Date.now(),
                 allFunds: allFunds,
@@ -4659,7 +4649,7 @@
                 favoriteExcludedAssets: favoriteExcludedAssets,
                 favoriteExcludedPortfolios: favoriteExcludedPortfolios,
                 chartExcludedAssets: [...chartExcludedAssets],
-                simulatorSettings: simSettings
+                simulatorSettings: simulatorSettings
             });
         }
 
@@ -4670,14 +4660,7 @@
             if (parsed.favoriteExcludedAssets) favoriteExcludedAssets = parsed.favoriteExcludedAssets;
             if (parsed.favoriteExcludedPortfolios) favoriteExcludedPortfolios = parsed.favoriteExcludedPortfolios;
             if (parsed.chartExcludedAssets)    chartExcludedAssets    = new Set(parsed.chartExcludedAssets);
-            // simulatorSettings stored in localStorage — applied when modal opens
-            if (parsed.simulatorSettings) {
-                try {
-                    const stored = JSON.parse(localStorage.getItem('portfolioMasterData') || '{}');
-                    stored.simulatorSettings = parsed.simulatorSettings;
-                    localStorage.setItem('portfolioMasterData', JSON.stringify(stored));
-                } catch(e) {}
-            }
+            if (parsed.simulatorSettings)      simulatorSettings      = parsed.simulatorSettings;
         }
 
         // Create a brand-new secret Gist and save its ID
@@ -5250,22 +5233,13 @@
         }
 
         function openSimulatorModal() {
-            // Load saved simulator settings from localStorage
-            try {
-                const stored = localStorage.getItem('portfolioMasterData');
-                if (stored) {
-                    const parsed = JSON.parse(stored);
-                    if (parsed.simulatorSettings) {
-                        const s = parsed.simulatorSettings;
-                        document.getElementById('sim_return').value   = s.annualReturn ?? 7;
-                        document.getElementById('sim_years').value    = s.years ?? 20;
-                        document.getElementById('sim_monthly').value  = s.monthly ?? 0;
-                        document.getElementById('sim_target').value   = s.target ?? 18000000;
-                        document.getElementById('sim_inflation').value = s.inflation ?? 3;
-                        document.getElementById('sim_fee').value      = s.fee ?? 1.5;
-                    }
-                }
-            } catch(e) {}
+            // Populate inputs from simulatorSettings JS variable (already loaded from localStorage/Gist)
+            document.getElementById('sim_return').value    = simulatorSettings.annualReturn ?? 7;
+            document.getElementById('sim_years').value     = simulatorSettings.years ?? 20;
+            document.getElementById('sim_monthly').value   = simulatorSettings.monthly ?? 0;
+            document.getElementById('sim_target').value    = simulatorSettings.target ?? 18000000;
+            document.getElementById('sim_inflation').value = simulatorSettings.inflation ?? 3;
+            document.getElementById('sim_fee').value       = simulatorSettings.fee ?? 1.5;
             // Auto-fill current value from chart-filtered funds
             const filtered = filteredFunds.filter(f => !chartExcludedAssets.has(f.assetClass));
             const curVal = filtered.reduce((s, f) => {
@@ -5446,27 +5420,27 @@
                 </div>
                 <div>
                     <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Expected Annual Return (%)</label>
-                    <input type="number" id="sim_return" value="7" step="0.5" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                    <input type="number" id="sim_return" oninput="simulatorSettings.annualReturn=parseFloat(this.value)||7;saveToLocalStorage();runSimulation()" value="7" step="0.5" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
                 </div>
                 <div>
                     <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Investment Period (Years)</label>
-                    <input type="number" id="sim_years" value="20" min="1" max="50" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                    <input type="number" id="sim_years" oninput="simulatorSettings.years=parseInt(this.value)||20;saveToLocalStorage();runSimulation()" value="20" min="1" max="50" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
                 </div>
                 <div>
                     <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Monthly Contribution (฿)</label>
-                    <input type="number" id="sim_monthly" value="0" step="1000" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                    <input type="number" id="sim_monthly" oninput="simulatorSettings.monthly=parseFloat(this.value)||0;saveToLocalStorage();runSimulation()" value="0" step="1000" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
                 </div>
                 <div>
                     <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Target Wealth (฿) <span class="text-slate-500 normal-case font-normal">(optional)</span></label>
-                    <input type="number" id="sim_target" value="18000000" step="100000" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                    <input type="number" id="sim_target" oninput="simulatorSettings.target=parseFloat(this.value)||18000000;saveToLocalStorage();runSimulation()" value="18000000" step="100000" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
                 </div>
                 <div>
                     <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Inflation Rate (%)</label>
-                    <input type="number" id="sim_inflation" value="3" step="0.5" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                    <input type="number" id="sim_inflation" oninput="simulatorSettings.inflation=parseFloat(this.value)||3;saveToLocalStorage();runSimulation()" value="3" step="0.5" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
                 </div>
                 <div>
                     <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Annual Fee (%)</label>
-                    <input type="number" id="sim_fee" value="1.5" step="0.1" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                    <input type="number" id="sim_fee" oninput="simulatorSettings.fee=parseFloat(this.value)||1.5;saveToLocalStorage();runSimulation()" value="1.5" step="0.1" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
                 </div>
             </div>
             <button onclick="runSimulation()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white py-3 rounded-xl font-black shadow-lg mb-5 transition-all">▶ Run Projection</button>
