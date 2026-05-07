@@ -4739,6 +4739,13 @@
             })
             .then(function(r) {
                 if (r.status === 401) { gistSyncStatusUI('⚠ Token invalid', '#ef4444'); if (!silent) alert('Token invalid or expired. Please update it in ☁️ GitHub Sync.'); return; }
+                if (r.status === 403) { 
+                    r.text().then(function(body) {
+                        gistSyncStatusUI('⚠ Forbidden', '#ef4444'); 
+                        if (!silent) alert('Push failed: HTTP 403\n\nDetail: ' + body.substring(0, 200) + '\n\nPossible causes:\n1. Token expired — generate a new one\n2. Gist ID is wrong\n3. Gist belongs to a different account');
+                    });
+                    return; 
+                }
                 if (r.status === 404) { gistSyncStatusUI('⚠ Gist not found', '#ef4444'); if (!silent) alert('Gist not found. It may have been deleted. Create a new one.'); return; }
                 if (!r.ok) throw new Error('HTTP ' + r.status);
                 return r.json();
