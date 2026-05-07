@@ -2778,15 +2778,6 @@
                         if (parsed.favoriteExcludedAssets)  favoriteExcludedAssets  = parsed.favoriteExcludedAssets;
                         if (parsed.favoriteExcludedPortfolios) favoriteExcludedPortfolios = parsed.favoriteExcludedPortfolios;
                         if (parsed.chartExcludedAssets)     chartExcludedAssets     = new Set(parsed.chartExcludedAssets);
-                        if (parsed.simulatorSettings) {
-                            const s = parsed.simulatorSettings;
-                            if (document.getElementById('sim_return'))   document.getElementById('sim_return').value   = s.annualReturn ?? 7;
-                            if (document.getElementById('sim_years'))    document.getElementById('sim_years').value    = s.years ?? 20;
-                            if (document.getElementById('sim_monthly'))  document.getElementById('sim_monthly').value  = s.monthly ?? 0;
-                            if (document.getElementById('sim_target'))   document.getElementById('sim_target').value   = s.target ?? 18000000;
-                            if (document.getElementById('sim_inflation')) document.getElementById('sim_inflation').value = s.inflation ?? 3;
-                            if (document.getElementById('sim_fee'))      document.getElementById('sim_fee').value      = s.fee ?? 1.5;
-                        }
                         const statusLabel = document.getElementById('saveStatus');
                         if (statusLabel) {
                             statusLabel.innerText = 'Auto-saved locally';
@@ -4652,13 +4643,23 @@
         }
 
         function gistGetPayload() {
+            const simSettings = {
+                annualReturn: parseFloat(document.getElementById('sim_return')?.value) || 7,
+                years:        parseInt(document.getElementById('sim_years')?.value)    || 20,
+                monthly:      parseFloat(document.getElementById('sim_monthly')?.value) || 0,
+                target:       parseFloat(document.getElementById('sim_target')?.value)  || 18000000,
+                inflation:    parseFloat(document.getElementById('sim_inflation')?.value) || 3,
+                fee:          parseFloat(document.getElementById('sim_fee')?.value)     || 1.5,
+            };
             return JSON.stringify({
                 version:  Date.now(),
                 allFunds: allFunds,
                 targetPercentages: targetPercentages,
                 taxSavings: taxSavings,
                 favoriteExcludedAssets: favoriteExcludedAssets,
-                favoriteExcludedPortfolios: favoriteExcludedPortfolios
+                favoriteExcludedPortfolios: favoriteExcludedPortfolios,
+                chartExcludedAssets: [...chartExcludedAssets],
+                simulatorSettings: simSettings
             });
         }
 
@@ -4668,6 +4669,15 @@
             if (parsed.taxSavings)             taxSavings             = parsed.taxSavings;
             if (parsed.favoriteExcludedAssets) favoriteExcludedAssets = parsed.favoriteExcludedAssets;
             if (parsed.favoriteExcludedPortfolios) favoriteExcludedPortfolios = parsed.favoriteExcludedPortfolios;
+            if (parsed.chartExcludedAssets)    chartExcludedAssets    = new Set(parsed.chartExcludedAssets);
+            // simulatorSettings stored in localStorage — applied when modal opens
+            if (parsed.simulatorSettings) {
+                try {
+                    const stored = JSON.parse(localStorage.getItem('portfolioMasterData') || '{}');
+                    stored.simulatorSettings = parsed.simulatorSettings;
+                    localStorage.setItem('portfolioMasterData', JSON.stringify(stored));
+                } catch(e) {}
+            }
         }
 
         // Create a brand-new secret Gist and save its ID
@@ -5233,6 +5243,22 @@
         }
 
         function openSimulatorModal() {
+            // Load saved simulator settings from localStorage
+            try {
+                const stored = localStorage.getItem('portfolioMasterData');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (parsed.simulatorSettings) {
+                        const s = parsed.simulatorSettings;
+                        document.getElementById('sim_return').value   = s.annualReturn ?? 7;
+                        document.getElementById('sim_years').value    = s.years ?? 20;
+                        document.getElementById('sim_monthly').value  = s.monthly ?? 0;
+                        document.getElementById('sim_target').value   = s.target ?? 18000000;
+                        document.getElementById('sim_inflation').value = s.inflation ?? 3;
+                        document.getElementById('sim_fee').value      = s.fee ?? 1.5;
+                    }
+                }
+            } catch(e) {}
             // Auto-fill current value from chart-filtered funds
             const filtered = filteredFunds.filter(f => !chartExcludedAssets.has(f.assetClass));
             const curVal = filtered.reduce((s, f) => {
