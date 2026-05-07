@@ -5253,23 +5253,24 @@
             // Build year-by-year projection
             const labels = [], nominalVals = [], realVals = [], contributedVals = [];
             let nomVal = P;
-            let realVal = P;
             let totalIn = P;
             let targetYear = null;
+            let cumulativeInflation = 1; // tracks (1+inflation)^y
 
             const startYear = new Date().getFullYear();
             labels.push(startYear.toString());
             nominalVals.push(Math.round(nomVal));
-            realVals.push(Math.round(realVal));
+            realVals.push(Math.round(nomVal)); // year 0: same as nominal
             contributedVals.push(Math.round(totalIn));
 
             for (let y = 1; y <= years; y++) {
                 // Compound monthly
                 for (let m = 0; m < 12; m++) {
                     nomVal = nomVal * (1 + monthlyRate) + monthly;
-                    realVal = realVal * (1 + (realReturn / 12)) + monthly;
                     totalIn += monthly;
                 }
+                cumulativeInflation *= (1 + inflation);
+                const realVal = nomVal / cumulativeInflation; // deflate to today's money
                 labels.push((startYear + y).toString());
                 nominalVals.push(Math.round(nomVal));
                 realVals.push(Math.round(realVal));
@@ -5283,7 +5284,7 @@
             // Summary
             const fmt = v => '฿' + Math.round(v).toLocaleString();
             document.getElementById('simFinalVal').innerText = fmt(nomVal);
-            document.getElementById('simFinalReal').innerText = 'Real: ' + fmt(realVal) + ' (inflation-adj)';
+            document.getElementById('simFinalReal').innerText = 'Real: ' + fmt(realVals[realVals.length-1]) + ' (today\'s money)';
             document.getElementById('simTotalIn').innerText = fmt(totalIn);
             document.getElementById('simTotalGain').innerText = 'Gain: ' + fmt(nomVal - totalIn);
 
