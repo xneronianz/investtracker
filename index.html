@@ -3789,25 +3789,71 @@
             }, 100);
             
             const revHistory = history.slice().reverse();
-            const formatRow = h => `<tr>
+            const formatRow = (h, monthKey) => `
+                <tr class="hist-row-${monthKey} hidden">
+                    <td class="py-2 pl-8 border-b text-sm text-slate-600">${h.date}</td>
+                    <td class="py-2 text-right font-black text-indigo-600 border-b text-sm">฿${h.nav.toFixed(4)}</td>
+                    <td class="py-2 text-right border-b">
+                        <button onclick="editHistItem('${id}', '${h.date}')" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1 rounded shadow-sm text-[10px] font-bold transition-all">✏️ Edit</button>
+                    </td>
+                </tr>`;
+
+            // Group by month
+            const monthGroups = {};
+            revHistory.forEach(h => {
+                const mk = h.date.substring(0, 7);
+                if (!monthGroups[mk]) monthGroups[mk] = [];
+                monthGroups[mk].push(h);
+            });
+
+            let html = '';
+            Object.keys(monthGroups).sort().reverse().forEach(mk => {
+                const entries = monthGroups[mk];
+                const latest = entries[0];
+                const count = entries.length;
+                const monthLabel = new Date(mk + '-01').toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+                // Month header row (clickable)
+                html += `<tr class="cursor-pointer bg-slate-50 hover:bg-indigo-50 transition-all" onclick="toggleHistMonth('${mk}')">
+                    <td class="py-2 px-3 border-b font-black text-slate-700 text-sm">
+                        <span id="hist-arrow-${mk}" class="mr-2 text-indigo-400">▶</span>${monthLabel}
+                        <span class="ml-2 text-[10px] text-slate-400 font-normal">${count} entries</span>
+                    </td>
+                    <td class="py-2 text-right font-black text-indigo-500 border-b text-sm">฿${latest.nav.toFixed(4)}</td>
+                    <td class="py-2 text-right border-b">
+                        <button onclick="event.stopPropagation();editHistItem('${id}', '${latest.date}')" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1 rounded shadow-sm text-[10px] font-bold transition-all">✏️ Edit</button>
+                    </td>
+                </tr>`;
+                // Daily rows (hidden by default)
+                entries.forEach(h => { html += formatRow(h, mk); });
+            });
+
+            document.getElementById('histRecentBody').innerHTML = html || '<tr><td colspan="3" class="py-4 text-center text-slate-300">No entry history.</td></tr>';
+
+            // Monthly snapshots panel stays as before
+            const monthlyMap = {};
+            revHistory.forEach(h => {
+                const monthKey = h.date.substring(0, 7);
+                if (!monthlyMap[monthKey] || h.date > monthlyMap[monthKey].date) {
+                    monthlyMap[monthKey] = h;
+                }
+            });
+            const monthlyList = Object.values(monthlyMap).sort((a, b) => b.date.localeCompare(a.date));
+            const fmtMonthRow = h => `<tr>
                 <td class="py-3 border-b font-medium">${h.date}</td>
                 <td class="py-3 text-right font-black text-indigo-600 border-b">฿${h.nav.toFixed(4)}</td>
                 <td class="py-3 text-right border-b">
                     <button onclick="editHistItem('${id}', '${h.date}')" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1 rounded shadow-sm text-[10px] font-bold transition-all">✏️ Edit</button>
                 </td>
             </tr>`;
-            
-            document.getElementById('histRecentBody').innerHTML = revHistory.length ? revHistory.slice(0, 10).map(formatRow).join('') : '<tr><td colspan=\"3\" class=\"py-4 text-center text-slate-300\">No entry history.</td></tr>';
-            
-            const monthlyMap = {}; 
-            revHistory.forEach(h => { 
-                const monthKey = h.date.substring(0, 7); 
-                if (!monthlyMap[monthKey] || h.date > monthlyMap[monthKey].date) {
-                    monthlyMap[monthKey] = h; 
-                }
-            });
-            const monthlyList = Object.values(monthlyMap).sort((a, b) => b.date.localeCompare(a.date));
-            document.getElementById('histMonthlyBody').innerHTML = monthlyList.length ? monthlyList.map(formatRow).join('') : '<tr><td colspan=\"3\" class=\"py-4 text-center text-slate-300\">No monthly data.</td></tr>';
+            document.getElementById('histMonthlyBody').innerHTML = monthlyList.length ? monthlyList.map(fmtMonthRow).join('') : '<tr><td colspan="3" class="py-4 text-center text-slate-300">No monthly data.</td></tr>';
+        }
+
+        function toggleHistMonth(mk) {
+            const rows = document.querySelectorAll('.hist-row-' + mk);
+            const arrow = document.getElementById('hist-arrow-' + mk);
+            const isHidden = rows.length > 0 && rows[0].classList.contains('hidden');
+            rows.forEach(r => r.classList.toggle('hidden', !isHidden));
+            if (arrow) arrow.textContent = isHidden ? '▼' : '▶';
         }
 
         function saveHistItem() {
