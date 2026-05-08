@@ -254,6 +254,7 @@
                         <div class="flex flex-col"><label class="text-[10px] font-black text-indigo-500 uppercase mb-2">Fund Name</label><select id="d_name" multiple="" onchange="filterData()" class="filter-select"><option value="ไทยประกันชีวิต">ไทยประกันชีวิต</option><option value="ABGDD-SSF">ABGDD-SSF</option><option value="AIA-Excellence">AIA-Excellence</option><option value="AIA-Retirement">AIA-Retirement</option><option value="AIA-Unit Link">AIA-Unit Link</option><option value="ASP-ThaiESG">ASP-ThaiESG</option><option value="B-FUTURESSF">B-FUTURESSF</option><option value="B-INNOTECHSSF">B-INNOTECHSSF</option><option value="Cash">Cash</option><option value="ES-GINNO-SSF">ES-GINNO-SSF</option><option value="FWD-Critical Illness">FWD-Critical Illness</option><option value="K-CHANGE-SSF">K-CHANGE-SSF</option><option value="KFCMEGASSF">KFCMEGASSF</option><option value="KFGGSSF">KFGGSSF</option><option value="KF-LATAM">KF-LATAM</option><option value="K-GOLD-A(A)">K-GOLD-A(A)</option><option value="KKP EMXCN-H-SSF">KKP EMXCN-H-SSF</option><option value="KKP EQ THAI ESG">KKP EQ THAI ESG</option><option value="KKP GB THAI ESG">KKP GB THAI ESG</option><option value="KKP US500-UH-SSF">KKP US500-UH-SSF</option><option value="KT-BOND">KT-BOND</option><option value="K-VIETNAM-SSF">K-VIETNAM-SSF</option><option value="MEGA10CHINA-SSF">MEGA10CHINA-SSF</option><option value="ONE-UGG-ASSF">ONE-UGG-ASSF</option><option value="PRINCIPAL iPROPEN-SSF">PRINCIPAL iPROPEN-SSF</option><option value="PVD Co-Contributed">PVD Co-Contributed</option><option value="PVD Self-Contributed">PVD Self-Contributed</option><option value="SCBAXJ(SSF)">SCBAXJ(SSF)</option><option value="SCBCHA-SSF">SCBCHA-SSF</option><option value="SCBCHA(SSFE)">SCBCHA(SSFE)</option><option value="SCBCOMP">SCBCOMP</option><option value="SCBCTECH(SSFE)">SCBCTECH(SSFE)</option><option value="SCBEUROPE(SSF)">SCBEUROPE(SSF)</option><option value="SCBEUROPE(SSFE)">SCBEUROPE(SSFE)</option><option value="SCBGOLDH-SSF">SCBGOLDH-SSF</option><option value="SCBNDQ(SSF)">SCBNDQ(SSF)</option><option value="SCBNEXT(SSFE)">SCBNEXT(SSFE)</option><option value="SCBS&amp;P500(SSFA)">SCBS&amp;P500(SSFA)</option><option value="SCBVIET(SSFA)">SCBVIET(SSFA)</option><option value="SCBVIET(SSFE)">SCBVIET(SSFE)</option><option value="SCBWORLD(SSFE)">SCBWORLD(SSFE)</option><option value="TDSThaiESG-A">TDSThaiESG-A</option><option value="TISCOCHA-SSF">TISCOCHA-SSF</option><option value="TLA-GEQ">TLA-GEQ</option><option value="TLFVMR-ASIAX">TLFVMR-ASIAX</option><option value="UCHINA-SSF">UCHINA-SSF</option><option value="UGIS-SSF">UGIS-SSF</option><option value="UOBSA-SSF">UOBSA-SSF</option></select></div>
                         <div class="flex flex-col"><label class="text-[10px] font-black text-indigo-500 uppercase mb-2">Portfolio</label><select id="d_port" multiple="" onchange="filterData()" class="filter-select"><option value="Cash">Cash</option><option value="Finnomena-AWS">Finnomena-AWS</option><option value="Finnomena-Tax">Finnomena-Tax</option><option value="Insurance">Insurance</option><option value="Krungsri iFund">Krungsri iFund</option><option value="Provident Fund">Provident Fund</option><option value="SCB Fund Click">SCB Fund Click</option></select></div>
                         <div class="flex flex-col"><label class="text-[10px] font-black text-indigo-500 uppercase mb-2">Asset Class</label><select id="d_geo" multiple="" onchange="filterData()" class="filter-select"><option value="Bond">Bond</option><option value="Cash">Cash</option><option value="CN">CN</option><option value="Commodity">Commodity</option><option value="EM">EM</option><option value="EU">EU</option><option value="Global Equity">Global Equity</option><option value="Insurance">Insurance</option><option value="Prop Fund">Prop Fund</option><option value="Provident">Provident</option><option value="TECH">TECH</option><option value="TH">TH</option><option value="US">US</option><option value="VIET">VIET</option></select></div>
+                        
                     </div>
                     <input type="text" id="globalSearch" onkeyup="filterData()" placeholder="🔍 Searching through investment holdings..." class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-sm">
                 </div>
@@ -291,6 +292,16 @@
                                 </div>
                             </th>
                             <th class="p-5 text-center sortable" onclick="sortTable('source')">Source ↕</th>
+                            <th class="p-5 text-center text-[10px]">
+                                <div class="flex flex-col items-center gap-1">
+                                    <select id="d_navsync" onchange="filterData()" class="text-[9px] font-black bg-slate-50 border border-slate-200 rounded-lg px-1 py-0.5 text-slate-600 cursor-pointer outline-none">
+                                        <option value="">All</option>
+                                        <option value="auto">⚡ Auto</option>
+                                        <option value="manual">✋ Manual</option>
+                                    </select>
+                                    <span class="text-[9px] font-black text-slate-500 uppercase tracking-wide cursor-pointer hover:text-indigo-500" onclick="sortTable('navSync')">NAV Sync ↕</span>
+                                </div>
+                            </th>
                             <th class="p-5 text-right font-black sortable" onclick="sortTable('currentValue')">Market Value ↕</th>
                             <th class="p-5 text-right sortable" onclick="sortTable('pl')">Capital G/L ↕</th>
                             <th class="p-5 text-center sortable" onclick="sortTable('trPercent')">Total Return ↕</th>
@@ -2836,6 +2847,10 @@
 
         let sortKey = 'name'; let sortAsc = true;
         let navPctKey = '1D'; // default NAV % change timeframe
+        const MANUAL_NAV_FUNDS = new Set([
+            'ABGDD-SSF','SCBCHA-SSF','SCBCHA(SSFE)','SCBGOLDH-SSF',
+            'UCHINA-SSF','ES-GINNO-SSF','SCBVIET(SSFE)','KKP CHINA-H-SSF'
+        ]);
         const NAV_TIMEFRAMES = [
             { key:'1D',  label:'1D',        days:1 },
             { key:'1W',  label:'1W',        days:7 },
@@ -2893,9 +2908,7 @@
         const thCollator = new Intl.Collator('th');
 
         function sortTable(key) {
-            if (sortKey === key) sortAsc = !sortAsc; else { sortKey = key; sortAsc = (key === 'name' || key === 'portfolio' || key === 'assetClass' || key === 'source'); }
-            // navPct only exists on filteredFunds (computed during filterData).
-            // Sort filteredFunds directly, then re-render without re-filtering.
+            if (sortKey === key) sortAsc = !sortAsc; else { sortKey = key; sortAsc = (key === 'name' || key === 'portfolio' || key === 'assetClass' || key === 'source' || key === 'navSync'); }
             if (key === 'navPct') {
                 filteredFunds.sort((a, b) => {
                     const vA = (a.navPct !== null && a.navPct !== undefined) ? a.navPct.pct : -Infinity;
@@ -2903,6 +2916,16 @@
                     return sortAsc ? (vA < vB ? -1 : 1) : (vA < vB ? 1 : -1);
                 });
                 renderAll();
+                return;
+            }
+            if (key === 'navSync') {
+                // Auto (0) before Manual (1) when ascending
+                allFunds.sort((a, b) => {
+                    const vA = MANUAL_NAV_FUNDS.has(a.name) ? 1 : 0;
+                    const vB = MANUAL_NAV_FUNDS.has(b.name) ? 1 : 0;
+                    return sortAsc ? vA - vB : vB - vA;
+                });
+                filterData();
                 return;
             }
             allFunds.sort((a, b) => {
@@ -3910,10 +3933,13 @@
             const selNames = Array.from(document.getElementById('d_name').selectedOptions).map(o => o.value);
             const selPorts = Array.from(document.getElementById('d_port').selectedOptions).map(o => o.value);
             const selGeos = Array.from(document.getElementById('d_geo').selectedOptions).map(o => o.value);
+            const selNavSync = document.getElementById('d_navsync')?.value || '';
 
             filteredFunds = allFunds.filter(f => {
                 const str = Object.values(f).join(' ').toLowerCase();
-                return str.includes(gSearch) && (selNames.length===0||selNames.includes(f.name)) && (selPorts.length===0||selPorts.includes(f.portfolio)) && (selGeos.length===0||selGeos.includes(f.assetClass));
+                const isManual = MANUAL_NAV_FUNDS.has(f.name);
+                const navSyncMatch = selNavSync === '' || (selNavSync === 'auto' && !isManual) || (selNavSync === 'manual' && isManual);
+                return str.includes(gSearch) && (selNames.length===0||selNames.includes(f.name)) && (selPorts.length===0||selPorts.includes(f.portfolio)) && (selGeos.length===0||selGeos.includes(f.assetClass)) && navSyncMatch;
             }).map(f => {
                 const curVal = f.units * f.nav;
                 const divSum = (f.dividends || []).reduce((sum, d) => sum + d.amount, 0);
@@ -4129,6 +4155,12 @@
                             : '<span class="text-slate-300 text-xs">N/A</span>'}
                     </td>
                     <td class="p-4 text-center">${sourceHTML}</td>
+                    <td class="p-4 text-center">
+                        ${MANUAL_NAV_FUNDS.has(f.name)
+                            ? '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-black bg-amber-50 text-amber-600 border border-amber-200">✋ Manual</span>'
+                            : '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-black bg-emerald-50 text-emerald-600 border border-emerald-200">⚡ Auto</span>'
+                        }
+                    </td>
                     <td class="p-4 text-right font-black text-sm">${formatBaht(f.currentValue)}</td>
                     <td class="p-4 text-right font-bold ${plColor}">${plFormatted}</td>
                     <td class="p-4 text-center">
@@ -5200,6 +5232,7 @@
         function clearAllFilters() {
             document.getElementById('globalSearch').value = ""; 
             ['d_name', 'd_port', 'd_geo'].forEach(id => { const el = document.getElementById(id); for (let i = 0; i < el.options.length; i++) el.options[i].selected = false; });
+            const navSync = document.getElementById('d_navsync'); if (navSync) navSync.value = '';
             filterData();
         }
 
