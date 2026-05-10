@@ -5559,7 +5559,7 @@
                 };
 
                 const updated = data.updated ? new Date(data.updated).toLocaleString() : '';
-                content.innerHTML = data.items.map(item => `
+                const renderNews = (items) => items.map(item => `
                     <div class="news-item">
                         <div class="flex items-center gap-2 mb-1 flex-wrap">
                             <span class="news-badge" style="${badgeStyle[item.badge]||badgeStyle.global}">${item.source}</span>
@@ -5567,8 +5567,19 @@
                         </div>
                         <a href="${item.link}" target="_blank" rel="noopener" style="display:block;cursor:pointer;" class="news-title">${item.title}</a>
                         <div class="news-body">${item.body}</div>
-                    </div>`).join('') +
-                    `<p class="text-[10px] text-slate-300 mt-4 text-right">Feed updated: ${updated}</p>`;
+                    </div>`).join('');
+
+                const allNewsItems = data.items;
+                const top5 = allNewsItems.slice(0, 5);
+                const rest = allNewsItems.slice(5);
+
+                content.innerHTML =
+                    renderNews(top5) +
+                    (rest.length > 0 ? `
+                        <div id="newsExtra" style="display:none;">${renderNews(rest)}</div>
+                        <button onclick="toggleNewsMore()" id="newsMoreBtn" class="w-full mt-3 py-2 rounded-xl text-[11px] font-black text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all">▼ Show ${rest.length} more headlines</button>
+                    ` : '') +
+                    `<p class="text-[10px] text-slate-300 mt-3 text-right">Feed updated: ${updated}</p>`;
 
             } catch(e) {
                 // Fallback: show quick links + setup instructions
@@ -5601,6 +5612,23 @@
                 <div class="grid grid-cols-2 gap-2">
                     ${links.map(([l,u]) => `<a href="${u}" target="_blank" rel="noopener" class="block bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-xl px-3 py-2.5 text-[11px] font-bold text-slate-600 hover:text-indigo-600 transition-all">${l}</a>`).join('')}
                 </div>`;
+        }
+
+        function toggleNewsMore() {
+            const extra = document.getElementById('newsExtra');
+            const btn = document.getElementById('newsMoreBtn');
+            if (!extra || !btn) return;
+            const isHidden = extra.style.display === 'none';
+            extra.style.display = isHidden ? '' : 'none';
+            if (isHidden) {
+                const count = extra.querySelectorAll('.news-item').length;
+                btn.innerHTML = '▲ Show less';
+                btn.className = 'w-full mt-3 py-2 rounded-xl text-[11px] font-black text-slate-500 bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-all';
+            } else {
+                const count = extra.querySelectorAll('.news-item').length;
+                btn.innerHTML = `▼ Show ${count} more headlines`;
+                btn.className = 'w-full mt-3 py-2 rounded-xl text-[11px] font-black text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all';
+            }
         }
 
         function showNewsQuickLinks(content) {
