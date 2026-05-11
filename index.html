@@ -5570,19 +5570,28 @@
                     </div>`).join('');
 
                 const allNewsItems = data.items;
-                const top5 = allNewsItems.slice(0, 5);
-                const rest = allNewsItems.slice(5);
-
+                const top3 = allNewsItems.slice(0, 3);
+                const rest = allNewsItems.slice(3);
                 const totalCount = rest.length;
+
+                // Render top 3 into content div
                 content.innerHTML =
-                    `<div id="newsCollapsed" style="max-height:360px;overflow:hidden;">
-                        ${renderNews(top5)}
-                    </div>` +
-                    (rest.length > 0 ? `
-                        <div id="newsExtra" style="display:none;">${renderNews(rest)}</div>
-                        <button onclick="toggleNewsMore()" id="newsMoreBtn" class="w-full mt-3 py-2 rounded-xl text-[11px] font-black text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all">▼ Show ${totalCount} more headlines</button>
-                    ` : '') +
+                    renderNews(top3) +
+                    (rest.length > 0 ? `<div id="newsExtra" style="display:none;">${renderNews(rest)}</div>` : '') +
                     `<p class="text-[10px] text-slate-300 mt-3 text-right">Feed updated: ${updated}</p>`;
+
+                // Render Show More button OUTSIDE content, directly in newsPanel
+                const newsPanel = document.getElementById('newsPanel');
+                const existingBtn = document.getElementById('newsMoreBtn');
+                if (existingBtn) existingBtn.remove();
+                if (rest.length > 0 && newsPanel) {
+                    const btn = document.createElement('button');
+                    btn.id = 'newsMoreBtn';
+                    btn.onclick = toggleNewsMore;
+                    btn.className = 'w-full mt-3 py-2.5 rounded-xl text-[11px] font-black text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all';
+                    btn.textContent = '▼ Show ' + totalCount + ' more headlines';
+                    newsPanel.appendChild(btn);
+                }
 
             } catch(e) {
                 // Fallback: show quick links + setup instructions
@@ -5618,23 +5627,19 @@
         }
 
         function toggleNewsMore() {
-            const collapsed = document.getElementById('newsCollapsed');
             const extra = document.getElementById('newsExtra');
             const btn = document.getElementById('newsMoreBtn');
             if (!extra || !btn) return;
             const isHidden = extra.style.display === 'none';
             if (isHidden) {
-                if (collapsed) collapsed.style.maxHeight = '';
                 extra.style.display = '';
-                const count = extra.querySelectorAll('.news-item').length;
-                btn.innerHTML = '▲ Show less';
-                btn.className = 'w-full mt-3 py-2 rounded-xl text-[11px] font-black text-slate-500 bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-all';
+                btn.textContent = '▲ Show less';
+                btn.className = 'w-full mt-3 py-2.5 rounded-xl text-[11px] font-black text-slate-500 bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-all';
             } else {
-                if (collapsed) collapsed.style.maxHeight = '360px';
                 extra.style.display = 'none';
                 const count = extra.querySelectorAll('.news-item').length;
-                btn.innerHTML = `▼ Show ${count} more headlines`;
-                btn.className = 'w-full mt-3 py-2 rounded-xl text-[11px] font-black text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all';
+                btn.textContent = '▼ Show ' + count + ' more headlines';
+                btn.className = 'w-full mt-3 py-2.5 rounded-xl text-[11px] font-black text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all';
                 document.getElementById('newsPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
