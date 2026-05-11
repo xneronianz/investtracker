@@ -34,7 +34,7 @@
         #fundTable thead th:first-child { position: sticky; top: 0; left: 0; z-index: 20; background: #f8fafc; box-shadow: 2px 2px 4px rgba(0,0,0,0.08); }
         .fund-table-wrap { min-height: 0; }
         /* News panel styles */
-        .news-item { padding: 12px 14px; border-radius: 14px; margin-bottom: 8px; border-left: 4px solid #e2e8f0; background: #f8fafc; }
+        .news-item { padding: 10px 14px; border-radius: 12px; margin-bottom: 6px; border-left: 4px solid #e2e8f0; background: #f8fafc; }
         .news-item:last-child { margin-bottom: 0; }
         .news-item.badge-thai     { border-left-color: #f59e0b; background: #fffbeb; }
         .news-item.badge-global   { border-left-color: #8b5cf6; background: #f5f3ff; }
@@ -5597,22 +5597,21 @@
                 const badgeEmoji = { thai:'🇹🇭', global:'🌐', fund:'💼', economic:'🏦', em:'🌏', bond:'📊', commodity:'🪙', us:'🇺🇸', china:'🇨🇳', vietnam:'🇻🇳' };
                 const renderNews = (items) => items.map(item => `
                     <div class="news-item badge-${item.badge||'global'}">
-                        <div class="flex items-center gap-2 mb-1 flex-wrap">
-                            <span class="news-badge" style="${badgeStyle[item.badge]||badgeStyle.global}">${badgeEmoji[item.badge]||'🟣'} ${item.source}</span>
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <span class="news-badge" style="${badgeStyle[item.badge]||badgeStyle.global}">${badgeEmoji[item.badge]||'🌐'} ${item.source}</span>
                             <span class="news-meta">${item.date ? new Date(item.date).toLocaleDateString() : ''}</span>
                         </div>
                         <a href="${item.link}" target="_blank" rel="noopener" style="display:block;cursor:pointer;" class="news-title">${item.title}</a>
-                        <div class="news-body">${item.body}</div>
                     </div>`).join('');
 
                 const allNewsItems = data.items;
-                const top3 = allNewsItems.slice(0, 3);
-                const rest = allNewsItems.slice(3);
+                const top5 = allNewsItems.slice(0, 5);
+                const rest = allNewsItems.slice(5);
                 const totalCount = rest.length;
 
-                // Render top 3 into content div
+                // Render top 5 into content div
                 content.innerHTML =
-                    renderNews(top3) +
+                    renderNews(top5) +
                     (rest.length > 0 ? `<div id="newsExtra" style="display:none;">${renderNews(rest)}</div>` : '') +
                     `<p class="text-[10px] text-slate-300 mt-3 text-right">Feed updated: ${updated}</p>`;
 
