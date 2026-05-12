@@ -63,8 +63,22 @@
         body.dark .news-item.badge-vietnam { background: #1a1500; border-left-color: #ca8a04; }
         body.dark .news-title { color: #f1f5f9; }
         body.dark .news-body { color: #94a3b8; border-top-color: rgba(255,255,255,0.08); }
+        /* Tech signal filter buttons */
+        .tech-filter-btn { background:#f8fafc; color:#64748b; border-color:#e2e8f0; }
+        .tech-filter-btn.active { background:#6366f1; color:white; border-color:#6366f1; }
         /* Prevent horizontal scroll on the page itself */
         html, body { overflow-x: hidden; max-width: 100vw; }
+        /* Tech signal badges */
+        .sig-card { padding: 10px 14px; border-radius: 12px; margin-bottom: 6px; border-left: 4px solid #e2e8f0; background: #f8fafc; }
+        .sig-card.buy  { border-left-color: #10b981; background: #f0fdf4; }
+        .sig-card.sell { border-left-color: #ef4444; background: #fef2f2; }
+        .sig-card.warn { border-left-color: #f59e0b; background: #fffbeb; }
+        .sig-card.info { border-left-color: #6366f1; background: #f5f3ff; }
+        body.dark .sig-card       { background: #1e293b; border-left-color: #475569; }
+        body.dark .sig-card.buy   { background: #052e16; border-left-color: #10b981; }
+        body.dark .sig-card.sell  { background: #1c0505; border-left-color: #ef4444; }
+        body.dark .sig-card.warn  { background: #1c1a09; border-left-color: #f59e0b; }
+        body.dark .sig-card.info  { background: #140f1f; border-left-color: #6366f1; }
 
         /* ===== DARK MODE ===== */
         body.dark { background: #0f172a; color: #e2e8f0; }
@@ -223,6 +237,33 @@
             <div class="w-full h-[360px] relative">
                 <canvas id="portfolioHistoryChart" style="box-sizing: border-box; display: block; height: 360px; width: 1067px;" width="2268" height="765"></canvas>
             </div>
+        </div>
+
+        <!-- Technical Signals Panel -->
+        <div class="bg-white p-6 rounded-[3rem] shadow-xl border border-slate-100 mb-6" id="techSignalsPanel">
+            <div class="flex items-center justify-between mb-3">
+                <div>
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">📡 Technical Signals</h3>
+                    <p class="text-[10px] text-slate-400 mt-1">Per-fund analysis vs relevant benchmark · from your NAV history</p>
+                </div>
+                <button onclick="runTechnicalAnalysis()" id="techScanBtn" class="btn-action text-white px-4 py-2 rounded-xl font-bold text-xs shadow-md" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">🔍 Scan</button>
+            </div>
+            <!-- Signal filter buttons -->
+            <div id="techFilterBtns" class="flex flex-wrap gap-1.5 mb-4" style="display:none!important;">
+                <button onclick="filterTechSignals('all')"          id="tf_all"    class="tech-filter-btn active text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">All</button>
+                <button onclick="filterTechSignals('oversold')"     id="tf_oversold"  class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">📉 Oversold</button>
+                <button onclick="filterTechSignals('overbought')"   id="tf_overbought" class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">📈 Overbought</button>
+                <button onclick="filterTechSignals('golden')"       id="tf_golden" class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">✨ Golden Cross</button>
+                <button onclick="filterTechSignals('dead')"         id="tf_dead"   class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">💀 Death Cross</button>
+                <button onclick="filterTechSignals('bb_buy')"       id="tf_bb_buy" class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">🎯 BB Lower</button>
+                <button onclick="filterTechSignals('bb_sell')"      id="tf_bb_sell" class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">🎯 BB Upper</button>
+                <button onclick="filterTechSignals('macd_bull')"    id="tf_macd_bull" class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">🐂 MACD Bull</button>
+                <button onclick="filterTechSignals('macd_bear')"    id="tf_macd_bear" class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">🐻 MACD Bear</button>
+                <button onclick="filterTechSignals('buy')"          id="tf_buy"    class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">🟢 All Buy</button>
+                <button onclick="filterTechSignals('sell')"         id="tf_sell"   class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">🔴 All Sell</button>
+            </div>
+            <!-- Signals list -->
+            <div id="techSignalsContent" class="text-sm text-slate-400 italic">Click Scan to analyse your funds' NAV history for technical signals.</div>
         </div>
 
         <!-- News & Market Updates Panel -->
@@ -5750,6 +5791,302 @@
                 runSimulation();
             }
         }
+
+        // ========== TECHNICAL ANALYSIS ENGINE v2 ==========
+        let techAllResults = [];
+        let benchmarkChartObj = null;
+
+        // Benchmark mapping by asset class / fund name keywords
+        const FUND_BENCHMARKS = {
+            'Global Equity': { label:'MSCI ACWI',    annualReturn:0.090, color:'#6366f1' },
+            'US':            { label:'S&P 500',       annualReturn:0.105, color:'#10b981' },
+            'CN':            { label:'CSI 300',       annualReturn:0.060, color:'#ef4444' },
+            'TH':            { label:'SET TRI',       annualReturn:0.040, color:'#f59e0b' },
+            'VIET':          { label:'VN-Index',      annualReturn:0.070, color:'#84cc16' },
+            'TECH':          { label:'Nasdaq 100',    annualReturn:0.150, color:'#06b6d4' },
+            'EM':            { label:'MSCI EM',       annualReturn:0.070, color:'#f97316' },
+            'EU':            { label:'MSCI Europe',   annualReturn:0.075, color:'#8b5cf6' },
+            'Bond':          { label:'Bloomberg Agg', annualReturn:0.030, color:'#db2777' },
+            'Commodity':     { label:'Bloomberg Commodity', annualReturn:0.040, color:'#0d9488' },
+            'Prop Fund':     { label:'SET Property',  annualReturn:0.050, color:'#64748b' },
+            'Insurance':     { label:'Fixed 3%',      annualReturn:0.030, color:'#94a3b8' },
+            'Provident':     { label:'Fixed 5%',      annualReturn:0.050, color:'#94a3b8' },
+            'Cash':          { label:'Fixed 1%',      annualReturn:0.010, color:'#94a3b8' },
+        };
+
+        function getBenchmarkForFund(f) {
+            return FUND_BENCHMARKS[f.assetClass] || { label:'MSCI ACWI', annualReturn:0.09, color:'#6366f1' };
+        }
+
+        function calcRSI(prices, period = 14) {
+            if (prices.length < period + 1) return null;
+            let gains = 0, losses = 0;
+            for (let i = 1; i <= period; i++) { const d = prices[i] - prices[i-1]; d > 0 ? gains += d : losses -= d; }
+            let avgGain = gains / period, avgLoss = losses / period;
+            for (let i = period + 1; i < prices.length; i++) {
+                const d = prices[i] - prices[i-1];
+                avgGain = (avgGain*(period-1) + (d>0?d:0)) / period;
+                avgLoss = (avgLoss*(period-1) + (d<0?-d:0)) / period;
+            }
+            if (avgLoss === 0) return 100;
+            return Math.round(100 - (100 / (1 + avgGain/avgLoss)));
+        }
+
+        function calcSMA(prices, period) {
+            if (prices.length < period) return null;
+            return prices.slice(-period).reduce((a,b)=>a+b,0) / period;
+        }
+
+        function calcEMA(prices, period) {
+            if (prices.length < period) return null;
+            const k = 2/(period+1);
+            let ema = prices.slice(0,period).reduce((a,b)=>a+b,0)/period;
+            for (let i = period; i < prices.length; i++) ema = prices[i]*k + ema*(1-k);
+            return ema;
+        }
+
+        function calcMACD(prices) {
+            if (prices.length < 26) return null;
+            const ema12 = calcEMA(prices,12), ema26 = calcEMA(prices,26);
+            if (!ema12||!ema26) return null;
+            const macdLine = ema12 - ema26;
+            const macdHist = [];
+            for (let i = Math.max(prices.length-9,26); i < prices.length; i++) {
+                const s = prices.slice(0,i+1), e12=calcEMA(s,12), e26=calcEMA(s,26);
+                if (e12&&e26) macdHist.push(e12-e26);
+            }
+            const signal = macdHist.length ? macdHist.reduce((a,b)=>a+b,0)/macdHist.length : 0;
+            const prevMACD = macdHist.length>1 ? macdHist[macdHist.length-2] : macdLine;
+            return { macd:macdLine, signal, prevMACD };
+        }
+
+        function calcBollinger(prices, period=20) {
+            if (prices.length < period) return null;
+            const slice = prices.slice(-period);
+            const sma = slice.reduce((a,b)=>a+b,0)/period;
+            const std = Math.sqrt(slice.reduce((s,p)=>s+(p-sma)**2,0)/period);
+            return { upper:sma+2*std, lower:sma-2*std, mid:sma };
+        }
+
+        function calcFibLevels(prices) {
+            if (prices.length < 20) return null;
+            const recent = prices.slice(-60);
+            const high=Math.max(...recent), low=Math.min(...recent), range=high-low;
+            if (range===0) return null;
+            const current = prices[prices.length-1];
+            const levels = {0:low, 23.6:low+range*0.236, 38.2:low+range*0.382, 50:low+range*0.5, 61.8:low+range*0.618, 78.6:low+range*0.786, 100:high};
+            let nearestLevel=null, nearestDist=Infinity;
+            for (const [k,v] of Object.entries(levels)) { const d=Math.abs(current-v)/range; if(d<nearestDist){nearestDist=d;nearestLevel=+k;} }
+            return { high, low, current, nearestLevel, nearestDist:Math.round(nearestDist*100), levels };
+        }
+
+        function analyseFund(f) {
+            const hist = (f.history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+            if (hist.length < 15) return null;
+            const prices = hist.map(h=>h.nav);
+            const dates = hist.map(h=>h.date);
+            const current = prices[prices.length-1];
+            const signals = [];
+            const tags = new Set();
+
+            const rsi = calcRSI(prices);
+            if (rsi !== null) {
+                if (rsi<=30)      { signals.push({type:'buy',  icon:'📉', text:`RSI ${rsi} — Oversold. Potential buying opportunity.`, strength:'strong'}); tags.add('oversold').add('buy'); }
+                else if (rsi>=70) { signals.push({type:'sell', icon:'📈', text:`RSI ${rsi} — Overbought. Consider taking profit.`, strength:'strong'}); tags.add('overbought').add('sell'); }
+                else if (rsi<=40) { signals.push({type:'info', icon:'📊', text:`RSI ${rsi} — Approaching oversold zone.`, strength:'mild'}); tags.add('oversold'); }
+                else if (rsi>=60) { signals.push({type:'warn', icon:'📊', text:`RSI ${rsi} — Approaching overbought zone.`, strength:'mild'}); tags.add('overbought'); }
+            }
+
+            const sma20=calcSMA(prices,20), sma50=calcSMA(prices,50);
+            if (sma20&&sma50) {
+                const p=prices.slice(0,-1), ps20=calcSMA(p,20), ps50=calcSMA(p,50);
+                if (ps20&&ps50) {
+                    if (ps20<ps50&&sma20>sma50) { signals.push({type:'buy',icon:'✨',text:`Golden Cross — SMA20 crossed above SMA50. Bullish trend.`,strength:'strong'}); tags.add('golden').add('buy'); }
+                    else if (ps20>ps50&&sma20<sma50) { signals.push({type:'sell',icon:'💀',text:`Death Cross — SMA20 crossed below SMA50. Bearish trend.`,strength:'strong'}); tags.add('dead').add('sell'); }
+                }
+                if (current<sma20) { signals.push({type:'warn',icon:'📉',text:`Price below SMA20 (฿${sma20.toFixed(4)}). Short-term downtrend.`,strength:'mild'}); tags.add('sell'); }
+                else               { signals.push({type:'info',icon:'📈',text:`Price above SMA20 (฿${sma20.toFixed(4)}). Short-term uptrend.`,strength:'mild'}); tags.add('buy'); }
+            }
+
+            const bb=calcBollinger(prices);
+            if (bb) {
+                if (current<=bb.lower) { signals.push({type:'buy',icon:'🎯',text:`At lower Bollinger Band (฿${bb.lower.toFixed(4)}). Mean-reversion buy signal.`,strength:'strong'}); tags.add('bb_buy').add('buy'); }
+                else if (current>=bb.upper) { signals.push({type:'sell',icon:'🎯',text:`At upper Bollinger Band (฿${bb.upper.toFixed(4)}). Mean-reversion sell signal.`,strength:'strong'}); tags.add('bb_sell').add('sell'); }
+            }
+
+            const macd=calcMACD(prices);
+            if (macd) {
+                if (macd.prevMACD<macd.signal&&macd.macd>macd.signal) { signals.push({type:'buy',icon:'🐂',text:`MACD bullish crossover — momentum turning positive.`,strength:'strong'}); tags.add('macd_bull').add('buy'); }
+                else if (macd.prevMACD>macd.signal&&macd.macd<macd.signal) { signals.push({type:'sell',icon:'🐻',text:`MACD bearish crossover — momentum turning negative.`,strength:'strong'}); tags.add('macd_bear').add('sell'); }
+            }
+
+            const fib=calcFibLevels(prices);
+            if (fib&&fib.nearestDist<3) {
+                signals.push({type:fib.nearestLevel<=38.2?'buy':'info',icon:'🔢',text:`Near Fibonacci ${fib.nearestLevel}% (฿${fib.levels[fib.nearestLevel]?.toFixed(4)}). Key support/resistance.`,strength:'mild'});
+                tags.add(fib.nearestLevel<=38.2?'buy':'info');
+            }
+
+            const mom10=prices.length>10?((current-prices[prices.length-11])/prices[prices.length-11]*100).toFixed(2):null;
+            if (mom10!==null&&Math.abs(mom10)>5) {
+                if (+mom10<-5) { signals.push({type:'warn',icon:'🔻',text:`Momentum ${mom10}% over 10 days — downward pressure.`,strength:'mild'}); tags.add('sell'); }
+                else           { signals.push({type:'info',icon:'🔺',text:`Momentum +${mom10}% over 10 days — upward pressure.`,strength:'mild'}); tags.add('buy'); }
+            }
+
+            if (!signals.length) return null;
+            const bm = getBenchmarkForFund(f);
+            return { fund:f.name, portfolio:f.portfolio, assetClass:f.assetClass, signals, tags:[...tags], rsi, sma20, sma50, bb, current, prices, dates, bm };
+        }
+
+        function buildFundMiniChart(canvasId, prices, dates, bm) {
+            const ctx = document.getElementById(canvasId);
+            if (!ctx || prices.length < 2) return;
+            const base = prices[0];
+            const normPrices = prices.map(p => +(p/base*100).toFixed(2));
+            const dailyRate = Math.pow(1+bm.annualReturn, 1/252)-1;
+            const startDate = new Date(dates[0]);
+            const bmData = dates.map(d => +(100*Math.pow(1+dailyRate, Math.round((new Date(d)-startDate)/86400000))).toFixed(2));
+            if (window['miniChart_'+canvasId]) window['miniChart_'+canvasId].destroy();
+            window['miniChart_'+canvasId] = new Chart(ctx, {
+                type:'line',
+                data:{ labels:dates, datasets:[
+                    {label:'NAV', data:normPrices, borderColor:'#22d3ee', backgroundColor:'rgba(34,211,238,0.08)', fill:true, tension:0.3, pointRadius:0, borderWidth:2},
+                    {label:bm.label, data:bmData, borderColor:bm.color, backgroundColor:'transparent', fill:false, tension:0.3, pointRadius:0, borderWidth:1.5, borderDash:[4,3]},
+                ]},
+                options:{responsive:true, maintainAspectRatio:false,
+                    plugins:{legend:{labels:{color:'#94a3b8',font:{size:9},boxWidth:10}},tooltip:{backgroundColor:'#1e293b',titleColor:'#e2e8f0',bodyColor:'#94a3b8',callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}`}}},
+                    scales:{x:{ticks:{color:'#94a3b8',font:{size:7},maxTicksLimit:5},grid:{display:false}},y:{ticks:{color:'#94a3b8',font:{size:8},callback:v=>v.toFixed(0)},grid:{color:'rgba(0,0,0,0.04)'}}}
+                }
+            });
+        }
+
+        let techCurrentFilter = 'all';
+
+        function filterTechSignals(filter) {
+            techCurrentFilter = filter;
+            document.querySelectorAll('.tech-filter-btn').forEach(b => b.classList.remove('active'));
+            const btn = document.getElementById('tf_'+filter);
+            if (btn) btn.classList.add('active');
+            const existingMore = document.getElementById('techMoreBtn');
+            if (existingMore) existingMore.remove();
+            renderTechSignals(techAllResults, filter);
+        }
+
+        function renderTechSignals(results, filter='all') {
+            const content = document.getElementById('techSignalsContent');
+            const filtered = filter==='all' ? results : results.filter(r => r.tags.includes(filter));
+            const strong = filtered.filter(r=>r.signals.some(s=>s.strength==='strong'));
+            const mild   = filtered.filter(r=>r.signals.every(s=>s.strength==='mild'));
+            const typeLabel = {buy:'🟢 BUY SIGNAL',sell:'🔴 SELL SIGNAL',warn:'🟡 CAUTION',info:'🔵 INFO'};
+
+            if (filtered.length===0) { content.innerHTML = '<p class="text-slate-400 text-sm">No funds match this filter.</p>'; return; }
+
+            const renderCard = (r, idx) => {
+                const canvasId = 'miniChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+idx;
+                return `<div class="mb-5 bg-slate-50 rounded-2xl p-4 tech-fund-card">
+                    <div class="flex items-center gap-2 mb-3 flex-wrap">
+                        <span class="font-black text-sm text-slate-800">${r.fund}</span>
+                        <span class="text-[9px] font-bold text-slate-400 bg-white px-2 py-0.5 rounded-full border">${r.assetClass}</span>
+                        ${r.rsi!==null?`<span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${r.rsi<=30?'bg-emerald-100 text-emerald-700':r.rsi>=70?'bg-rose-100 text-rose-700':'bg-slate-100 text-slate-500'}">RSI ${r.rsi}</span>`:''}
+                        <span class="text-[9px] text-slate-400 ml-auto">vs ${r.bm.label}</span>
+                    </div>
+                    <div style="height:140px;position:relative;margin-bottom:12px;">
+                        <canvas id="${canvasId}"></canvas>
+                    </div>
+                    ${r.signals.map(s=>`<div class="sig-card ${s.type} mb-1.5">
+                        <span class="text-[9px] font-black uppercase tracking-wider opacity-60">${typeLabel[s.type]||''}</span>
+                        <p class="text-[11px] font-bold text-slate-700 mt-0.5">${s.icon} ${s.text}</p>
+                    </div>`).join('')}
+                </div>`;
+            };
+
+            const allOrdered = [...strong, ...mild];
+            const top5 = allOrdered.slice(0, 5);
+            const rest = allOrdered.slice(5);
+
+            let globalIdx = 0;
+            let html = '';
+            if (strong.length) html += `<p class="text-[10px] font-black text-slate-500 uppercase tracking-wider mb-3">⚡ Strong Signals — ${strong.length} fund${strong.length>1?'s':''}</p>`;
+            html += top5.map(r => renderCard(r, globalIdx++)).join('');
+            if (rest.length > 0) {
+                html += `<div id="techExtra" style="display:none;">`;
+                if (mild.length && strong.length) html += `<p class="text-[10px] font-black text-slate-500 uppercase tracking-wider mb-3 mt-3">📊 Mild Signals — ${mild.length} fund${mild.length>1?'s':''}</p>`;
+                html += rest.map(r => renderCard(r, globalIdx++)).join('') + `</div>`;
+            }
+            html += `<p class="text-[9px] text-slate-300 mt-3" id="techFooter">Analysed ${results.length} fund${results.length!==1?'s':''}. ⚠️ Based on NAV history only. Not financial advice.</p>`;
+            content.innerHTML = html;
+
+            // Show more button appended outside content
+            const panel = document.getElementById('techSignalsPanel');
+            const existingBtn = document.getElementById('techMoreBtn');
+            if (existingBtn) existingBtn.remove();
+            if (rest.length > 0) {
+                const btn = document.createElement('button');
+                btn.id = 'techMoreBtn';
+                btn.onclick = toggleTechMore;
+                btn.className = 'w-full mt-3 py-2.5 rounded-xl text-[11px] font-black text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all';
+                btn.textContent = `▼ Show ${rest.length} more funds`;
+                panel.appendChild(btn);
+            }
+
+            // Draw mini charts for top 5 immediately
+            requestAnimationFrame(() => {
+                let drawIdx = 0;
+                top5.forEach(r => {
+                    const canvasId = 'miniChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+drawIdx;
+                    buildFundMiniChart(canvasId, r.prices, r.dates, r.bm);
+                    drawIdx++;
+                });
+            });
+        }
+
+        function toggleTechMore() {
+            const extra = document.getElementById('techExtra');
+            const btn = document.getElementById('techMoreBtn');
+            if (!extra || !btn) return;
+            const isHidden = extra.style.display === 'none';
+            extra.style.display = isHidden ? '' : 'none';
+            if (isHidden) {
+                btn.textContent = '▲ Show less';
+                btn.className = 'w-full mt-3 py-2.5 rounded-xl text-[11px] font-black text-slate-500 bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-all';
+                // Draw charts for newly visible cards
+                requestAnimationFrame(() => {
+                    const allOrdered = [...techAllResults.filter(r=>r.signals.some(s=>s.strength==='strong')), ...techAllResults.filter(r=>r.signals.every(s=>s.strength==='mild'))];
+                    allOrdered.slice(5).forEach((r, i) => {
+                        const idx = i + 5;
+                        const canvasId = 'miniChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+idx;
+                        buildFundMiniChart(canvasId, r.prices, r.dates, r.bm);
+                    });
+                });
+            } else {
+                const count = extra.querySelectorAll('.tech-fund-card').length;
+                btn.textContent = `▼ Show ${count} more funds`;
+                btn.className = 'w-full mt-3 py-2.5 rounded-xl text-[11px] font-black text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all';
+                document.getElementById('techSignalsPanel')?.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        }
+
+        function runTechnicalAnalysis() {
+            const btn = document.getElementById('techScanBtn');
+            const content = document.getElementById('techSignalsContent');
+            btn.disabled=true; btn.textContent='⏳ Scanning...';
+            setTimeout(() => {
+                techAllResults = filteredFunds.map(f=>analyseFund(f)).filter(Boolean);
+                // Show filter buttons
+                const filterBtns = document.getElementById('techFilterBtns');
+                if (filterBtns) filterBtns.style.removeProperty('display');
+                // Reset to 'all'
+                techCurrentFilter = 'all';
+                document.querySelectorAll('.tech-filter-btn').forEach(b=>b.classList.remove('active'));
+                const allBtn = document.getElementById('tf_all');
+                if (allBtn) allBtn.classList.add('active');
+                renderTechSignals(techAllResults, 'all');
+                btn.disabled=false; btn.textContent='🔍 Scan';
+            }, 50);
+        }
+
+        function updateBenchmarkChart() {}
+        function buildBenchmarkChart() {}
+        // ========== END TECHNICAL ANALYSIS ==========
 
         function openSimulatorModal() {
             // Populate inputs from simulatorSettings JS variable (already loaded from localStorage/Gist)
