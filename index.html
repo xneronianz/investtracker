@@ -5696,7 +5696,23 @@
                     </div>`;
                 }).join('');
 
-                const allNewsItems = data.items;
+                const cutoff = Date.now() - 48 * 60 * 60 * 1000; // 48 hours ago
+                const allNewsItems = data.items.filter(item => {
+                    if (!item.date) return true; // keep if no date
+                    return new Date(item.date).getTime() >= cutoff;
+                });
+                const skipped = data.items.length - allNewsItems.length;
+
+                if (allNewsItems.length === 0) {
+                    content.innerHTML = `<div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                        <p class="text-amber-700 font-bold text-xs mb-1">⏰ No recent news (last 48h)</p>
+                        <p class="text-amber-600 text-[11px]">All ${data.items.length} cached articles are older than 48 hours. Trigger the workflow manually in GitHub Actions → Update News → Run workflow.</p>
+                        <p class="text-amber-500 text-[10px] mt-2">Feed last updated: ${data.updated ? new Date(data.updated).toLocaleString() : 'unknown'}</p>
+                    </div>`;
+                    btn.disabled = false; btn.textContent = '🔄 Refresh';
+                    return;
+                }
+
                 const top5 = allNewsItems.slice(0, 5);
                 const rest = allNewsItems.slice(5);
                 const totalCount = rest.length;
@@ -5706,7 +5722,7 @@
                 content.innerHTML =
                     renderNews(top5) +
                     (rest.length > 0 ? `<div id="newsExtra" style="display:none;">${renderNews(rest)}</div>` : '') +
-                    `<p class="text-[10px] text-slate-300 mt-3 text-right">Feed updated: ${updated}</p>`;
+                    `<p class="text-[10px] text-slate-300 mt-3 text-right">${allNewsItems.length} articles from last 48h${skipped>0?` · ${skipped} older articles hidden`:''} · Feed updated: ${updated}</p>`;
 
                 // Render Show More button OUTSIDE content, directly in newsPanel
                 const newsPanel = document.getElementById('newsPanel');
