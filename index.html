@@ -5956,21 +5956,38 @@
         function buildFundMiniChart(canvasId, prices, dates, bm) {
             const ctx = document.getElementById(canvasId);
             if (!ctx || prices.length < 2) return;
+            // Destroy previous instance if exists
+            const key = 'miniChart_' + canvasId;
+            if (window[key]) { try { window[key].destroy(); } catch(e){} delete window[key]; }
+            // Force explicit size so Chart.js has a target
+            ctx.style.width = '100%';
+            ctx.style.height = '140px';
+            ctx.width = ctx.offsetWidth || 300;
+            ctx.height = 140;
             const base = prices[0];
             const normPrices = prices.map(p => +(p/base*100).toFixed(2));
-            const dailyRate = Math.pow(1+bm.annualReturn, 1/252)-1;
+            const dailyRate = Math.pow(1 + bm.annualReturn, 1/252) - 1;
             const startDate = new Date(dates[0]);
-            const bmData = dates.map(d => +(100*Math.pow(1+dailyRate, Math.round((new Date(d)-startDate)/86400000))).toFixed(2));
-            if (window['miniChart_'+canvasId]) window['miniChart_'+canvasId].destroy();
-            window['miniChart_'+canvasId] = new Chart(ctx, {
-                type:'line',
-                data:{ labels:dates, datasets:[
-                    {label:'NAV', data:normPrices, borderColor:'#22d3ee', backgroundColor:'rgba(34,211,238,0.08)', fill:true, tension:0.3, pointRadius:0, borderWidth:2},
-                    {label:bm.label, data:bmData, borderColor:bm.color, backgroundColor:'transparent', fill:false, tension:0.3, pointRadius:0, borderWidth:1.5, borderDash:[4,3]},
+            const bmData = dates.map(d => +(100 * Math.pow(1 + dailyRate, Math.round((new Date(d) - startDate) / 86400000))).toFixed(2));
+            window[key] = new Chart(ctx, {
+                type: 'line',
+                data: { labels: dates, datasets: [
+                    { label:'NAV', data:normPrices, borderColor:'#22d3ee', backgroundColor:'rgba(34,211,238,0.08)', fill:true, tension:0.3, pointRadius:0, borderWidth:2 },
+                    { label:bm.label, data:bmData, borderColor:bm.color, backgroundColor:'transparent', fill:false, tension:0.3, pointRadius:0, borderWidth:1.5, borderDash:[4,3] },
                 ]},
-                options:{responsive:true, maintainAspectRatio:false,
-                    plugins:{legend:{labels:{color:'#94a3b8',font:{size:9},boxWidth:10}},tooltip:{backgroundColor:'#1e293b',titleColor:'#e2e8f0',bodyColor:'#94a3b8',callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}`}}},
-                    scales:{x:{ticks:{color:'#94a3b8',font:{size:7},maxTicksLimit:5},grid:{display:false}},y:{ticks:{color:'#94a3b8',font:{size:8},callback:v=>v.toFixed(0)},grid:{color:'rgba(0,0,0,0.04)'}}}
+                options: {
+                    responsive: false,
+                    animation: false,
+                    plugins: {
+                        legend: { labels: { color:'#94a3b8', font:{ size:9 }, boxWidth:10 } },
+                        tooltip: { backgroundColor:'#1e293b', titleColor:'#e2e8f0', bodyColor:'#94a3b8',
+                            callbacks: { label: c => `${c.dataset.label}: ${c.parsed.y.toFixed(1)}` }
+                        }
+                    },
+                    scales: {
+                        x: { ticks:{ color:'#94a3b8', font:{ size:7 }, maxTicksLimit:5 }, grid:{ display:false } },
+                        y: { ticks:{ color:'#94a3b8', font:{ size:8 }, callback: v => v.toFixed(0) }, grid:{ color:'rgba(0,0,0,0.04)' } }
+                    }
                 }
             });
         }
@@ -6045,14 +6062,12 @@
             }
 
             // Draw mini charts for top 5 immediately
-            requestAnimationFrame(() => {
-                let drawIdx = 0;
-                top5.forEach(r => {
+            setTimeout(() => {
+                top5.forEach((r, drawIdx) => {
                     const canvasId = 'miniChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+drawIdx;
                     buildFundMiniChart(canvasId, r.prices, r.dates, r.bm);
-                    drawIdx++;
                 });
-            });
+            }, 100);
         }
 
         function toggleTechMore() {
@@ -6065,14 +6080,15 @@
                 btn.textContent = '▲ Show less';
                 btn.className = 'w-full mt-3 py-2.5 rounded-xl text-[11px] font-black text-slate-500 bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-all';
                 // Draw charts for newly visible cards
-                requestAnimationFrame(() => {
-                    const allOrdered = [...techAllResults.filter(r=>r.signals.some(s=>s.strength==='strong')), ...techAllResults.filter(r=>r.signals.every(s=>s.strength==='mild'))];
+                setTimeout(() => {
+                    const filtered = techCurrentFilter==='all' ? techAllResults : techAllResults.filter(r=>r.tags.includes(techCurrentFilter));
+                    const allOrdered = [...filtered.filter(r=>r.signals.some(s=>s.strength==='strong')), ...filtered.filter(r=>r.signals.every(s=>s.strength==='mild'))];
                     allOrdered.slice(5).forEach((r, i) => {
                         const idx = i + 5;
                         const canvasId = 'miniChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+idx;
                         buildFundMiniChart(canvasId, r.prices, r.dates, r.bm);
                     });
-                });
+                }, 100);
             } else {
                 const count = extra.querySelectorAll('.tech-fund-card').length;
                 btn.textContent = `▼ Show ${count} more funds`;
