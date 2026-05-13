@@ -129,23 +129,53 @@
                 </button>
             </div>
             <div class="grid grid-cols-2 gap-2 w-full">
-                <button onclick="openGlobalTx()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#f59e0b,#f97316);">💱 Log Transaction</button>
-                <button onclick="openAllTransactionsModal()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#fb923c,#ef4444);">📜 Tx Log</button>
-                <button onclick="openAddModal()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#22c55e,#10b981);">➕ Add Fund</button>
-                <button onclick="openSecNavModal()" id="secNavBtn" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#14b8a6,#06b6d4);">🔄 Auto NAV</button>
+                <!-- Group 1: Actions -->
+                <button onclick="openActionsSheet()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center col-span-1" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">⚡ Actions</button>
+                <!-- Group 2: Data -->
+                <button onclick="openDataSheet()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center col-span-1" style="background:linear-gradient(135deg,#059669,#0284c7);">☁️ Data & Sync</button>
+                <!-- Favorites row -->
                 <div class="flex gap-[2px]">
-                    <button onclick="applyFavoriteFilter(1)" id="favBtn1" class="btn-action text-white py-3 rounded-l-xl font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#a855f7,#9333ea);">⭐ Fav 1</button>
-                    <button onclick="applyFavoriteFilter(2)" id="favBtn2" class="text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#9333ea,#7c3aed);">⭐ Fav 2</button>
-                    <button onclick="applyFavoriteFilter(3)" id="favBtn3" class="text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 3</button>
-                    <button onclick="openFavoritesModal(0)" class="text-white px-3 py-3 rounded-r-xl font-bold shadow-md transition-all text-xs" style="background:#5b21b6;" title="Configure Favorites">⚙️</button>
+                    <button onclick="applyFavoriteFilter(1)" id="favBtn1" class="btn-action text-white py-3 rounded-l-xl font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 1</button>
+                    <button onclick="applyFavoriteFilter(2)" id="favBtn2" class="text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
+                    <button onclick="applyFavoriteFilter(3)" id="favBtn3" class="text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
+                    <button onclick="openFavoritesModal(0)" class="text-white px-3 py-3 rounded-r-xl font-bold shadow-md transition-all text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
                 </div>
-                <button onclick="clearAllFilters()" class="btn-action py-3 rounded-xl font-bold transition-all text-xs text-center" style="background:linear-gradient(135deg,#fce7f3,#fdf2f8);color:#db2777;border:2px solid #f9a8d4;">✕ Clear Filters</button>
-                <button onclick="openTaxSavings()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">🧾 Tax Savings</button>
+                <button onclick="clearAllFilters()" class="btn-action py-3 rounded-xl font-bold transition-all text-xs text-center" style="background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:#4f46e5;border:2px solid #a5b4fc;">✕ Clear Filters</button>
+                <!-- Auto NAV + Simulator -->
+                <button onclick="openSecNavModal()" id="secNavBtn" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#0284c7,#0369a1);">🔄 Auto NAV</button>
                 <button onclick="openSimulatorModal()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">📈 Simulator</button>
-                <button onclick="openGistModal()" id="gSyncBtn" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#10b981,#0ea5e9);">☁️ GitHub Sync</button>
-                <button onclick="openPagesModal()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">🚀 GitHub Pages</button>
-                <button onclick="saveToFile()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#f59e0b,#eab308);">💾 Backup HTML</button>
-                <button onclick="exportToCSV()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#ec4899,#f43f5e);">📥 Export Excel</button>
+            </div>
+        </div>
+
+        <!-- Actions Bottom Sheet -->
+        <div id="actionsSheet" class="modal" style="z-index:3000;align-items:flex-end;padding:0;">
+            <div class="bg-white w-full rounded-t-[2rem] p-6 shadow-2xl" style="max-height:80vh;overflow-y:auto;">
+                <div class="flex items-center justify-between mb-5">
+                    <h3 class="text-lg font-black text-slate-700">⚡ Actions</h3>
+                    <button onclick="closeModal('actionsSheet')" class="text-slate-400 hover:text-rose-500 font-black text-xl">✕</button>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="openGlobalTx();closeModal('actionsSheet')" class="btn-action text-white py-4 rounded-2xl font-bold shadow-md text-sm text-center" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">💱 Log Transaction</button>
+                    <button onclick="openAllTransactionsModal();closeModal('actionsSheet')" class="btn-action text-white py-4 rounded-2xl font-bold shadow-md text-sm text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">📜 Tx Log</button>
+                    <button onclick="openAddModal();closeModal('actionsSheet')" class="btn-action text-white py-4 rounded-2xl font-bold shadow-md text-sm text-center" style="background:linear-gradient(135deg,#059669,#0284c7);">➕ Add Fund</button>
+                    <button onclick="openTaxSavings();closeModal('actionsSheet')" class="btn-action text-white py-4 rounded-2xl font-bold shadow-md text-sm text-center" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">🧾 Tax Savings</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data & Sync Bottom Sheet -->
+        <div id="dataSheet" class="modal" style="z-index:3000;align-items:flex-end;padding:0;">
+            <div class="bg-white w-full rounded-t-[2rem] p-6 shadow-2xl" style="max-height:80vh;overflow-y:auto;">
+                <div class="flex items-center justify-between mb-5">
+                    <h3 class="text-lg font-black text-slate-700">☁️ Data & Sync</h3>
+                    <button onclick="closeModal('dataSheet')" class="text-slate-400 hover:text-rose-500 font-black text-xl">✕</button>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="openGistModal();closeModal('dataSheet')" id="gSyncBtn" class="btn-action text-white py-4 rounded-2xl font-bold shadow-md text-sm text-center" style="background:linear-gradient(135deg,#059669,#0284c7);">☁️ GitHub Sync</button>
+                    <button onclick="openPagesModal();closeModal('dataSheet')" class="btn-action text-white py-4 rounded-2xl font-bold shadow-md text-sm text-center" style="background:linear-gradient(135deg,#0284c7,#0369a1);">🚀 GitHub Pages</button>
+                    <button onclick="saveToFile();closeModal('dataSheet')" class="btn-action text-white py-4 rounded-2xl font-bold shadow-md text-sm text-center" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">💾 Backup HTML</button>
+                    <button onclick="exportToCSV();closeModal('dataSheet')" class="btn-action text-white py-4 rounded-2xl font-bold shadow-md text-sm text-center" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">📥 Export Excel</button>
+                </div>
             </div>
         </div>
 
@@ -2926,6 +2956,9 @@
                 }
             });
         }
+
+        function openActionsSheet() { document.getElementById('actionsSheet').classList.add('active'); }
+        function openDataSheet() { document.getElementById('dataSheet').classList.add('active'); }
 
         function toggleDarkMode() {
             const isDark = document.body.classList.toggle('dark');
