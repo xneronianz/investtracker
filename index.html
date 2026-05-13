@@ -5837,15 +5837,19 @@
         function calcRSI(prices, period = 14) {
             if (prices.length < period + 1) return null;
             let gains = 0, losses = 0;
-            for (let i = 1; i <= period; i++) { const d = prices[i] - prices[i-1]; d > 0 ? gains += d : losses -= d; }
+            for (let i = 1; i <= period; i++) {
+                const d = prices[i] - prices[i-1];
+                d > 0 ? gains += d : losses -= d;
+            }
             let avgGain = gains / period, avgLoss = losses / period;
+            // Wilder's smoothing
             for (let i = period + 1; i < prices.length; i++) {
                 const d = prices[i] - prices[i-1];
-                avgGain = (avgGain*(period-1) + (d>0?d:0)) / period;
-                avgLoss = (avgLoss*(period-1) + (d<0?-d:0)) / period;
+                avgGain = (avgGain * (period-1) + (d > 0 ? d : 0)) / period;
+                avgLoss = (avgLoss * (period-1) + (d < 0 ? -d : 0)) / period;
             }
             if (avgLoss === 0) return 100;
-            return Math.round(100 - (100 / (1 + avgGain/avgLoss)));
+            return Math.round(100 - (100 / (1 + avgGain / avgLoss)));
         }
 
         function calcSMA(prices, period) {
@@ -5956,10 +5960,8 @@
         function buildFundMiniChart(canvasId, prices, dates, bm) {
             const ctx = document.getElementById(canvasId);
             if (!ctx || prices.length < 2) return;
-            // Destroy previous instance if exists
             const key = 'miniChart_' + canvasId;
             if (window[key]) { try { window[key].destroy(); } catch(e){} delete window[key]; }
-            // Force explicit size so Chart.js has a target
             ctx.style.width = '100%';
             ctx.style.height = '140px';
             ctx.width = ctx.offsetWidth || 300;
@@ -5976,8 +5978,7 @@
                     { label:bm.label, data:bmData, borderColor:bm.color, backgroundColor:'transparent', fill:false, tension:0.3, pointRadius:0, borderWidth:1.5, borderDash:[4,3] },
                 ]},
                 options: {
-                    responsive: false,
-                    animation: false,
+                    responsive: false, animation: false,
                     plugins: {
                         legend: { labels: { color:'#94a3b8', font:{ size:9 }, boxWidth:10 } },
                         tooltip: { backgroundColor:'#1e293b', titleColor:'#e2e8f0', bodyColor:'#94a3b8',
@@ -5987,6 +5988,89 @@
                     scales: {
                         x: { ticks:{ color:'#94a3b8', font:{ size:7 }, maxTicksLimit:5 }, grid:{ display:false } },
                         y: { ticks:{ color:'#94a3b8', font:{ size:8 }, callback: v => v.toFixed(0) }, grid:{ color:'rgba(0,0,0,0.04)' } }
+                    }
+                }
+            });
+        }
+
+        function buildRSIChart(canvasId, prices, dates) {
+            const ctx = document.getElementById(canvasId);
+            if (!ctx || prices.length < 16) return;
+            const key = 'rsiChart_' + canvasId;
+            if (window[key]) { try { window[key].destroy(); } catch(e){} delete window[key]; }
+            ctx.style.width = '100%';
+            ctx.style.height = '100px';
+            ctx.width = ctx.offsetWidth || 300;
+            ctx.height = 100;
+
+            const period = 14;
+            const rsiData = [];
+            let gains = 0, losses = 0;
+            for (let i = 1; i <= period; i++) {
+                const d = prices[i] - prices[i-1];
+                d > 0 ? gains += d : losses -= d;
+            }
+            let avgGain = gains / period, avgLoss = losses / period;
+            const firstRSI = avgLoss === 0 ? 100 : Math.round(100 - 100/(1 + avgGain/avgLoss));
+            // Fill warmup period with firstRSI so X-axis aligns with NAV chart
+            for (let i = 0; i <= period; i++) rsiData.push(firstRSI);
+            for (let i = period + 1; i < prices.length; i++) {
+                const d = prices[i] - prices[i-1];
+                avgGain = (avgGain * (period-1) + (d > 0 ? d : 0)) / period;
+                avgLoss = (avgLoss * (period-1) + (d < 0 ? -d : 0)) / period;
+                rsiData.push(avgLoss === 0 ? 100 : Math.round(100 - 100/(1 + avgGain/avgLoss)));
+            }
+            if (rsiData.length < 2) return;
+
+            window[key] = new Chart(ctx, {
+                type: 'line',
+                data: { labels: dates, datasets: [{
+                    label: 'RSI 14',
+                    data: rsiData,
+                    borderColor: '#818cf8',
+                    backgroundColor: 'rgba(129,140,248,0.08)',
+                    fill: true, tension: 0.3, pointRadius: 0, borderWidth: 1.5,
+                    spanGaps: true,
+                    segment: {
+                        borderColor: ctx2 => {
+                            const v = ctx2.p1.parsed.y;
+                            return v >= 70 ? '#ef4444' : v <= 30 ? '#10b981' : '#818cf8';
+                        }
+                    }
+                }]},
+                options: {
+                    responsive: false, animation: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { backgroundColor:'#1e293b', callbacks: { label: c => `RSI: ${c.parsed.y}` } }
+                    },
+                    scales: {
+                        x: {
+                            ticks:{ color:'#94a3b8', font:{ size:7 }, maxTicksLimit:5 },
+                            grid:{ display:false },
+                        },
+                        y: {
+                            min: 0, max: 100,
+                            afterBuildTicks: axis => { axis.ticks = [30,50,70].map(v => ({ value: v })); },
+                            ticks: {
+                                font:{ size:7 },
+                                color: ctx2 => {
+                                    const v = ctx2.tick.value;
+                                    return v === 70 ? '#ef4444' : v === 30 ? '#10b981' : '#94a3b8';
+                                },
+                                callback: v => v,
+                            },
+                            grid: {
+                                color: ctx2 => {
+                                    const v = ctx2.tick.value;
+                                    if (v === 70) return 'rgba(239,68,68,0.7)';
+                                    if (v === 30) return 'rgba(16,185,129,0.7)';
+                                    return 'rgba(148,163,184,0.4)';
+                                },
+                                lineWidth: 1,
+                                borderDash: [4, 3],
+                            }
+                        }
                     }
                 }
             });
@@ -6015,6 +6099,7 @@
 
             const renderCard = (r, idx) => {
                 const canvasId = 'miniChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+idx;
+                const rsiCanvasId = 'rsiChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+idx;
                 return `<div class="mb-5 bg-slate-50 rounded-2xl p-4 tech-fund-card">
                     <div class="flex items-center gap-2 mb-3 flex-wrap">
                         <span class="font-black text-sm text-slate-800">${r.fund}</span>
@@ -6022,8 +6107,12 @@
                         ${r.rsi!==null?`<span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${r.rsi<=30?'bg-emerald-100 text-emerald-700':r.rsi>=70?'bg-rose-100 text-rose-700':'bg-slate-100 text-slate-500'}">RSI ${r.rsi}</span>`:''}
                         <span class="text-[9px] text-slate-400 ml-auto">vs ${r.bm.label}</span>
                     </div>
-                    <div style="height:140px;position:relative;margin-bottom:12px;">
+                    <div style="height:140px;position:relative;margin-bottom:4px;">
                         <canvas id="${canvasId}"></canvas>
+                    </div>
+                    <div style="height:100px;position:relative;margin-bottom:12px;border-top:1px dashed #e2e8f0;padding-top:4px;">
+                        <canvas id="${rsiCanvasId}"></canvas>
+                        <div style="position:absolute;top:4px;left:2px;font-size:7px;font-weight:800;color:#818cf8;opacity:0.7;pointer-events:none;">RSI 14</div>
                     </div>
                     ${r.signals.map(s=>`<div class="sig-card ${s.type} mb-1.5">
                         <span class="text-[9px] font-black uppercase tracking-wider opacity-60">${typeLabel[s.type]||''}</span>
@@ -6065,7 +6154,9 @@
             setTimeout(() => {
                 top5.forEach((r, drawIdx) => {
                     const canvasId = 'miniChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+drawIdx;
+                    const rsiCanvasId = 'rsiChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+drawIdx;
                     buildFundMiniChart(canvasId, r.prices, r.dates, r.bm);
+                    buildRSIChart(rsiCanvasId, r.prices, r.dates);
                 });
             }, 100);
         }
@@ -6086,7 +6177,9 @@
                     allOrdered.slice(5).forEach((r, i) => {
                         const idx = i + 5;
                         const canvasId = 'miniChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+idx;
+                        const rsiCanvasId = 'rsiChart_'+r.fund.replace(/[^a-zA-Z0-9]/g,'_')+'_'+idx;
                         buildFundMiniChart(canvasId, r.prices, r.dates, r.bm);
+                        buildRSIChart(rsiCanvasId, r.prices, r.dates);
                     });
                 }, 100);
             } else {
