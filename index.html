@@ -220,26 +220,26 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-slate-800 p-6 rounded-[2rem] shadow-xl text-white col-span-2 flex flex-col justify-center overflow-hidden">
+            <div class="bg-white p-6 rounded-[2rem] shadow-xl border border-slate-100 col-span-2 flex flex-col justify-center overflow-hidden">
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-slate-700 rounded-2xl p-4">
-                        <h3 class="text-[10px] font-black uppercase opacity-70 mb-2 tracking-wider">Overall CAGR</h3>
-                        <p class="font-black text-emerald-400 leading-none" id="overallCAGR" style="font-size:1.75rem;" title="Portfolio is less than 1 year old — showing total return %, not annualized CAGR">—</p>
-                        <p class="text-[10px] opacity-50 mt-2" id="cagrSubtitle">Annualized Growth Rate</p>
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                        <h3 class="text-[10px] font-black uppercase text-slate-500 mb-2 tracking-wider">Overall CAGR</h3>
+                        <p class="font-black text-emerald-500 leading-none" id="overallCAGR" style="font-size:1.75rem;" title="Portfolio is less than 1 year old — showing total return %, not annualized CAGR">—</p>
+                        <p class="text-[10px] text-slate-400 mt-2" id="cagrSubtitle">Annualized Growth Rate</p>
                     </div>
-                    <div class="bg-slate-700 rounded-2xl p-4">
-                        <h3 class="text-[10px] font-black uppercase opacity-70 mb-2 tracking-wider">XIRR</h3>
-                        <p class="font-black text-sky-400 leading-none" id="overallXIRR" style="font-size:1.75rem;">—</p>
-                        <p class="text-[10px] opacity-50 mt-2">
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                        <h3 class="text-[10px] font-black uppercase text-slate-500 mb-2 tracking-wider">XIRR</h3>
+                        <p class="font-black text-sky-500 leading-none" id="overallXIRR" style="font-size:1.75rem;">—</p>
+                        <p class="text-[10px] text-slate-400 mt-2">
                           <span id="xirrScopeLabel">Based on chart filters</span>
                         </p>
-                        <p id="xirrDebug" class="text-[8px] opacity-30 mt-1"></p>
+                        <p id="xirrDebug" class="text-[8px] text-slate-300 mt-1"></p>
                     </div>
                 </div>
             </div>
-            <div class="bg-slate-700 p-6 rounded-[2rem] shadow-xl text-white col-span-2 flex flex-col justify-center overflow-hidden">
-                <h3 class="text-xs font-black uppercase opacity-70 mb-1">Selected Count</h3>
-                <p class="font-black auto-text" id="fundCount" style="font-size: 2.25rem;">52</p>
+            <div class="bg-white p-6 rounded-[2rem] shadow-xl border border-slate-100 col-span-2 flex flex-col justify-center overflow-hidden">
+                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Selected Count</h3>
+                <p class="font-black auto-text text-indigo-600" id="fundCount" style="font-size: 2.25rem;">52</p>
             </div>
         </div>
 
@@ -3103,24 +3103,10 @@
             }
         }
 
-        loadFromLocalStorage();
-        applyFavNames();
-        setTimeout(fitFundTable, 100); // after DOM fully painted
-        gistAutoSync(); // auto-pull from Gist if configured
-        secNavAutoSync(); // auto-update NAV from SEC Thailand if configured
-
-        // Capture raw HTML source at load time for reliable backup
-        // (outerHTML is unreliable on Android — script contents may be altered)
-        var _originalSource = null;
-        try {
-            var _xhr = new XMLHttpRequest();
-            _xhr.open('GET', location.href, false); // synchronous
-            _xhr.send();
-            if (_xhr.status === 200 || _xhr.status === 0) {
-                _originalSource = _xhr.responseText;
-            }
-        } catch(e) { _originalSource = null; }
-
+        // === STATE DECLARATIONS — must be initialised BEFORE any function calls below ===
+        // (filterData / gistAutoSync's .then can reference these; declaring late causes
+        //  "Cannot access 'MANUAL_NAV_FUNDS' before initialization" TDZ errors on some
+        //  mobile browsers where sync XHR allows microtasks to run mid-block.)
         let sortKey = 'name'; let sortAsc = true;
         let navPctKey = '1D'; // default NAV % change timeframe
         const MANUAL_NAV_FUNDS = new Set([
@@ -3141,6 +3127,24 @@
             { key:'10Y', label:'10Y',       days:3650 },
             { key:'SI',  label:'Inception', days:null }  // special
         ];
+
+        loadFromLocalStorage();
+        applyFavNames();
+        setTimeout(fitFundTable, 100); // after DOM fully painted
+        gistAutoSync(); // auto-pull from Gist if configured
+        secNavAutoSync(); // auto-update NAV from SEC Thailand if configured
+
+        // Capture raw HTML source at load time for reliable backup
+        // (outerHTML is unreliable on Android — script contents may be altered)
+        var _originalSource = null;
+        try {
+            var _xhr = new XMLHttpRequest();
+            _xhr.open('GET', location.href, false); // synchronous
+            _xhr.send();
+            if (_xhr.status === 200 || _xhr.status === 0) {
+                _originalSource = _xhr.responseText;
+            }
+        } catch(e) { _originalSource = null; }
 
         function calcNavPct(f, tfKey) {
             if (!f.history || f.history.length === 0) return null;
@@ -4361,12 +4365,12 @@
             let overallCagr = calculateCAGR(inv, cur + divEff + realEff + taxEff, overallStartDate);
             if (overallCagr !== null) {
                 document.getElementById('overallCAGR').innerText = overallCagr.toFixed(2) + "%";
-                document.getElementById('overallCAGR').className = `font-black ${overallCagr >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
+                document.getElementById('overallCAGR').className = `font-black ${overallCagr >= 0 ? 'text-emerald-500' : 'text-rose-500'}`;
             } else {
                 // Less than 1 year — show actual total return % with note
                 const trPct = inv > 0 ? ((cur + divEff + realEff + taxEff - inv) / inv * 100) : 0;
                 document.getElementById('overallCAGR').innerText = trPct.toFixed(2) + "%*";
-                document.getElementById('overallCAGR').className = `font-black ${trPct >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
+                document.getElementById('overallCAGR').className = `font-black ${trPct >= 0 ? 'text-emerald-500' : 'text-rose-500'}`;
                 document.getElementById('overallCAGR').title = "Portfolio is less than 1 year old — showing total return %, not annualized CAGR";
                 // Update the label below the number
                 const cagrLabel = document.querySelector('#overallCAGR + * , #overallCAGR ~ *');
@@ -4400,7 +4404,7 @@
                     console.log('XIRR result:', xirr);
                     if (xirr !== null && isFinite(xirr)) {
                         xirrEl.innerText = xirr.toFixed(2) + '%';
-                        xirrEl.className = `font-black ${xirr >= 0 ? 'text-sky-400' : 'text-rose-400'}`;
+                        xirrEl.className = `font-black ${xirr >= 0 ? 'text-sky-500' : 'text-rose-500'}`;
                     } else {
                         const neg = xirrFlows.filter(f=>f.amount<0).length;
                         const pos = xirrFlows.filter(f=>f.amount>0).length;
