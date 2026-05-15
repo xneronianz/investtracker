@@ -301,14 +301,14 @@
                 <div class="dash-alloc-card bg-white rounded-[2rem] shadow-xl p-6 border border-slate-100">
                     <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Asset Class Allocation</h3>
                     <div class="flex flex-col items-center">
-                        <div class="relative mb-4" style="width:160px;height:160px;"><canvas id="dashAssetChart"></canvas></div>
+                        <div class="relative mb-4" style="width:160px;height:160px;"><canvas id="dashAssetChart" width="160" height="160"></canvas></div>
                         <div id="dashAssetLegend" class="w-full grid grid-cols-1 gap-y-1 text-[10px] font-bold text-slate-600 max-h-[200px] overflow-y-auto"></div>
                     </div>
                 </div>
                 <div class="dash-alloc-card bg-white rounded-[2rem] shadow-xl p-6 border border-slate-100">
                     <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Portfolio Allocation</h3>
                     <div class="flex flex-col items-center">
-                        <div class="relative mb-4" style="width:160px;height:160px;"><canvas id="dashPortChart"></canvas></div>
+                        <div class="relative mb-4" style="width:160px;height:160px;"><canvas id="dashPortChart" width="160" height="160"></canvas></div>
                         <div id="dashPortLegend" class="w-full grid grid-cols-1 gap-y-1 text-[10px] font-bold text-slate-600 max-h-[200px] overflow-y-auto"></div>
                     </div>
                 </div>
@@ -381,16 +381,31 @@
 
         <!-- TAB 3: FUND DATA -->
         <div id="tab-funddata" class="tab-panel hidden">
-            <!-- Fund Data Action Bar -->
-            <div class="relative flex flex-wrap items-center justify-between gap-2 mb-4">
-                <div class="flex flex-1 gap-2 flex-wrap">
-                    <button onclick="openGlobalTx()" class="btn-action text-white flex-1 py-4 rounded-xl font-bold shadow-md text-sm min-w-[130px]" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">💱 Log Transaction</button>
-                    <button onclick="openAllTransactionsModal()" class="btn-action text-white flex-1 py-4 rounded-xl font-bold shadow-md text-sm min-w-[100px]" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">📜 Tx Log</button>
-                    <button onclick="openAddModal()" class="btn-action text-white flex-1 py-4 rounded-xl font-bold shadow-md text-sm min-w-[100px]" style="background:linear-gradient(135deg,#059669,#0284c7);">➕ Add Fund</button>
-                    <button onclick="openTaxSavings()" class="btn-action text-white flex-1 py-4 rounded-xl font-bold shadow-md text-sm min-w-[110px]" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">🧾 Tax Savings</button>
+            <!-- Fund Data Action Bar: grid-aligned rows + gear column -->
+            <div class="flex gap-2 mb-4">
+                <!-- Left: both button rows in grid -->
+                <div class="flex-1 flex flex-col gap-2 min-w-0">
+                    <!-- Row 1: 4 equal action buttons -->
+                    <div class="grid grid-cols-4 gap-2">
+                        <button onclick="openGlobalTx()" class="btn-action text-white py-4 rounded-xl font-bold shadow-md text-sm" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">💱 Log Transaction</button>
+                        <button onclick="openAllTransactionsModal()" class="btn-action text-white py-4 rounded-xl font-bold shadow-md text-sm" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">📜 Tx Log</button>
+                        <button onclick="openAddModal()" class="btn-action text-white py-4 rounded-xl font-bold shadow-md text-sm" style="background:linear-gradient(135deg,#059669,#0284c7);">➕ Add Fund</button>
+                        <button onclick="openTaxSavings()" class="btn-action text-white py-4 rounded-xl font-bold shadow-md text-sm" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">🧾 Tax Savings</button>
+                    </div>
+                    <!-- Row 2: 3 cols = favs, 1 col = clear filters — perfectly aligned with row 1 -->
+                    <div class="grid grid-cols-4 gap-2">
+                        <div class="col-span-3 flex gap-[2px]">
+                            <button onclick="applyFavoriteFilter(1)" id="fundTabFavBtn1" class="btn-action text-white py-2.5 rounded-l-xl font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 1</button>
+                            <button onclick="applyFavoriteFilter(2)" id="fundTabFavBtn2" class="text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
+                            <button onclick="applyFavoriteFilter(3)" id="fundTabFavBtn3" class="text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
+                            <button onclick="openFavoritesModal(0)" class="text-white px-2 py-2.5 rounded-r-xl font-bold shadow-md text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
+                        </div>
+                        <button onclick="clearAllFilters()" class="btn-action py-2.5 rounded-xl font-bold text-xs text-center" style="background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:#4f46e5;border:2px solid #a5b4fc;">✕ Clear Filters</button>
+                    </div>
                 </div>
-                <div class="relative">
-                    <button onclick="toggleSettingsPanel()" class="settings-gear w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-lg font-bold transition-all" title="Settings">⚙️</button>
+                <!-- Right: gear icon spanning both rows -->
+                <div class="relative flex-shrink-0 flex">
+                    <button onclick="toggleSettingsPanel()" class="settings-gear w-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-lg font-bold transition-all w-full" title="Settings">⚙️</button>
                     <div id="settingsPanel" class="hidden absolute right-0 top-12 z-50 bg-white rounded-2xl shadow-2xl border border-slate-100 p-3" style="min-width:210px;">
                         <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 pb-2 border-b border-slate-100 mb-2">Settings & Tools</div>
                         <div class="flex flex-col gap-1">
@@ -405,31 +420,33 @@
                 </div>
             </div>
 
-                <div class="bg-white p-8 rounded-[3rem] shadow-xl border border-slate-100 mb-6">
-            <div class="flex flex-col xl:flex-row gap-10 items-stretch min-h-[400px]">
-                <div class="w-full xl:w-[45%] flex flex-col items-center justify-center border-r border-slate-100 pr-8">
-                    <h3 class="text-xs font-black text-slate-400 uppercase mb-3">Rebalancing Calculator</h3>
-                    <div class="flex gap-1 mb-4 bg-slate-100 rounded-xl p-1">
-                        <button id="rebalViewAsset" onclick="setRebalView('asset')" class="flex-1 py-1.5 rounded-lg text-[10px] font-black transition-all bg-white text-indigo-600 shadow-sm">By Asset Class</button>
-                        <button id="rebalViewPort" onclick="setRebalView('portfolio')" class="flex-1 py-1.5 rounded-lg text-[10px] font-black transition-all text-slate-400">By Portfolio</button>
+
+                <!-- CARD 1: REBALANCING CALCULATOR -->
+                <div class="bg-white p-6 rounded-[3rem] shadow-xl border border-slate-100 mb-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xs font-black text-slate-400 uppercase">Rebalancing Calculator</h3>
+                        <div class="flex gap-1 bg-slate-100 rounded-xl p-1">
+                            <button id="rebalViewAsset" onclick="setRebalView('asset')" class="flex-1 py-1 px-3 rounded-lg text-[10px] font-black transition-all bg-white text-indigo-600 shadow-sm">By Asset Class</button>
+                            <button id="rebalViewPort" onclick="setRebalView('portfolio')" class="flex-1 py-1 px-3 rounded-lg text-[10px] font-black transition-all text-slate-400">By Portfolio</button>
+                        </div>
                     </div>
-                    <div class="flex gap-6 w-full items-center mb-6">
-                        <div class="relative w-1/3 max-w-[150px]"><canvas id="geoChart" style="box-sizing: border-box; display: block; height: 150px; width: 150px;" width="318" height="318"></canvas></div>
-                        <div class="w-2/3">
-                            <div class="flex justify-between items-center mb-2 text-[9px] font-black text-slate-400 uppercase border-b pb-1">
-                                <div class="cursor-pointer hover:text-indigo-500 transition-colors" style="width:16%" onclick="sortLegend('label')" id="rebalColLabel">Asset <span id="sort_ind_label"></span></div>
-                                <div class="text-right cursor-pointer hover:text-indigo-500 transition-colors text-indigo-400" style="width:14%" onclick="sortLegend('value')">Market Val <span id="sort_ind_value"></span></div>
-                                <div class="text-right cursor-pointer hover:text-emerald-600 transition-colors text-emerald-500" style="width:14%" onclick="sortLegend('capGain')">Cap G/L <span id="sort_ind_capGain"></span></div>
-                                <div class="text-right cursor-pointer hover:text-emerald-600 transition-colors text-emerald-500" style="width:11%" onclick="sortLegend('capGainPct')">G/L% <span id="sort_ind_capGainPct"></span></div>
-                                <div class="text-right cursor-pointer hover:text-indigo-500 transition-colors" style="width:11%" onclick="sortLegend('percent')">Cur% <span id="sort_ind_percent">↓</span></div>
-                                <div class="text-right cursor-pointer hover:text-indigo-600 transition-colors select-none" style="width:9%" onclick="sortLegend('target')" title="Sort by Target %">Tar% <span id="sort_ind_target" class="text-indigo-500"></span></div>
-                                <div class="text-right cursor-pointer hover:text-indigo-500 transition-colors" style="width:16%" onclick="sortLegend('action')"><span class="text-indigo-500">Action ฿</span> <span id="sort_ind_action"></span></div>
+                    <!-- Hidden canvas kept so chart.js reference doesn't break -->
+                    <canvas id="geoChart" style="display:none;position:absolute;"></canvas>
+                    <div class="w-full">
+                            <div class="flex justify-between items-center mb-2 text-[9px] font-black text-slate-400 uppercase border-b pb-1.5">
+                                <div class="cursor-pointer hover:text-indigo-500 transition-colors" style="width:15%" onclick="sortLegend('label')" id="rebalColLabel">Asset <span id="sort_ind_label"></span></div>
+                                <div class="text-right cursor-pointer hover:text-indigo-500 transition-colors text-indigo-400" style="width:17%" onclick="sortLegend('value')">Market Val <span id="sort_ind_value"></span></div>
+                                <div class="text-right cursor-pointer hover:text-emerald-600 transition-colors text-emerald-500" style="width:17%" onclick="sortLegend('capGain')">Cap G/L <span id="sort_ind_capGain"></span></div>
+                                <div class="text-right cursor-pointer hover:text-emerald-600 transition-colors text-emerald-500" style="width:10%" onclick="sortLegend('capGainPct')">G/L% <span id="sort_ind_capGainPct"></span></div>
+                                <div class="text-right cursor-pointer hover:text-indigo-500 transition-colors" style="width:10%" onclick="sortLegend('percent')">Cur% <span id="sort_ind_percent">↓</span></div>
+                                <div class="text-right cursor-pointer hover:text-indigo-600 transition-colors select-none" style="width:8%" onclick="sortLegend('target')" title="Sort by Target %">Tar% <span id="sort_ind_target" class="text-indigo-500"></span></div>
+                                <div class="text-right cursor-pointer hover:text-indigo-500 transition-colors" style="width:18%" onclick="sortLegend('action')"><span class="text-indigo-500">Action ฿</span> <span id="sort_ind_action"></span></div>
                             </div>
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-[9px] text-slate-300 italic">Click column headers to sort</span>
                                 <button onclick="resetAllTargets()" class="text-[10px] font-black text-rose-500 hover:text-white hover:bg-rose-500 px-3 py-1 rounded-lg transition-all border border-rose-300 hover:border-rose-500 shadow-sm">✕ Reset Targets</button>
                             </div>
-                            <div id="geoLegend" class="grid grid-cols-1 gap-y-1 text-[10px] font-bold text-slate-600">
+                            <div id="geoLegend" class="grid grid-cols-1 gap-y-0.5 text-[10px] font-bold text-slate-600">
                 <div class="flex justify-between items-center mb-1 px-1 border-b border-slate-50 pb-1 hover:bg-slate-50">
                     <div class="flex items-center gap-1 w-1/3 truncate"><span class="w-2 h-2 rounded-full flex-shrink-0" style="background:#fb7185"></span><span class="truncate">Bond</span></div>
                     <div class="w-1/6 text-right text-slate-400 font-bold">6.2%</div>
@@ -513,37 +530,35 @@
                     <div class="w-1/6 text-right text-slate-400 font-bold">20.2%</div>
                     <div class="w-1/6 text-right"><input type="number" step="0.1" class="target-input !w-8 !text-xs" value="0" onchange="targetPercentages['Insurance'] = parseFloat(this.value); saveToLocalStorage(); renderAll();"></div>
                     <div class="w-1/3 text-right font-black text-rose-500">-฿1,026,794.00</div>
-                </div></div>
+                </div>
                             
                             <div class="flex justify-between items-center mt-2 pt-2 border-t-2 border-slate-100 text-[9px] font-black uppercase tracking-wider">
-                                <div style="width:16%" class="text-slate-400">Total Sum</div>
-                                <div style="width:14%" class="text-right text-indigo-600" id="totalMarketVal">—</div>
-                                <div style="width:14%" class="text-right" id="totalCapGain">—</div>
-                                <div style="width:11%" class="text-right" id="totalCapGainPct">—</div>
-                                <div style="width:11%" class="text-right text-slate-400" id="totalCurPerc">100.0%</div>
-                                <div style="width:9%" class="text-right text-emerald-500" id="totalTarPerc">100.0%</div>
-                                <div style="width:16%" class="text-right text-emerald-500" id="totalAction">+฿0.00</div>
+                                <div style="width:15%" class="text-slate-400">Total Sum</div>
+                                <div style="width:17%" class="text-right text-indigo-600" id="totalMarketVal">—</div>
+                                <div style="width:17%" class="text-right" id="totalCapGain">—</div>
+                                <div style="width:10%" class="text-right" id="totalCapGainPct">—</div>
+                                <div style="width:10%" class="text-right text-slate-400" id="totalCurPerc">100.0%</div>
+                                <div style="width:8%" class="text-right text-emerald-500" id="totalTarPerc">100.0%</div>
+                                <div style="width:18%" class="text-right text-emerald-500" id="totalAction">+฿0.00</div>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <div class="w-full xl:w-[55%] flex flex-col">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Filters</span>
-                        <button onclick="toggleFilters()" id="filterToggleBtn" class="text-[10px] font-black text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-200 transition-all">▲ Hide</button>
-                    </div>
-                    <div id="filterPanel" class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow mb-6">
+
+                <!-- CARD 2: FILTERS -->
+                <div class="bg-white p-5 rounded-[3rem] shadow-xl border border-slate-100 mb-4">
+                    <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Filters</div>
+                    <div id="filterPanel" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
                         <div class="flex flex-col"><label class="text-[10px] font-black text-indigo-500 uppercase mb-2">Fund Name</label><select id="d_name" multiple="" onchange="filterData()" class="filter-select"><option value="ไทยประกันชีวิต">ไทยประกันชีวิต</option><option value="ABGDD-SSF">ABGDD-SSF</option><option value="AIA-Excellence">AIA-Excellence</option><option value="AIA-Retirement">AIA-Retirement</option><option value="AIA-Unit Link">AIA-Unit Link</option><option value="ASP-ThaiESG">ASP-ThaiESG</option><option value="B-FUTURESSF">B-FUTURESSF</option><option value="B-INNOTECHSSF">B-INNOTECHSSF</option><option value="Cash">Cash</option><option value="ES-GINNO-SSF">ES-GINNO-SSF</option><option value="FWD-Critical Illness">FWD-Critical Illness</option><option value="K-CHANGE-SSF">K-CHANGE-SSF</option><option value="KFCMEGASSF">KFCMEGASSF</option><option value="KFGGSSF">KFGGSSF</option><option value="KF-LATAM">KF-LATAM</option><option value="K-GOLD-A(A)">K-GOLD-A(A)</option><option value="KKP EMXCN-H-SSF">KKP EMXCN-H-SSF</option><option value="KKP EQ THAI ESG">KKP EQ THAI ESG</option><option value="KKP GB THAI ESG">KKP GB THAI ESG</option><option value="KKP US500-UH-SSF">KKP US500-UH-SSF</option><option value="KT-BOND">KT-BOND</option><option value="K-VIETNAM-SSF">K-VIETNAM-SSF</option><option value="MEGA10CHINA-SSF">MEGA10CHINA-SSF</option><option value="ONE-UGG-ASSF">ONE-UGG-ASSF</option><option value="PRINCIPAL iPROPEN-SSF">PRINCIPAL iPROPEN-SSF</option><option value="PVD Co-Contributed">PVD Co-Contributed</option><option value="PVD Self-Contributed">PVD Self-Contributed</option><option value="SCBAXJ(SSF)">SCBAXJ(SSF)</option><option value="SCBCHA-SSF">SCBCHA-SSF</option><option value="SCBCHA(SSFE)">SCBCHA(SSFE)</option><option value="SCBCOMP">SCBCOMP</option><option value="SCBCTECH(SSFE)">SCBCTECH(SSFE)</option><option value="SCBEUROPE(SSF)">SCBEUROPE(SSF)</option><option value="SCBEUROPE(SSFE)">SCBEUROPE(SSFE)</option><option value="SCBGOLDH-SSF">SCBGOLDH-SSF</option><option value="SCBNDQ(SSF)">SCBNDQ(SSF)</option><option value="SCBNEXT(SSFE)">SCBNEXT(SSFE)</option><option value="SCBS&amp;P500(SSFA)">SCBS&amp;P500(SSFA)</option><option value="SCBVIET(SSFA)">SCBVIET(SSFA)</option><option value="SCBVIET(SSFE)">SCBVIET(SSFE)</option><option value="SCBWORLD(SSFE)">SCBWORLD(SSFE)</option><option value="TDSThaiESG-A">TDSThaiESG-A</option><option value="TISCOCHA-SSF">TISCOCHA-SSF</option><option value="TLA-GEQ">TLA-GEQ</option><option value="TLFVMR-ASIAX">TLFVMR-ASIAX</option><option value="UCHINA-SSF">UCHINA-SSF</option><option value="UGIS-SSF">UGIS-SSF</option><option value="UOBSA-SSF">UOBSA-SSF</option></select></div>
                         <div class="flex flex-col"><label class="text-[10px] font-black text-indigo-500 uppercase mb-2">Portfolio</label><select id="d_port" multiple="" onchange="filterData()" class="filter-select"><option value="Cash">Cash</option><option value="Finnomena-AWS">Finnomena-AWS</option><option value="Finnomena-Tax">Finnomena-Tax</option><option value="Insurance">Insurance</option><option value="Krungsri iFund">Krungsri iFund</option><option value="Provident Fund">Provident Fund</option><option value="SCB Fund Click">SCB Fund Click</option></select></div>
                         <div class="flex flex-col"><label class="text-[10px] font-black text-indigo-500 uppercase mb-2">Asset Class</label><select id="d_geo" multiple="" onchange="filterData()" class="filter-select"><option value="Bond">Bond</option><option value="Cash">Cash</option><option value="CN">CN</option><option value="Commodity">Commodity</option><option value="EM">EM</option><option value="EU">EU</option><option value="Global Equity">Global Equity</option><option value="Insurance">Insurance</option><option value="Prop Fund">Prop Fund</option><option value="Provident">Provident</option><option value="TECH">TECH</option><option value="TH">TH</option><option value="US">US</option><option value="VIET">VIET</option></select></div>
                     </div>
-                    <input type="text" id="globalSearch" onkeyup="filterData()" placeholder="🔍 Searching through investment holdings..." class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-sm">
                 </div>
-            </div>
-        </div>
 
-
+        <!-- CARD 3: SEARCH + FUND TABLE -->
         <div class="bg-white rounded-[3rem] shadow-2xl border border-slate-100 overflow-hidden" style="height:80vh;display:flex;flex-direction:column;">
+            <div class="px-6 pt-5 pb-3 border-b border-slate-100 flex-shrink-0">
+                <input type="text" id="globalSearch" onkeyup="filterData()" placeholder="🔍 Searching through investment holdings..." class="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-sm">
+            </div>
             <div class="fund-table-wrap overflow-x-auto overflow-y-auto" style="position:relative;flex:1;min-height:0;">
                 <table id="fundTable" class="w-full text-left min-w-full" style="border-collapse:separate;border-spacing:0;">
                     <thead>
@@ -3068,12 +3083,9 @@
         // Auto-collapse filters on mobile screens
         if (window.innerWidth < 768) {
             document.addEventListener('DOMContentLoaded', function() {
-                const panel = document.getElementById('filterPanel');
-                const btn = document.getElementById('filterToggleBtn');
-                if (panel && btn) {
-                    panel.style.display = 'none';
-                    btn.textContent = '▼ Filters';
-                }
+                // filterPanel is now always visible in the side panel — no auto-hide
+                var btn = document.getElementById('filterToggleBtn');
+                if (btn) btn.style.display = 'none'; // hide the toggle btn since panel is always open
             });
         }
 
@@ -3308,6 +3320,10 @@
             renderAll();
         }
         let filteredFunds = []; let geoChart = null; let navChartObj = null; let portHistoryChartObj = null;
+        // Dashboard donut chart objects — declared here (before filterData() runs) to avoid var-hoisting reset bug
+        var dashAssetChartObj = null;
+        var dashPortChartObj = null;
+        var DASH_COLORS = ['#6366f1','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899','#84cc16','#f97316','#14b8a6','#a78bfa','#fb7185','#60a5fa','#34d399','#fbbf24','#e879f9','#4ade80'];
 
         const thCollator = new Intl.Collator('th');
 
@@ -4655,7 +4671,7 @@
             // Keep NAV % timeframe selector in sync
             const npSel = document.getElementById('navPctSelect');
             if (npSel) npSel.value = navPctKey;
-            updateGeoChart(cur);
+            try { updateGeoChart(cur); } catch(e) { console.warn('geoChart:', e); }
             updatePortfolioHistoryChart(); 
             setTimeout(autoScaleText, 0);
             // Update dashboard allocation charts if on dashboard tab
@@ -4701,8 +4717,7 @@
                 return legendSortAsc ? (vA < vB ? -1 : 1) : (vA < vB ? 1 : -1);
             });
 
-            if (geoChart) geoChart.destroy();
-            geoChart = new Chart(document.getElementById('geoChart'), { type: 'doughnut', data: { labels: legendItems.map(i => i.label), datasets: [{ data: legendItems.map(i => i.value), backgroundColor: legendItems.map(i => i.color), borderWidth: 2, borderColor: '#fff' }] }, options: { plugins: { legend: { display: false } }, cutout: '78%' } });
+            // geoChart removed from UI — only legend table is rendered below
             
             const fmt = n => '฿' + Math.abs(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             document.getElementById('geoLegend').innerHTML = legendItems.map(item => {
@@ -4714,13 +4729,13 @@
                 
                 return `
                 <div class="flex justify-between items-center mb-1 px-1 border-b border-slate-50 pb-1 hover:bg-slate-50 text-[9px]">
-                    <div class="flex items-center gap-1 truncate" style="width:16%"><span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${item.color}"></span><span class="truncate font-bold">${item.label}</span></div>
-                    <div class="text-right font-black text-indigo-600" style="width:14%">${fmt(item.value)}</div>
-                    <div class="text-right font-black ${cgColor}" style="width:14%">${cgSign}${fmt(item.capGain)}</div>
-                    <div class="text-right font-black ${cgPctColor}" style="width:11%">${cgSign}${Math.abs(item.capGainPct).toFixed(1)}%</div>
-                    <div class="text-right text-slate-500 font-bold" style="width:11%">${item.percent.toFixed(1)}%</div>
-                    <div class="text-right" style="width:9%"><input type="number" step="0.1" class="target-input !text-xs" style="width:36px;" value="${item.target}" onchange="(rebalView==='portfolio'?portfolioTargetPercentages:targetPercentages)['${item.label}']=parseFloat(this.value);saveToLocalStorage();renderAll();"></div>
-                    <div class="text-right font-black ${actionColor}" style="width:16%">${actionText}</div>
+                    <div class="flex items-center gap-1 truncate" style="width:15%"><span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${item.color}"></span><span class="truncate font-bold">${item.label}</span></div>
+                    <div class="text-right font-black text-indigo-600" style="width:17%">${fmt(item.value)}</div>
+                    <div class="text-right font-black ${cgColor}" style="width:17%">${cgSign}${fmt(item.capGain)}</div>
+                    <div class="text-right font-black ${cgPctColor}" style="width:10%">${cgSign}${Math.abs(item.capGainPct).toFixed(1)}%</div>
+                    <div class="text-right text-slate-500 font-bold" style="width:10%">${item.percent.toFixed(1)}%</div>
+                    <div class="text-right" style="width:8%"><input type="number" step="0.1" class="target-input !text-xs" style="width:36px;" value="${item.target}" onchange="(rebalView==='portfolio'?portfolioTargetPercentages:targetPercentages)['${item.label}']=parseFloat(this.value);saveToLocalStorage();renderAll();"></div>
+                    <div class="text-right font-black ${actionColor}" style="width:18%">${actionText}</div>
                 </div>`;
             }).join('');
 
@@ -6714,10 +6729,27 @@
                 if (btn) btn.classList.toggle('active', t === name);
             });
             if (name === 'dashboard') {
-                setTimeout(renderDashboardAllocation, 50);
-                if (typeof portHistoryChartObj !== 'undefined' && portHistoryChartObj) portHistoryChartObj.resize();
+                setTimeout(function() {
+                    // Resize & re-render the performance chart
+                    if (typeof portHistoryChartObj !== 'undefined' && portHistoryChartObj) {
+                        portHistoryChartObj.resize();
+                    } else if (typeof updatePortfolioHistoryChart === 'function') {
+                        updatePortfolioHistoryChart();
+                    }
+                    // Re-render allocation donuts
+                    renderDashboardAllocation();
+                }, 80);
             }
         }
+
+        // Force chart render after full page load (backup for initial render)
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                if (filteredFunds && filteredFunds.length > 0) {
+                    renderDashboardAllocation();
+                }
+            }, 500);
+        });
 
         // ========= SETTINGS PANEL =========
         function toggleSettingsPanel() {
@@ -6738,13 +6770,6 @@
         });
 
         // ========= DASHBOARD ALLOCATION CHARTS =========
-        var dashAssetChartObj = null;
-        var dashPortChartObj = null;
-        var DASH_COLORS = [
-            '#6366f1','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4',
-            '#ec4899','#84cc16','#f97316','#14b8a6','#a78bfa','#fb7185','#60a5fa',
-            '#34d399','#fbbf24','#e879f9','#4ade80'
-        ];
         function renderDashboardAllocation() {
             var funds = (typeof filteredFunds !== 'undefined' && filteredFunds.length > 0) ? filteredFunds : [];
             // Asset class aggregation
@@ -6780,6 +6805,7 @@
                     datasets: [{ data: keys.map(function(k){ return dataMap[k]; }), backgroundColor: colors, borderWidth: 2, borderColor: '#fff', hoverBorderWidth: 2 }]
                 },
                 options: {
+                    responsive: false,
                     plugins: { legend: { display: false } },
                     cutout: '72%',
                     animation: { duration: 300 }
@@ -6789,7 +6815,7 @@
             // Render legend
             var html = keys.map(function(k, i) {
                 var pct = (dataMap[k] / total * 100).toFixed(1);
-                var valStr = '฿' + (dataMap[k]/1000).toFixed(1) + 'K';
+                var valStr = '฿' + Math.round(dataMap[k]).toLocaleString('en');
                 return '<div class="flex justify-between items-center px-1 py-0.5 hover:bg-slate-50 rounded">' +
                     '<div class="flex items-center gap-1 truncate"><span class="w-2 h-2 rounded-full flex-shrink-0" style="background:' + colors[i] + '"></span>' +
                     '<span class="truncate">' + k + '</span></div>' +
