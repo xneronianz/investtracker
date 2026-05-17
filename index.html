@@ -71,7 +71,9 @@
         #totalMarketVal, #totalCapGain, #totalCapGainPct,
         #totalCurPerc, #totalTarPerc, #totalAction,
         #fundTable tbody td, #geoLegend, #dashAssetLegend, #dashPortLegend,
-        .target-input { font-family: var(--font-num) !important; font-variant-numeric: tabular-nums; }
+        .target-input,
+        #simFinalVal, #simTotalIn, #simTargetPct, #simEffReturn
+        { font-family: var(--font-num) !important; font-variant-numeric: tabular-nums; }
 
         /* Responsive number sizing */
         .auto-text { font-size: clamp(1rem, 4vw, 2.25rem) !important; white-space: nowrap; transition: font-size 0.2s ease; }
@@ -79,6 +81,12 @@
         #overallCAGR, #overallXIRR { font-size: clamp(1rem, 4vw, 1.75rem) !important; }
         #fundCount { font-size: clamp(1.5rem, 5vw, 2.25rem) !important; }
         #dashAssetLegend .font-black, #dashPortLegend .font-black { font-family: var(--font-num) !important; font-size: 10px !important; }
+        /* Simulator result numbers — half-width cards, squeeze to 1 row */
+        #simFinalVal, #simTotalIn, #simTargetPct, #simEffReturn {
+            font-size: clamp(0.6rem, 3.8vw, 1.25rem) !important;
+            white-space: nowrap; overflow: hidden;
+            letter-spacing: -0.03em; font-weight: 900;
+        }
 
         /* Touch/hover fix for table rows */
         .hover\:bg-slate-50:hover, tr.hover\:bg-slate-50:hover td { background-color: #f8fafc !important; }
@@ -5658,22 +5666,22 @@
                 <div class="grid grid-cols-2 gap-3 mb-4">
                     <div class="bg-slate-800 rounded-xl p-4">
                         <p class="text-[9px] uppercase text-slate-400 font-black mb-1">Projected Value</p>
-                        <p class="text-xl font-black text-cyan-400" id="simFinalVal">—</p>
+                        <p class="font-black text-cyan-400" id="simFinalVal">—</p>
                         <p class="text-[9px] text-slate-500 mt-1" id="simFinalReal">Real value (inflation-adj)</p>
                     </div>
                     <div class="bg-slate-800 rounded-xl p-4">
                         <p class="text-[9px] uppercase text-slate-400 font-black mb-1">Total Contributed</p>
-                        <p class="text-xl font-black text-emerald-400" id="simTotalIn">—</p>
+                        <p class="font-black text-emerald-400" id="simTotalIn">—</p>
                         <p class="text-[9px] text-slate-500 mt-1" id="simTotalGain">Total gain</p>
                     </div>
                     <div class="bg-slate-800 rounded-xl p-4">
                         <p class="text-[9px] uppercase text-slate-400 font-black mb-1">Target Achievement</p>
-                        <p class="text-xl font-black" id="simTargetPct">—</p>
+                        <p class="font-black" id="simTargetPct">—</p>
                         <p class="text-[9px] text-slate-500 mt-1" id="simTargetYear">Year target reached</p>
                     </div>
                     <div class="bg-slate-800 rounded-xl p-4">
                         <p class="text-[9px] uppercase text-slate-400 font-black mb-1">Effective Return</p>
-                        <p class="text-xl font-black text-violet-400" id="simEffReturn">—</p>
+                        <p class="font-black text-violet-400" id="simEffReturn">—</p>
                         <p class="text-[9px] text-slate-500 mt-1">After fees & inflation</p>
                     </div>
                 </div>
