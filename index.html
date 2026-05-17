@@ -306,6 +306,19 @@
         body.futuristic ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
         body.futuristic #darkModeBtn { border: 1px solid var(--border-dim) !important; }
 
+        /* ── SPARKLINES ── */
+        .fund-sparkline { border-radius: 4px; display: block; margin: auto; }
+        /* ── FUND TRENDS CARD ── */
+        .trend-row { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:12px; background:#f8fafc; border:1px solid #f1f5f9; }
+        .trend-rank { font-family:var(--font-display); font-size:10px; font-weight:900; color:#94a3b8; width:16px; flex-shrink:0; }
+        .trend-name { font-family:var(--font-display); font-size:11px; font-weight:700; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#1e293b; }
+        .trend-pct  { font-family:var(--font-num); font-size:12px; font-weight:800; flex-shrink:0; }
+        body.futuristic .trend-row { background:var(--bg-surface); border-color:var(--border-dim); }
+        body.futuristic .trend-name { color:var(--text-1); }
+        body.futuristic .trend-rank { color:var(--text-3); }
+        body.dark .trend-row { background:#1e293b; border-color:#334155; }
+        body.dark .trend-name { color:#e2e8f0; }
+
         /* Theme toggle button */
         #themeToggleBtn {
             display: flex; align-items: center; gap: 6px;
@@ -330,16 +343,16 @@
     <div class="main-container">
         <!-- APP HEADER -->
         <div class="app-header flex items-center justify-between mb-4 pb-4 border-b border-slate-100">
-            <div>
-                <h1 class="text-3xl font-black text-slate-800 tracking-tight">Portfolio Master</h1>
-                <p class="text-indigo-600 font-bold tracking-wide text-xs">● Wealth Analytics Engine | <span id="saveStatus" class="text-emerald-500 font-black">Auto-saved locally</span> <span id="syncStatus" class="text-slate-400 font-bold text-xs"></span></p>
+            <div class="min-w-0 flex-1">
+                <h1 class="font-black text-slate-800 tracking-tight leading-tight" style="font-size:clamp(1.1rem,5vw,1.875rem);">Portfolio Master</h1>
+                <p class="text-indigo-600 font-bold tracking-wide text-[10px] leading-snug truncate">● Wealth Analytics Engine | <span id="saveStatus" class="text-emerald-500 font-black">Auto-saved locally</span> <span id="syncStatus" class="text-slate-400 font-bold text-[10px]"></span></p>
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 flex-shrink-0 ml-2">
                 <button id="themeToggleBtn" onclick="toggleTheme()" title="Switch theme">
                     <span id="themeIcon">🚀</span>
                     <span id="themeLabel">Futuristic</span>
                 </button>
-                <button onclick="toggleDarkMode()" id="darkModeBtn" class="mt-1 w-12 h-6 rounded-full relative transition-all duration-300 focus:outline-none flex-shrink-0" style="background:#cbd5e1;" title="Toggle dark mode">
+                <button onclick="toggleDarkMode()" id="darkModeBtn" class="w-11 h-6 rounded-full relative transition-all duration-300 focus:outline-none flex-shrink-0" style="background:#cbd5e1;" title="Toggle dark mode">
                     <span id="darkModeThumb" class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-all duration-300 flex items-center justify-center text-[10px]">☀️</span>
                 </button>
             </div>
@@ -388,20 +401,18 @@
         <div id="tab-dashboard" class="tab-panel">
             <!-- Dashboard Quick Actions -->
             <div class="flex flex-col gap-2 w-full mb-6">
-                <!-- Row 1: Fav 1 | Fav 2 | Fav 3 | ⚙️ | Clear Filters — same total width as row 2 -->
-                <div class="flex gap-2">
-                    <div class="flex gap-[2px] flex-1">
-                        <button onclick="applyFavoriteFilter(1)" id="favBtn1" class="btn-action text-white py-3 rounded-l-xl font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 1</button>
-                        <button onclick="applyFavoriteFilter(2)" id="favBtn2" class="text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
-                        <button onclick="applyFavoriteFilter(3)" id="favBtn3" class="text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
-                        <button onclick="openFavoritesModal(0)" class="text-white px-3 py-3 rounded-r-xl font-bold shadow-md transition-all text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
-                    </div>
-                    <button onclick="clearAllFilters()" class="btn-action py-3 px-4 rounded-xl font-bold transition-all text-xs text-center flex-1" style="background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:#4f46e5;border:2px solid #a5b4fc;">✕ Clear Filters</button>
+                <!-- Row 1: Fav 1 | Fav 2 | Fav 3 | ⚙️ — full width -->
+                <div class="flex gap-[2px]">
+                    <button onclick="applyFavoriteFilter(1)" id="favBtn1" class="btn-action text-white py-3 rounded-l-xl font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 1</button>
+                    <button onclick="applyFavoriteFilter(2)" id="favBtn2" class="btn-action text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
+                    <button onclick="applyFavoriteFilter(3)" id="favBtn3" class="btn-action text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
+                    <button onclick="openFavoritesModal(0)" class="btn-action text-white px-3 py-3 rounded-r-xl font-bold shadow-md transition-all text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
                 </div>
-                <!-- Row 2: Auto NAV | Simulator — same total width as row 1 -->
-                <div class="flex gap-2">
-                    <button onclick="openSecNavModal()" id="secNavBtn" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center flex-1" style="background:linear-gradient(135deg,#0284c7,#0369a1);">🔄 Auto NAV</button>
-                    <button onclick="openSimulatorModal()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center flex-1" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">📈 Simulator</button>
+                <!-- Row 2: Auto NAV | Clear Filters | Simulator -->
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="openSecNavModal()" id="secNavBtn" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#0284c7,#0369a1);">🔄 Auto NAV</button>
+                    <button onclick="clearAllFilters()" class="btn-action py-3 rounded-xl font-bold transition-all text-xs text-center" style="background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:#4f46e5;border:2px solid #a5b4fc;">✕ Clear</button>
+                    <button onclick="openSimulatorModal()" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">📈 Simulator</button>
                 </div>
             </div>
 
@@ -512,6 +523,26 @@
                 </div>
             </div>
 
+
+            <!-- FUND TRENDS: Top 3 Winners + Top 3 Losers -->
+            <div class="bg-white rounded-[3rem] shadow-xl border border-slate-100 p-6 mt-6" id="fundTrendsCard">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">🏆 Fund Trends <span id="trendPeriodLabel" class="text-indigo-500 normal-case">(Selected period)</span></h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Winners -->
+                    <div>
+                        <div class="text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-3 flex items-center gap-1">🚀 Top 3 Winners</div>
+                        <div id="trendWinners" class="flex flex-col gap-2"></div>
+                    </div>
+                    <!-- Losers -->
+                    <div>
+                        <div class="text-[10px] font-black text-rose-500 uppercase tracking-widest mb-3 flex items-center gap-1">📉 Top 3 Losers</div>
+                        <div id="trendLosers" class="flex flex-col gap-2"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- TAB 2: NEWS & TECHNICAL -->
@@ -594,9 +625,9 @@
                     <div class="grid grid-cols-4 gap-2">
                         <div class="col-span-3 flex gap-[2px]">
                             <button onclick="applyFavoriteFilter(1)" id="fundTabFavBtn1" class="btn-action text-white py-2.5 rounded-l-xl font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 1</button>
-                            <button onclick="applyFavoriteFilter(2)" id="fundTabFavBtn2" class="text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
-                            <button onclick="applyFavoriteFilter(3)" id="fundTabFavBtn3" class="text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
-                            <button onclick="openFavoritesModal(0)" class="text-white px-2 py-2.5 rounded-r-xl font-bold shadow-md text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
+                            <button onclick="applyFavoriteFilter(2)" id="fundTabFavBtn2" class="btn-action text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
+                            <button onclick="applyFavoriteFilter(3)" id="fundTabFavBtn3" class="btn-action text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
+                            <button onclick="openFavoritesModal(0)" class="btn-action text-white px-2 py-2.5 rounded-r-xl font-bold shadow-md text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
                         </div>
                         <button onclick="clearAllFilters()" class="btn-action py-2.5 rounded-xl font-bold text-xs text-center" style="background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:#4f46e5;border:2px solid #a5b4fc;">✕ Clear Filters</button>
                     </div>
@@ -685,6 +716,7 @@
                             <th class="p-5 sortable" onclick="sortTable('assetClass')">Asset Class ↕</th>
                             <th class="p-5 text-right sortable" onclick="sortTable('invested')">Invested ↕</th>
                             <th class="p-5 text-right text-indigo-600 font-bold sortable" onclick="sortTable('nav')">Latest NAV ↕</th>
+                            <th class="p-5 text-center" style="min-width:90px;">Trend</th>
 <th class="p-5 text-center" id="navPctHeader">
                                 <div class="flex flex-col items-center gap-1">
                                     <select id="navPctSelect" onchange="navPctKey=this.value; filterData(); renderAll();" class="text-[10px] font-black bg-indigo-50 border border-indigo-200 rounded-lg px-1 py-0.5 text-indigo-600 cursor-pointer outline-none">
@@ -1587,6 +1619,120 @@
 
         function openActionsSheet() { document.getElementById('actionsSheet').classList.add('active'); }
         function openDataSheet() { document.getElementById('dataSheet').classList.add('active'); }
+
+        // ═══════════ SPARKLINES ═══════════
+        function drawSparkline(canvas, navHistory, isPositive) {
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var W = canvas.width, H = canvas.height;
+            ctx.clearRect(0, 0, W, H);
+            if (!navHistory || navHistory.length < 2) {
+                ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1.5;
+                ctx.beginPath(); ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); ctx.stroke();
+                return;
+            }
+            var vals = navHistory.map(function(h){ return parseFloat(h.nav) || 0; });
+            var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+            var range = max - min || 1;
+            var pad = 3;
+            var color = isPositive ? '#10b981' : '#f43f5e';
+            // Draw filled area
+            ctx.beginPath();
+            vals.forEach(function(v, i) {
+                var x = pad + (i / (vals.length-1)) * (W - pad*2);
+                var y = H - pad - ((v - min) / range) * (H - pad*2);
+                if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            });
+            var lastX = pad + (W - pad*2), lastY = H - pad;
+            ctx.lineTo(lastX, lastY); ctx.lineTo(pad, lastY);
+            ctx.closePath();
+            ctx.fillStyle = isPositive ? 'rgba(16,185,129,0.12)' : 'rgba(244,63,94,0.12)';
+            ctx.fill();
+            // Draw line
+            ctx.beginPath();
+            vals.forEach(function(v, i) {
+                var x = pad + (i / (vals.length-1)) * (W - pad*2);
+                var y = H - pad - ((v - min) / range) * (H - pad*2);
+                if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            });
+            ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+            // End dot
+            var lv = vals[vals.length-1];
+            var ex = pad + (W - pad*2), ey = H - pad - ((lv - min) / range) * (H - pad*2);
+            ctx.beginPath(); ctx.arc(ex, ey, 2.5, 0, Math.PI*2);
+            ctx.fillStyle = color; ctx.fill();
+        }
+        function renderAllSparklines() {
+            // Compute cutoff date based on selected navPctKey timeframe
+            var tfDays = null;
+            var tfCutoff = null;
+            if (navPctKey) {
+                var tfDef = NAV_TIMEFRAMES.find(function(t){ return t.key === navPctKey; });
+                if (tfDef && tfDef.days !== null) {
+                    var cutDate = new Date();
+                    cutDate.setDate(cutDate.getDate() - tfDef.days);
+                    tfCutoff = cutDate.toISOString().slice(0,10);
+                } else if (navPctKey === 'YTD') {
+                    tfCutoff = new Date().getFullYear() + '-01-01';
+                }
+                // SI (since inception) = no cutoff (use all)
+            }
+            document.querySelectorAll('.fund-sparkline').forEach(function(canvas) {
+                var id = canvas.getAttribute('data-id');
+                if (!id) return;
+                var parts = id.split('||');
+                var f = filteredFunds.find(function(x){ return x.name === parts[0] && x.portfolio === parts[1]; });
+                if (!f || !f.history || f.history.length < 2) {
+                    drawSparkline(canvas, null, true); return;
+                }
+                // Sort history and filter to the selected timeframe window
+                var sorted = f.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                var hist = tfCutoff ? sorted.filter(function(h){ return h.date >= tfCutoff; }) : sorted;
+                // Need at least 2 points; fall back to last 2 if window is too narrow
+                if (hist.length < 2) hist = sorted.slice(-2);
+                var first = parseFloat(hist[0].nav), last = parseFloat(hist[hist.length-1].nav);
+                drawSparkline(canvas, hist, last >= first);
+            });
+        }
+
+        // ═══════════ FUND TRENDS ═══════════
+        function renderFundTrends() {
+            var winners = document.getElementById('trendWinners');
+            var losers  = document.getElementById('trendLosers');
+            var label   = document.getElementById('trendPeriodLabel');
+            if (!winners || !losers) return;
+            // Get navPct for each fund
+            var ranked = filteredFunds.filter(function(f){ return f.navPct && f.navPct.pct !== null; })
+                .map(function(f){ return { name: f.name, pct: f.navPct.pct, navHistory: f.history }; })
+                .sort(function(a,b){ return b.pct - a.pct; });
+            if (label) label.textContent = '(' + (navPctKey || '1D') + ')';
+            function trendRowHTML(f, rank, isWin) {
+                var sign = f.pct >= 0 ? '+' : '';
+                var color = f.pct >= 0 ? '#10b981' : '#f43f5e';
+                return '<div class="trend-row">' +
+                    '<span class="trend-rank">' + rank + '</span>' +
+                    '<canvas class="trend-spark" width="56" height="28" id="trendSpark_' + rank + '_' + (isWin?'w':'l') + '"></canvas>' +
+                    '<span class="trend-name" title="' + f.name + '">' + f.name + '</span>' +
+                    '<span class="trend-pct" style="color:' + color + '">' + sign + f.pct.toFixed(2) + '%</span>' +
+                '</div>';
+            }
+            var top3 = ranked.slice(0, 3);
+            var bot3 = ranked.slice(-3).reverse();
+            winners.innerHTML = top3.length ? top3.map(function(f,i){ return trendRowHTML(f, i+1, true); }).join('') : '<div class="text-xs text-slate-400 p-2">No data</div>';
+            losers.innerHTML  = bot3.length ? bot3.map(function(f,i){ return trendRowHTML(f, i+1, false); }).join('') : '<div class="text-xs text-slate-400 p-2">No data</div>';
+            // Draw mini sparklines in trend rows
+            setTimeout(function() {
+                function drawTrend(canvasId, fund) {
+                    var c = document.getElementById(canvasId); if (!c || !fund) return;
+                    var hist = (fund.history || []).slice().sort(function(a,b){ return a.date.localeCompare(b.date); }).slice(-20);
+                    var first = hist.length ? parseFloat(hist[0].nav) : 0;
+                    var last  = hist.length ? parseFloat(hist[hist.length-1].nav) : 0;
+                    drawSparkline(c, hist, last >= first);
+                }
+                top3.forEach(function(f,i){ drawTrend('trendSpark_'+(i+1)+'_w', filteredFunds.find(function(x){return x.name===f.name;})); });
+                bot3.forEach(function(f,i){ drawTrend('trendSpark_'+(i+1)+'_l', filteredFunds.find(function(x){return x.name===f.name;})); });
+            }, 30);
+        }
 
         // ═══════════ THEME TOGGLE ═══════════
         function toggleTheme() {
@@ -3178,6 +3324,9 @@
                         <span class="font-bold text-indigo-600">฿${fmtNum(f.nav, 4)}</span><br>
                         <span class="text-[9px] text-slate-400">${f.units.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:4})} units</span>
                     </td>
+                    <td class="p-2 text-center" style="min-width:90px;">
+                        <canvas class="fund-sparkline" data-id="${id}" width="80" height="36" style="display:block;margin:auto;"></canvas>
+                    </td>
                     <td class="p-4 text-center">
                         ${f.navPct !== null ?
                             `<span class="font-black text-xs ${f.navPct.pct >= 0 ? 'text-emerald-500' : 'text-rose-500'}">${f.navPct.pct >= 0 ? '▲' : '▼'} ${Math.abs(f.navPct.pct).toFixed(2)}%</span>
@@ -3219,10 +3368,13 @@
             try { updateGeoChart(cur); } catch(e) { console.warn('geoChart:', e); }
             updatePortfolioHistoryChart(); 
             setTimeout(autoScaleText, 0);
-            // Update dashboard allocation charts if on dashboard tab
+            // Sparklines in fund table
+            setTimeout(renderAllSparklines, 60);
+            // Update dashboard allocation charts + fund trends if on dashboard tab
             var dashPanel = document.getElementById('tab-dashboard');
             if (dashPanel && !dashPanel.classList.contains('hidden')) {
                 setTimeout(renderDashboardAllocation, 50);
+                setTimeout(renderFundTrends, 80);
             }
         }
 
@@ -3258,7 +3410,7 @@
             
             legendItems.sort((a, b) => {
                 let vA = a[legendSortKey]; let vB = b[legendSortKey];
-                if (typeof vA === 'string') { return thCollator.compare(vA, vB); }
+                if (typeof vA === 'string') { const cmp = thCollator.compare(vA, vB); return legendSortAsc ? cmp : -cmp; }
                 return legendSortAsc ? (vA < vB ? -1 : 1) : (vA < vB ? 1 : -1);
             });
 
@@ -4438,6 +4590,8 @@
                 const name = favNames[i] || `Fav ${i}`;
                 const btn = document.getElementById(`favBtn${i}`);
                 if (btn) btn.textContent = '⭐ ' + name;
+                const tabBtn = document.getElementById(`fundTabFavBtn${i}`);
+                if (tabBtn) tabBtn.textContent = '⭐ ' + name;
                 const tab = document.getElementById(`favTab${i}`);
                 if (tab) tab.textContent = '⭐ ' + name;
             });
@@ -5294,8 +5448,9 @@
                     } else if (typeof updatePortfolioHistoryChart === 'function') {
                         updatePortfolioHistoryChart();
                     }
-                    // Re-render allocation donuts
+                    // Re-render allocation donuts + fund trends
                     renderDashboardAllocation();
+                    renderFundTrends();
                 }, 80);
             }
         }
@@ -5305,6 +5460,8 @@
             setTimeout(function() {
                 if (filteredFunds && filteredFunds.length > 0) {
                     renderDashboardAllocation();
+                    renderFundTrends();
+                    renderAllSparklines();
                 }
             }, 500);
         });
