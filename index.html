@@ -1560,6 +1560,13 @@
                 <div><label class="text-[10px] font-black uppercase mb-1 text-indigo-600">Current NAV (4D)</label><input type="number" id="in_nav" step="0.0001" oninput="calculateAddFundUnits()" class="w-full p-3 bg-slate-50 rounded-xl border"></div>
                 <div class="col-span-2"><label class="text-[10px] font-black uppercase mb-1">Source URL</label><input type="text" id="in_source" class="w-full p-3 bg-slate-50 rounded-xl border" placeholder="Paste Full URL or type 'Finnomena'"></div>
                 <div><label class="text-[10px] font-black uppercase mb-1 text-emerald-600">📅 Start Date <span class="text-slate-400 normal-case font-normal">(first purchase, for CAGR)</span></label><input type="date" id="in_start_date" class="w-full p-3 bg-slate-50 rounded-xl border"></div>
+                <div><label class="text-[10px] font-black uppercase mb-1 text-sky-600">🔄 NAV Sync</label>
+                    <div class="flex gap-2 mt-1">
+                        <button type="button" id="navSyncAuto" onclick="setNavSyncMode('auto')" class="flex-1 py-2.5 rounded-xl text-xs font-black border-2 transition-all" style="background:#e0f2fe;color:#0284c7;border-color:#0284c7;">⚡ Auto</button>
+                        <button type="button" id="navSyncManual" onclick="setNavSyncMode('manual')" class="flex-1 py-2.5 rounded-xl text-xs font-black border-2 transition-all" style="background:#f1f5f9;color:#94a3b8;border-color:#e2e8f0;">✋ Manual</button>
+                    </div>
+                    <input type="hidden" id="in_nav_sync" value="auto">
+                </div>
             </div>
             <div class="flex flex-col gap-3 mt-10">
                 <div class="flex gap-4"><button onclick="submitData()" class="flex-1 bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg">Save Changes</button><button onclick="closeModal('dataModal')" class="flex-1 bg-slate-100 py-4 rounded-2xl font-bold text-slate-500">Cancel</button></div>
@@ -1941,7 +1948,7 @@
         const MANUAL_NAV_FUNDS = new Set([
             'ABGDD-SSF','SCBCHA-SSF','SCBCHA(SSFE)','SCBGOLDH-SSF',
             'UCHINA-SSF','ES-GINNO-SSF','SCBVIET(SSFE)','KKP CHINA-H-SSF',
-            'SCBNDQ(SSF)','SCBS&P500(SSFA)'
+            'SCBNDQ(SSF)','SCBS&P500(SSFA)','UOBSD-SSF'
         ]);
         const NAV_TIMEFRAMES = [
             { key:'1D',  label:'1D',        days:1 },
@@ -2045,8 +2052,8 @@
             if (key === 'navSync') {
                 // Auto (0) before Manual (1) when ascending
                 allFunds.sort((a, b) => {
-                    const vA = MANUAL_NAV_FUNDS.has(a.name) ? 1 : 0;
-                    const vB = MANUAL_NAV_FUNDS.has(b.name) ? 1 : 0;
+                    const vA = (MANUAL_NAV_FUNDS.has(a.name) || a.navSyncMode === 'manual') ? 1 : 0;
+                    const vB = (MANUAL_NAV_FUNDS.has(b.name) || b.navSyncMode === 'manual') ? 1 : 0;
                     return sortAsc ? vA - vB : vB - vA;
                 });
                 filterData();
@@ -3156,7 +3163,7 @@
 
             filteredFunds = allFunds.filter(f => {
                 const str = Object.values(f).join(' ').toLowerCase();
-                const isManual = MANUAL_NAV_FUNDS.has(f.name);
+                const isManual = MANUAL_NAV_FUNDS.has(f.name) || f.navSyncMode === 'manual';
                 const navSyncMatch = selNavSync === '' || (selNavSync === 'auto' && !isManual) || (selNavSync === 'manual' && isManual);
                 return str.includes(gSearch) && (selNames.length===0||selNames.includes(f.name)) && (selPorts.length===0||selPorts.includes(f.portfolio)) && (selGeos.length===0||selGeos.includes(f.assetClass)) && navSyncMatch;
             }).map(f => {
@@ -3385,7 +3392,7 @@
                     </td>
                     <td class="p-4 text-center">${sourceHTML}</td>
                     <td class="p-4 text-center">
-                        ${MANUAL_NAV_FUNDS.has(f.name)
+                        ${(MANUAL_NAV_FUNDS.has(f.name) || f.navSyncMode === 'manual')
                             ? '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-black bg-amber-50 text-amber-600 border border-amber-200">✋ Manual</span>'
                             : '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-black bg-emerald-50 text-emerald-600 border border-emerald-200">⚡ Auto</span>'
                         }
@@ -3741,12 +3748,27 @@
             });
         }
         
+        function setNavSyncMode(mode) {
+            document.getElementById('in_nav_sync').value = mode;
+            const autoBtn = document.getElementById('navSyncAuto');
+            const manualBtn = document.getElementById('navSyncManual');
+            if (mode === 'auto') {
+                autoBtn.style.cssText   = 'flex:1;padding:10px;border-radius:12px;font-size:12px;font-weight:900;border-width:2px;background:#e0f2fe;color:#0284c7;border-color:#0284c7;';
+                manualBtn.style.cssText = 'flex:1;padding:10px;border-radius:12px;font-size:12px;font-weight:900;border-width:2px;background:#f1f5f9;color:#94a3b8;border-color:#e2e8f0;';
+            } else {
+                autoBtn.style.cssText   = 'flex:1;padding:10px;border-radius:12px;font-size:12px;font-weight:900;border-width:2px;background:#f1f5f9;color:#94a3b8;border-color:#e2e8f0;';
+                manualBtn.style.cssText = 'flex:1;padding:10px;border-radius:12px;font-size:12px;font-weight:900;border-width:2px;background:#fef3c7;color:#d97706;border-color:#d97706;';
+            }
+        }
+
         function openAddModal() {
             document.getElementById('editKey').value = "";
             document.getElementById('in_name').value = ""; document.getElementById('in_port').value = ""; document.getElementById('in_geo').value = "";
             document.getElementById('in_units').value = ""; document.getElementById('in_invested').value = ""; document.getElementById('in_nav').value = "";
             document.getElementById('in_source').value = "";
-            document.getElementById('in_start_date').value = ''; document.getElementById('deleteBtn').classList.add('hidden'); document.getElementById('dataModal').classList.add('active');
+            document.getElementById('in_start_date').value = '';
+            setNavSyncMode('manual'); // default new funds to Manual
+            document.getElementById('deleteBtn').classList.add('hidden'); document.getElementById('dataModal').classList.add('active');
         }
 
         function openEditById(id) {
@@ -3757,6 +3779,9 @@
             document.getElementById('in_invested').value = f.invested.toFixed(2); document.getElementById('in_nav').value = f.nav.toFixed(4);
             document.getElementById('in_source').value = f.source || "";
             document.getElementById('in_start_date').value = f.startDate || '';
+            // Show current sync mode: manual if in MANUAL_NAV_FUNDS or explicitly marked
+            const isManual = MANUAL_NAV_FUNDS.has(f.name) || f.navSyncMode === 'manual';
+            setNavSyncMode(isManual ? 'manual' : 'auto');
             document.getElementById('deleteBtn').classList.remove('hidden'); document.getElementById('dataModal').classList.add('active');
         }
 
@@ -3773,6 +3798,7 @@
             const id = document.getElementById('editKey').value;
             const newNav = parseFloat(parseFloat(document.getElementById('in_nav').value).toFixed(4)) || 0;
             const dateStr = new Date().toISOString().split('T')[0];
+            const navSyncMode = document.getElementById('in_nav_sync').value || 'manual';
 
             const data = {
                 name: document.getElementById('in_name').value, 
@@ -3781,8 +3807,17 @@
                 units: parseFloat(parseFloat(document.getElementById('in_units').value).toFixed(4)) || 0,
                 invested: parseFloat(parseFloat(document.getElementById('in_invested').value).toFixed(2)) || 0, 
                 nav: newNav, navDate: dateStr, source: document.getElementById('in_source').value || "Manual",
-                startDate: document.getElementById('in_start_date').value || ""
+                startDate: document.getElementById('in_start_date').value || "",
+                navSyncMode: navSyncMode
             };
+
+            // Update MANUAL_NAV_FUNDS set dynamically based on user choice
+            if (navSyncMode === 'manual') {
+                MANUAL_NAV_FUNDS.add(data.name);
+            } else {
+                // Only remove from set if not in the original hardcoded list
+                MANUAL_NAV_FUNDS.delete(data.name);
+            }
 
             if (id) { 
                 const idx = allFunds.findIndex(x => (x.name + "||" + x.portfolio) === id); 
