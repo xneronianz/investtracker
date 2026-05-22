@@ -3710,15 +3710,31 @@
                     dailyRealized  = liveTotals.realized;
                 } else {
                     chartFilteredFunds.forEach(f => {
+                        // Determine the fund's effective start date.
+                        // Priority: explicit f.startDate (user's first purchase date),
+                        // then fall back to earliest history entry.
+                        let fundStartDate = f.startDate || null;
+                        let earliestHistoryDate = null;
+                        if (f.history && f.history.length > 0) {
+                            let dates = f.history.map(h => h.date).filter(d => d).sort();
+                            if (dates.length > 0) earliestHistoryDate = dates[0];
+                        }
+                        if (!fundStartDate) fundStartDate = earliestHistoryDate;
+                        // Before the fund's first purchase — it didn't exist in the portfolio yet
+                        if (fundStartDate && date < fundStartDate) return;
+
                         let activeNav = f.nav; let activeInvested = f.invested; let activeUnits = f.units;
 
                         if (f.history && f.history.length > 0) {
+                            // Most recent NAV entry on or before this date
                             let pastEntries = f.history.filter(h => h.date && h.date <= date).sort((a,b) => b.date.localeCompare(a.date));
                             if (pastEntries.length > 0) {
                                 activeNav      = pastEntries[0].nav;
                                 if (pastEntries[0].invested !== undefined) activeInvested = pastEntries[0].invested;
                                 if (pastEntries[0].units    !== undefined) activeUnits    = pastEntries[0].units;
                             } else {
+                                // Gap: date is AFTER startDate but BEFORE earliest history entry.
+                                // Use the earliest history entry's invested/units (closest snapshot we have).
                                 let futureEntries = f.history.filter(h => h.date).sort((a,b) => a.date.localeCompare(b.date));
                                 if (futureEntries.length > 0) {
                                     activeNav      = futureEntries[0].nav;
@@ -3741,6 +3757,8 @@
                 const dailyTax = includeTaxInReturn ? (date === latestChartDate ? liveTotals.tax : taxSavings.filter(t => t.date <= date).reduce((s, t) => s + t.amount, 0)) : 0;
                 let dailyTR = dailyCurrent + dailyDividends + dailyRealized + dailyTax - dailyInvested;
                 let dailyTRPercent = dailyInvested > 0 ? (dailyTR / dailyInvested) * 100 : 0;
+                // Skip dates where NO fund had started yet — avoids flat-zero leading bars
+                if (dailyInvested === 0 && dailyCurrent === 0 && date !== latestChartDate) return;
                 historyData.push({ date, invested: dailyInvested, current: dailyCurrent + dailyDividends + dailyRealized + dailyTax, tr: dailyTR, trPercent: dailyTRPercent });
             });
 
