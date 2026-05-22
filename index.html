@@ -519,16 +519,61 @@
                 <div class="dash-alloc-card bg-white rounded-[2rem] shadow-xl p-6 border border-slate-100">
                     <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Asset Class Allocation</h3>
                     <div class="flex flex-col items-center">
-                        <div class="relative mb-4" style="width:160px;height:160px;"><canvas id="dashAssetChart" width="160" height="160"></canvas></div>
+                        <div id="dashAssetChartSvg" style="width:200px;height:200px;margin-bottom:16px;"></div>
                         <div id="dashAssetLegend" class="w-full grid grid-cols-1 gap-y-1 text-[10px] font-bold text-slate-600 max-h-[200px] overflow-y-auto"></div>
                     </div>
                 </div>
                 <div class="dash-alloc-card bg-white rounded-[2rem] shadow-xl p-6 border border-slate-100">
                     <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Portfolio Allocation</h3>
                     <div class="flex flex-col items-center">
-                        <div class="relative mb-4" style="width:160px;height:160px;"><canvas id="dashPortChart" width="160" height="160"></canvas></div>
+                        <div id="dashPortChartSvg" style="width:200px;height:200px;margin-bottom:16px;"></div>
                         <div id="dashPortLegend" class="w-full grid grid-cols-1 gap-y-1 text-[10px] font-bold text-slate-600 max-h-[200px] overflow-y-auto"></div>
                     </div>
+                </div>
+            </div>
+
+            <!-- TREEMAP: Portfolio Holdings -->
+            <div class="bg-white rounded-[2rem] shadow-xl border border-slate-100 p-6 mb-6" style="position:relative;">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">🗺️ Portfolio Treemap</h3>
+                    <div class="flex gap-1">
+                        <button onclick="renderTreemap('marketValue')" id="tmBtnMV" class="text-[9px] font-black px-2 py-1 rounded-lg bg-indigo-100 text-indigo-600 border border-indigo-200">Market Value</button>
+                        <button onclick="renderTreemap('invested')"    id="tmBtnInv" class="text-[9px] font-black px-2 py-1 rounded-lg bg-slate-100 text-slate-500 border border-slate-200">Invested</button>
+                    </div>
+                </div>
+                <p class="text-[10px] text-slate-400 mb-3">Size = holding value · Color = gain/loss · Tap/click a box for details</p>
+                <div id="treemapContainer" style="width:100%;position:relative;">
+                    <div id="treemapCanvas" style="display:block;width:100%;cursor:pointer;"></div>
+                    <div id="treemapTooltip" style="display:none;position:absolute;z-index:50;background:#1e293b;color:#fff;font-size:11px;font-weight:700;border-radius:12px;padding:8px 12px;box-shadow:0 8px 24px rgba(0,0,0,0.3);pointer-events:none;max-width:200px;"></div>
+                </div>
+            </div>
+
+            <!-- MONTHLY PERFORMANCE HEATMAP -->
+            <div class="bg-white rounded-[2rem] shadow-xl border border-slate-100 p-6 mb-6">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">🗓️ Monthly Performance Heatmap</h3>
+                    <select id="heatmapFundSel" onchange="renderHeatmap()" class="text-[9px] bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 text-slate-600 outline-none max-w-[150px]">
+                        <option value="__portfolio__">Whole Portfolio</option>
+                    </select>
+                </div>
+                <p class="text-[10px] text-slate-400 mb-3">Monthly NAV % change — green = gain · red = loss · grey = no data</p>
+                <div id="heatmapGrid" class="overflow-x-auto"></div>
+            </div>
+
+            <!-- RISK vs RETURN SCATTER -->
+            <div class="bg-white rounded-[2rem] shadow-xl border border-slate-100 p-6 mb-6">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">⚖️ Risk vs. Return</h3>
+                    <div class="flex gap-1">
+                        <button onclick="setRiskReturnMetric('xirr')"  id="rrBtnXirr"  class="text-[9px] font-black px-2 py-1 rounded-lg bg-indigo-100 text-indigo-600 border border-indigo-200">XIRR</button>
+                        <button onclick="setRiskReturnMetric('cagr')"  id="rrBtnCagr"  class="text-[9px] font-black px-2 py-1 rounded-lg bg-slate-100 text-slate-500 border border-slate-200">CAGR</button>
+                    </div>
+                </div>
+                <p class="text-[10px] text-slate-400 mb-3">X = Volatility (NAV std dev %) · Y = <span id="rrYLabel">XIRR</span> % · Ideal funds: upper-left · Tap a dot for details</p>
+                <div id="riskReturnContainer" style="position:relative;width:100%;min-height:320px;">
+                    <div id="riskReturnChart" style="display:block;width:100%;min-height:320px;"></div>
+                    <div id="riskReturnPlaceholder" style="display:none;align-items:center;justify-content:center;height:320px;width:100%;color:#94a3b8;font-size:12px;text-align:center;padding:20px;">Not enough NAV history to plot. Each fund needs at least 10 daily NAV entries.</div>
+                    <div id="riskReturnTooltip" style="display:none;position:absolute;z-index:50;background:#1e293b;color:#fff;font-size:11px;font-weight:700;border-radius:12px;padding:8px 12px;box-shadow:0 8px 24px rgba(0,0,0,0.3);pointer-events:none;max-width:200px;"></div>
                 </div>
             </div>
 
@@ -556,7 +601,113 @@
 
         <!-- TAB 2: NEWS & TECHNICAL -->
         <div id="tab-news" class="tab-panel hidden">
-        <!-- Technical Signals Panel -->
+
+        <!-- TRADINGVIEW TICKER TAPE -->
+        <div class="mb-4 rounded-2xl overflow-hidden shadow border border-slate-100">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [
+                        {"proName":"SET:SET","title":"SET Index"},
+                        {"proName":"CAPITALCOM:US500","title":"S&P 500"},
+                        {"proName":"TVC:GOLD","title":"Gold"},
+                        {"proName":"FX:USDTHB","title":"USD/THB"},
+                        {"proName":"CAPITALCOM:CN50","title":"China A50"},
+                        {"proName":"TVC:VN30","title":"VN30"},
+                        {"proName":"TVC:US10Y","title":"US 10Y Yield"}
+                    ],
+                    "showSymbolLogo": true,
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "colorTheme": "light",
+                    "locale": "en"
+                }
+                </script>
+            </div>
+        </div>
+
+        <!-- MARKET OVERVIEW -->
+        <div class="bg-white p-5 rounded-[2rem] shadow-xl border border-slate-100 mb-4">
+            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">🌐 Market Overview</h3>
+            <div class="tradingview-widget-container" style="height:400px;">
+                <div class="tradingview-widget-container__widget" style="height:100%;"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                    "colorTheme": "light",
+                    "dateRange": "1M",
+                    "showChart": true,
+                    "locale": "en",
+                    "largeChartUrl": "",
+                    "isTransparent": false,
+                    "showSymbolLogo": true,
+                    "showFloatingTooltip": false,
+                    "width": "100%",
+                    "height": "400",
+                    "tabs": [
+                        {
+                            "title": "Indices",
+                            "symbols": [
+                                {"s":"SET:SET","d":"SET Index"},
+                                {"s":"CAPITALCOM:US500","d":"S&P 500"},
+                                {"s":"TVC:HSI","d":"Hang Seng"},
+                                {"s":"CAPITALCOM:CN50","d":"China A50"},
+                                {"s":"INDEX:VN30","d":"VN30"}
+                            ],
+                            "originalTitle": "Indices"
+                        },
+                        {
+                            "title": "Commodities",
+                            "symbols": [
+                                {"s":"TVC:GOLD","d":"Gold"},
+                                {"s":"TVC:SILVER","d":"Silver"},
+                                {"s":"NYMEX:CL1!","d":"Crude Oil"}
+                            ],
+                            "originalTitle": "Commodities"
+                        },
+                        {
+                            "title": "FX",
+                            "symbols": [
+                                {"s":"FX:USDTHB","d":"USD/THB"},
+                                {"s":"FX:EURUSD","d":"EUR/USD"},
+                                {"s":"FX:USDJPY","d":"USD/JPY"}
+                            ],
+                            "originalTitle": "FX"
+                        },
+                        {
+                            "title": "Bonds",
+                            "symbols": [
+                                {"s":"TVC:US10Y","d":"US 10Y"},
+                                {"s":"TVC:US02Y","d":"US 2Y"},
+                                {"s":"TVC:TH10Y","d":"Thai 10Y"}
+                            ],
+                            "originalTitle": "Bonds"
+                        }
+                    ]
+                }
+                </script>
+            </div>
+        </div>
+
+        <!-- ECONOMIC CALENDAR -->
+        <div class="bg-white p-5 rounded-[2rem] shadow-xl border border-slate-100 mb-4">
+            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">📅 Economic Calendar</h3>
+            <div class="tradingview-widget-container" style="height:450px;">
+                <div class="tradingview-widget-container__widget" style="height:100%;"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+                {
+                    "colorTheme": "light",
+                    "isTransparent": false,
+                    "width": "100%",
+                    "height": "450",
+                    "locale": "en",
+                    "importanceFilter": "0,1",
+                    "countryFilter": "th,us,cn,eu,jp,vn"
+                }
+                </script>
+            </div>
+        </div>
+
         <!-- Technical Signals Panel -->
         <div class="bg-white p-6 rounded-[3rem] shadow-xl border border-slate-100 mb-6" id="techSignalsPanel">
             <div class="flex items-center justify-between mb-3">
@@ -566,7 +717,6 @@
                 </div>
                 <button onclick="runTechnicalAnalysis()" id="techScanBtn" class="btn-action text-white px-4 py-2 rounded-xl font-bold text-xs shadow-md" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">🔍 Scan</button>
             </div>
-            <!-- Signal filter buttons -->
             <div id="techFilterBtns" class="flex flex-wrap gap-1.5 mb-4" style="display:none!important;">
                 <button onclick="filterTechSignals('all')"          id="tf_all"    class="tech-filter-btn active text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">All</button>
                 <button onclick="filterTechSignals('oversold')"     id="tf_oversold"  class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">📉 Oversold</button>
@@ -580,11 +730,10 @@
                 <button onclick="filterTechSignals('buy')"          id="tf_buy"    class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">🟢 All Buy</button>
                 <button onclick="filterTechSignals('sell')"         id="tf_sell"   class="tech-filter-btn text-[9px] font-black px-2.5 py-1 rounded-full border transition-all">🔴 All Sell</button>
             </div>
-            <!-- Signals list -->
             <div id="techSignalsContent" class="text-sm text-slate-400 italic">Click Scan to analyse your funds' NAV history for technical signals.</div>
         </div>
 
-        <!-- News & Market Updates Panel -->
+        <!-- News Panel -->
         <div class="bg-white p-6 rounded-[3rem] shadow-xl border border-slate-100 mb-6" id="newsPanel">
             <div class="flex items-center justify-between mb-3">
                 <div>
@@ -599,7 +748,6 @@
                     <button onclick="fetchPortfolioNews()" id="newsFetchBtn" class="btn-action text-white px-4 py-2 rounded-xl font-bold text-xs shadow-md" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">🔄 Refresh</button>
                 </div>
             </div>
-            <!-- Category legend -->
             <div class="flex flex-wrap gap-1.5 mb-4">
                 <span class="text-[9px] font-black px-2 py-1 rounded-full" style="background:#fffbeb;color:#d97706;border:1px solid #fde68a;">🇹🇭 Thai</span>
                 <span class="text-[9px] font-black px-2 py-1 rounded-full" style="background:#f5f3ff;color:#7c3aed;border:1px solid #ddd6fe;">🌐 Global</span>
@@ -612,7 +760,6 @@
                 <span class="text-[9px] font-black px-2 py-1 rounded-full" style="background:#fdf2f8;color:#db2777;border:1px solid #fbcfe8;">📊 Bond</span>
                 <span class="text-[9px] font-black px-2 py-1 rounded-full" style="background:#f0fdfa;color:#0d9488;border:1px solid #99f6e4;">🪙 Commodity</span>
             </div>
-            <!-- News content -->
             <div id="newsContent" class="text-sm text-slate-500 italic">Click Refresh to load latest news relevant to your portfolio.</div>
         </div>
         </div>
@@ -2035,6 +2182,8 @@
         var dashAssetChartObj = null;
         var dashPortChartObj = null;
         var DASH_COLORS = ['#6366f1','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899','#84cc16','#f97316','#14b8a6','#a78bfa','#fb7185','#60a5fa','#34d399','#fbbf24','#e879f9','#4ade80'];
+        // Shared asset class color map — initialized empty, populated by buildAssetColorMap()
+        var ASSET_CLASS_COLORS = {};
 
         const thCollator = new Intl.Collator('th');
 
@@ -4778,8 +4927,7 @@
         }
 
         filterData();
-    
-        // ========== PORTFOLIO NEWS ==========
+        buildAssetColorMap(); // pre-build asset class color map for consistency across all charts
         async function fetchPortfolioNews() {
             const btn = document.getElementById('newsFetchBtn');
             const content = document.getElementById('newsContent');
@@ -5550,8 +5698,53 @@
                     renderFundTrends();
                     renderAllSparklines();
                 }
-            }, 500);
+            }, 300);
         });
+
+        // Belt-and-suspenders: re-render dashboard charts on ANY resize/orientation event.
+        var _resizeTimer = null;
+        function triggerDashRerender(delay) {
+            if (_resizeTimer) clearTimeout(_resizeTimer);
+            _resizeTimer = setTimeout(function() {
+                requestAnimationFrame(function() {
+                    if (filteredFunds && filteredFunds.length > 0) {
+                        renderDashboardAllocation();
+                        renderFundTrends();
+                        renderAllSparklines();
+                    }
+                });
+            }, delay || 250);
+        }
+        window.addEventListener('resize', function(){ triggerDashRerender(250); });
+        window.addEventListener('orientationchange', function(){ triggerDashRerender(500); });
+        // matchMedia is the most reliable orientation change detector on mobile
+        if (window.matchMedia) {
+            var portraitMQ = window.matchMedia('(orientation: portrait)');
+            if (portraitMQ.addEventListener) {
+                portraitMQ.addEventListener('change', function(){ triggerDashRerender(500); });
+            } else if (portraitMQ.addListener) {
+                portraitMQ.addListener(function(){ triggerDashRerender(500); });
+            }
+        }
+        function setupDashResizeObserver() {
+            if (typeof ResizeObserver === 'undefined') return;
+            var dashPanel = document.getElementById('tab-dashboard');
+            if (!dashPanel) return;
+            var lastWidth = 0;
+            var ro = new ResizeObserver(function(entries) {
+                var w = entries[0].contentRect.width;
+                if (Math.abs(w - lastWidth) < 5) return;
+                lastWidth = w;
+                triggerDashRerender(250);
+            });
+            ro.observe(dashPanel);
+            ro.observe(document.body);
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupDashResizeObserver);
+        } else {
+            setupDashResizeObserver();
+        }
 
         // ========= SETTINGS PANEL =========
         function toggleSettingsPanel() {
@@ -5598,57 +5791,507 @@
         document.addEventListener('DOMContentLoaded', function() { updateAutoSyncBtn(); });
         function renderDashboardAllocation() {
             var funds = (typeof filteredFunds !== 'undefined' && filteredFunds.length > 0) ? filteredFunds : [];
-            // Asset class aggregation
+            if (!funds.length) return;
+            // Use SAME calculation as treemap (which works) — f.nav * f.units
             var assetMap = {};
             var portMap = {};
             funds.forEach(function(f) {
-                var val = (f.currentValue !== undefined) ? f.currentValue : (f.nav || 0) * (f.units || 0);
+                var val = (f.nav || 0) * (f.units || 0);
                 if (!val || val <= 0) return;
                 var ac = f.assetClass || 'Other';
                 assetMap[ac] = (assetMap[ac] || 0) + val;
                 var pt = f.portfolio || 'Other';
                 portMap[pt] = (portMap[pt] || 0) + val;
             });
-            renderDashDonut('dashAssetChart', 'dashAssetLegend', assetMap, dashAssetChartObj, function(c) { dashAssetChartObj = c; });
-            renderDashDonut('dashPortChart', 'dashPortLegend', portMap, dashPortChartObj, function(c) { dashPortChartObj = c; });
+            try { dashAssetChartObj = renderDashDonut('dashAssetChart', 'dashAssetLegend', assetMap, dashAssetChartObj); } catch(e) { console.warn('assetChart:', e); }
+            try { dashPortChartObj  = renderDashDonut('dashPortChart',  'dashPortLegend',  portMap,  dashPortChartObj);  } catch(e) { console.warn('portChart:', e); }
+            try { renderTreemap('marketValue'); } catch(e) { console.warn('treemap:', e); }
+            try { renderHeatmap(); } catch(e) { console.warn('heatmap:', e); }
+            try { renderRiskReturn(); } catch(e) { console.warn('riskReturn:', e); }
+            try { populateHeatmapFundSelector(); } catch(e) {}
         }
-        function renderDashDonut(canvasId, legendId, dataMap, existingChart, setter) {
-            var canvas = document.getElementById(canvasId);
-            var legendEl = document.getElementById(legendId);
-            if (!canvas || !legendEl) return;
-            var keys = Object.keys(dataMap).sort(function(a,b){ return dataMap[b]-dataMap[a]; });
-            var total = keys.reduce(function(s,k){ return s + dataMap[k]; }, 0);
-            if (!total) return;
-            var colors = keys.map(function(k, i) { return DASH_COLORS[i % DASH_COLORS.length]; });
-            if (existingChart) { try { existingChart.destroy(); } catch(e){} }
-            var isDark = document.body.classList.contains('dark');
-            var chartBg = isDark ? '#1e293b' : 'transparent';
-            var ctx = canvas.getContext('2d');
-            var newChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: keys,
-                    datasets: [{ data: keys.map(function(k){ return dataMap[k]; }), backgroundColor: colors, borderWidth: 2, borderColor: '#fff', hoverBorderWidth: 2 }]
-                },
-                options: {
-                    responsive: false,
-                    plugins: { legend: { display: false } },
-                    cutout: '72%',
-                    animation: { duration: 300 }
+
+        // ─── SHARED ASSET CLASS COLOR MAP (declared at top of script) ───────────
+        function buildAssetColorMap() {
+            var allClasses = [];
+            allFunds.forEach(function(f){ if (allClasses.indexOf(f.assetClass) < 0) allClasses.push(f.assetClass); });
+            allClasses.sort();
+            allClasses.forEach(function(c, i){ ASSET_CLASS_COLORS[c] = DASH_COLORS[i % DASH_COLORS.length]; });
+        }
+        function getAssetColor(ac) {
+            if (!ASSET_CLASS_COLORS[ac]) buildAssetColorMap();
+            return ASSET_CLASS_COLORS[ac] || '#94a3b8';
+        }
+
+        // ─── TREEMAP (SVG-based, auto-scales to container width) ────────────────
+        var _tmMode = 'marketValue';
+        function renderTreemap(mode) {
+            _tmMode = mode || _tmMode;
+            var btnMV  = document.getElementById('tmBtnMV');
+            var btnInv = document.getElementById('tmBtnInv');
+            if (btnMV)  btnMV.className  = _tmMode==='marketValue' ? 'text-[9px] font-black px-2 py-1 rounded-lg bg-indigo-100 text-indigo-600 border border-indigo-200' : 'text-[9px] font-black px-2 py-1 rounded-lg bg-slate-100 text-slate-500 border border-slate-200';
+            if (btnInv) btnInv.className = _tmMode==='invested'    ? 'text-[9px] font-black px-2 py-1 rounded-lg bg-indigo-100 text-indigo-600 border border-indigo-200' : 'text-[9px] font-black px-2 py-1 rounded-lg bg-slate-100 text-slate-500 border border-slate-200';
+
+            var container = document.getElementById('treemapContainer');
+            var chartDiv = document.getElementById('treemapCanvas');
+            if (!chartDiv || !container || !filteredFunds.length) return;
+
+            // Use fixed viewBox dimensions — SVG scales to container automatically
+            var W = 600, H = 330;
+
+            // Merge duplicate fund names across portfolios
+            var merged = {};
+            filteredFunds.forEach(function(f) {
+                var mv = f.nav * f.units;
+                var val = _tmMode === 'marketValue' ? mv : f.invested;
+                if (!merged[f.name]) merged[f.name] = { name: f.name, val: 0, mv: 0, invested: 0, assetClass: f.assetClass };
+                merged[f.name].val      += Math.max(val, 0);
+                merged[f.name].mv       += mv;
+                merged[f.name].invested += f.invested;
+            });
+            var items = Object.values(merged).filter(function(x){ return x.val > 0; })
+                .map(function(x){ x.pct = x.invested > 0 ? (x.mv - x.invested) / x.invested * 100 : 0; return x; })
+                .sort(function(a,b){ return b.val - a.val; });
+            var total = items.reduce(function(s,i){ return s + i.val; }, 0);
+            if (!total) { chartDiv.innerHTML = ''; return; }
+
+            // Squarified treemap layout
+            items.forEach(function(it){ it._area = it.val / total * W * H; });
+            function worstAspectRatio(row, rowArea, stripSide) {
+                var stripW = rowArea / stripSide;
+                var worst = 0;
+                row.forEach(function(it) {
+                    var itemLen = it._area / stripW;
+                    var r = stripW > itemLen ? stripW / itemLen : itemLen / stripW;
+                    if (r > worst) worst = r;
+                });
+                return worst;
+            }
+            function layoutStrip(row, rowArea, x, y, stripW, stripH, horiz) {
+                var pos = horiz ? y : x;
+                row.forEach(function(it) {
+                    var frac = it._area / rowArea;
+                    var rw = horiz ? stripW : frac * stripW;
+                    var rh = horiz ? frac * stripH : stripH;
+                    it._r = { x: horiz ? x : pos, y: horiz ? pos : y, w: Math.max(rw,0), h: Math.max(rh,0) };
+                    pos += horiz ? rh : rw;
+                });
+            }
+            function squarify(itemsArr, x, y, w, h) {
+                if (!itemsArr.length || w < 1 || h < 1) return;
+                var remaining = itemsArr.slice();
+                var horiz = w >= h;
+                var row = [], rowArea = 0;
+                while (remaining.length) {
+                    var item = remaining[0];
+                    var newArea = rowArea + item._area;
+                    var side = horiz ? h : w;
+                    if (!row.length || worstAspectRatio(row.concat([item]), newArea, side) <= worstAspectRatio(row, rowArea, side)) {
+                        row.push(remaining.shift());
+                        rowArea += item._area;
+                    } else {
+                        var dim = rowArea / (horiz ? h : w);
+                        layoutStrip(row, rowArea, x, y, horiz ? dim : w, horiz ? h : dim, horiz);
+                        if (horiz) { x += dim; w -= dim; } else { y += dim; h -= dim; }
+                        horiz = w >= h;
+                        row = []; rowArea = 0;
+                    }
+                }
+                if (row.length && w > 0 && h > 0) {
+                    var dim = horiz ? w : h;
+                    layoutStrip(row, rowArea, x, y, horiz ? dim : w, horiz ? h : dim, horiz);
+                }
+            }
+            squarify(items, 0, 0, W, H);
+
+            // Build SVG — viewBox makes it scale to container width
+            var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block;font-family:sans-serif;">';
+            items.forEach(function(it, idx) {
+                if (!it._r) return;
+                var r = it._r;
+                var pct = it.pct;
+                var alpha = 0.2 + Math.min(0.72, Math.abs(pct) / 20);
+                var fill = pct >= 0 ? 'rgba(16,185,129,' + alpha + ')' : 'rgba(239,68,68,' + alpha + ')';
+                svg += '<rect data-idx="' + idx + '" x="' + (r.x + 1) + '" y="' + (r.y + 1) + '" width="' + Math.max(r.w - 2, 0) + '" height="' + Math.max(r.h - 2, 0) + '" fill="' + fill + '" stroke="rgba(255,255,255,0.9)" stroke-width="2" style="cursor:pointer;"/>';
+                if (r.w > 35 && r.h > 20) {
+                    var fs = Math.min(12, Math.max(7, Math.min(r.w / 9, r.h / 3.5)));
+                    var label = it.name.length > 16 ? it.name.slice(0,15) + '…' : it.name;
+                    label = label.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+                    var midX = r.x + r.w / 2, midY = r.y + r.h / 2;
+                    if (r.h > 36) {
+                        svg += '<text x="' + midX + '" y="' + (midY - 2) + '" font-size="' + fs + '" font-weight="700" fill="#1e293b" text-anchor="middle">' + label + '</text>';
+                        svg += '<text x="' + midX + '" y="' + (midY + fs + 1) + '" font-size="' + Math.max(7, fs - 1) + '" font-weight="700" fill="' + (pct >= 0 ? '#065f46' : '#991b1b') + '" text-anchor="middle">' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%</text>';
+                    } else {
+                        svg += '<text x="' + midX + '" y="' + (midY + fs / 3) + '" font-size="' + fs + '" font-weight="700" fill="#1e293b" text-anchor="middle">' + label + '</text>';
+                    }
                 }
             });
-            setter(newChart);
-            // Render legend
-            var html = keys.map(function(k, i) {
-                var pct = (dataMap[k] / total * 100).toFixed(1);
-                var valStr = '฿' + Math.round(dataMap[k]).toLocaleString('en');
-                return '<div class="flex justify-between items-center px-1 py-0.5 hover:bg-slate-50 rounded">' +
-                    '<div class="flex items-center gap-1 truncate"><span class="w-2 h-2 rounded-full flex-shrink-0" style="background:' + colors[i] + '"></span>' +
-                    '<span class="truncate">' + k + '</span></div>' +
-                    '<div class="flex gap-2 flex-shrink-0"><span class="text-slate-400">' + pct + '%</span>' +
-                    '<span class="font-black text-slate-600">' + valStr + '</span></div></div>';
-            }).join('');
-            legendEl.innerHTML = html;
+            svg += '</svg>';
+            chartDiv.innerHTML = svg;
+
+            // Click tooltip
+            var tooltip = document.getElementById('treemapTooltip');
+            chartDiv.querySelectorAll('rect[data-idx]').forEach(function(rect) {
+                rect.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var idx = parseInt(rect.getAttribute('data-idx'));
+                    var it = items[idx];
+                    if (!it || !tooltip) return;
+                    tooltip.innerHTML = '<b>' + it.name + '</b><br>' + it.assetClass +
+                        '<br>Value: ฿' + Math.round(it.val).toLocaleString('en') +
+                        '<br>P/L: ' + (it.pct >= 0 ? '+' : '') + it.pct.toFixed(2) + '%';
+                    var cRect = container.getBoundingClientRect();
+                    var rRect = rect.getBoundingClientRect();
+                    tooltip.style.left = Math.min(rRect.left - cRect.left + 8, cRect.width - 210) + 'px';
+                    tooltip.style.top = Math.max(rRect.top - cRect.top - 60, 4) + 'px';
+                    tooltip.style.display = 'block';
+                });
+            });
+            chartDiv.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'rect' && tooltip) tooltip.style.display = 'none';
+            });
+        }
+
+        // ─── MONTHLY HEATMAP ────────────────────────────────────────────────────
+        function populateHeatmapFundSelector() {
+            var sel = document.getElementById('heatmapFundSel');
+            if (!sel) return;
+            var current = sel.value;
+            sel.innerHTML = '<option value="__portfolio__">Whole Portfolio</option>';
+            var seen = new Set();
+            filteredFunds.forEach(function(f) {
+                if (!seen.has(f.name)) { seen.add(f.name); sel.innerHTML += '<option value="' + f.name + '">' + f.name + '</option>'; }
+            });
+            if ([...sel.options].find(function(o){ return o.value === current; })) sel.value = current;
+        }
+
+        function isConsecutiveMonths(ym1, ym2) {
+            // Returns true only if ym2 is exactly one calendar month after ym1
+            var y1 = parseInt(ym1.slice(0,4)), m1 = parseInt(ym1.slice(5,7));
+            var y2 = parseInt(ym2.slice(0,4)), m2 = parseInt(ym2.slice(5,7));
+            return (y2 * 12 + m2) - (y1 * 12 + m1) === 1;
+        }
+
+        function renderHeatmap() {
+            var grid = document.getElementById('heatmapGrid');
+            if (!grid) return;
+            var sel = document.getElementById('heatmapFundSel');
+            var fundName = sel ? sel.value : '__portfolio__';
+            var monthlyData = {};
+
+            if (fundName === '__portfolio__') {
+                // Correct portfolio monthly return:
+                // For each pair of STRICTLY CONSECUTIVE calendar months,
+                // compute weighted-average NAV return across all funds.
+                // Weight = fund's market value at end of previous month (navPrev × units).
+                // Only include funds that have NAV data in BOTH months (no fallback).
+                var fundMonthNav = {}; // key → { units, byMonth: { 'YYYY-MM': lastNavInMonth } }
+                filteredFunds.forEach(function(f) {
+                    var key = f.name + '||' + f.portfolio;
+                    if (!fundMonthNav[key]) fundMonthNav[key] = { units: f.units, byMonth: {}, lastDate: {} };
+                    (f.history || []).forEach(function(h) {
+                        var ym = h.date.slice(0, 7);
+                        // Keep only the LAST entry per month (by date string comparison)
+                        if (!fundMonthNav[key].lastDate[ym] || h.date > fundMonthNav[key].lastDate[ym]) {
+                            fundMonthNav[key].byMonth[ym] = parseFloat(h.nav);
+                            fundMonthNav[key].lastDate[ym] = h.date;
+                        }
+                    });
+                });
+
+                // Collect all months with data
+                var allMonthsSet = new Set();
+                Object.values(fundMonthNav).forEach(function(fd) {
+                    Object.keys(fd.byMonth).forEach(function(ym){ allMonthsSet.add(ym); });
+                });
+                var sortedMonths = Array.from(allMonthsSet).sort();
+
+                for (var mi = 1; mi < sortedMonths.length; mi++) {
+                    var ymPrev = sortedMonths[mi - 1], ymCur = sortedMonths[mi];
+                    // ONLY compare truly consecutive calendar months
+                    if (!isConsecutiveMonths(ymPrev, ymCur)) continue;
+
+                    var totalWeightedReturn = 0, totalWeight = 0;
+                    Object.values(fundMonthNav).forEach(function(fd) {
+                        var navPrev = fd.byMonth[ymPrev];
+                        var navCur  = fd.byMonth[ymCur];
+                        // Both months must have data — NO fallback to older months
+                        if (navPrev && navCur && navPrev > 0) {
+                            var weight = navPrev * fd.units;
+                            totalWeightedReturn += ((navCur - navPrev) / navPrev) * weight;
+                            totalWeight += weight;
+                        }
+                    });
+                    if (totalWeight > 0) monthlyData[ymCur] = totalWeightedReturn / totalWeight * 100;
+                }
+            } else {
+                var fund = filteredFunds.find(function(f){ return f.name === fundName; });
+                if (!fund || !fund.history) { grid.innerHTML = '<p class="text-xs text-slate-400">No history data.</p>'; return; }
+                var sorted = fund.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                // Get last NAV per month
+                var byM = {}, lastD = {};
+                sorted.forEach(function(h) {
+                    var ym = h.date.slice(0,7);
+                    if (!lastD[ym] || h.date > lastD[ym]) { byM[ym] = parseFloat(h.nav); lastD[ym] = h.date; }
+                });
+                var yms = Object.keys(byM).sort();
+                for (var i = 1; i < yms.length; i++) {
+                    if (!isConsecutiveMonths(yms[i-1], yms[i])) continue;
+                    if (byM[yms[i-1]] > 0) monthlyData[yms[i]] = (byM[yms[i]] - byM[yms[i-1]]) / byM[yms[i-1]] * 100;
+                }
+            }
+
+            if (!Object.keys(monthlyData).length) { grid.innerHTML = '<p class="text-xs text-slate-400 italic">Not enough history to build heatmap. Need NAV data across at least 2 consecutive months.</p>'; return; }
+            var allYMs = Object.keys(monthlyData).sort();
+            var years = [...new Set(allYMs.map(function(s){ return s.slice(0,4); }))].sort();
+            var mLabels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var maxAbs = Math.max.apply(null, Object.values(monthlyData).map(Math.abs)) || 1;
+
+            var html = '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;">' +
+                '<table style="border-collapse:separate;border-spacing:2px;font-family:var(--font-num);width:100%;table-layout:fixed;">';
+            html += '<colgroup><col style="width:3em"/>' + mLabels.map(function(){ return '<col/>'; }).join('') + '</colgroup>';
+            html += '<thead><tr><th></th>';
+            mLabels.forEach(function(m){ html += '<th style="font-size:clamp(7px,1.5vw,9px);font-weight:900;color:#94a3b8;text-align:center;padding:2px 0;">' + m + '</th>'; });
+            html += '</tr></thead><tbody>';
+            years.forEach(function(yr) {
+                html += '<tr><td style="font-size:clamp(8px,1.5vw,9px);font-weight:900;color:#64748b;padding-right:3px;white-space:nowrap;">' + yr + '</td>';
+                for (var m = 1; m <= 12; m++) {
+                    var key = yr + '-' + String(m).padStart(2,'0');
+                    var val = monthlyData[key];
+                    var bg, color, txt;
+                    if (val === undefined) { bg = '#f1f5f9'; color = '#cbd5e1'; txt = ''; }
+                    else {
+                        var intensity = Math.min(1, Math.abs(val) / maxAbs);
+                        if (val >= 0) { bg = 'rgba(16,185,129,' + (0.15 + intensity * 0.75) + ')'; color = intensity > 0.5 ? '#fff' : '#065f46'; }
+                        else          { bg = 'rgba(239,68,68,'   + (0.15 + intensity * 0.75) + ')'; color = intensity > 0.5 ? '#fff' : '#991b1b'; }
+                        txt = (val >= 0 ? '+' : '') + val.toFixed(1) + '%';
+                    }
+                    html += '<td style="background:' + bg + ';color:' + color + ';text-align:center;border-radius:4px;padding:4px 1px;font-weight:800;font-size:clamp(6px,1.6vw,9px);">' + txt + '</td>';
+                }
+                html += '</tr>';
+            });
+            html += '</tbody></table></div>';
+            grid.innerHTML = html;
+        }
+
+        // ─── RISK vs RETURN SCATTER ─────────────────────────────────────────────
+        // ─── RISK vs RETURN SCATTER ─────────────────────────────────────────────
+        var _rrMetric = 'xirr'; // 'xirr' or 'cagr'
+        function setRiskReturnMetric(m) {
+            _rrMetric = m || 'xirr';
+            var btnXirr = document.getElementById('rrBtnXirr');
+            var btnCagr = document.getElementById('rrBtnCagr');
+            var yLabel  = document.getElementById('rrYLabel');
+            if (btnXirr) btnXirr.className = _rrMetric==='xirr' ? 'text-[9px] font-black px-2 py-1 rounded-lg bg-indigo-100 text-indigo-600 border border-indigo-200' : 'text-[9px] font-black px-2 py-1 rounded-lg bg-slate-100 text-slate-500 border border-slate-200';
+            if (btnCagr) btnCagr.className = _rrMetric==='cagr' ? 'text-[9px] font-black px-2 py-1 rounded-lg bg-indigo-100 text-indigo-600 border border-indigo-200' : 'text-[9px] font-black px-2 py-1 rounded-lg bg-slate-100 text-slate-500 border border-slate-200';
+            if (yLabel) yLabel.textContent = _rrMetric==='xirr' ? 'XIRR' : 'CAGR';
+            renderRiskReturn();
+        }
+
+        function renderRiskReturn() {
+            var chartDiv = document.getElementById('riskReturnChart');
+            var placeholder = document.getElementById('riskReturnPlaceholder');
+            if (!chartDiv) return;
+
+            try {
+                if (typeof buildAssetColorMap === 'function') buildAssetColorMap();
+
+                // Merge same fund name across portfolios
+                var fundMap = {};
+                (filteredFunds||[]).forEach(function(f) {
+                    if (!fundMap[f.name]) fundMap[f.name] = { name: f.name, assetClass: f.assetClass, history: [], startDate: f.startDate, units: 0, invested: 0, nav: f.nav, funds: [] };
+                    fundMap[f.name].units += (f.units || 0);
+                    fundMap[f.name].invested += (f.invested || 0);
+                    fundMap[f.name].funds.push(f);
+                    (f.history||[]).forEach(function(h) {
+                        if (!fundMap[f.name].history.find(function(x){ return x.date === h.date; })) fundMap[f.name].history.push(h);
+                    });
+                    if (f.startDate && (!fundMap[f.name].startDate || f.startDate < fundMap[f.name].startDate)) fundMap[f.name].startDate = f.startDate;
+                });
+
+                var pts = [];
+                Object.values(fundMap).forEach(function(f) {
+                    if (!f.history || f.history.length < 10) return;
+                    var sorted = f.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                    var returns = [];
+                    for (var i = 1; i < sorted.length; i++) {
+                        var p = parseFloat(sorted[i-1].nav), c = parseFloat(sorted[i].nav);
+                        if (p > 0) returns.push((c - p) / p * 100);
+                    }
+                    if (returns.length < 5) return;
+                    var mean = returns.reduce(function(s,r){ return s+r; },0) / returns.length;
+                    var variance = returns.reduce(function(s,r){ return s + (r-mean)*(r-mean); },0) / returns.length;
+                    var vol = Math.sqrt(variance);
+
+                    // Y value: either XIRR or CAGR
+                    var yVal = null;
+                    if (_rrMetric === 'xirr' && typeof buildXIRRCashFlows === 'function' && typeof calculateXIRR === 'function') {
+                        try {
+                            var currentValue = f.nav * f.units;
+                            var cashflows = buildXIRRCashFlows(f.funds, currentValue);
+                            yVal = calculateXIRR(cashflows);
+                        } catch(err) { yVal = null; }
+                    }
+                    if (yVal === null || yVal === undefined || !isFinite(yVal)) {
+                        // Fall back to CAGR
+                        var firstDate = f.startDate || sorted[0].date;
+                        var yrs = (new Date() - new Date(firstDate)) / (365.25 * 86400000);
+                        if (yrs < 0.1) return;
+                        var firstNav = parseFloat(sorted[0].nav), lastNav = parseFloat(sorted[sorted.length-1].nav);
+                        if (firstNav <= 0) return;
+                        yVal = (Math.pow(lastNav / firstNav, 1 / yrs) - 1) * 100;
+                    }
+                    if (!isFinite(yVal)) return;
+                    // Clamp extreme outliers for readability (still shown in tooltip)
+                    pts.push({ x: parseFloat(vol.toFixed(3)), y: parseFloat(yVal.toFixed(2)), label: f.name, assetClass: f.assetClass });
+                });
+
+                if (placeholder) placeholder.style.display = pts.length ? 'none' : 'flex';
+                chartDiv.style.display = pts.length ? 'block' : 'none';
+                if (!pts.length) { chartDiv.innerHTML = ''; return; }
+
+                // SVG with viewBox auto-scales to container
+                var W = 600, H = 320;
+                var padLeft = 50, padRight = 18, padTop = 24, padBottom = 40;
+                var plotW = W - padLeft - padRight;
+                var plotH = H - padTop - padBottom;
+
+                var xVals = pts.map(function(p){ return p.x; });
+                var yVals = pts.map(function(p){ return p.y; });
+                var xMin = Math.min.apply(null, xVals); var xMax = Math.max.apply(null, xVals);
+                var yMin = Math.min.apply(null, yVals); var yMax = Math.max.apply(null, yVals);
+                var xRange = xMax - xMin || 1;
+                var yRange = yMax - yMin || 1;
+                xMin -= xRange * 0.1; xMax += xRange * 0.1;
+                yMin -= yRange * 0.15; yMax += yRange * 0.15;
+                if (yMin > 0 && yMin < yRange * 0.5) yMin = 0;
+                function xToPx(x) { return padLeft + ((x - xMin) / (xMax - xMin)) * plotW; }
+                function yToPx(y) { return padTop + (1 - (y - yMin) / (yMax - yMin)) * plotH; }
+
+                var parts = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" width="100%" height="320" preserveAspectRatio="xMidYMid meet" style="display:block;cursor:pointer;font-family:sans-serif;">'];
+
+                for (var i = 0; i <= 5; i++) {
+                    var yv = yMin + (yMax - yMin) * i / 5;
+                    var py = yToPx(yv);
+                    parts.push('<line x1="' + padLeft + '" y1="' + py + '" x2="' + (W - padRight) + '" y2="' + py + '" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>');
+                    parts.push('<text x="' + (padLeft - 6) + '" y="' + (py + 3) + '" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="end">' + yv.toFixed(1) + '</text>');
+                }
+                for (var i = 0; i <= 5; i++) {
+                    var xv = xMin + (xMax - xMin) * i / 5;
+                    var px = xToPx(xv);
+                    parts.push('<line x1="' + px + '" y1="' + padTop + '" x2="' + px + '" y2="' + (H - padBottom) + '" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>');
+                    parts.push('<text x="' + px + '" y="' + (H - padBottom + 16) + '" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">' + xv.toFixed(2) + '</text>');
+                }
+                if (yMin < 0 && yMax > 0) {
+                    var pz = yToPx(0);
+                    parts.push('<line x1="' + padLeft + '" y1="' + pz + '" x2="' + (W - padRight) + '" y2="' + pz + '" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"/>');
+                }
+                parts.push('<text x="' + (padLeft + plotW/2) + '" y="' + (H - 8) + '" font-size="11" font-weight="800" fill="#475569" text-anchor="middle">Daily Volatility (%)</text>');
+                parts.push('<text transform="translate(14,' + (padTop + plotH/2) + ') rotate(-90)" font-size="11" font-weight="800" fill="#475569" text-anchor="middle">' + (_rrMetric==='xirr'?'XIRR':'CAGR') + ' (%)</text>');
+
+                var dotR = 10;
+                pts.forEach(function(p, i) {
+                    var px = xToPx(p.x), py = yToPx(p.y);
+                    var color = (typeof getAssetColor === 'function' && getAssetColor(p.assetClass)) || '#6366f1';
+                    var lbl = (p.label.length > 13 ? p.label.slice(0,12)+'…' : p.label).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+                    parts.push('<text x="' + px + '" y="' + (py - dotR - 4) + '" font-size="9" font-weight="700" fill="#475569" text-anchor="middle">' + lbl + '</text>');
+                    parts.push('<circle data-idx="' + i + '" cx="' + px + '" cy="' + py + '" r="' + dotR + '" fill="' + color + '" fill-opacity="0.75" stroke="' + color + '" stroke-width="2" style="cursor:pointer;"/>');
+                });
+
+                parts.push('</svg>');
+                chartDiv.innerHTML = parts.join('');
+
+                // Tooltip click handlers
+                var tooltip = document.getElementById('riskReturnTooltip');
+                var container = document.getElementById('riskReturnContainer');
+                chartDiv.querySelectorAll('circle[data-idx]').forEach(function(circle) {
+                    circle.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var idx = parseInt(circle.getAttribute('data-idx'));
+                        var p = pts[idx];
+                        if (!p || !tooltip) return;
+                        tooltip.innerHTML = '<b>'+p.label+'</b><br>'+(p.assetClass||'')+'<br>Volatility: '+p.x.toFixed(3)+'%/day<br>'+(_rrMetric==='xirr'?'XIRR':'CAGR')+': '+(p.y>=0?'+':'')+p.y.toFixed(2)+'%';
+                        var rect = container.getBoundingClientRect();
+                        var cRect = circle.getBoundingClientRect();
+                        tooltip.style.left = Math.min(cRect.left - rect.left + 12, rect.width - 200) + 'px';
+                        tooltip.style.top = Math.max(cRect.top - rect.top - 60, 4) + 'px';
+                        tooltip.style.display = 'block';
+                    });
+                });
+                chartDiv.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'circle' && tooltip) tooltip.style.display = 'none';
+                });
+            } catch (e) {
+                chartDiv.innerHTML = '<div style="color:#dc2626;font-size:11px;padding:20px;text-align:center;">Scatter chart error: ' + (e.message || e) + '</div>';
+                chartDiv.style.display = 'block';
+                if (placeholder) placeholder.style.display = 'none';
+            }
+        }
+        // SVG-based donut chart — bulletproof rendering
+        function renderDashDonut(canvasId, legendId, dataMap, existingChart) {
+            try {
+                // Map old canvas IDs to new SVG container IDs
+                var svgIdMap = { 'dashAssetChart': 'dashAssetChartSvg', 'dashPortChart': 'dashPortChartSvg' };
+                var svgId = svgIdMap[canvasId] || canvasId;
+                var container = document.getElementById(svgId);
+                var legendEl = document.getElementById(legendId);
+                if (!container) { if (legendEl) legendEl.innerHTML = '<div style="color:#dc2626;font-size:10px;">[err: container '+svgId+' missing]</div>'; return null; }
+                if (!legendEl) return null;
+
+                var keys = Object.keys(dataMap || {}).sort(function(a,b){ return dataMap[b]-dataMap[a]; });
+                var total = keys.reduce(function(s,k){ return s + dataMap[k]; }, 0);
+                if (!total || !keys.length) {
+                    container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:200px;color:#94a3b8;font-size:10px;">No data</div>';
+                    legendEl.innerHTML = '<div class="text-slate-400 italic text-center py-2">No data</div>';
+                    return null;
+                }
+
+                if (typeof buildAssetColorMap === 'function') buildAssetColorMap();
+                var isAssetChart = svgId.toLowerCase().indexOf('asset') >= 0;
+                var palette = (typeof DASH_COLORS !== 'undefined') ? DASH_COLORS : ['#6366f1','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899','#84cc16','#f97316'];
+                var colors = keys.map(function(k, i) {
+                    if (isAssetChart && typeof getAssetColor === 'function') {
+                        var c = getAssetColor(k);
+                        if (c) return c;
+                    }
+                    return palette[i % palette.length];
+                });
+
+                // Build SVG using stroke-dasharray on circles (proven pattern)
+                var cx = 100, cy = 100, r = 70, strokeW = 36;
+                var circ = 2 * Math.PI * r;
+                var parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" style="display:block;">'];
+                // Background circle (light grey ring)
+                parts.push('<circle cx="100" cy="100" r="70" fill="none" stroke="#f1f5f9" stroke-width="36"/>');
+                var offset = 0;
+                keys.forEach(function(k, i) {
+                    var slice = (dataMap[k] / total) * circ;
+                    parts.push('<circle cx="100" cy="100" r="70" fill="none" stroke="' + (colors[i] || '#94a3b8') + '" stroke-width="36" stroke-dasharray="' + slice + ' ' + (circ - slice) + '" stroke-dashoffset="' + (-offset) + '" transform="rotate(-90 100 100)"/>');
+                    offset += slice;
+                });
+                parts.push('</svg>');
+                container.innerHTML = parts.join('');
+
+                // Build legend
+                var legendHtml = keys.map(function(k, i) {
+                    var pct = (dataMap[k] / total * 100).toFixed(1);
+                    var valStr = '฿' + Math.round(dataMap[k]).toLocaleString('en');
+                    var safeName = String(k).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 4px;">' +
+                        '<div style="display:flex;align-items:center;gap:4px;min-width:0;overflow:hidden;">' +
+                          '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0;background:' + (colors[i] || '#94a3b8') + '"></span>' +
+                          '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + safeName + '</span>' +
+                        '</div>' +
+                        '<div style="display:flex;gap:8px;flex-shrink:0;"><span style="color:#94a3b8;">' + pct + '%</span>' +
+                        '<span style="font-weight:900;color:#475569;">' + valStr + '</span></div></div>';
+                }).join('');
+                legendEl.innerHTML = legendHtml;
+                return null;
+            } catch (e) {
+                var le = document.getElementById(legendId);
+                if (le) le.innerHTML = '<div style="color:#dc2626;font-size:9px;padding:8px;">Chart error: ' + (e.message || e) + '</div>';
+                return null;
+            }
         }
 
         </script>
