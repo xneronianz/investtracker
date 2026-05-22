@@ -6150,8 +6150,10 @@
                 chartDiv.style.display = pts.length ? 'block' : 'none';
                 if (!pts.length) { chartDiv.innerHTML = ''; return; }
 
-                // SVG with viewBox auto-scales to container
-                var W = 600, H = 320;
+                // Read container's actual width at render time so chart fills full screen
+                var W = chartDiv.clientWidth || (document.getElementById('riskReturnContainer') ? document.getElementById('riskReturnContainer').clientWidth : 600) || 600;
+                if (W < 50) W = 600; // fallback for hidden containers
+                var H = 320;
                 var padLeft = 50, padRight = 18, padTop = 24, padBottom = 40;
                 var plotW = W - padLeft - padRight;
                 var plotH = H - padTop - padBottom;
@@ -6168,7 +6170,7 @@
                 function xToPx(x) { return padLeft + ((x - xMin) / (xMax - xMin)) * plotW; }
                 function yToPx(y) { return padTop + (1 - (y - yMin) / (yMax - yMin)) * plotH; }
 
-                var parts = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" width="100%" height="320" preserveAspectRatio="xMidYMid meet" style="display:block;cursor:pointer;font-family:sans-serif;">'];
+                var parts = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" width="100%" height="' + H + '" preserveAspectRatio="none" style="display:block;cursor:pointer;font-family:sans-serif;">'];
 
                 for (var i = 0; i <= 5; i++) {
                     var yv = yMin + (yMax - yMin) * i / 5;
