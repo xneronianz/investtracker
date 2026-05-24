@@ -1,12 +1,52 @@
 {
-  "updated": "2026-05-24T05:00:50.025Z",
+  "updated": "2026-05-24T09:21:10.071Z",
   "items": [
     {
-      "title": "The War-Driven Supply Shock Already Roiling Manufacturing in Asia",
-      "body": "A shortage of naphtha, stemming from the blockade of the Strait of Hormuz, is disrupting manufacturing and retail goods in Japan and South Korea.",
-      "link": "https://www.nytimes.com/2026/05/24/business/what-is-naphtha.html",
-      "date": "2026-05-24T04:01:15.000Z",
+      "title": "UK Institute Is Hunting for Dangers Lurking in AI",
+      "body": "The government’s A.I. Security Institute, staffed by alumni from OpenAI and Google, is becoming a model for countries grappling with A.I.’s emerging risks.",
+      "link": "https://www.nytimes.com/2026/05/24/technology/uk-ai-safety-institute.html",
+      "date": "2026-05-24T09:01:42.000Z",
       "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "To A.I. Executives, We’re All Just ‘Meat Computers’",
+      "body": "A term first used in philosophy and cognitive science circles has lately taken on a more ominous cast. Moo.",
+      "link": "https://www.nytimes.com/2026/05/24/business/meat-computer-brain-artificial-intelligence.html",
+      "date": "2026-05-24T09:01:31.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "In Homeless Crisis, California ‘Is Waging a War on R.V.s’",
+      "body": "The R.V.s are seen as an eyesore — the most visible sign of the state’s homelessness crisis. Neighbors and politicians want them gone. The people who call them home feel under siege.",
+      "link": "https://www.nytimes.com/2026/05/24/us/california-homeless-cars-rvs.html",
+      "date": "2026-05-24T09:00:42.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "At an LA Costco, Skateboarding and Learning About Loss",
+      "body": "We’re all going to die. But first — just one more trick.",
+      "link": "https://www.nytimes.com/2026/05/24/business/economy/costco-curbs-skateboarding-genx.html",
+      "date": "2026-05-24T09:00:14.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Canal walls unrepaired, Songkhla residents fear fresh flooding",
+      "body": "SONGKHLA - Residents along a major canal draining storm water from Hat Yai city are again living on the edge, with last year's damaged floodwall still unrepaired ahead of the return of the annual wet season in the South.",
+      "link": "https://www.bangkokpost.com/thailand/general/3260085/canal-walls-unrepaired-songkhla-residents-fear-fresh-flooding",
+      "date": "2026-05-24T05:47:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "'Six eggs used to be £1' - why everyday essentials cost so much more now",
+      "body": "Six supermarket brand eggs cost £1 in 2022. How much are they now, why have they gone up, and is anyone profiteering?",
+      "link": "https://www.bbc.com/news/articles/cd6pw4zg5p9o?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-05-24T01:02:55.000Z",
+      "source": "BBC Business",
       "badge": "global"
     },
     {
@@ -34,19 +74,11 @@
       "badge": "thai"
     },
     {
-      "title": "'Thais Help Thais' makes B110.89m",
-      "body": "The government's \"Thais Help Thais\" programme has generated more than 110.89 million baht in spending while cutting household expenses by over 24.51 million baht, as authorities press ahead with efforts to stimulate gras...",
-      "link": "https://www.bangkokpost.com/thailand/general/3259919/thais-help-thais-makes-b11089m",
-      "date": "2026-05-23T22:18:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Should You Lend Money to Friends? More People Are Open to the Arrangement.",
-      "body": "Friendship and money don’t always mix. But many Americans feel comfortable discussing financial issues with their friends and lending them money.",
-      "link": "https://www.nytimes.com/2026/05/23/business/loans-money-friends.html",
-      "date": "2026-05-23T12:36:51.000Z",
-      "source": "NY Times",
+      "title": "'Shameful' more spent on benefits than jobs for young people, says Milburn",
+      "body": "Reforms are needed of the welfare system to tackle the high numbers of young people not in work or education, says Alan Milburn.",
+      "link": "https://www.bbc.com/news/articles/crrpx4p1z71o?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-05-23T12:00:31.000Z",
+      "source": "BBC Business",
       "badge": "global"
     },
     {
@@ -58,36 +90,12 @@
       "badge": "global"
     },
     {
-      "title": "5 Takeaways From a Times Investigation on Autism Therapy Clinics",
-      "body": "A rapidly growing industry often overprescribes treatment to young children with autism, who spend as many as 40 hours a week at the facilities.",
-      "link": "https://www.nytimes.com/2026/05/23/health/autisim-clinics-investigation.html",
-      "date": "2026-05-23T09:00:44.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Short Naps, Long Hours: How Autism Clinics Squeeze Medicaid Dollars Out of Preschoolers",
-      "body": "The industry has grown rapidly, straining state budgets. A focus on finances has led to overbilling, fraud and even harm.",
-      "link": "https://www.nytimes.com/2026/05/23/health/autism-therapy-clinics.html",
-      "date": "2026-05-23T09:00:16.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
       "title": "The Economic Implications of the Middle East Crisis: Measuring Preparedness in the MENA - ORF Middle East",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiugFBVV95cUxNd1g5YXlPX2xhdjd5OW0zdi1sTkZDMGtJcUQwdkIwTFd6eDA2WHBnVUxYbnNONU0xcEQ4Uy1WeXg2WUJ1cGFHd0FlOHItalROVnBSOW9lZXoxT3pMVHV6eHo0eE1xekJsQUtrUTJvUDROWjgtc200WWRsLTFkMn...",
       "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNd1g5YXlPX2xhdjd5OW0zdi1sTkZDMGtJcUQwdkIwTFd6eDA2WHBnVUxYbnNONU0xcEQ4Uy1WeXg2WUJ1cGFHd0FlOHItalROVnBSOW9lZXoxT3pMVHV6eHo0eE1xekJsQUtrUTJvUDROWjgtc200WWRsLTFkMnNBbUE2bkQ5aUpmR01HOHdOcDMyY3Awb1NSWHhPWW5VUU9lRGRvdC1BeU5GZC1lcU5ZNmk2clpqWXVJaXc?oc=5",
       "date": "2026-05-23T06:00:23.000Z",
       "source": "Google News",
       "badge": "economic"
-    },
-    {
-      "title": "Gold, silver prices today: Check retail rates of 24K, 22K gold, 999 silver on 23 May in Delhi, Mumbai and Kolkata - Mint",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMihwJBVV95cUxOU1ZZbFpsaHFPcHpiRVNjQlVndm9uTHVTUTk5UmZILTlrdm8wdW1WbWZpa3FVbk1XSEF0OHpVTlVmbF9taHRpandyd0FYVWJHQk12U1hfSVpjY2I4aXFwd3RHa3o1RFlMNV9GMVNyQklfa1pxMUR6TVEyekpLMk...",
-      "link": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOU1ZZbFpsaHFPcHpiRVNjQlVndm9uTHVTUTk5UmZILTlrdm8wdW1WbWZpa3FVbk1XSEF0OHpVTlVmbF9taHRpandyd0FYVWJHQk12U1hfSVpjY2I4aXFwd3RHa3o1RFlMNV9GMVNyQklfa1pxMUR6TVEyekpLMktRNGVCSHVySmpORm5fU0R4UDVnNEVubldHMUoyNkZtNVpfTUc4bFhoNENObldvX1FhUndiVEtyMU5oRkZNdDNwZ2dQbGpkU1Uza3FZLWFKc0s3dWtCZ0wyYld5RWlacG56UEh0MVhzN1NkXzZPY0cyLTB5UzEtVlVUd0k2RDVudlA3RC1uUU9lVdIBjAJBVV95cUxPODFrc1FTZWIxemdBQk5FNEpMcjllN1QwbUtLcWxZcXUtdGtDVk8yMUVwNU1SaWpzT1RCT0wxaDJsQXVVZEpOUklNMy16SUVWVWluVXBXWVhCbDh0VTllLVNHcWJiakozbk8wUUFyenh0RVhqMGRvOVl1OW9GNEk2WEhWZzRiZ2JBaUZpTTVVQXB5U3FYajI5SU1FT1U5d1pNcXIyMmduUmx1U2NEUEg5QmcwTUprNjlFdC1DYVF3NnFqcjRlLTRON2g2NGNOaGwyUkJ2ZXN4d0ZPYTRXaEtiUlkwcFQ2WmRpYVNRaGwzTUdybWtxX3dZUEJvUGZNRWE3VFQ5R1VjOFd4Mlg4?oc=5",
-      "date": "2026-05-23T03:04:05.000Z",
-      "source": "Google News",
-      "badge": "commodity"
     },
     {
       "title": "New Fed chief faces immediate pressure",
@@ -122,14 +130,6 @@
       "badge": "thai"
     },
     {
-      "title": "AI may speed up search for drugs to treat brain conditions",
-      "body": "Researchers hope the work will help identify affordable, effective drugs to treat conditions like MND.",
-      "link": "https://www.bbc.com/news/articles/cdrp3zzzp71o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-05-22T21:30:06.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
       "title": "Bank boss sorry after describing workers as 'lower value human capital'",
       "body": "The Standard Chartered boss said he values all colleagues and is committed to helping them cope with change.",
       "link": "https://www.bbc.com/news/articles/c98rqld1j3yo?at_medium=RSS&amp;at_campaign=rss",
@@ -154,14 +154,6 @@
       "badge": "global"
     },
     {
-      "title": "Trump wants new Fed chair to be 'totally independent'",
-      "body": "The US president piled major pressure on Kevin Warsh's predecessor to cut interest rates.",
-      "link": "https://www.bbc.com/news/articles/cvgz311dq3ko?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-05-22T18:16:58.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
       "title": "Higher electricity prices to hit large Thai families",
       "body": "Large households and small businesses operating from residential properties are expected to face higher electricity bills from July, as the government prepares to roll out a new tariff system.",
       "link": "https://www.bangkokpost.com/business/general/3259429/higher-electricity-prices-to-hit-large-thai-families",
@@ -170,12 +162,20 @@
       "badge": "thai"
     },
     {
-      "title": "Commodity wrap: Oil gains as US–Iran talks stall; gold slips, copper resilient - TradingView",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMizAFBVV95cUxOdGpvLWU2RnhqVmVPdXlyY0FJQVRYMk1JOGZwR2lQeHh2dlVJUTR2MUlyWVhicV91N0J2eTJueUswdVZIdWptdUJTLUxoQXZCdEVSREpobEZJcnBiTGVUaUp5TkpkTmxONGMySHNRV0JQNzh1eGlpVUtJb0ZXU0...",
-      "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOdGpvLWU2RnhqVmVPdXlyY0FJQVRYMk1JOGZwR2lQeHh2dlVJUTR2MUlyWVhicV91N0J2eTJueUswdVZIdWptdUJTLUxoQXZCdEVSREpobEZJcnBiTGVUaUp5TkpkTmxONGMySHNRV0JQNzh1eGlpVUtJb0ZXU0dGZHV1dHRFdHhBQ3AxXzUwQ3RyRnRVNnRlX3cxQ01mY0RwZzIyV18tb0xOcmo2dnc3WkVFUlBVU19pWXhoMUx4Wm1QVFc1QWlWVGdBejk?oc=5",
-      "date": "2026-05-22T17:50:47.000Z",
+      "title": "Commodity wrap: Oil gains as US–Iran talks stall; gold slips, copper resilient - Invezz",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMisAFBVV95cUxOcC03YjZlUDFsbDFabGYwMElvRVZVSHFLM3F0WlBxbGRCSkVzdjNYTEhKNGtVUDJka1NiN0JRQ2xsTFZJTkl6OEV5MVpzME9ySlJVOHZ6VXpfdUk5d3ctZmUtVVNaLXQtU20zeGVIS21neEpUNWY1LWZDbnZuZ3...",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOcC03YjZlUDFsbDFabGYwMElvRVZVSHFLM3F0WlBxbGRCSkVzdjNYTEhKNGtVUDJka1NiN0JRQ2xsTFZJTkl6OEV5MVpzME9ySlJVOHZ6VXpfdUk5d3ctZmUtVVNaLXQtU20zeGVIS21neEpUNWY1LWZDbnZuZ3BZcThWN2hGbnZuY2JZZ0FxQ0d6cFExYTFwNnhKeDh5Z0NqMG9HVU81aThpNEpRa1pyWQ?oc=5",
+      "date": "2026-05-22T17:52:38.000Z",
       "source": "Google News",
       "badge": "commodity"
+    },
+    {
+      "title": "Week Ahead for FX, Bonds: U.S. PCE Data, Middle East Developments in Focus - WSJ",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNS1uSUU5SGZLajEwY25qaGl6X1JzUzhQdE1pMHppYmRUZ2E3Q2U5ZTA1anRYMEpBX0NzSng1X29jNWlJV1hsSUhBbFBQMjZDNGdHNGtfY2tyY3RQaWwxYW45eTNYZFV4bEhFM0h5Mk4xZXVfQ3lBdHcxSk5oTF...",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNS1uSUU5SGZLajEwY25qaGl6X1JzUzhQdE1pMHppYmRUZ2E3Q2U5ZTA1anRYMEpBX0NzSng1X29jNWlJV1hsSUhBbFBQMjZDNGdHNGtfY2tyY3RQaWwxYW45eTNYZFV4bEhFM0h5Mk4xZXVfQ3lBdHcxSk5oTFNWbjN3NDJMNFFlNWpyTGhlb25TWEx6ZE02eU9pLVlfanR2cWx0S3hKbU9Wdms?oc=5",
+      "date": "2026-05-22T16:16:00.000Z",
+      "source": "Google News",
+      "badge": "us"
     },
     {
       "title": "Which company will the U.S. government take a stake in next? Here’s what traders think",
@@ -250,14 +250,6 @@
       "badge": "us"
     },
     {
-      "title": "Crude Oil Rose, Metals Saw Overseas Market Outperform Domestic Market, Lithium Carbonate, Polysilicon, and Coke Fell Over 1%, Coking Coal Fell Over 3%",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMi_AFBVV95cUxNalBTanl2bFU4ZUZLemhlNHR6SEI5UXVhZUp2VkcyR0dEc290LUxOU1QxX0FRdnNhV01qd3JaeDA1dTZidHplQlA5TUxxRkVBbHUxRHZYWHlLSFRQcVNKa2NETDUxeUZPdG16RDVzUGsyREpCSFdIT21JS1p2ej...",
-      "link": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxNalBTanl2bFU4ZUZLemhlNHR6SEI5UXVhZUp2VkcyR0dEc290LUxOU1QxX0FRdnNhV01qd3JaeDA1dTZidHplQlA5TUxxRkVBbHUxRHZYWHlLSFRQcVNKa2NETDUxeUZPdG16RDVzUGsyREpCSFdIT21JS1p2ejZKUDQ1bXM1emI3Z0tyUjVTb0pvWEIybkYwMkphUUxMeW1EOHliU0dIRlVvN3RtUnhkaGhUVGRIeTRxd0c1V1dzUUM4RXhTYURDS0ZfblBGN216c0lYakpjcUZoQWVMYTZZY1k4bVlFUkdnTHQ3MzczY1F1TVY3azUtRkVIeTM?oc=5",
-      "date": "2026-05-22T07:31:58.000Z",
-      "source": "Google News",
-      "badge": "commodity"
-    },
-    {
       "title": "Treasury Yields Snapshot: May 22, 2026 - Advisor Perspectives",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMinwFBVV95cUxNNFpBakdyN3FmV2RlV0pvVGtieGMwZkx3UHljd2RPT1JrYnYtakJNc1ROQTBzMUFVMG9kMV9XTHNIQ3d6bjhqVmoyWThVd1VDV29NcXQ0Z3E4eXpkbE5lSmFrY013WTd5b0xDUzBKTEpfSXN0OVlSSk1fVzhqWW...",
       "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNNFpBakdyN3FmV2RlV0pvVGtieGMwZkx3UHljd2RPT1JrYnYtakJNc1ROQTBzMUFVMG9kMV9XTHNIQ3d6bjhqVmoyWThVd1VDV29NcXQ0Z3E4eXpkbE5lSmFrY013WTd5b0xDUzBKTEpfSXN0OVlSSk1fVzhqWWlFSlpXeHJrMnFlOFpOWUpIRjNsMTJ6NFY4bXZQQTNMdWM?oc=5",
@@ -270,14 +262,6 @@
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiwAFBVV95cUxPd25vaUJfMFlhNlA4VU04WEg1SDg0WVJ5SEgwWHNXNEk1bm44VHhJbmhiNzNsZ29qd2xBeEZGb0VqMExfSnlneVh3RnRSMkw3Z09LSHBHYjMyMktTMXNOWVAycTA0d1ZZajA4dEdYTmJwZlFSMC10NG5aMk5IbX...",
       "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPd25vaUJfMFlhNlA4VU04WEg1SDg0WVJ5SEgwWHNXNEk1bm44VHhJbmhiNzNsZ29qd2xBeEZGb0VqMExfSnlneVh3RnRSMkw3Z09LSHBHYjMyMktTMXNOWVAycTA0d1ZZajA4dEdYTmJwZlFSMC10NG5aMk5IbXI4blBla0h0ZWlwa0otaTk1ZEpUSFlLc1NWTTZKR3RuYlVyMTFtTjhmb2x1Sk0teU0xaC1qeW5aU2stZnAxN2lxM2fSAcABQVVfeXFMT3dub2lCXzBZYTZQOFVNOFhINUg4NFlSeUhIMFhzVzRJNW5uOFR4SW5oYjczbGdvandsQXhGRm9FajBMX0p5Z3lYd0Z0UjJMN2dPS0hwR2IzMjJLUzFzTllQMnEwNHdWWWowOHRHWE5icGZRUjAtdDRuWjJOSG1yOG5QZWtIdGVpcGtKLWk5NWRKVEhZS3NTVk02Skd0bmJVcjExbU44Zm9sdUpNLXlNMWgtanluWlNrLWZwMTdpcTNn?oc=5",
       "date": "2026-05-22T03:25:00.000Z",
-      "source": "Google News",
-      "badge": "bond"
-    },
-    {
-      "title": "U.S. Treasury Bond Futures Overview - CME Group",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMikwFBVV95cUxQSFpNb1pHdDFZcU1rMUo1a01PWGd5SlQydFRzcXRHVE1fTl9JMy1NV09FSmRhVF9fMEtOakh4RXRYOFZoS3hLcU5KS1BEVFZ0TWJzejNkY2JJblhKMWcwUEUyWFh1dEFNazliTU8wSzVFSzVWSE5KNFVkaG9Xbn...",
-      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQSFpNb1pHdDFZcU1rMUo1a01PWGd5SlQydFRzcXRHVE1fTl9JMy1NV09FSmRhVF9fMEtOakh4RXRYOFZoS3hLcU5KS1BEVFZ0TWJzejNkY2JJblhKMWcwUEUyWFh1dEFNazliTU8wSzVFSzVWSE5KNFVkaG9XbnpNZHdfV1lqanZUMEU2X3lqaFpiN28?oc=5",
-      "date": "2026-05-21T20:44:45.000Z",
       "source": "Google News",
       "badge": "bond"
     },
@@ -314,14 +298,6 @@
       "badge": "em"
     },
     {
-      "title": "Fed Minutes Reveal Support for Rate Hikes if Inflation Proves Persistent - WSJ",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiwwFBVV95cUxNM3B2WWw5VnNCNWo5SWlqdlhOT2ZVZm9yTm5yc1hmdGE3SUUyZy1RTndpUGF3T0REdXJHc2xGZUR2SnB1dU1aQ2plTWJaTTVaRkxjV2RUSVg0NDVxTzRVV18tbWRBMzNHNHJMOFp0Zm85dk1LMkl4SVFVNDlJaE...",
-      "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNM3B2WWw5VnNCNWo5SWlqdlhOT2ZVZm9yTm5yc1hmdGE3SUUyZy1RTndpUGF3T0REdXJHc2xGZUR2SnB1dU1aQ2plTWJaTTVaRkxjV2RUSVg0NDVxTzRVV18tbWRBMzNHNHJMOFp0Zm85dk1LMkl4SVFVNDlJaE1nQ05HV3BFWnYxRTlhSjBtQW16WWlYQnA1cW9OMk1wTE9taEYyUUoxTnN6U2tmT1ZyYTBDcnNjQngtSmNrVVoxNjF2Qms?oc=5",
-      "date": "2026-05-20T19:46:00.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
       "title": "Wall Street expected to open with gains as oil prices fall - Fast Company",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMijAFBVV95cUxObjZ6M2NVVGhZSHZDRVpqSzBVbVFXRGFmSkk1LW9yekZHV0doTm9ES0N0T2I4N0daYlBrX0R3UTZkbUhhRFpuLXRCXzZUWkxTZUFxdFk2aWw0UkNXUGhtWFRKWGt1aFJEWUFxUVVvRlVaRWVYS3k0WW1SMjF1aV...",
       "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxObjZ6M2NVVGhZSHZDRVpqSzBVbVFXRGFmSkk1LW9yekZHV0doTm9ES0N0T2I4N0daYlBrX0R3UTZkbUhhRFpuLXRCXzZUWkxTZUFxdFk2aWw0UkNXUGhtWFRKWGt1aFJEWUFxUVVvRlVaRWVYS3k0WW1SMjF1aVlhVlR2SnAwRnJLNUwyZA?oc=5",
@@ -330,12 +306,12 @@
       "badge": "us"
     },
     {
-      "title": "Gold price faces downside risk on break of 200-DMA and $4,350 critical support – Societe Generale - KITCO",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMitwFBVV95cUxQZDFqeEQySUJuY2Q0M3BISDNjYUJtenpOUEZKbWZkaUpMUzFOVnVLbVhuZmNWdXZGNl9jNmtjR3RaQllDZllUbHlTZ0pQR3ZqV01kbkU0S2tSWmFHRHc4MVcyUUhVbU5rVDVXVzRHcU80YUhjXzluZHJiYTZRZS...",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQZDFqeEQySUJuY2Q0M3BISDNjYUJtenpOUEZKbWZkaUpMUzFOVnVLbVhuZmNWdXZGNl9jNmtjR3RaQllDZllUbHlTZ0pQR3ZqV01kbkU0S2tSWmFHRHc4MVcyUUhVbU5rVDVXVzRHcU80YUhjXzluZHJiYTZRZS1laEN6V2I5MG95TGNvR0o3SmphVWJocEltelA0aGxLdXpjZmNhZVZITUxnQmJUWW1oZ1JRMlJmOEU?oc=5",
-      "date": "2026-05-20T10:59:00.000Z",
+      "title": "Is the Bond Market Signaling Danger or Opportunity? Or Both? - The New York Times",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMijwFBVV95cUxNdTlUckpEbl9veS0xSWFmTks0S2Z4LUlyLVN5Qk50b1dJSlNvaEFBS0NUaGVsUy16aTdjUXFrTndIUUFJbjljU1hENzN3UV9TTmVQNFFtZ2Eyem03UmV0VVJ3Q042Ulo4dlFER0U4V0hRcDJfd1dBV21ydEVhZm...",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNdTlUckpEbl9veS0xSWFmTks0S2Z4LUlyLVN5Qk50b1dJSlNvaEFBS0NUaGVsUy16aTdjUXFrTndIUUFJbjljU1hENzN3UV9TTmVQNFFtZ2Eyem03UmV0VVJ3Q042Ulo4dlFER0U4V0hRcDJfd1dBV21ydEVhZm1NTW0yNEs0ZTBNeTg3Z3JhOA?oc=5",
+      "date": "2026-05-20T09:02:14.000Z",
       "source": "Google News",
-      "badge": "commodity"
+      "badge": "bond"
     },
     {
       "title": "Thailand Focus 2026 : The Conference - The Stock Exchange of Thailand - SET",
@@ -400,6 +376,30 @@
       "date": "2026-05-12T07:00:00.000Z",
       "source": "Google News",
       "badge": "em"
+    },
+    {
+      "title": "Precious Metal Price Forecasts 2026: Gold, Silver Platinum and Palladium - BullionVault",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMilAFBVV95cUxQc0N1SjRWTnE4Z0FnZDBmZmFtYjVCV2ZYcW5Dd3hYQkQ0b19sTmJIVVVPbGxJbFNFM3ZEdUxjTEJhQldjZV9mb3ZWZGtZRVJGXzRSSVRNZjQ3NU1GU1VBd2h5WXFEMnI4aEJSNERlYktTdThYa3VlY1loMXF4LX...",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQc0N1SjRWTnE4Z0FnZDBmZmFtYjVCV2ZYcW5Dd3hYQkQ0b19sTmJIVVVPbGxJbFNFM3ZEdUxjTEJhQldjZV9mb3ZWZGtZRVJGXzRSSVRNZjQ3NU1GU1VBd2h5WXFEMnI4aEJSNERlYktTdThYa3VlY1loMXF4LXYySmNpbWJFUGw5SFdEMml5QmV4SjBu?oc=5",
+      "date": "2026-05-12T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
+      "title": "Commodities Quick-Take - TD Economics",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiW0FVX3lxTE0xdzhQMEluOXcyYldUZm5tZnNrU2R1QTRGQkt6UVYzUEVpamVHcXJHWFJPaDF6b095Yk1iU0NlbU9YQlVONnhRb1l3M04xWFJmOVRLMFdSYTZDeDA?oc=5\" target=\"_blank\">Commodities Quick-Take</...",
+      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE0xdzhQMEluOXcyYldUZm5tZnNrU2R1QTRGQkt6UVYzUEVpamVHcXJHWFJPaDF6b095Yk1iU0NlbU9YQlVONnhRb1l3M04xWFJmOVRLMFdSYTZDeDA?oc=5",
+      "date": "2026-05-12T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
+      "title": "Where is the gold price going next? - MoneyWeek",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMibkFVX3lxTFB2bE9sak9INWNGZklGWlNxZzY1bDlINno5bTh4OWQwLTBtOGVJNE9zR2xuclhONllpM3NraVJTMWEtRVpxVVU3TmM4RUpFSURlTHNVM25mUXg0QlNpUmxUOVhJem94NTZIRmtyQXFn?oc=5\" target=\"_blank\"...",
+      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTFB2bE9sak9INWNGZklGWlNxZzY1bDlINno5bTh4OWQwLTBtOGVJNE9zR2xuclhONllpM3NraVJTMWEtRVpxVVU3TmM4RUpFSURlTHNVM25mUXg0QlNpUmxUOVhJem94NTZIRmtyQXFn?oc=5",
+      "date": "2026-05-11T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
     }
   ]
 }
