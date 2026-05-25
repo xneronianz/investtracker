@@ -1895,11 +1895,26 @@
             losers.innerHTML  = bot3.length ? bot3.map(function(f,i){ return trendRowHTML(f, i+1, false); }).join('') : '<div class="text-xs text-slate-400 p-2">No data</div>';
             // Draw mini sparklines in trend rows
             setTimeout(function() {
+                // Compute cutoff date based on selected navPctKey timeframe — same as table
+                var tfCutoff = null;
+                if (typeof navPctKey !== 'undefined' && navPctKey) {
+                    var tfDef = NAV_TIMEFRAMES.find(function(t){ return t.key === navPctKey; });
+                    if (tfDef && tfDef.days !== null) {
+                        var cutDate = new Date();
+                        cutDate.setDate(cutDate.getDate() - tfDef.days);
+                        tfCutoff = cutDate.toISOString().slice(0,10);
+                    } else if (navPctKey === 'YTD') {
+                        tfCutoff = new Date().getFullYear() + '-01-01';
+                    }
+                }
                 function drawTrend(canvasId, fund) {
                     var c = document.getElementById(canvasId); if (!c || !fund) return;
-                    var hist = (fund.history || []).slice().sort(function(a,b){ return a.date.localeCompare(b.date); }).slice(-20);
-                    var first = hist.length ? parseFloat(hist[0].nav) : 0;
-                    var last  = hist.length ? parseFloat(hist[hist.length-1].nav) : 0;
+                    var sorted = (fund.history || []).slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                    var hist = tfCutoff ? sorted.filter(function(h){ return h.date >= tfCutoff; }) : sorted;
+                    if (hist.length < 2) hist = sorted.slice(-2);
+                    if (hist.length < 2) { drawSparkline(c, null, true); return; }
+                    var first = parseFloat(hist[0].nav);
+                    var last  = parseFloat(hist[hist.length-1].nav);
                     drawSparkline(c, hist, last >= first);
                 }
                 top3.forEach(function(f,i){ drawTrend('trendSpark_'+(i+1)+'_w', filteredFunds.find(function(x){return x.name===f.name;})); });
