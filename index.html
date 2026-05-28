@@ -41,8 +41,9 @@
         .sortable:hover { background-color: #f1f5f9 !important; color: #4f46e5; }
 
         /* Modal */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.85); align-items: center; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); -webkit-overflow-scrolling: touch; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.85); align-items: flex-start; justify-content: center; z-index: 1000; padding: 20px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); -webkit-overflow-scrolling: touch; overflow-y: auto; }
         .modal.active { display: flex !important; }
+        .modal > div { max-height: calc(100vh - 40px); overflow-y: auto; -webkit-overflow-scrolling: touch; margin: auto 0; }
 
         /* Tab system */
         .tab-panel { display: block; }
@@ -517,7 +518,10 @@
             <!-- Allocation Charts -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mb-6">
                 <div class="dash-alloc-card bg-white rounded-[2rem] shadow-xl p-6 border border-slate-100">
-                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Asset Class Allocation</h3>
+                    <div class="flex items-center justify-center gap-2 mb-4">
+                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest text-center">Asset Class Allocation</h3>
+                        <button onclick="openAssetColorModal()" title="Customize asset class colors" class="text-xs flex-shrink-0" style="line-height:1;">🎨</button>
+                    </div>
                     <div class="flex flex-col items-center">
                         <div id="dashAssetChartSvg" style="width:200px;height:200px;margin-bottom:16px;"></div>
                         <div id="dashAssetLegend" class="w-full grid grid-cols-1 gap-y-1 text-[10px] font-bold text-slate-600 max-h-[200px] overflow-y-auto"></div>
@@ -1453,9 +1457,9 @@
 
     <div id="taxSavingsModal" class="modal" style="z-index: 2000;">
         <div class="bg-white p-8 rounded-[2rem] shadow-2xl w-full max-w-md">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 py-2 -mt-2" style="background:inherit;">
                 <h2 class="text-xl font-black text-violet-600">🧾 Tax Savings</h2>
-                <button onclick="closeModal('taxSavingsModal')" class="text-slate-400 font-black hover:text-rose-500">✕</button>
+                <button onclick="closeModal('taxSavingsModal')" class="text-slate-400 font-black hover:text-rose-500 text-xl">✕</button>
             </div>
             <p class="text-xs text-slate-400 mb-4">Record annual tax savings from SSF/RMF/ThaiESG deductions. These are counted as part of your total return.</p>
             <div class="flex flex-col gap-4 mb-6 p-4 bg-violet-50 rounded-xl border border-violet-100">
@@ -1524,6 +1528,19 @@
                 <span class="text-xs font-black text-slate-500 uppercase">Total Tax Saved</span>
                 <span class="font-black text-violet-600 text-lg" id="taxTotalDisplay">฿330,000.00</span>
             </div>
+        </div>
+    </div>
+
+    <!-- Asset Class Color Customization Modal -->
+    <div id="assetColorModal" class="modal" style="z-index:3000;">
+        <div class="bg-white p-8 rounded-[2rem] shadow-2xl w-full max-w-md">
+            <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 py-2 -mt-2" style="background:inherit;">
+                <h2 class="text-xl font-black text-indigo-600">🎨 Asset Class Colors</h2>
+                <button onclick="closeModal('assetColorModal')" class="text-slate-400 font-black hover:text-rose-500 text-xl">✕</button>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Pick a color for each asset class. Your choices apply consistently across all charts — pie charts, treemap, scatter plot, and legends.</p>
+            <div id="assetColorBody" class="mb-4"></div>
+            <button onclick="resetAssetColors()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-3 rounded-xl font-bold text-sm border border-slate-200">↺ Reset to Default Colors</button>
         </div>
     </div>
 
@@ -5846,14 +5863,77 @@
 
         // ─── SHARED ASSET CLASS COLOR MAP (declared at top of script) ───────────
         function buildAssetColorMap() {
+            // Load user's custom colors (persisted)
+            var custom = {};
+            try { custom = JSON.parse(localStorage.getItem('assetClassColors') || '{}'); } catch(e) { custom = {}; }
             var allClasses = [];
             allFunds.forEach(function(f){ if (allClasses.indexOf(f.assetClass) < 0) allClasses.push(f.assetClass); });
             allClasses.sort();
-            allClasses.forEach(function(c, i){ ASSET_CLASS_COLORS[c] = DASH_COLORS[i % DASH_COLORS.length]; });
+            allClasses.forEach(function(c, i){
+                // Custom color takes priority; otherwise use default from palette
+                ASSET_CLASS_COLORS[c] = custom[c] || DASH_COLORS[i % DASH_COLORS.length];
+            });
         }
         function getAssetColor(ac) {
             if (!ASSET_CLASS_COLORS[ac]) buildAssetColorMap();
             return ASSET_CLASS_COLORS[ac] || '#94a3b8';
+        }
+        // Get the DEFAULT color for an asset class (ignoring custom overrides) — for "reset"
+        function getDefaultAssetColor(ac) {
+            var allClasses = [];
+            allFunds.forEach(function(f){ if (allClasses.indexOf(f.assetClass) < 0) allClasses.push(f.assetClass); });
+            allClasses.sort();
+            var idx = allClasses.indexOf(ac);
+            return idx >= 0 ? DASH_COLORS[idx % DASH_COLORS.length] : '#94a3b8';
+        }
+
+        // ─── ASSET CLASS COLOR CUSTOMIZATION MODAL ──────────────────────────────
+        function openAssetColorModal() {
+            var modal = document.getElementById('assetColorModal');
+            var body = document.getElementById('assetColorBody');
+            if (!modal || !body) return;
+            buildAssetColorMap();
+            var allClasses = [];
+            allFunds.forEach(function(f){ if (allClasses.indexOf(f.assetClass) < 0) allClasses.push(f.assetClass); });
+            allClasses.sort();
+            body.innerHTML = allClasses.map(function(c) {
+                var color = getAssetColor(c);
+                var safeC = String(c).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+                return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px;border-bottom:1px solid #f1f5f9;">' +
+                    '<div style="display:flex;align-items:center;gap:8px;min-width:0;">' +
+                      '<span style="display:inline-block;width:14px;height:14px;border-radius:50%;flex-shrink:0;background:' + color + ';" id="acDot_' + safeC + '"></span>' +
+                      '<span style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + safeC + '</span>' +
+                    '</div>' +
+                    '<input type="color" value="' + color + '" data-ac="' + safeC + '" onchange="onAssetColorChange(this)" ' +
+                      'style="width:44px;height:32px;border:1px solid #e2e8f0;border-radius:8px;cursor:pointer;flex-shrink:0;padding:2px;background:#fff;"/>' +
+                    '</div>';
+            }).join('');
+            modal.classList.add('active');
+        }
+        function onAssetColorChange(input) {
+            var ac = input.getAttribute('data-ac');
+            var color = input.value;
+            var custom = {};
+            try { custom = JSON.parse(localStorage.getItem('assetClassColors') || '{}'); } catch(e) {}
+            custom[ac] = color;
+            localStorage.setItem('assetClassColors', JSON.stringify(custom));
+            // Live preview the dot
+            var dot = document.getElementById('acDot_' + ac);
+            if (dot) dot.style.background = color;
+            // Rebuild map and re-render everything
+            buildAssetColorMap();
+            applyAssetColorsEverywhere();
+        }
+        function resetAssetColors() {
+            localStorage.removeItem('assetClassColors');
+            buildAssetColorMap();
+            applyAssetColorsEverywhere();
+            openAssetColorModal(); // refresh modal swatches
+        }
+        function applyAssetColorsEverywhere() {
+            // Re-render every chart that uses asset class colors
+            try { if (typeof renderDashboardAllocation === 'function') renderDashboardAllocation(); } catch(e) {}
+            try { if (typeof renderAll === 'function') renderAll(); } catch(e) {}
         }
 
         // ─── TREEMAP (SVG-based, auto-scales to container width) ────────────────
