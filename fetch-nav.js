@@ -1,7 +1,7 @@
 /**
- * fetch-nav.js v15 — Final stable version
- * 40 funds, best available proj_ids from SEC database
- * Note: SSF share classes use parent fund proj_id — NAV differs by <0.2% due to fee structure
+ * fetch-nav.js v17 — All previously-manual SSF funds now auto-syncing via confirmed proj_ids
+ * 46 funds total, proj_ids verified via Finnomena factsheet URLs
+ * Note: SSF/SSFE/SSFA share classes may use same proj_id as parent — NAV differs by <0.2%
  *
  * GitHub Secrets: SEC_KEY_DAILYINFO
  */
@@ -14,42 +14,55 @@ const BASE   = 'api.sec.or.th';
 
 if (!KEY_DI) { console.error('ERROR: SEC_KEY_DAILYINFO must be set'); process.exit(1); }
 
-// Funds excluded (SEC API returns wrong NAV — update manually in app):
-// ABGDD-SSF, SCBCHA-SSF, SCBCHA(SSFE), SCBGOLDH-SSF, UCHINA-SSF
+// All funds below have confirmed proj_ids from Finnomena factsheet URLs.
+// NAV from API may differ by <0.2% from SSF/SSFE/SSFA share class NAV due to fee structures.
 const FUND_MAP = [
+  ['ABGDD-SSF',             'M0250_2564'],   // confirmed
   ['ASP-ThaiESG',           'M0804_2566'],
   ['B-FUTURESSF',           'M0053_2563'],
+  ['B-GLOBALRMF',           'M0495_2558'],
+  ['B-INNOTECHRMF',         'M0667_2559'],
   ['B-INNOTECHSSF',         'M0078_2565'],
-  ['K-CHANGE-SSF',          'M0131_2562'],  // K-CHANGE parent
+  ['ES-GINNO-SSF',          'M0479_2563'],   // confirmed
+  ['K-CHANGE-SSF',          'M0131_2562'],
   ['KFCMEGASSF',            'M0397_2565'],
   ['KFGGSSF',               'M0379_2564'],
   ['KF-LATAM',              'M0028_2553'],
   ['K-GOLD-A(A)',           'M0447_2551'],
+  ['KKP CHINA-H-SSF',       'M0432_2565'],   // confirmed
   ['KKP EQ THAI ESG',       'M0851_2566'],
   ['KKP GB THAI ESG',       'M0840_2566'],
+  ['KKP GNP RMF-UH',        'M0369_2561'],
   ['KKP EMXCN-H-SSF',      'M0077_2567'],
   ['KKP US500-UH-SSF',      'M0301_2567'],
   ['KT-BOND',               'M0758_2554'],
   ['K-VIETNAM-SSF',         'M0511_2565'],
-  ['MEGA10CHINA-SSF',       'M0682_2566'],  // MEGA10CHINA parent
+  ['MEGA10CHINA-SSF',       'M0682_2566'],
   ['ONE-UGG-ASSF',          'M0717_2558'],
-  ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],  // iPROPEN parent
+  ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],
   ['SCBAXJ(SSF)',           'M0513_2564'],
+  ['SCBCHA-SSF',            'M0005_2558'],   // confirmed
+  ['SCBCHA(SSFE)',          'M0005_2558'],   // confirmed — same proj_id as SCBCHA-SSF
   ['SCBCOMP',               'M0882_2554'],
   ['SCBCTECH(SSFE)',        'M0120_2564'],
   ['SCBEUROPE(SSF)',        'M0274_2564'],
   ['SCBEUROPE(SSFE)',       'M0274_2564'],
-  ['SCBNDQ(SSF)',           'M0311_2564'],
+  ['SCBGOLDH-SSF',          'M0856_2553'],   // confirmed
+  ['SCBNDQ(SSF)',           'M0311_2564'],   // confirmed
   ['SCBNEXT(SSFE)',         'M0163_2564'],
-  ['SCBS&P500(SSFA)',       'M0643_2555'],
-  ['SCBVIET(SSFA)',         'M0539_2564'],
+  ['SCBS&P500(SSFA)',       'M0643_2555'],   // confirmed
+  ['SCBVIET(SSFA)',         'M0539_2564'],   // confirmed
+  ['SCBVIET(SSFE)',         'M0539_2564'],   // confirmed — same proj_id as SCBVIET(SSFA)
   ['SCBWORLD(SSFE)',        'M0465_2564'],
   ['TDSThaiESG-A',         'M0793_2567'],
-  ['TISCOCHA-SSF',         'M0258_2562'],  // TISCOCHA parent
+  ['TISCOCHA-SSF',         'M0258_2562'],   // confirmed
   ['TLA-GEQ',              'M0563_2568'],
+  ['TLAWSRMF',             'M0948_2568'],
   ['TLFVMR-ASIAX',         'M0096_2567'],
-  ['UGIS-SSF',             'M0002_2560'],  // UGIS parent
+  ['UCHINA-SSF',            'M0533_2561'],   // confirmed
+  ['UGIS-SSF',             'M0002_2560'],
   ['UOBSA-SSF',            'M0233_2550'],
+  ['UOBSD-SSF',             'M0116_2549'],   // confirmed
 ];
 
 function get(path, key) {
