@@ -1,28 +1,26 @@
 /**
- * discover-proj-ids.js — One-time helper to find SEC proj_ids for new funds.
+ * discover-proj-ids.js v2 — Uses only the DailyInfo API (same as fetch-nav.js)
  *
  * USAGE:
  *   SEC_KEY_DAILYINFO=your_key node discover-proj-ids.js
  *
- * Or run in GitHub Actions manually (workflow_dispatch trigger).
+ * Strategy:
+ *   1. Hit /FundDailyInfo/{projId}/dailynav/{date} for recent dates
+ *   2. Extract proj_abbr_name / fund_abbr_name from the response
+ *   3. Match against target fund names
  *
- * Approach: tries the SEC FundFactsheet endpoint for each candidate proj_id
- * in narrow AMC-specific year/number ranges. Reports matches to console.
- * Scans ~6000 candidates @ 30ms each ≈ 3 minutes.
+ * IMPORTANT: All 4 target funds are RMF parent funds (not share classes),
+ * so their NAVs should be directly in the DailyInfo endpoint.
  *
- * Output: paste the printed proj_ids into fetch-nav.js FUND_MAP.
+ * Output: paste the printed lines into fetch-nav.js FUND_MAP
  */
 
 const https = require('https');
 const KEY = process.env.SEC_KEY_DAILYINFO;
 const BASE = 'api.sec.or.th';
 
-if (!KEY) {
-  console.error('ERROR: SEC_KEY_DAILYINFO env var required');
-  process.exit(1);
-}
+if (!KEY) { console.error('ERROR: SEC_KEY_DAILYINFO env var required'); process.exit(1); }
 
-// Funds we're hunting for (case-insensitive match against API response).
 const TARGETS = [
   'B-GLOBALRMF',
   'B-INNOTECHRMF',
@@ -30,26 +28,40 @@ const TARGETS = [
   'TLAWSRMF',
 ];
 
-// AMC-specific scan ranges based on patterns in existing FUND_MAP:
-//   BBL Asset funds (B-*): M0001-M0200, years 2553-2568
-//   KKP funds: M0001-M0999, years 2563-2568
-//   Talis (TLA*): M0500-M0700, years 2563-2568
-// We dedupe and union these so the scan does each proj_id only once.
+// Generate recent dates to try (API only returns data for trading days)
+function recentDates(n) {
+  const dates = [];
+  const d = new Date();
+  for (let i = 1; i <= n; i++) {
+    d.setDate(d.getDate() - 1);
+    dates.push(d.toISOString().slice(0, 10));
+  }
+  return dates;
+}
+
+// AMC-specific ranges based on known patterns in fetch-nav.js:
+//   B-* (BBLAM/Bualuang): M0001-M0200, years 2553-2568
+//   KKP*: M0001-M1000, years 2560-2568
+//   TLA* (Talis): M0001-M0700, years 2560-2568
 function buildScanList() {
-  const set = new Set();
-  // BBL
-  for (let y = 2553; y <= 2568; y++) {
-    for (let n = 1; n <= 200; n++) set.add(`M${String(n).padStart(4, '0')}_${y}`);
-  }
-  // KKP
-  for (let y = 2563; y <= 2568; y++) {
-    for (let n = 1; n <= 999; n++) set.add(`M${String(n).padStart(4, '0')}_${y}`);
-  }
-  // Talis
-  for (let y = 2563; y <= 2568; y++) {
-    for (let n = 500; n <= 700; n++) set.add(`M${String(n).padStart(4, '0')}_${y}`);
-  }
-  return Array.from(set);
+  const entries = new Set();
+
+  // BBLAM range (B-FUTURESSF=M0053_2563, B-INNOTECHSSF=M0078_2565 → RMF likely nearby)
+  for (let y = 2558; y <= 2568; y++)
+    for (let n = 1; n <= 200; n++)
+      entries.add(`M${String(n).padStart(4,'0')}_${y}`);
+
+  // KKP range (KKP EMXCN-H-SSF=M0077_2567, KKP US500=M0301_2567)
+  for (let y = 2560; y <= 2568; y++)
+    for (let n = 1; n <= 999; n++)
+      entries.add(`M${String(n).padStart(4,'0')}_${y}`);
+
+  // Talis range (TLA-GEQ=M0563_2568, TLFVMR=M0096_2567 → TLAWSRMF likely nearby)
+  for (let y = 2560; y <= 2568; y++)
+    for (let n = 1; n <= 700; n++)
+      entries.add(`M${String(n).padStart(4,'0')}_${y}`);
+
+  return Array.from(entries);
 }
 
 function get(path) {
@@ -66,82 +78,129 @@ function get(path) {
       });
     });
     req.on('error', () => resolve({ status: 0, data: null }));
-    req.setTimeout(8000, () => { req.destroy(); resolve({ status: 0, data: null }); });
+    req.setTimeout(10000, () => { req.destroy(); resolve({ status: 0, data: null }); });
     req.end();
   });
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// Try both common SEC endpoints to extract a fund's abbreviation/name.
-async function getFundName(projId) {
-  // Endpoint 1: class_fund — usually returns class-level info incl. abbreviations
-  const r1 = await get(`/FundFactsheet/fund/class_fund/${projId}`);
-  if (r1.status === 200 && r1.data) {
-    const items = Array.isArray(r1.data) ? r1.data : [r1.data];
-    const names = [];
-    for (const it of items) {
-      for (const k of ['fund_abbr_name','proj_abbr_name','class_abbr_name','unique_class_id','fund_name','proj_name']) {
-        if (it && it[k]) names.push(String(it[k]));
-      }
-    }
-    if (names.length) return names;
+// Extract all name-like fields from a DailyInfo response item
+function extractNames(item) {
+  if (!item || typeof item !== 'object') return [];
+  const names = [];
+  // All known name fields in SEC DailyInfo responses
+  const fields = [
+    'proj_abbr_name', 'fund_abbr_name', 'class_abbr_name',
+    'unique_class_id', 'fund_name_th', 'fund_name_en',
+    'proj_name_th', 'proj_name_en', 'abbr_name'
+  ];
+  for (const f of fields) {
+    if (item[f] && typeof item[f] === 'string') names.push(item[f].trim());
   }
-  // Endpoint 2: factsheet via DailyInfo — sometimes includes proj name
-  const r2 = await get(`/FundDailyInfo/${projId}/dailynav/${new Date().toISOString().slice(0,10)}`);
-  if (r2.status === 200 && r2.data) {
-    const items = Array.isArray(r2.data) ? r2.data : [r2.data];
-    const names = [];
-    for (const it of items) {
-      for (const k of ['proj_abbr_name','fund_abbr_name','class_abbr_name','unique_class_id']) {
-        if (it && it[k]) names.push(String(it[k]));
+  return names;
+}
+
+async function tryProjId(projId, dates) {
+  for (const date of dates) {
+    const r = await get(`/FundDailyInfo/${projId}/dailynav/${date}`);
+    if (r.status === 200 && r.data) {
+      const items = Array.isArray(r.data) ? r.data : [r.data];
+      const names = [];
+      for (const item of items) names.push(...extractNames(item));
+      if (names.length > 0) return { names, projId, date };
+    }
+    if (r.status === 429) {
+      // Rate limited — wait 10s and retry
+      console.log('  ⚠ Rate limited, waiting 10s...');
+      await sleep(10000);
+      const r2 = await get(`/FundDailyInfo/${projId}/dailynav/${date}`);
+      if (r2.status === 200 && r2.data) {
+        const items = Array.isArray(r2.data) ? r2.data : [r2.data];
+        const names = [];
+        for (const item of items) names.push(...extractNames(item));
+        if (names.length > 0) return { names, projId, date };
       }
     }
-    if (names.length) return names;
+    // 204 = no data for that date, try next date
+    if (r.status !== 204 && r.status !== 404 && r.status !== 200) {
+      // Unexpected status — skip this projId
+      break;
+    }
+    await sleep(15);
   }
   return null;
 }
 
 async function main() {
   const candidates = buildScanList();
-  console.log(`Scanning ${candidates.length} candidate proj_ids for: ${TARGETS.join(', ')}`);
-  console.log(`Estimated time: ~${Math.ceil(candidates.length * 0.05 / 60)} minutes\n`);
+  const dates = recentDates(10); // try last 10 trading days
+  const targetUpper = TARGETS.map(t => t.toUpperCase());
+  console.log(`Scanning ${candidates.length} proj_ids for: ${TARGETS.join(', ')}`);
+  console.log(`Using dates: ${dates.slice(0,3).join(', ')} ... (${dates.length} dates)`);
+  console.log(`Estimated time: ~${Math.ceil(candidates.length * 0.06 / 60)} minutes\n`);
 
   const found = {};
-  const targetUpper = TARGETS.map(t => t.toUpperCase());
-  let scanned = 0, hits = 0;
+  let scanned = 0;
+  let validResponses = 0;
+
+  // Print ALL names seen in first 50 valid responses — helps debug name format
+  let samplePrinted = 0;
 
   for (const projId of candidates) {
     scanned++;
-    const names = await getFundName(projId);
-    if (names) {
-      hits++;
-      for (const n of names) {
-        const u = n.toUpperCase().trim();
+    const result = await tryProjId(projId, dates);
+
+    if (result) {
+      validResponses++;
+
+      // Print first 20 valid responses as samples to understand name format
+      if (samplePrinted < 20) {
+        console.log(`  SAMPLE ${projId}: [${result.names.join(' | ')}]`);
+        samplePrinted++;
+      }
+
+      for (const name of result.names) {
+        const u = name.toUpperCase().replace(/\s+/g,' ').trim();
         for (let i = 0; i < targetUpper.length; i++) {
-          if (u === targetUpper[i] && !found[TARGETS[i]]) {
+          if ((u === targetUpper[i] || u.includes(targetUpper[i])) && !found[TARGETS[i]]) {
             found[TARGETS[i]] = projId;
-            console.log(`\n✓ FOUND: ${TARGETS[i]}  →  '${projId}'   (matched name: "${n}")\n`);
+            console.log(`\n✓ FOUND: ${TARGETS[i]}  →  '${projId}'  (matched: "${name}" on ${result.date})\n`);
           }
         }
       }
     }
-    if (scanned % 200 === 0) {
-      console.log(`  scanned ${scanned}/${candidates.length}, valid responses: ${hits}, matched: ${Object.keys(found).length}/${TARGETS.length}`);
+
+    if (scanned % 100 === 0) {
+      console.log(`  scanned ${scanned}/${candidates.length}, valid: ${validResponses}, found: ${Object.keys(found).length}/${TARGETS.length}`);
     }
+
     if (Object.keys(found).length === TARGETS.length) {
-      console.log('\nAll targets found, stopping scan.');
+      console.log('\n✓ All targets found!');
       break;
     }
-    await sleep(30);
+
+    await sleep(50); // 50ms between requests — stays within rate limits
   }
 
   console.log('\n═══════════════════════════════════════════════════');
-  console.log('RESULTS — paste these into fetch-nav.js FUND_MAP:');
+  console.log('RESULTS — paste into fetch-nav.js FUND_MAP:');
   console.log('═══════════════════════════════════════════════════');
   for (const t of TARGETS) {
     if (found[t]) console.log(`  ['${t}',\t'${found[t]}'],`);
-    else          console.log(`  // ['${t}',\t'???'],    <— NOT FOUND, may need manual lookup`);
+    else          console.log(`  // ['${t}',\t'???'],    <— NOT FOUND`);
+  }
+
+  console.log('\nTotal scanned:', scanned, '| Valid responses:', validResponses);
+  if (validResponses === 0) {
+    console.log('\n⚠ ZERO valid responses — possible causes:');
+    console.log('  1. API key is wrong or expired');
+    console.log('  2. SEC server is down');
+    console.log('  3. Rate limit hit — wait 1 hour and retry');
+    console.log('\nTest your key manually:');
+    console.log(`  curl -H "Ocp-Apim-Subscription-Key: YOUR_KEY" \\`);
+    console.log(`    "https://api.sec.or.th/FundDailyInfo/M0053_2563/dailynav/2026-05-28"`);
+    console.log('  (M0053_2563 = B-FUTURESSF — known working fund from your FUND_MAP)');
   }
 }
 
