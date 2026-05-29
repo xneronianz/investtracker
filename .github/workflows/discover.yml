@@ -1,0 +1,12 @@
+name: Discover proj_ids
+on: workflow_dispatch
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: node discover-proj-ids.js
+        env:
+          SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
