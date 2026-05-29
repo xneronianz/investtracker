@@ -4331,6 +4331,10 @@
         }
 
         function gistGetPayload() {
+            var assetColors = {};
+            try { assetColors = JSON.parse(localStorage.getItem('assetClassColors') || '{}'); } catch(e) {}
+            var portColors = {};
+            try { portColors = JSON.parse(localStorage.getItem('portfolioColors') || '{}'); } catch(e) {}
             return JSON.stringify({
                 version:  Date.now(),
                 allFunds: allFunds,
@@ -4344,7 +4348,9 @@
                 favorite3ExcludedPortfolios: favorite3ExcludedPortfolios,
                 favNames: favNames,
                 chartExcludedAssets: [...chartExcludedAssets],
-                simulatorSettings: simulatorSettings
+                simulatorSettings: simulatorSettings,
+                assetClassColors: assetColors,
+                portfolioColors: portColors
             });
         }
 
@@ -4362,6 +4368,15 @@
             if (parsed.favNames) favNames = parsed.favNames;
             if (parsed.chartExcludedAssets)    chartExcludedAssets    = new Set(parsed.chartExcludedAssets);
             if (parsed.simulatorSettings)      simulatorSettings      = parsed.simulatorSettings;
+            // Sync color preferences — save to localStorage so they work offline too
+            if (parsed.assetClassColors && Object.keys(parsed.assetClassColors).length > 0) {
+                localStorage.setItem('assetClassColors', JSON.stringify(parsed.assetClassColors));
+                buildAssetColorMap();
+            }
+            if (parsed.portfolioColors && Object.keys(parsed.portfolioColors).length > 0) {
+                localStorage.setItem('portfolioColors', JSON.stringify(parsed.portfolioColors));
+                buildPortfolioColorMap();
+            }
             applyFavNames();
         }
 
@@ -5941,12 +5956,19 @@
             // Rebuild map and re-render everything
             buildAssetColorMap();
             applyAssetColorsEverywhere();
+            // Auto-push to Gist silently if connected
+            if (typeof gistCfg !== 'undefined' && gistCfg.token && gistCfg.gistId) {
+                setTimeout(function(){ gistPush(true); }, 500);
+            }
         }
         function resetAssetColors() {
             localStorage.removeItem('assetClassColors');
             buildAssetColorMap();
             applyAssetColorsEverywhere();
-            openAssetColorModal(); // refresh modal swatches
+            openAssetColorModal();
+            if (typeof gistCfg !== 'undefined' && gistCfg.token && gistCfg.gistId) {
+                setTimeout(function(){ gistPush(true); }, 500);
+            }
         }
         function applyAssetColorsEverywhere() {
             // Re-render every chart that uses asset class colors
@@ -6024,6 +6046,10 @@
             buildPortfolioColorMap();
             try { if (typeof renderDashboardAllocation === 'function') renderDashboardAllocation(); } catch(e) {}
             try { if (typeof renderAll === 'function') renderAll(); } catch(e) {}
+            // Auto-push to Gist silently if connected
+            if (typeof gistCfg !== 'undefined' && gistCfg.token && gistCfg.gistId) {
+                setTimeout(function(){ gistPush(true); }, 500);
+            }
         }
         function resetPortfolioColors() {
             localStorage.removeItem('portfolioColors');
@@ -6031,6 +6057,9 @@
             try { if (typeof renderDashboardAllocation === 'function') renderDashboardAllocation(); } catch(e) {}
             try { if (typeof renderAll === 'function') renderAll(); } catch(e) {}
             openPortfolioColorModal();
+            if (typeof gistCfg !== 'undefined' && gistCfg.token && gistCfg.gistId) {
+                setTimeout(function(){ gistPush(true); }, 500);
+            }
         }
 
         // ─── TREEMAP (SVG-based, auto-scales to container width) ────────────────
