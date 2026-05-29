@@ -528,7 +528,10 @@
                     </div>
                 </div>
                 <div class="dash-alloc-card bg-white rounded-[2rem] shadow-xl p-6 border border-slate-100">
-                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Portfolio Allocation</h3>
+                    <div class="flex items-center justify-center gap-2 mb-4">
+                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest text-center">Portfolio Allocation</h3>
+                        <button onclick="openPortfolioColorModal()" title="Customize portfolio colors" class="text-xs flex-shrink-0" style="line-height:1;">🎨</button>
+                    </div>
                     <div class="flex flex-col items-center">
                         <div id="dashPortChartSvg" style="width:200px;height:200px;margin-bottom:16px;"></div>
                         <div id="dashPortLegend" class="w-full grid grid-cols-1 gap-y-1 text-[10px] font-bold text-slate-600 max-h-[200px] overflow-y-auto"></div>
@@ -1544,6 +1547,19 @@
         </div>
     </div>
 
+    <!-- Portfolio Color Customization Modal -->
+    <div id="portfolioColorModal" class="modal" style="z-index:3000;">
+        <div class="bg-white p-8 rounded-[2rem] shadow-2xl w-full max-w-md">
+            <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 py-2 -mt-2" style="background:inherit;">
+                <h2 class="text-xl font-black text-indigo-600">🎨 Portfolio Colors</h2>
+                <button onclick="closeModal('portfolioColorModal')" class="text-slate-400 font-black hover:text-rose-500 text-xl">✕</button>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Pick a color for each portfolio. Your choices appear in the Portfolio Allocation chart and its legend.</p>
+            <div id="portfolioColorBody" class="mb-4"></div>
+            <button onclick="resetPortfolioColors()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 py-3 rounded-xl font-bold text-sm border border-slate-200">↺ Reset to Default Colors</button>
+        </div>
+    </div>
+
     <!-- SEC Thailand NAV Auto-Sync Modal -->
     <div id="secNavModal" class="modal" style="z-index:3000;">
         <div class="bg-white p-8 rounded-[2rem] shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
@@ -2216,6 +2232,8 @@
         var DASH_COLORS = ['#6366f1','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899','#84cc16','#f97316','#14b8a6','#a78bfa','#fb7185','#60a5fa','#34d399','#fbbf24','#e879f9','#4ade80'];
         // Shared asset class color map — initialized empty, populated by buildAssetColorMap()
         var ASSET_CLASS_COLORS = {};
+        // Shared portfolio color map — initialized empty, populated by buildPortfolioColorMap()
+        var PORTFOLIO_COLORS = {};
 
         const thCollator = new Intl.Collator('th');
 
@@ -5936,6 +5954,85 @@
             try { if (typeof renderAll === 'function') renderAll(); } catch(e) {}
         }
 
+        // ─── PORTFOLIO COLOR MAP & CUSTOMIZATION ────────────────────────────────
+        function buildPortfolioColorMap() {
+            var custom = {};
+            try { custom = JSON.parse(localStorage.getItem('portfolioColors') || '{}'); } catch(e) { custom = {}; }
+            // Use the SAME ordering the donut uses: sorted by total value DESC.
+            // That way portfolio-color picker swatches match the on-chart slice colors.
+            var totals = {};
+            allFunds.forEach(function(f) {
+                var v = (f.nav || 0) * (f.units || 0);
+                if (!v) return;
+                var p = f.portfolio || 'Other';
+                totals[p] = (totals[p] || 0) + v;
+            });
+            var sortedPorts = Object.keys(totals).sort(function(a,b){ return totals[b] - totals[a]; });
+            // Also pull in any portfolios that have no current value but exist in allFunds
+            allFunds.forEach(function(f){
+                var p = f.portfolio || 'Other';
+                if (sortedPorts.indexOf(p) < 0) sortedPorts.push(p);
+            });
+            sortedPorts.forEach(function(p, i){
+                PORTFOLIO_COLORS[p] = custom[p] || DASH_COLORS[i % DASH_COLORS.length];
+            });
+        }
+        function getPortfolioColor(p) {
+            if (!PORTFOLIO_COLORS[p]) buildPortfolioColorMap();
+            return PORTFOLIO_COLORS[p] || '#94a3b8';
+        }
+        function openPortfolioColorModal() {
+            var modal = document.getElementById('portfolioColorModal');
+            var body  = document.getElementById('portfolioColorBody');
+            if (!modal || !body) return;
+            buildPortfolioColorMap();
+            var totals = {};
+            allFunds.forEach(function(f) {
+                var v = (f.nav || 0) * (f.units || 0);
+                if (!v) return;
+                var p = f.portfolio || 'Other';
+                totals[p] = (totals[p] || 0) + v;
+            });
+            var sorted = Object.keys(totals).sort(function(a,b){ return totals[b] - totals[a]; });
+            allFunds.forEach(function(f){
+                var p = f.portfolio || 'Other';
+                if (sorted.indexOf(p) < 0) sorted.push(p);
+            });
+            body.innerHTML = sorted.map(function(p) {
+                var color = getPortfolioColor(p);
+                var safeP = String(p).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+                return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4px;border-bottom:1px solid #f1f5f9;">' +
+                    '<div style="display:flex;align-items:center;gap:8px;min-width:0;">' +
+                      '<span style="display:inline-block;width:14px;height:14px;border-radius:50%;flex-shrink:0;background:' + color + ';" id="pcDot_' + safeP + '"></span>' +
+                      '<span style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + safeP + '</span>' +
+                    '</div>' +
+                    '<input type="color" value="' + color + '" data-port="' + safeP + '" onchange="onPortfolioColorChange(this)" ' +
+                      'style="width:44px;height:32px;border:1px solid #e2e8f0;border-radius:8px;cursor:pointer;flex-shrink:0;padding:2px;background:#fff;"/>' +
+                    '</div>';
+            }).join('');
+            modal.classList.add('active');
+        }
+        function onPortfolioColorChange(input) {
+            var p = input.getAttribute('data-port');
+            var color = input.value;
+            var custom = {};
+            try { custom = JSON.parse(localStorage.getItem('portfolioColors') || '{}'); } catch(e) {}
+            custom[p] = color;
+            localStorage.setItem('portfolioColors', JSON.stringify(custom));
+            var dot = document.getElementById('pcDot_' + p);
+            if (dot) dot.style.background = color;
+            buildPortfolioColorMap();
+            try { if (typeof renderDashboardAllocation === 'function') renderDashboardAllocation(); } catch(e) {}
+            try { if (typeof renderAll === 'function') renderAll(); } catch(e) {}
+        }
+        function resetPortfolioColors() {
+            localStorage.removeItem('portfolioColors');
+            buildPortfolioColorMap();
+            try { if (typeof renderDashboardAllocation === 'function') renderDashboardAllocation(); } catch(e) {}
+            try { if (typeof renderAll === 'function') renderAll(); } catch(e) {}
+            openPortfolioColorModal();
+        }
+
         // ─── TREEMAP (SVG-based, auto-scales to container width) ────────────────
         var _tmMode = 'marketValue';
         function renderTreemap(mode) {
@@ -6362,12 +6459,18 @@
                 }
 
                 if (typeof buildAssetColorMap === 'function') buildAssetColorMap();
+                if (typeof buildPortfolioColorMap === 'function') buildPortfolioColorMap();
                 var isAssetChart = svgId.toLowerCase().indexOf('asset') >= 0;
+                var isPortChart  = svgId.toLowerCase().indexOf('port')  >= 0;
                 var palette = (typeof DASH_COLORS !== 'undefined') ? DASH_COLORS : ['#6366f1','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899','#84cc16','#f97316'];
                 var colors = keys.map(function(k, i) {
                     if (isAssetChart && typeof getAssetColor === 'function') {
                         var c = getAssetColor(k);
                         if (c) return c;
+                    }
+                    if (isPortChart && typeof getPortfolioColor === 'function') {
+                        var c2 = getPortfolioColor(k);
+                        if (c2) return c2;
                     }
                     return palette[i % palette.length];
                 });
