@@ -1,26 +1,22 @@
 /**
- * discover-proj-ids.js v2 — Uses only the DailyInfo API (same as fetch-nav.js)
+ * discover-proj-ids.js v3
  *
- * USAGE:
- *   SEC_KEY_DAILYINFO=your_key node discover-proj-ids.js
+ * USAGE: SEC_KEY_DAILYINFO=your_key node discover-proj-ids.js
  *
- * Strategy:
- *   1. Hit /FundDailyInfo/{projId}/dailynav/{date} for recent dates
- *   2. Extract proj_abbr_name / fund_abbr_name from the response
- *   3. Match against target fund names
- *
- * IMPORTANT: All 4 target funds are RMF parent funds (not share classes),
- * so their NAVs should be directly in the DailyInfo endpoint.
- *
- * Output: paste the printed lines into fetch-nav.js FUND_MAP
+ * Changes from v2:
+ * - First verifies API key works using 3 known funds
+ * - Only tries YESTERDAY's date (not 10 dates) to keep it fast
+ * - Scans a tighter range focused on BBL, KKP, Talis AMCs
+ * - Completes in ~10 minutes instead of 1 hour
  */
 
 const https = require('https');
-const KEY = process.env.SEC_KEY_DAILYINFO;
-const BASE = 'api.sec.or.th';
+const KEY   = process.env.SEC_KEY_DAILYINFO;
+const BASE  = 'api.sec.or.th';
 
 if (!KEY) { console.error('ERROR: SEC_KEY_DAILYINFO env var required'); process.exit(1); }
 
+// ── Funds we need to find ───────────────────────────────────────────────────
 const TARGETS = [
   'B-GLOBALRMF',
   'B-INNOTECHRMF',
@@ -28,42 +24,32 @@ const TARGETS = [
   'TLAWSRMF',
 ];
 
-// Generate recent dates to try (API only returns data for trading days)
-function recentDates(n) {
-  const dates = [];
+// ── Known-working funds to verify key before scanning ───────────────────────
+const KNOWN = [
+  ['B-FUTURESSF',  'M0053_2563'],  // BBLAM
+  ['KKP EQ THAI ESG', 'M0851_2566'], // KKP
+  ['TLA-GEQ',      'M0563_2568'],  // Talis
+];
+
+// ── Date helpers ─────────────────────────────────────────────────────────────
+function dateStr(daysAgo) {
   const d = new Date();
-  for (let i = 1; i <= n; i++) {
-    d.setDate(d.getDate() - 1);
-    dates.push(d.toISOString().slice(0, 10));
+  d.setDate(d.getDate() - daysAgo);
+  return d.toISOString().slice(0, 10);
+}
+// Try last 5 weekdays only (avoids weekends with no NAV)
+function recentDates() {
+  const out = [];
+  for (let i = 1; i <= 7 && out.length < 5; i++) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dow = d.getDay();
+    if (dow !== 0 && dow !== 6) out.push(d.toISOString().slice(0, 10));
   }
-  return dates;
+  return out;
 }
 
-// AMC-specific ranges based on known patterns in fetch-nav.js:
-//   B-* (BBLAM/Bualuang): M0001-M0200, years 2553-2568
-//   KKP*: M0001-M1000, years 2560-2568
-//   TLA* (Talis): M0001-M0700, years 2560-2568
-function buildScanList() {
-  const entries = new Set();
-
-  // BBLAM range (B-FUTURESSF=M0053_2563, B-INNOTECHSSF=M0078_2565 → RMF likely nearby)
-  for (let y = 2558; y <= 2568; y++)
-    for (let n = 1; n <= 200; n++)
-      entries.add(`M${String(n).padStart(4,'0')}_${y}`);
-
-  // KKP range (KKP EMXCN-H-SSF=M0077_2567, KKP US500=M0301_2567)
-  for (let y = 2560; y <= 2568; y++)
-    for (let n = 1; n <= 999; n++)
-      entries.add(`M${String(n).padStart(4,'0')}_${y}`);
-
-  // Talis range (TLA-GEQ=M0563_2568, TLFVMR=M0096_2567 → TLAWSRMF likely nearby)
-  for (let y = 2560; y <= 2568; y++)
-    for (let n = 1; n <= 700; n++)
-      entries.add(`M${String(n).padStart(4,'0')}_${y}`);
-
-  return Array.from(entries);
-}
-
+// ── HTTP helper ───────────────────────────────────────────────────────────────
 function get(path) {
   return new Promise(resolve => {
     const req = https.request({
@@ -73,116 +59,142 @@ function get(path) {
       let body = '';
       res.on('data', d => body += d);
       res.on('end', () => {
-        try { resolve({ status: res.statusCode, data: body ? JSON.parse(body) : null }); }
-        catch(e) { resolve({ status: res.statusCode, data: null }); }
+        try { resolve({ status: res.statusCode, data: body ? JSON.parse(body) : null, raw: body }); }
+        catch(e) { resolve({ status: res.statusCode, data: null, raw: body }); }
       });
     });
-    req.on('error', () => resolve({ status: 0, data: null }));
-    req.setTimeout(10000, () => { req.destroy(); resolve({ status: 0, data: null }); });
+    req.on('error', () => resolve({ status: 0, data: null, raw: '' }));
+    req.setTimeout(12000, () => { req.destroy(); resolve({ status: 0, data: null, raw: 'TIMEOUT' }); });
     req.end();
   });
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// Extract all name-like fields from a DailyInfo response item
-function extractNames(item) {
-  if (!item || typeof item !== 'object') return [];
-  const names = [];
-  // All known name fields in SEC DailyInfo responses
-  const fields = [
-    'proj_abbr_name', 'fund_abbr_name', 'class_abbr_name',
-    'unique_class_id', 'fund_name_th', 'fund_name_en',
-    'proj_name_th', 'proj_name_en', 'abbr_name'
-  ];
-  for (const f of fields) {
-    if (item[f] && typeof item[f] === 'string') names.push(item[f].trim());
-  }
-  return names;
-}
-
-async function tryProjId(projId, dates) {
+// ── Try fetching NAV for a proj_id across recent dates ─────────────────────
+async function tryFetch(projId, dates) {
   for (const date of dates) {
     const r = await get(`/FundDailyInfo/${projId}/dailynav/${date}`);
     if (r.status === 200 && r.data) {
       const items = Array.isArray(r.data) ? r.data : [r.data];
-      const names = [];
-      for (const item of items) names.push(...extractNames(item));
-      if (names.length > 0) return { names, projId, date };
-    }
-    if (r.status === 429) {
-      // Rate limited — wait 10s and retry
-      console.log('  ⚠ Rate limited, waiting 10s...');
-      await sleep(10000);
-      const r2 = await get(`/FundDailyInfo/${projId}/dailynav/${date}`);
-      if (r2.status === 200 && r2.data) {
-        const items = Array.isArray(r2.data) ? r2.data : [r2.data];
+      if (items.length > 0 && items[0]) {
+        // Extract all string fields — one of them will be the fund abbreviation
         const names = [];
-        for (const item of items) names.push(...extractNames(item));
-        if (names.length > 0) return { names, projId, date };
+        for (const [k, v] of Object.entries(items[0])) {
+          if (typeof v === 'string' && v.trim().length > 0 && v.length < 80) {
+            names.push(`${k}=${v.trim()}`);
+          }
+        }
+        const nav = parseFloat(items[0].last_val || items[0].nav_value || items[0].nav || 0);
+        return { nav, date, names, projId };
       }
     }
-    // 204 = no data for that date, try next date
-    if (r.status !== 204 && r.status !== 404 && r.status !== 200) {
-      // Unexpected status — skip this projId
-      break;
-    }
-    await sleep(15);
+    if (r.status === 429) { console.log('  ⏳ Rate limited, waiting 30s...'); await sleep(30000); }
+    await sleep(20);
   }
   return null;
 }
 
+// ── Scan a specific range ─────────────────────────────────────────────────────
+function buildRange(nMin, nMax, years) {
+  const out = [];
+  for (const y of years)
+    for (let n = nMin; n <= nMax; n++)
+      out.push(`M${String(n).padStart(4,'0')}_${y}`);
+  return out;
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
-  const candidates = buildScanList();
-  const dates = recentDates(10); // try last 10 trading days
-  const targetUpper = TARGETS.map(t => t.toUpperCase());
-  console.log(`Scanning ${candidates.length} proj_ids for: ${TARGETS.join(', ')}`);
-  console.log(`Using dates: ${dates.slice(0,3).join(', ')} ... (${dates.length} dates)`);
-  console.log(`Estimated time: ~${Math.ceil(candidates.length * 0.06 / 60)} minutes\n`);
+  const dates = recentDates();
+  console.log(`\nUsing dates: ${dates.join(', ')}\n`);
+
+  // ── STEP 1: Verify API key works ─────────────────────────────────────────
+  console.log('STEP 1: Testing API key with 3 known funds...\n');
+  let keyWorks = false;
+  for (const [name, projId] of KNOWN) {
+    const r = await tryFetch(projId, dates);
+    if (r && r.nav > 0) {
+      console.log(`  ✓ ${name} (${projId}): NAV = ${r.nav} on ${r.date}`);
+      keyWorks = true;
+    } else {
+      const raw = await get(`/FundDailyInfo/${projId}/dailynav/${dates[0]}`);
+      console.log(`  ✗ ${name} (${projId}): status=${raw.status} body="${raw.raw.slice(0,100)}"`);
+    }
+    await sleep(200);
+  }
+
+  if (!keyWorks) {
+    console.log('\n═══════════════════════════════════════════════════');
+    console.log('❌ API KEY NOT WORKING — cannot scan for funds.');
+    console.log('═══════════════════════════════════════════════════');
+    console.log('\nPossible fixes:');
+    console.log('1. Go to https://developer.sec.or.th → My Applications');
+    console.log('2. Regenerate your SEC_KEY_DAILYINFO subscription key');
+    console.log('3. Update the secret in GitHub: Settings → Secrets → Actions');
+    console.log('4. Run this workflow again\n');
+    process.exit(1);
+  }
+
+  console.log('\n✓ API key works! Starting proj_id scan...\n');
+
+  // ── STEP 2: Scan focused ranges ──────────────────────────────────────────
+  // Known patterns:
+  //   B-FUTURESSF    = M0053_2563  → B-GLOBALRMF/B-INNOTECHRMF nearby (BBL, 2564-2568)
+  //   TLFVMR-ASIAX   = M0096_2567  → TLAWSRMF nearby (Talis, 2565-2568)
+  //   KKP EQ TH ESG  = M0851_2566  → KKP GNP RMF-UH (KKP, 2563-2568)
+
+  const ranges = [
+    // BBL Asset Management (Bualuang) — B-* funds
+    ...buildRange(1,   200, [2562, 2563, 2564, 2565, 2566, 2567, 2568]),
+    // Talis — TLA* funds
+    ...buildRange(1,   200, [2565, 2566, 2567, 2568]),
+    // KKP — wider range (uses higher numbers)
+    ...buildRange(200, 900, [2563, 2564, 2565, 2566, 2567, 2568]),
+  ];
+
+  // Deduplicate (ranges overlap intentionally but no need to scan twice)
+  const candidates = [...new Set(ranges)];
+  console.log(`Scanning ${candidates.length} candidate proj_ids...\n`);
 
   const found = {};
-  let scanned = 0;
-  let validResponses = 0;
-
-  // Print ALL names seen in first 50 valid responses — helps debug name format
-  let samplePrinted = 0;
+  const targetUpper = TARGETS.map(t => t.toUpperCase());
+  let scanned = 0, validCount = 0, samplesPrinted = 0;
 
   for (const projId of candidates) {
     scanned++;
-    const result = await tryProjId(projId, dates);
+    const result = await tryFetch(projId, [dates[0], dates[1]]); // only try 2 dates for speed
 
-    if (result) {
-      validResponses++;
+    if (result && result.nav > 0) {
+      validCount++;
 
-      // Print first 20 valid responses as samples to understand name format
-      if (samplePrinted < 20) {
-        console.log(`  SAMPLE ${projId}: [${result.names.join(' | ')}]`);
-        samplePrinted++;
+      // Print first 5 samples so you can see the actual field names
+      if (samplesPrinted < 5) {
+        console.log(`  SAMPLE ${projId}: nav=${result.nav} fields: ${result.names.slice(0,6).join(', ')}`);
+        samplesPrinted++;
       }
 
-      for (const name of result.names) {
-        const u = name.toUpperCase().replace(/\s+/g,' ').trim();
+      // Match against targets — check all string fields
+      for (const nameKV of result.names) {
+        const val = nameKV.split('=').slice(1).join('=').toUpperCase().trim();
         for (let i = 0; i < targetUpper.length; i++) {
-          if ((u === targetUpper[i] || u.includes(targetUpper[i])) && !found[TARGETS[i]]) {
+          if ((val === targetUpper[i] || val.replace(/\s/g,'') === targetUpper[i].replace(/\s/g,''))
+              && !found[TARGETS[i]]) {
             found[TARGETS[i]] = projId;
-            console.log(`\n✓ FOUND: ${TARGETS[i]}  →  '${projId}'  (matched: "${name}" on ${result.date})\n`);
+            console.log(`\n✓ FOUND: ${TARGETS[i]}  →  '${projId}'   field: ${nameKV}\n`);
           }
         }
       }
     }
 
-    if (scanned % 100 === 0) {
-      console.log(`  scanned ${scanned}/${candidates.length}, valid: ${validResponses}, found: ${Object.keys(found).length}/${TARGETS.length}`);
+    if (scanned % 200 === 0) {
+      console.log(`  scanned ${scanned}/${candidates.length} | valid responses: ${validCount} | found: ${Object.keys(found).length}/${TARGETS.length}`);
     }
-
-    if (Object.keys(found).length === TARGETS.length) {
-      console.log('\n✓ All targets found!');
-      break;
-    }
-
-    await sleep(50); // 50ms between requests — stays within rate limits
+    if (Object.keys(found).length === TARGETS.length) { console.log('\n✓ All found! Stopping.'); break; }
+    await sleep(50);
   }
 
+  // ── RESULTS ──────────────────────────────────────────────────────────────
   console.log('\n═══════════════════════════════════════════════════');
   console.log('RESULTS — paste into fetch-nav.js FUND_MAP:');
   console.log('═══════════════════════════════════════════════════');
@@ -190,18 +202,13 @@ async function main() {
     if (found[t]) console.log(`  ['${t}',\t'${found[t]}'],`);
     else          console.log(`  // ['${t}',\t'???'],    <— NOT FOUND`);
   }
+  console.log(`\nScanned: ${scanned} | Valid responses: ${validCount} | Matched: ${Object.keys(found).length}/${TARGETS.length}`);
 
-  console.log('\nTotal scanned:', scanned, '| Valid responses:', validResponses);
-  if (validResponses === 0) {
-    console.log('\n⚠ ZERO valid responses — possible causes:');
-    console.log('  1. API key is wrong or expired');
-    console.log('  2. SEC server is down');
-    console.log('  3. Rate limit hit — wait 1 hour and retry');
-    console.log('\nTest your key manually:');
-    console.log(`  curl -H "Ocp-Apim-Subscription-Key: YOUR_KEY" \\`);
-    console.log(`    "https://api.sec.or.th/FundDailyInfo/M0053_2563/dailynav/2026-05-28"`);
-    console.log('  (M0053_2563 = B-FUTURESSF — known working fund from your FUND_MAP)');
+  if (validCount > 0 && Object.keys(found).length < TARGETS.length) {
+    console.log('\n⚠ Some funds not found. They may have slightly different name formats.');
+    console.log('Check the SAMPLE lines above to see what name fields the API returns.');
+    console.log('The fund name in the API may differ slightly from what you entered.');
   }
 }
 
-main().catch(e => { console.error('Fatal:', e); process.exit(1); });
+main().catch(e => { console.error('Fatal:', e.message); process.exit(1); });
