@@ -2129,7 +2129,7 @@
             } catch (e) { }
             if (typeof gistCfg !== "undefined" && gistCfg.token && gistCfg.gistId) {
                 if (localStorage.getItem('gistAutoSyncEnabled') !== '0') {
-                    gistPush(true);
+                    gistScheduleAutoPush();
                 }
             }
         }
@@ -4420,6 +4420,17 @@
         }
 
         // Push current data to existing Gist
+        // Debounced auto-push — batches rapid changes into a single push after 10 seconds
+        var _gistAutoPushTimer = null;
+        function gistScheduleAutoPush() {
+            if (typeof gistCfg === 'undefined' || !gistCfg.token || !gistCfg.gistId) return;
+            if (_gistAutoPushTimer) clearTimeout(_gistAutoPushTimer);
+            _gistAutoPushTimer = setTimeout(function() {
+                _gistAutoPushTimer = null;
+                gistPush(true);
+            }, 10000); // wait 10 seconds, then push once
+        }
+
         function gistPush(silent) {
             if (!gistCfg.token || !gistCfg.gistId) {
                 if (!silent) alert('Please create or connect a Gist first (click ☁️ GitHub Sync).');
@@ -4438,13 +4449,24 @@
                 })
             })
             .then(function(r) {
-                if (r.status === 401) { gistSyncStatusUI('⚠ Token invalid', '#ef4444'); if (!silent) alert('Token invalid or expired. Please update it in ☁️ GitHub Sync.'); return; }
-                if (r.status === 403) { 
-                    r.text().then(function(body) {
-                        gistSyncStatusUI('⚠ Forbidden', '#ef4444'); 
-                        if (!silent) alert('Push failed: HTTP 403\n\nDetail: ' + body.substring(0, 200) + '\n\nPossible causes:\n1. Token expired — generate a new one\n2. Gist ID is wrong\n3. Gist belongs to a different account');
+                if (r.status === 401) {
+                    gistSyncStatusUI('⚠ Token invalid', '#ef4444');
+                    if (!silent) alert('Token invalid or expired. Please generate a new token in ☁️ GitHub Sync.');
+                    return;
+                }
+                if (r.status === 403) {
+                    return r.json().then(function(body) {
+                        var msg = (body && body.message) || '';
+                        if (msg.toLowerCase().indexOf('rate limit') >= 0) {
+                            // Rate limit — schedule a retry in 60 seconds silently
+                            gistSyncStatusUI('⏳ Rate limited, retrying…', '#f59e0b');
+                            setTimeout(function(){ gistPush(true); }, 60000);
+                            if (!silent) alert('GitHub rate limit reached. The app will retry automatically in 1 minute.\n\nThis usually happens when changes are saved very rapidly. No data is lost.');
+                        } else {
+                            gistSyncStatusUI('⚠ Push forbidden', '#ef4444');
+                            if (!silent) alert('Push failed (403 Forbidden).\n\n' + msg + '\n\nPossible fixes:\n1. Token expired — generate a new one at github.com/settings/tokens/new\n2. Token missing "gist" scope\n3. Gist belongs to a different account');
+                        }
                     });
-                    return; 
                 }
                 if (r.status === 404) { gistSyncStatusUI('⚠ Gist not found', '#ef4444'); if (!silent) alert('Gist not found. It may have been deleted. Create a new one.'); return; }
                 if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -5958,7 +5980,7 @@
             applyAssetColorsEverywhere();
             // Auto-push to Gist silently if connected
             if (typeof gistCfg !== 'undefined' && gistCfg.token && gistCfg.gistId) {
-                setTimeout(function(){ gistPush(true); }, 500);
+                gistScheduleAutoPush();
             }
         }
         function resetAssetColors() {
@@ -5967,7 +5989,7 @@
             applyAssetColorsEverywhere();
             openAssetColorModal();
             if (typeof gistCfg !== 'undefined' && gistCfg.token && gistCfg.gistId) {
-                setTimeout(function(){ gistPush(true); }, 500);
+                gistScheduleAutoPush();
             }
         }
         function applyAssetColorsEverywhere() {
@@ -6048,7 +6070,7 @@
             try { if (typeof renderAll === 'function') renderAll(); } catch(e) {}
             // Auto-push to Gist silently if connected
             if (typeof gistCfg !== 'undefined' && gistCfg.token && gistCfg.gistId) {
-                setTimeout(function(){ gistPush(true); }, 500);
+                gistScheduleAutoPush();
             }
         }
         function resetPortfolioColors() {
@@ -6058,7 +6080,7 @@
             try { if (typeof renderAll === 'function') renderAll(); } catch(e) {}
             openPortfolioColorModal();
             if (typeof gistCfg !== 'undefined' && gistCfg.token && gistCfg.gistId) {
-                setTimeout(function(){ gistPush(true); }, 500);
+                gistScheduleAutoPush();
             }
         }
 
