@@ -1,6 +1,62 @@
 {
-  "updated": "2026-05-31T05:17:16.106Z",
+  "updated": "2026-05-31T09:46:35.239Z",
   "items": [
+    {
+      "title": "Can the World Cup Help the U.S. Beer Industry Kick Its Slump?",
+      "body": "Bars and stores are uncertain if the soccer tournament will boost beer sales. Still, the maker of Budweiser and Michelob Ultra is going all in.",
+      "link": "https://www.nytimes.com/2026/05/31/business/world-cup-beer.html",
+      "date": "2026-05-31T09:01:39.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "What Is Airbnb For, Exactly?",
+      "body": "The home-sharing app recently added car rentals, groceries and — perhaps most surprisingly — hotels. Brian Chesky, the co-founder and chief executive, is always thinking about how to redesign it.",
+      "link": "https://www.nytimes.com/2026/05/31/business/airbnb-brian-chesky.html",
+      "date": "2026-05-31T09:00:44.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Is This the Future of Air Travel?",
+      "body": "A new all-electric aircraft made a test flight in New York City. Our transportation reporter Niraj Chokshi describes what to know.",
+      "link": "https://www.nytimes.com/video/business/100000010859133/is-this-the-future-of-air-travel.html",
+      "date": "2026-05-31T09:00:28.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Joby Demonstrated its Air Taxi in Manhattan, but You Can’t Fly in It Yet",
+      "body": "Aviation start-ups and the Trump administration want to replace helicopters with electric aircraft, but the new vehicles still have to pass arduous tests before the public can use them.",
+      "link": "https://www.nytimes.com/2026/05/31/business/air-taxis-joby-helicopters.html",
+      "date": "2026-05-31T09:00:05.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Copper price analysis as US strike on Iran tests market optimism - Invezz",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMipgFBVV95cUxNQ2RIdWVsb0JER2c2MzFmUV9vSlNVa3VPektxZjI1S29ROGMyUDVaaVRPbThmWkFkNDM2Y1F4cS1rYXZ3U0ZMNGxSZzdydmRxQlFTVlEwSzN0d2RKN3ZPTjJZUE1zbXhkeWlvMkRJcjM5OWxFU29ORGFQbUtyc0...",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNQ2RIdWVsb0JER2c2MzFmUV9vSlNVa3VPektxZjI1S29ROGMyUDVaaVRPbThmWkFkNDM2Y1F4cS1rYXZ3U0ZMNGxSZzdydmRxQlFTVlEwSzN0d2RKN3ZPTjJZUE1zbXhkeWlvMkRJcjM5OWxFU29ORGFQbUtyc0FFRk43Zm1yTUF2V2F2eDZPekNyYXUtQjFwU0NpWUNrSnotNVFKWWRn?oc=5",
+      "date": "2026-05-31T08:48:45.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
+      "title": "Thai Airways told to add flights to secondary airports",
+      "body": "The Transport Ministry wants Thai Airways International to increase domestic flights and open new international routes to secondary domestic destinations popular with foreign tourists.",
+      "link": "https://www.bangkokpost.com/business/general/3263703/thai-airways-told-to-add-flights-to-secondary-airports",
+      "date": "2026-05-31T08:20:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "More Hong Kong tourists drawn to 'mysterious' Central Asia, travel agencies say",
+      "body": "The mystique of Central Asia and its deepening business ties with mainland China have prompted more Hongkongers to choose the region for holidays, according to travel agency heads.",
+      "link": "https://www.bangkokpost.com/business/general/3263689/more-hong-kong-tourists-drawn-to-mysterious-central-asia-travel-agencies-say",
+      "date": "2026-05-31T06:20:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
     {
       "title": "Ministry's AI project faces heat",
       "body": "The Democrat Party has called on the Ministry of Digital Economy and Society (DES) to review its proposed TH-AI Passport project, citing concerns over transparency, procurement practices and value for money.",
@@ -18,18 +74,18 @@
       "badge": "thai"
     },
     {
+      "title": "Why Britain's notoriously bad train wi-fi might soon be a thing of the past",
+      "body": "How bad is the signal on our trains? We spoke to commuters to find out.",
+      "link": "https://www.bbc.com/news/articles/cn8pn4l03r7o?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-05-30T23:02:37.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
       "title": "Chiang Mai a top spot for digital nomads: Forbes",
       "body": "Chiang Mai has once again gained international recognition after Forbes magazine named it one of the world's eight leading destinations for digital nomads and creators in 2026.",
       "link": "https://www.bangkokpost.com/thailand/general/3263378/chiang-mai-a-top-spot-for-digital-nomads-forbes",
       "date": "2026-05-30T22:40:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Co-pay scheme misses 30m target",
-      "body": "Registration for the government's \"Thais Help Thais Plus 60/40\" co-payment scheme closed nearly four million places short of its 30 million target, despite attracting more than 26.04 million applicants in five days.",
-      "link": "https://www.bangkokpost.com/thailand/general/3263488/copay-scheme-misses-30m-target",
-      "date": "2026-05-30T22:35:00.000Z",
       "source": "Bangkok Post",
       "badge": "thai"
     },
@@ -42,14 +98,6 @@
       "badge": "global"
     },
     {
-      "title": "Dang Van Phuoc Dies at 90; Intrepid Photojournalist in Vietnam War",
-      "body": "A photographer for The Associated Press, he spent a decade on the front lines of combat in his native Vietnam and lost his right eye in a grenade explosion.",
-      "link": "https://www.nytimes.com/2026/05/30/business/media/dang-van-phuoc-dead.html",
-      "date": "2026-05-30T19:16:53.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
       "title": "Two months, $2.6 billion: How NASA ETF turned SpaceX IPO access into a hot retail trade",
       "body": "With Elon Musk's SpaceX IPO ahead, retail investors are rushing into space-themed ETFs including NASA which offers direct access to the rocket company.",
       "link": "https://www.cnbc.com/2026/05/30/spacex-ipo-invest.html",
@@ -58,27 +106,11 @@
       "badge": "global"
     },
     {
-      "title": "When War Breaks Out Over the Family Business, They Get the Call",
-      "body": "As baby boomers begin passing down trillions in assets, advisers who specialize in navigating the process — and the emotions around it — have never been busier.",
-      "link": "https://www.nytimes.com/2026/05/30/business/dealbook/family-business-counselors.html",
-      "date": "2026-05-30T12:00:03.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "How Your Friend Group Influences How You Spend and Save",
-      "body": "Our spending habits are often influenced by our social circles. You can help shape what it looks like.",
-      "link": "https://www.nytimes.com/2026/05/30/business/friends-spending-habits.html",
-      "date": "2026-05-30T09:02:38.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Making Motherhood and a Long Tennis Career Possible",
-      "body": "Tennis is a solitary sport, but with new fertility benefits, a sisterhood of egg freezers is emerging in locker rooms and players’ lounges.",
-      "link": "https://www.nytimes.com/2026/05/30/business/tennis-wta-in-vitro-fertilization.html",
-      "date": "2026-05-30T09:00:26.000Z",
-      "source": "NY Times",
+      "title": "Arrive three hours before flight home, airline boss tells UK holidaymakers",
+      "body": "Wizz Air CEO Yvonne Moynihan also advises passengers to carry portable chargers and water due to lengthy queues.",
+      "link": "https://www.bbc.com/news/articles/c8xw2kjlrlxo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-05-30T08:56:05.000Z",
+      "source": "BBC Business",
       "badge": "global"
     },
     {
@@ -98,20 +130,12 @@
       "badge": "thai"
     },
     {
-      "title": "Grab adds perks for co-pay scheme",
-      "body": "Grab has slashed its gross profit (GP) charge by more than 50% to 9% to attract merchants to sign up with the platform for the \"Thai Chuay Thai Plus\" subsidy scheme.",
-      "link": "https://www.bangkokpost.com/business/general/3262975/grab-adds-perks-for-copay-scheme",
-      "date": "2026-05-30T01:15:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "CPN agrees to tie-up for developments in Vietnam",
-      "body": "Central Pattana Plc (CPN), a large Thai real estate developer, has signed a memorandum of understanding with Sun Group, a Vietnamese real estate and tourism developer, to jointly explore opportunities for world-class ret...",
-      "link": "https://www.bangkokpost.com/business/general/3263095/cpn-agrees-to-tieup-for-developments-in-vietnam",
-      "date": "2026-05-29T23:17:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
+      "title": "How a borough in Merseyside is bucking the UK's youth unemployment trend",
+      "body": "Could personalised early intervention help prevent under-16s falling into the Neet trap?",
+      "link": "https://www.bbc.com/news/articles/cd6p9yyg64vo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-05-30T00:50:21.000Z",
+      "source": "BBC Business",
+      "badge": "global"
     },
     {
       "title": "Software stocks wrap up best month since 2001 as talk of &apos;SaaSpocalypse&apos; subsides",
@@ -146,14 +170,6 @@
       "badge": "us"
     },
     {
-      "title": "Universal rejects billionaire Bill Ackman's takeover bid",
-      "body": "The music giant said Pershing Square's offer fundamentally undervalued the business.",
-      "link": "https://www.bbc.com/news/articles/cn8pnd9yj4eo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-05-29T19:29:12.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
       "title": "Is Now A Good Time To Invest In Bonds? - Forbes",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMilgFBVV95cUxNN2xSMHRJQTlMcGVwWEdnbW00Vjh2R0xWbERNdEY0eXFCdzNZRlJlc1ZITW1kX1BUbktEc3VjaTJUUHZPc1FTZG13cThOR0x4aFZFS1o2ZXB0UUV5NDZWcG1wV2JXMGlvQlNOTnBpQmZuUEtzSjVKRzQxOUNPRm...",
       "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNN2xSMHRJQTlMcGVwWEdnbW00Vjh2R0xWbERNdEY0eXFCdzNZRlJlc1ZITW1kX1BUbktEc3VjaTJUUHZPc1FTZG13cThOR0x4aFZFS1o2ZXB0UUV5NDZWcG1wV2JXMGlvQlNOTnBpQmZuUEtzSjVKRzQxOUNPRmZ2U1V1UmNlVk5UaDJmb0RTX3lYVlBpTEE?oc=5",
@@ -170,28 +186,12 @@
       "badge": "global"
     },
     {
-      "title": "Only three-quarters of first class mail delivered on time",
-      "body": "Royal Mail says its service is improving and that it is on track to hit the regulator Ofcom's reduced targets",
-      "link": "https://www.bbc.com/news/articles/cy02jyxz26po?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-05-29T15:51:39.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
       "title": "Stock market today: Dow, S&P 500, Nasdaq gain as Wall Street braces for US-Iran update - Yahoo Finance",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMijwFBVV95cUxQZ3p5UE42a0tFS21EMG9GamFPTHh4NXpxaEJPTDlXbTZMNGdvSHVzOS04Ym5UVER4SFJjTUlXeFgyQzhZYkVQSTdkekRGU0kxZ2psYThaNF92MmR6dS05TldhVkJuZVBJN3o3RDBZUEJsdkRkQXl5M09yQk5nMl...",
       "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQZ3p5UE42a0tFS21EMG9GamFPTHh4NXpxaEJPTDlXbTZMNGdvSHVzOS04Ym5UVER4SFJjTUlXeFgyQzhZYkVQSTdkekRGU0kxZ2psYThaNF92MmR6dS05TldhVkJuZVBJN3o3RDBZUEJsdkRkQXl5M09yQk5nMlZrMk1ESVM4cmRpbkRra2JNRQ?oc=5",
       "date": "2026-05-29T14:20:44.000Z",
       "source": "Google News",
       "badge": "us"
-    },
-    {
-      "title": "Top UK chefs call for cutting VAT for pubs and restaurants to 10%",
-      "body": "Tom Kerridge, Yotam Ottolenghi, Ravneet Gill and Simon Rogan told BBC Newsnight VAT should be halved to ease mounting pressure on the hospitality industry.",
-      "link": "https://www.bbc.com/news/articles/c78kg45yx0vo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-05-29T10:55:45.000Z",
-      "source": "BBC Business",
-      "badge": "global"
     },
     {
       "title": "Why Are Canadian Bond Yields Rising? - Morningstar",
@@ -202,12 +202,12 @@
       "badge": "bond"
     },
     {
-      "title": "Gold price prediction: What's the outlook for gold prices recover on May 29, 2026 & what should investors - The Times of India",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMinAJBVV95cUxOZXZsdkprQU0yQU5lNlVNMnM2WmNrclotU1lDbFR6WFVta0VJQ3ZJeURYVG5vZVplMTgyUGZYNzEtZHFUT0YyOHR1MkNYR0tLaXpXbnFHMWtKZWRNSW1TNVdGdmk1YUt6NGptT1hqdjZuUzVqeFVCMUs0ZEd5Sk...",
-      "link": "https://news.google.com/rss/articles/CBMinAJBVV95cUxOZXZsdkprQU0yQU5lNlVNMnM2WmNrclotU1lDbFR6WFVta0VJQ3ZJeURYVG5vZVplMTgyUGZYNzEtZHFUT0YyOHR1MkNYR0tLaXpXbnFHMWtKZWRNSW1TNVdGdmk1YUt6NGptT1hqdjZuUzVqeFVCMUs0ZEd5SkhUUkFZeWJERUVFQXZEUFJtT0RqUEtGRGpjZUZydXhyY21GekNhZ2s3SmUzdEtJZy0tYzdFU0c3VWRjUzRxUmxqcVZoSGljQXg3SzVrT0lPb0VJWW1qaGVfSFZEQnZlSmw3Ym9lNGoyZHhlbXA1OHRBZm1BRjdxODBTM2pIMElsQTBtdzBXbHY3TkJMb0t0YTBTLU5GSFFaR1hlT0Z5M9IBogJBVV95cUxNbUU0dmFwYURCdXdCZUpTaS16TWxmc2dIdEhkaVdmOVNHOHo4dWEwZVFvaFM3Z2ZjUnRaYmdTaHg1VUNVWWZ2UTZuaktGanNsdF83eG84QjdhTHppNUp4YlY1dmd6ZktEQTBuUjh3dXVZWDFkOU9rMTliZGg2NnBYMFFQd1cyVWxKY3ItTExWTm11eFYyUFByVXFCc3drQWlnVENrM1JnazExQi1NYThWUVAzeGcwbVY4TDhBR2xtTG1la2s5c3lSY1pYVEdjUTE3WTNrVzlmV005VUlEc0RETFNuYXNIaVk3WmotMDVSR19YSjR5TUx6RVVvS1ZpNlJENjVra0RsWXZIcE9ORDNDXzhjZ05lMWFoTXhsLTJIUVVHdw?oc=5",
-      "date": "2026-05-29T05:05:00.000Z",
+      "title": "U.S. Dollar to Thai Baht - USD/THB Exchange Rate Chart - FOREX.com",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiX0FVX3lxTE1SVXBkc3FKdVdIZVhIaWtFUmVUaXhWM3dGZ29Kcmh4c211cjhicTE1Z29NTTNGN205VlM0MlFPWlBsSzl0Y1FqOGQtVXBSU1hxSE5fSGcyODBqUV8xUGtR?oc=5\" target=\"_blank\">U.S. Dollar to Thai...",
+      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1SVXBkc3FKdVdIZVhIaWtFUmVUaXhWM3dGZ29Kcmh4c211cjhicTE1Z29NTTNGN205VlM0MlFPWlBsSzl0Y1FqOGQtVXBSU1hxSE5fSGcyODBqUV8xUGtR?oc=5",
+      "date": "2026-05-29T07:00:00.000Z",
       "source": "Google News",
-      "badge": "commodity"
+      "badge": "thai"
     },
     {
       "title": "Costco issues a lukewarm quarter, but delivers on the metric that matters most",
@@ -274,20 +274,20 @@
       "badge": "us"
     },
     {
-      "title": "Copper hits one-week low as Middle East escalation clouds growth outlook - The Economic Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMi5gFBVV95cUxPcXR2cDlvcVBnYTF3emdQZkV3cXJDcEZaSDNhZnQwUmhzUjF4U2kyd0FGVW5mcGwwVjBCX0tpYVpxYndlMDkyY3BqVDdWdXZBTWFITUZUQUJ5Tzk0RlBMZk1CS0ZYT3pnX1FyeGFWVVI3Sk0zNGMtNVJNZFA4cm...",
-      "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPcXR2cDlvcVBnYTF3emdQZkV3cXJDcEZaSDNhZnQwUmhzUjF4U2kyd0FGVW5mcGwwVjBCX0tpYVpxYndlMDkyY3BqVDdWdXZBTWFITUZUQUJ5Tzk0RlBMZk1CS0ZYT3pnX1FyeGFWVVI3Sk0zNGMtNVJNZFA4cmxpVktxa1AxZDI0Y3pqTnhNdmVEM1J0blR0T1RQcDN5Rm1kMFhQVGtKUlNkOG03Q3pfSU4zTFYyYVdzX19tM3FJaU56aWt4Z1Z3ZU9LVXlkeHFSSno4dU1MeVVYc3ZxUHVSQUJSWHFjd9IB6wFBVV95cUxNcno2Y0pqeWVmV2Q5bDRSMUx6ZE45RjZJaGxkVFpsemRjdnVGWTZzdFJPUGUwSUxCMEZxd0FsUVIxZE5lbTlMM1Q5VVAtZzVjU3Jick05WC1sRTZhS2Nwc0RJUzVSYjRSM19KbTFMMUNCeV9EcTlMS05XX2R6eHJOLUpFQ1I2YWUyN1R3cnNJUTNzLXdLNXR5dXg0TnEwYlA3ekloRG5Ddy1hbGZJakZmMFlta2pubURqV0R3eEZtQUNNSDBiZXM4dkpmTE4yRVdieGRuWFBHTktvemhpQVZzSkF3X2ZXamMwcDBB?oc=5",
-      "date": "2026-05-28T03:38:12.000Z",
-      "source": "Google News",
-      "badge": "commodity"
-    },
-    {
       "title": "War stress pushes Indonesia, Thailand to lean on short-term debt - The Edge Malaysia",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiUEFVX3lxTE5OZEJtb1diOHB5QWdvZnJiMkwwX0hPNEpBNUxRUXMyQ3pJOVpSbHZoUEVGTmlhUzJkUW4wV3RXVWpxa0J1ZzNOOHU0YTY4RWY2?oc=5\" target=\"_blank\">War stress pushes Indonesia, Thailand t...",
       "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5OZEJtb1diOHB5QWdvZnJiMkwwX0hPNEpBNUxRUXMyQ3pJOVpSbHZoUEVGTmlhUzJkUW4wV3RXVWpxa0J1ZzNOOHU0YTY4RWY2?oc=5",
       "date": "2026-05-28T02:50:00.000Z",
       "source": "Google News",
       "badge": "bond"
+    },
+    {
+      "title": "ASEAN Business Advisory Council (ASEAN-BAC) and AVPN Establish Regional Platform to Strengthen Corporate Social Investment and Cross-Sector Collaborat",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMi4wJBVV95cUxON01ISTlBU0NKTHpjdjBKRFgxajhycV9SazktS05uX1hrLXk5R1VhTGQ1NTJyR3Z1SkwyTEl1MS1wd2loNUVMR1RSd2VqRi1qckVmQnctR0dMTmJQaGFIcUUyZnFaZ1VWNzlSYUFoRkE1Q0hoN2ZXR3ZNMG0zOT...",
+      "link": "https://news.google.com/rss/articles/CBMi4wJBVV95cUxON01ISTlBU0NKTHpjdjBKRFgxajhycV9SazktS05uX1hrLXk5R1VhTGQ1NTJyR3Z1SkwyTEl1MS1wd2loNUVMR1RSd2VqRi1qckVmQnctR0dMTmJQaGFIcUUyZnFaZ1VWNzlSYUFoRkE1Q0hoN2ZXR3ZNMG0zOTI3Y25IZVhyU3QwUzhsNVNhUXROMjJJUzI0MmU1WWY4dE5FUk0xVGJjTVowSkNFc0xYeGVpN0NwYWtQQzFRZW01Y2tnVE93Mm1DeEhUcnVEeVBreWhaZnhOT1l1anFTTHQ3M0RsTmFlb1RCdEhqbXRoQ1dPUkNlaG1XUEpPUGNNMHFlaHh0elQzcmw5OTc3X2hnTXJCdFBNc0F0VG8xcVVLUDhVM1hmM3JUdldpUUN2bUZhcUlCVmctMEhxTi0xNHkzVDNVR2hGUE1FOTRhNW9XZEdkVGVpX1V0Y2gwQjMwMnlaTENj0gHoAkFVX3lxTFAzalpOdHdKbERmTG1CRFZ5S2s3R3JDbUYzck13elVGMS1HVnE3d1QwcmtESGxtTmNCZ3lHS3dhOXpfSUNoZTZFTWJsX3Z3dDdyTUNnU0p6b0U3dmtwazEtVnlQbmZubWt4ekRuNlJmUzM2YjlKZlYyYWY4UHVGYkViYmYyS0tEM25NTTBHXzdWeUdTNnlpd3QzbmJJZEtuVjFEdGNWbGkyX0pJMTBBMnJwT0F2TE5VYkd1cVZ4QkZGZkd2VWhjVGI0bHJrLVlPbFpiUndFblRYTUpvMGJDYm9wOXd2VFBwOTJhOFMwbW9DaFo5NV9fX1dDQ0dDLTB5Z2lTcnNncENHcmJFanNBU0MwZktpcU83MDJRWm9HSGNpSVZMd3BGQ01PYUlJbGxpOUR0UHZSSlkxN0lkaVFBNWpZMmpVM0ZnRDlpVF9Tbk42NXVnV1ZER2UzeGtVUzZmTndqWlBGSXh5MA?oc=5",
+      "date": "2026-05-28T02:27:38.000Z",
+      "source": "Google News",
+      "badge": "em"
     },
     {
       "title": "U.S. Treasury Bond Futures Overview - CME Group",
@@ -298,12 +298,12 @@
       "badge": "bond"
     },
     {
-      "title": "UBS lowers 2026 gold price forecast to $5,500/oz: ‘Markets are rediscovering the concept of opportunity cost’ - KITCO",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMitAFBVV95cUxNdU1LT1lxQ2FEMnFlLWtZUURUN2t2TnFkdXlIWC01WHA3U0l1dUpGQVp6TXBiZnloZi1tTVVrcW9YcHYwamM5LVVPclc3dzFPOEpWYXg1a2RfZWxzZTBWNE1NLTBGM09jNWhpajdUMGljdll3Q0FKemVLa1RhOG...",
-      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNdU1LT1lxQ2FEMnFlLWtZUURUN2t2TnFkdXlIWC01WHA3U0l1dUpGQVp6TXBiZnloZi1tTVVrcW9YcHYwamM5LVVPclc3dzFPOEpWYXg1a2RfZWxzZTBWNE1NLTBGM09jNWhpajdUMGljdll3Q0FKemVLa1RhOG9WZWhzckw4cUVWaGdWcEJsQ3o0bXlPVkdvNU1NVVNkUDRmODlJNkJfRGVtU0VjSGJHVnNVRzk?oc=5",
-      "date": "2026-05-27T11:28:00.000Z",
+      "title": "Thailand eyes $5 billion from notes, loans as bond yields soar - MSN",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiyAJBVV95cUxNQ0I3Z0tlVWJFM3Z5MnpTMmJzOUg3OV9kNXdhSWNvbTNGdHhBTnFBMXMyMVRlTlZmTU9Fa0VlMU92aHpORERNOWgwb01nZm5NSVVFN1hUdURhQWVZdnQwRGFkMy1pTDZQazl4RE9UdWk2UEljQThULVZZanBlej...",
+      "link": "https://news.google.com/rss/articles/CBMiyAJBVV95cUxNQ0I3Z0tlVWJFM3Z5MnpTMmJzOUg3OV9kNXdhSWNvbTNGdHhBTnFBMXMyMVRlTlZmTU9Fa0VlMU92aHpORERNOWgwb01nZm5NSVVFN1hUdURhQWVZdnQwRGFkMy1pTDZQazl4RE9UdWk2UEljQThULVZZanBlejJOSktZMTk5WUlMXzBaT2hRU3M4S0s5ckZyR2JDbkF5ZkR3WVdGaTdTWVhtOHRzNWt5aFpPZE92RjIxYVVCclpzRGNIOTNZS2YxQ0lna0I0eUVLeC1wcUZ6U0VtZUwzeGZzTnZZaXJRZ2g5Q2VGbHZTcjYwemNWSUVpTVJVTmViM3dXcllpM3B5UFpWY0QzM0UwNGtVWFl5dzBoWndlMGlaTmlrdXdkNXhKZFkzY3d6OEpOelNhbjFGYkVTMVdJNUFXWWZkbUZOS3FM?oc=5",
+      "date": "2026-05-27T09:39:25.000Z",
       "source": "Google News",
-      "badge": "commodity"
+      "badge": "bond"
     },
     {
       "title": "Samsung Electronics plans ecosystem investment fund spanning five years - Crypto Briefing",
@@ -370,14 +370,6 @@
       "badge": "commodity"
     },
     {
-      "title": "Thai stocks are beating peers amid volatility, as analysts warn passive Asean investing is 'punishing' - The Business Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMi3wFBVV95cUxQU0stLU5MNDE0aDV2dzEtRUVMSVBUeUV0cTJXYnRqSG81THIwYmJtWHNISXNucWhUVXVoSUNLNWJ2UjZvMXBxUWQwbTJCdjFqZ1FWVkZTbG9oU29NTnlnVVVuN2J6RGljTXN5OVpyREdYQ3IzTGw0cFJrWEhLaT...",
-      "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQU0stLU5MNDE0aDV2dzEtRUVMSVBUeUV0cTJXYnRqSG81THIwYmJtWHNISXNucWhUVXVoSUNLNWJ2UjZvMXBxUWQwbTJCdjFqZ1FWVkZTbG9oU29NTnlnVVVuN2J6RGljTXN5OVpyREdYQ3IzTGw0cFJrWEhLaTNMS3U3NWNKZ1JNYmNCX19KR0N0dnB0RVYtVG9uTHotaHhYMDJGRTlNUUtadGlOdm5PNjBLYThSOFFrSk1TOHBMNUxuMXZ4eXBDZ2pkYkxPZ2FTblhjbHAtemNETExtZ1pV?oc=5",
-      "date": "2026-05-05T07:00:00.000Z",
-      "source": "Google News",
-      "badge": "thai"
-    },
-    {
       "title": "The Commodity Markets Outlook in eight charts - World Bank Blogs",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMimAFBVV95cUxOVjBXRzlVTHN6ZjNNcWRTRU0xMFRlaG5uUVhkUzRacEdrUURuWnJqVnZoME1oNHRva3hsT1JDZElEN0VrVmt4WWNEY1oyUVppbllWbUdPRG1ROHYzQXYxUWZYOXJQS3p5SkZpQnhpcWlUNVRFM2xfM1NnOWlYX0...",
       "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOVjBXRzlVTHN6ZjNNcWRTRU0xMFRlaG5uUVhkUzRacEdrUURuWnJqVnZoME1oNHRva3hsT1JDZElEN0VrVmt4WWNEY1oyUVppbllWbUdPRG1ROHYzQXYxUWZYOXJQS3p5SkZpQnhpcWlUNVRFM2xfM1NnOWlYX0FJRnJPdzI2NVRicVkxNWFrakJxaXZDSTA4QQ?oc=5",
@@ -392,6 +384,14 @@
       "date": "2026-04-28T07:00:00.000Z",
       "source": "Google News",
       "badge": "economic"
+    },
+    {
+      "title": "World Bank sees a ceiling above gold and silver prices through 2026 amid market volatility - KITCO",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMitwFBVV95cUxOVVFuYnN6Yk1uU05nRG9EdFVBVno1MEpuUVlBVEhBdDRCY3lGeVRoSWt1bWZmU3FtZ2pTSXByRGMyZ2tqbG8tbmFPbEN0cTZMYlV0TjJvTm9temVCZ0hCTkVZQjNub0hBeEIxSHhJRTFHSW44N1hGV0VSdzB1Yz...",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOVVFuYnN6Yk1uU05nRG9EdFVBVno1MEpuUVlBVEhBdDRCY3lGeVRoSWt1bWZmU3FtZ2pTSXByRGMyZ2tqbG8tbmFPbEN0cTZMYlV0TjJvTm9temVCZ0hCTkVZQjNub0hBeEIxSHhJRTFHSW44N1hGV0VSdzB1YzRJRktZMFZQRmowdGZWMjR0ZjkwM3dyT0pnWklzbUV6UkdHcl9JdE1RcGFmZk1SdjJKd3ozZlFhYTA?oc=5",
+      "date": "2026-04-28T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
     },
     {
       "title": "Major corporations back Ho Chi Minh City Venture Capital Fund - Theinvestor",
