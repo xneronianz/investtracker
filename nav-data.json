@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-01T19:20:22.847Z",
-  "date": "2026-06-01",
+  "updated_at": "2026-06-02T18:04:55.698Z",
+  "date": "2026-06-02",
   "count": 46,
   "funds": {
     "ABGDD-SSF": {
@@ -96,7 +96,7 @@
       "nav_date": "2026-05-28"
     },
     "SCBNEXT(SSFE)": {
-      "nav": 8.4825,
+      "nav": 8.4834,
       "nav_date": "2026-05-28"
     },
     "SCBVIET(SSFA)": {
@@ -120,12 +120,12 @@
       "nav_date": "2026-05-29"
     },
     "TLA-GEQ": {
-      "nav": 12.5115,
-      "nav_date": "2026-05-28"
+      "nav": 12.5,
+      "nav_date": "2026-05-29"
     },
     "TLFVMR-ASIAX": {
-      "nav": 15.2263,
-      "nav_date": "2026-05-28"
+      "nav": 15.1712,
+      "nav_date": "2026-05-29"
     },
     "UCHINA-SSF": {
       "nav": 7.4005,
@@ -160,7 +160,7 @@
       "nav_date": "2026-05-28"
     },
     "UOBSA-SSF": {
-      "nav": 16.547,
+      "nav": 16.5416,
       "nav_date": "2026-05-28"
     },
     "B-GLOBALRMF": {
@@ -180,8 +180,8 @@
       "nav_date": "2026-05-28"
     },
     "TLAWSRMF": {
-      "nav": 12.262,
-      "nav_date": "2026-05-28"
+      "nav": 12.2399,
+      "nav_date": "2026-05-29"
     },
     "UOBSD-SSF": {
       "nav": 13.6806,
