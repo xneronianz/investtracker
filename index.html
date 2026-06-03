@@ -411,14 +411,20 @@
         <div id="tab-dashboard" class="tab-panel">
             <!-- Dashboard Quick Actions -->
             <div class="flex flex-col gap-2 w-full mb-6">
-                <!-- Row 1: Fav 1 | Fav 2 | Fav 3 | ⚙️ — full width -->
+                <!-- Row 1: Fav 1 | Fav 2 | Fav 3 | ⚙️ -->
                 <div class="flex gap-[2px]">
                     <button onclick="applyFavoriteFilter(1)" id="favBtn1" class="btn-action text-white py-3 rounded-l-xl font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 1</button>
                     <button onclick="applyFavoriteFilter(2)" id="favBtn2" class="btn-action text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
                     <button onclick="applyFavoriteFilter(3)" id="favBtn3" class="btn-action text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
                     <button onclick="openFavoritesModal(0)" class="btn-action text-white px-3 py-3 rounded-r-xl font-bold shadow-md transition-all text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
                 </div>
-                <!-- Row 2: Auto NAV | Clear Filters | Simulator -->
+                <!-- Row 2: Fav 4 | Fav 5 | Fav 6 -->
+                <div class="flex gap-[2px]">
+                    <button onclick="applyFavoriteFilter(4)" id="favBtn4" class="btn-action text-white py-3 rounded-l-xl font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#0369a1,#0284c7);">⭐ Fav 4</button>
+                    <button onclick="applyFavoriteFilter(5)" id="favBtn5" class="btn-action text-white py-3 font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#0284c7,#0ea5e9);">⭐ Fav 5</button>
+                    <button onclick="applyFavoriteFilter(6)" id="favBtn6" class="btn-action text-white py-3 rounded-r-xl font-bold shadow-md transition-all text-xs flex-1 text-center" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4);">⭐ Fav 6</button>
+                </div>
+                <!-- Row 3: Auto NAV | Clear Filters | Simulator -->
                 <div class="grid grid-cols-3 gap-2">
                     <button onclick="openSecNavModal()" id="secNavBtn" class="btn-action text-white py-3 rounded-xl font-bold shadow-md transition-all text-xs text-center" style="background:linear-gradient(135deg,#0284c7,#0369a1);">🔄 Auto NAV</button>
                     <button onclick="clearAllFilters()" class="btn-action py-3 rounded-xl font-bold transition-all text-xs text-center" style="background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:#4f46e5;border:2px solid #a5b4fc;">✕ Clear</button>
@@ -784,15 +790,19 @@
                         <button onclick="openAddModal()" class="btn-action text-white py-4 rounded-xl font-bold shadow-md text-sm" style="background:linear-gradient(135deg,#059669,#0284c7);">➕ Add Fund</button>
                         <button onclick="openTaxSavings()" class="btn-action text-white py-4 rounded-xl font-bold shadow-md text-sm" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">🧾 Tax Savings</button>
                     </div>
-                    <!-- Row 2: 3 cols = favs, 1 col = clear filters — perfectly aligned with row 1 -->
-                    <div class="grid grid-cols-4 gap-2">
-                        <div class="col-span-3 flex gap-[2px]">
-                            <button onclick="applyFavoriteFilter(1)" id="fundTabFavBtn1" class="btn-action text-white py-2.5 rounded-l-xl font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 1</button>
-                            <button onclick="applyFavoriteFilter(2)" id="fundTabFavBtn2" class="btn-action text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
-                            <button onclick="applyFavoriteFilter(3)" id="fundTabFavBtn3" class="btn-action text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
-                            <button onclick="openFavoritesModal(0)" class="btn-action text-white px-2 py-2.5 rounded-r-xl font-bold shadow-md text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
-                        </div>
-                        <button onclick="clearAllFilters()" class="btn-action py-2.5 rounded-xl font-bold text-xs text-center" style="background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:#4f46e5;border:2px solid #a5b4fc;">✕ Clear Filters</button>
+                    <!-- Row 2: Fav 1-3 + ⚙️ -->
+                    <div class="flex gap-[2px] mb-[2px]">
+                        <button onclick="applyFavoriteFilter(1)" id="fundTabFavBtn1" class="btn-action text-white py-2.5 rounded-l-xl font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">⭐ Fav 1</button>
+                        <button onclick="applyFavoriteFilter(2)" id="fundTabFavBtn2" class="btn-action text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#6d28d9,#5b21b6);">⭐ Fav 2</button>
+                        <button onclick="applyFavoriteFilter(3)" id="fundTabFavBtn3" class="btn-action text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#5b21b6,#4c1d95);">⭐ Fav 3</button>
+                        <button onclick="openFavoritesModal(0)" class="btn-action text-white px-2 py-2.5 rounded-r-xl font-bold shadow-md text-xs" style="background:#4c1d95;" title="Configure Favorites">⚙️</button>
+                    </div>
+                    <!-- Row 3: Fav 4-6 + Clear Filters -->
+                    <div class="flex gap-[2px]">
+                        <button onclick="applyFavoriteFilter(4)" id="fundTabFavBtn4" class="btn-action text-white py-2.5 rounded-l-xl font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#0369a1,#0284c7);">⭐ Fav 4</button>
+                        <button onclick="applyFavoriteFilter(5)" id="fundTabFavBtn5" class="btn-action text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#0284c7,#0ea5e9);">⭐ Fav 5</button>
+                        <button onclick="applyFavoriteFilter(6)" id="fundTabFavBtn6" class="btn-action text-white py-2.5 font-bold shadow-md text-xs flex-1 text-center" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4);">⭐ Fav 6</button>
+                        <button onclick="clearAllFilters()" class="btn-action py-2.5 rounded-r-xl font-bold text-xs text-center px-2" style="background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:#4f46e5;border:2px solid #a5b4fc;">✕ Clear</button>
                     </div>
                 </div>
                 <!-- Right: gear icon spanning both rows -->
@@ -1304,11 +1314,16 @@
                 <h2 class="text-2xl font-black text-purple-600" id="favModalTitle">Configure Favorites</h2>
                 <button onclick="closeModal('favoritesModal')" class="text-slate-400 font-black hover:text-rose-500 transition-colors">✕</button>
             </div>
-            <!-- Fav1/Fav2 tabs -->
-            <div class="flex gap-1 mb-4 bg-slate-100 rounded-xl p-1">
+            <!-- Fav tabs — 2 rows of 3 -->
+            <div class="flex gap-1 mb-1 bg-slate-100 rounded-xl p-1">
                 <button id="favTab1" onclick="switchFavTab(1)" class="flex-1 py-1.5 rounded-lg text-[11px] font-black transition-all bg-white text-purple-600 shadow-sm">⭐ Fav 1</button>
                 <button id="favTab2" onclick="switchFavTab(2)" class="flex-1 py-1.5 rounded-lg text-[11px] font-black transition-all text-slate-400">⭐ Fav 2</button>
                 <button id="favTab3" onclick="switchFavTab(3)" class="flex-1 py-1.5 rounded-lg text-[11px] font-black transition-all text-slate-400">⭐ Fav 3</button>
+            </div>
+            <div class="flex gap-1 mb-4 bg-slate-100 rounded-xl p-1">
+                <button id="favTab4" onclick="switchFavTab(4)" class="flex-1 py-1.5 rounded-lg text-[11px] font-black transition-all text-slate-400">⭐ Fav 4</button>
+                <button id="favTab5" onclick="switchFavTab(5)" class="flex-1 py-1.5 rounded-lg text-[11px] font-black transition-all text-slate-400">⭐ Fav 5</button>
+                <button id="favTab6" onclick="switchFavTab(6)" class="flex-1 py-1.5 rounded-lg text-[11px] font-black transition-all text-slate-400">⭐ Fav 6</button>
             </div>
             <!-- Editable name field -->
             <div class="flex items-center gap-2 mb-4">
@@ -1766,7 +1781,13 @@
         let favorite2ExcludedPortfolios = [];
         let favorite3ExcludedAssets = [];
         let favorite3ExcludedPortfolios = [];
-        let favNames = { 1: 'Fav 1', 2: 'Fav 2', 3: 'Fav 3' };
+        let favorite4ExcludedAssets = [];
+        let favorite4ExcludedPortfolios = [];
+        let favorite5ExcludedAssets = [];
+        let favorite5ExcludedPortfolios = [];
+        let favorite6ExcludedAssets = [];
+        let favorite6ExcludedPortfolios = [];
+        let favNames = { 1: 'Fav 1', 2: 'Fav 2', 3: 'Fav 3', 4: 'Fav 4', 5: 'Fav 5', 6: 'Fav 6' };
         let portfolioTargetPercentages = {};
         let allFunds = [];
         let targetPercentages = {};
@@ -2094,6 +2115,12 @@
                         if (parsed.favorite2ExcludedPortfolios) favorite2ExcludedPortfolios = parsed.favorite2ExcludedPortfolios;
                         if (parsed.favorite3ExcludedAssets)  favorite3ExcludedAssets  = parsed.favorite3ExcludedAssets;
                         if (parsed.favorite3ExcludedPortfolios) favorite3ExcludedPortfolios = parsed.favorite3ExcludedPortfolios;
+                        if (parsed.favorite4ExcludedAssets)  favorite4ExcludedAssets  = parsed.favorite4ExcludedAssets;
+                        if (parsed.favorite4ExcludedPortfolios) favorite4ExcludedPortfolios = parsed.favorite4ExcludedPortfolios;
+                        if (parsed.favorite5ExcludedAssets)  favorite5ExcludedAssets  = parsed.favorite5ExcludedAssets;
+                        if (parsed.favorite5ExcludedPortfolios) favorite5ExcludedPortfolios = parsed.favorite5ExcludedPortfolios;
+                        if (parsed.favorite6ExcludedAssets)  favorite6ExcludedAssets  = parsed.favorite6ExcludedAssets;
+                        if (parsed.favorite6ExcludedPortfolios) favorite6ExcludedPortfolios = parsed.favorite6ExcludedPortfolios;
                         if (parsed.favNames) favNames = parsed.favNames;
                         if (parsed.chartExcludedAssets)     chartExcludedAssets     = new Set(parsed.chartExcludedAssets);
                         if (parsed.simulatorSettings)       simulatorSettings       = parsed.simulatorSettings;
@@ -2114,7 +2141,13 @@
                 // Save simulator settings from JS variable (always up to date)
                 const dataToSave = {
                     version: DATA_VERSION, allFunds, targetPercentages, portfolioTargetPercentages, taxSavings,
-                    favoriteExcludedAssets, favoriteExcludedPortfolios, favorite2ExcludedAssets, favorite2ExcludedPortfolios, favorite3ExcludedAssets, favorite3ExcludedPortfolios, favNames,
+                    favoriteExcludedAssets, favoriteExcludedPortfolios,
+                    favorite2ExcludedAssets, favorite2ExcludedPortfolios,
+                    favorite3ExcludedAssets, favorite3ExcludedPortfolios,
+                    favorite4ExcludedAssets, favorite4ExcludedPortfolios,
+                    favorite5ExcludedAssets, favorite5ExcludedPortfolios,
+                    favorite6ExcludedAssets, favorite6ExcludedPortfolios,
+                    favNames,
                     chartExcludedAssets: [...chartExcludedAssets],
                     simulatorSettings: simulatorSettings
                 };
@@ -4346,6 +4379,12 @@
                 favorite2ExcludedPortfolios: favorite2ExcludedPortfolios,
                 favorite3ExcludedAssets: favorite3ExcludedAssets,
                 favorite3ExcludedPortfolios: favorite3ExcludedPortfolios,
+                favorite4ExcludedAssets: favorite4ExcludedAssets,
+                favorite4ExcludedPortfolios: favorite4ExcludedPortfolios,
+                favorite5ExcludedAssets: favorite5ExcludedAssets,
+                favorite5ExcludedPortfolios: favorite5ExcludedPortfolios,
+                favorite6ExcludedAssets: favorite6ExcludedAssets,
+                favorite6ExcludedPortfolios: favorite6ExcludedPortfolios,
                 favNames: favNames,
                 chartExcludedAssets: [...chartExcludedAssets],
                 simulatorSettings: simulatorSettings,
@@ -4365,6 +4404,12 @@
             if (parsed.favorite2ExcludedPortfolios) favorite2ExcludedPortfolios = parsed.favorite2ExcludedPortfolios;
             if (parsed.favorite3ExcludedAssets) favorite3ExcludedAssets = parsed.favorite3ExcludedAssets;
             if (parsed.favorite3ExcludedPortfolios) favorite3ExcludedPortfolios = parsed.favorite3ExcludedPortfolios;
+            if (parsed.favorite4ExcludedAssets) favorite4ExcludedAssets = parsed.favorite4ExcludedAssets;
+            if (parsed.favorite4ExcludedPortfolios) favorite4ExcludedPortfolios = parsed.favorite4ExcludedPortfolios;
+            if (parsed.favorite5ExcludedAssets) favorite5ExcludedAssets = parsed.favorite5ExcludedAssets;
+            if (parsed.favorite5ExcludedPortfolios) favorite5ExcludedPortfolios = parsed.favorite5ExcludedPortfolios;
+            if (parsed.favorite6ExcludedAssets) favorite6ExcludedAssets = parsed.favorite6ExcludedAssets;
+            if (parsed.favorite6ExcludedPortfolios) favorite6ExcludedPortfolios = parsed.favorite6ExcludedPortfolios;
             if (parsed.favNames) favNames = parsed.favNames;
             if (parsed.chartExcludedAssets)    chartExcludedAssets    = new Set(parsed.chartExcludedAssets);
             if (parsed.simulatorSettings)      simulatorSettings      = parsed.simulatorSettings;
@@ -4927,7 +4972,7 @@
         }
 
         function applyFavNames() {
-            [1,2,3].forEach(i => {
+            [1,2,3,4,5,6].forEach(i => {
                 const name = favNames[i] || `Fav ${i}`;
                 const btn = document.getElementById(`favBtn${i}`);
                 if (btn) btn.textContent = '⭐ ' + name;
@@ -4940,22 +4985,39 @@
 
         function switchFavTab(preset) {
             currentFavPreset = preset;
-            [1,2,3].forEach(i => {
+            [1,2,3,4,5,6].forEach(i => {
                 const tab = document.getElementById(`favTab${i}`);
                 if (!tab) return;
                 const name = favNames[i] || `Fav ${i}`;
                 tab.textContent = '⭐ ' + name;
-                tab.className = `flex-1 py-1.5 rounded-lg text-[11px] font-black transition-all ${i===preset ? (preset===1?'bg-white text-purple-600 shadow-sm':preset===2?'bg-white text-purple-700 shadow-sm':'bg-white text-indigo-600 shadow-sm') : 'text-slate-400'}`;
+                const colors = ['','text-purple-600','text-purple-700','text-indigo-600','text-sky-600','text-cyan-600','text-teal-600'];
+                tab.className = `flex-1 py-1.5 rounded-lg text-[11px] font-black transition-all ${i===preset ? 'bg-white shadow-sm '+colors[i] : 'text-slate-400'}`;
             });
-            // Set name input value
             const nameInput = document.getElementById('favNameInput');
             if (nameInput) nameInput.value = favNames[preset] || `Fav ${preset}`;
             populateFavModal(preset);
         }
 
+        function getFavExcluded(preset) {
+            if (preset === 6) return { assets: favorite6ExcludedAssets, ports: favorite6ExcludedPortfolios };
+            if (preset === 5) return { assets: favorite5ExcludedAssets, ports: favorite5ExcludedPortfolios };
+            if (preset === 4) return { assets: favorite4ExcludedAssets, ports: favorite4ExcludedPortfolios };
+            if (preset === 3) return { assets: favorite3ExcludedAssets, ports: favorite3ExcludedPortfolios };
+            if (preset === 2) return { assets: favorite2ExcludedAssets, ports: favorite2ExcludedPortfolios };
+            return { assets: favoriteExcludedAssets, ports: favoriteExcludedPortfolios };
+        }
+
+        function setFavExcluded(preset, assets, ports) {
+            if (preset === 6) { favorite6ExcludedAssets = assets; favorite6ExcludedPortfolios = ports; }
+            else if (preset === 5) { favorite5ExcludedAssets = assets; favorite5ExcludedPortfolios = ports; }
+            else if (preset === 4) { favorite4ExcludedAssets = assets; favorite4ExcludedPortfolios = ports; }
+            else if (preset === 3) { favorite3ExcludedAssets = assets; favorite3ExcludedPortfolios = ports; }
+            else if (preset === 2) { favorite2ExcludedAssets = assets; favorite2ExcludedPortfolios = ports; }
+            else { favoriteExcludedAssets = assets; favoriteExcludedPortfolios = ports; }
+        }
+
         function populateFavModal(preset) {
-            const excAssets = preset === 3 ? favorite3ExcludedAssets : preset === 2 ? favorite2ExcludedAssets : favoriteExcludedAssets;
-            const excPorts  = preset === 3 ? favorite3ExcludedPortfolios : preset === 2 ? favorite2ExcludedPortfolios : favoriteExcludedPortfolios;
+            const { assets: excAssets, ports: excPorts } = getFavExcluded(preset);
             const allGeos = [...new Set(allFunds.map(f => f.assetClass))].sort(thCollator.compare);
             const allPorts = [...new Set(allFunds.map(f => f.portfolio))].sort(thCollator.compare);
             document.getElementById('favCheckboxList').innerHTML = allGeos.map(geo => {
@@ -4979,27 +5041,14 @@
             const portCbs = document.querySelectorAll('.fav-cb-port');
             const newExcludedGeos = [];
             const newExcludedPorts = [];
-            
             geoCbs.forEach(cb => { if (!cb.checked) newExcludedGeos.push(cb.value); });
             portCbs.forEach(cb => { if (!cb.checked) newExcludedPorts.push(cb.value); });
-            
-            if (currentFavPreset === 3) {
-                favorite3ExcludedAssets = newExcludedGeos;
-                favorite3ExcludedPortfolios = newExcludedPorts;
-            } else if (currentFavPreset === 2) {
-                favorite2ExcludedAssets = newExcludedGeos;
-                favorite2ExcludedPortfolios = newExcludedPorts;
-            } else {
-                favoriteExcludedAssets = newExcludedGeos;
-                favoriteExcludedPortfolios = newExcludedPorts;
-            }
-            
+            setFavExcluded(currentFavPreset, newExcludedGeos, newExcludedPorts);
             saveToLocalStorage(); closeModal('favoritesModal'); applyFavoriteFilter(currentFavPreset);
         }
 
         function applyFavoriteFilter(preset) {
-            const excAssets = preset === 3 ? favorite3ExcludedAssets : preset === 2 ? favorite2ExcludedAssets : favoriteExcludedAssets;
-            const excPorts  = preset === 3 ? favorite3ExcludedPortfolios : preset === 2 ? favorite2ExcludedPortfolios : favoriteExcludedPortfolios;
+            const { assets: excAssets, ports: excPorts } = getFavExcluded(preset);
 
             document.getElementById('globalSearch').value = ""; 
             
