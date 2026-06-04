@@ -554,7 +554,8 @@
                         <button onclick="renderTreemap('invested')"    id="tmBtnInv" class="text-[9px] font-black px-2 py-1 rounded-lg bg-slate-100 text-slate-500 border border-slate-200">Invested</button>
                     </div>
                 </div>
-                <p class="text-[10px] text-slate-400 mb-3">Size = holding value · Color = gain/loss · Tap/click a box for details</p>
+                <div class="flex gap-[3px] flex-wrap mb-2" id="tfBar_treemap"></div>
+                <p class="text-[10px] text-slate-400 mb-3">Size = holding value · Color = gain/loss over selected period · Tap a box for details</p>
                 <div id="treemapContainer" style="width:100%;position:relative;">
                     <div id="treemapCanvas" style="display:block;width:100%;cursor:pointer;"></div>
                     <div id="treemapTooltip" style="display:none;position:absolute;z-index:50;background:#1e293b;color:#fff;font-size:11px;font-weight:700;border-radius:12px;padding:8px 12px;box-shadow:0 8px 24px rgba(0,0,0,0.3);pointer-events:none;max-width:200px;"></div>
@@ -569,6 +570,7 @@
                         <option value="__portfolio__">Whole Portfolio</option>
                     </select>
                 </div>
+                <div class="flex gap-[3px] flex-wrap mb-2" id="tfBar_heatmap"></div>
                 <p class="text-[10px] text-slate-400 mb-3">Monthly NAV % change — green = gain · red = loss · grey = no data</p>
                 <div id="heatmapGrid" class="overflow-x-auto"></div>
             </div>
@@ -582,6 +584,7 @@
                         <button onclick="setRiskReturnMetric('cagr')"  id="rrBtnCagr"  class="text-[9px] font-black px-2 py-1 rounded-lg bg-slate-100 text-slate-500 border border-slate-200">CAGR</button>
                     </div>
                 </div>
+                <div class="flex gap-[3px] flex-wrap mb-2" id="tfBar_scatter"></div>
                 <p class="text-[10px] text-slate-400 mb-3">X = Volatility (NAV std dev %) · Y = <span id="rrYLabel">XIRR</span> % · Ideal funds: upper-left · Tap a dot for details</p>
                 <div id="riskReturnContainer" style="position:relative;width:100%;min-height:320px;">
                     <div id="riskReturnChart" style="display:block;width:100%;min-height:320px;"></div>
@@ -593,9 +596,10 @@
 
             <!-- FUND TRENDS: Top 3 Winners + Top 3 Losers -->
             <div class="bg-white rounded-[3rem] shadow-xl border border-slate-100 p-6 mt-6" id="fundTrendsCard">
-                <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center justify-between mb-2">
                     <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">🏆 Fund Trends <span id="trendPeriodLabel" class="text-indigo-500 normal-case">(Selected period)</span></h3>
                 </div>
+                <div class="flex gap-[3px] flex-wrap mb-4" id="tfBar_trends"></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Winners -->
                     <div>
@@ -1831,6 +1835,8 @@
                 // filterPanel is now always visible in the side panel — no auto-hide
                 var btn = document.getElementById('filterToggleBtn');
                 if (btn) btn.style.display = 'none'; // hide the toggle btn since panel is always open
+                // Build period buttons in all chart cards
+                if (typeof buildPeriodBars === 'function') buildPeriodBars();
             });
         }
 
@@ -2078,23 +2084,56 @@
             }).join('');
         }
 
+        // Period button bars — injected into each chart card that needs them
+        const TF_BAR_IDS = ['tfBar_treemap', 'tfBar_heatmap', 'tfBar_scatter', 'tfBar_trends'];
+        const TF_BAR_KEYS = ['1D','1W','1M','3M','6M','YTD','1Y','3Y','5Y','10Y','ALL'];
+
+        function buildPeriodBars() {
+            TF_BAR_IDS.forEach(function(barId) {
+                var bar = document.getElementById(barId);
+                if (!bar) return;
+                bar.innerHTML = TF_BAR_KEYS.map(function(key) {
+                    // Use same onclick as main hist perf chart — all share setChartTimeframe
+                    return '<button onclick="setChartTimeframe(\'' + key + '\')" ' +
+                        'data-tfbar="' + key + '" ' +
+                        'class="tf-btn px-2 py-0.5 text-[9px] font-black rounded-md text-slate-500 hover:text-indigo-600 transition-all">' +
+                        key + '</button>';
+                }).join('');
+            });
+        }
+
         function setChartTimeframe(tf) {
             chartTimeframe = tf;
-            // Sync % NAV change column to same timeframe
+            // Sync % NAV change column — ALL and YTD map to nearest navPctKey
             const validNavKeys = ['1D','1W','1M','3M','6M','1Y','3Y','5Y','10Y'];
             if (validNavKeys.includes(tf)) {
                 navPctKey = tf;
-                const npSel = document.getElementById('navPctSelect');
-                if (npSel) npSel.value = tf;
-                filterData(); // recompute navPct for all funds
+            } else if (tf === 'YTD') {
+                navPctKey = 'YTD';
+            } else if (tf === 'ALL') {
+                navPctKey = '1Y'; // best fallback for table column
             }
+            const npSel = document.getElementById('navPctSelect');
+            if (npSel) npSel.value = navPctKey;
+            filterData(); // recompute navPct for all funds
+
+            // Update ALL tf-btn elements across the entire page (hist perf + all chart bars)
             document.querySelectorAll('.tf-btn').forEach(btn => {
-                btn.className = "tf-btn px-3 py-1 text-[10px] font-bold rounded-lg text-slate-500 hover:text-indigo-600 transition-all";
+                const key = btn.getAttribute('data-tfbar') || btn.id.replace('btn_tf_','');
+                const isActive = key === tf;
+                btn.className = isActive
+                    ? 'tf-btn px-2 py-0.5 text-[9px] font-black rounded-md bg-indigo-500 text-white shadow-sm transition-all'
+                    : 'tf-btn px-2 py-0.5 text-[9px] font-black rounded-md text-slate-500 hover:text-indigo-600 transition-all';
             });
-            const activeBtn = document.getElementById('btn_tf_' + tf);
-            if(activeBtn) {
-                activeBtn.className = "tf-btn px-3 py-1 text-[10px] font-bold rounded-lg bg-white text-indigo-600 shadow-sm transition-all";
-            }
+            // The historical-perf buttons have different sizing — restore their classes
+            document.querySelectorAll('[id^="btn_tf_"]').forEach(btn => {
+                const key = btn.id.replace('btn_tf_','');
+                const isActive = key === tf;
+                btn.className = isActive
+                    ? 'tf-btn px-3 py-1 text-[10px] font-bold rounded-lg bg-white text-indigo-600 shadow-sm transition-all'
+                    : 'tf-btn px-3 py-1 text-[10px] font-bold rounded-lg text-slate-500 hover:text-indigo-600 transition-all';
+            });
+
             updatePortfolioHistoryChart();
             renderAll();
         }
@@ -2407,23 +2446,43 @@
 
             funds.forEach(f => {
                 const assetClass = (f.assetClass || '').toLowerCase();
-                const source = (f.source || '').toLowerCase();
-                // Exclude cash, provident and loans from XIRR
                 if (assetClass === 'provident' || assetClass === 'cash') return;
-                if ((f.invested || 0) < 0) return;
+                if ((f.invested || 0) <= 0) return;
 
-                // Use history to reconstruct cash flows
-                // Each increase in invested = cash outflow
-                const hist = (f.history || []).filter(h => h.invested > 0 && h.date).sort((a, b) => a.date.localeCompare(b.date));
+                // Build outflows from explicit purchase transactions if available
+                const buyTxs = (f.transactions || []).filter(t =>
+                    (t.type === 'Buy' || t.type === 'Switch In') && t.amount > 0 && t.date);
 
-                // Prefer explicit startDate for the initial outflow
-                const fundStart = f.startDate || (hist.length > 0 ? hist[0].date : null) || getFundStartDate(f);
-                if (f.invested > 0 && fundStart) {
-                    // Use startDate as date of full invested amount outflow
-                    flows.push({ date: fundStart, amount: -f.invested });
+                if (buyTxs.length > 0) {
+                    // Use individual purchase transactions
+                    buyTxs.forEach(tx => flows.push({ date: tx.date, amount: -(tx.amount || 0) }));
+                } else {
+                    // No transaction history: use invested amount at startDate.
+                    // Use history-based invested snapshots if available (more accurate for DCA).
+                    const hist = (f.history || []).filter(h => h.invested > 0 && h.date)
+                        .sort((a, b) => a.date.localeCompare(b.date));
+
+                    if (hist.length >= 2) {
+                        // Reconstruct purchases from increases in invested amount across history
+                        let prevInvested = 0;
+                        hist.forEach(h => {
+                            const delta = (h.invested || 0) - prevInvested;
+                            if (delta > 10) flows.push({ date: h.date, amount: -delta }); // new purchase
+                            prevInvested = Math.max(prevInvested, h.invested || 0);
+                        });
+                        // If still no flows (flat invested throughout), fall back to single outflow
+                        if (flows.filter(fl => fl.amount < 0).length === 0) {
+                            const fundStart = f.startDate || hist[0].date;
+                            flows.push({ date: fundStart, amount: -f.invested });
+                        }
+                    } else {
+                        // Last resort: single lump-sum outflow at startDate
+                        const fundStart = f.startDate || (hist.length > 0 ? hist[0].date : null) || getFundStartDate(f);
+                        if (fundStart) flows.push({ date: fundStart, amount: -f.invested });
+                    }
                 }
 
-                // Transactions (Switch Out / Sell = positive inflow)
+                // Sell / Switch Out transactions as inflows
                 (f.transactions || []).forEach(tx => {
                     if ((tx.type === 'Switch Out' || tx.type === 'Sell') && tx.amount > 0 && tx.date) {
                         flows.push({ date: tx.date, amount: tx.amount });
@@ -6159,16 +6218,44 @@
 
             // Merge duplicate fund names across portfolios
             var merged = {};
+            // Compute cutoff date for period-aware gain/loss coloring
+            var tmCutoff = null;
+            if (typeof chartTimeframe !== 'undefined' && chartTimeframe && chartTimeframe !== 'ALL') {
+                var tfDef = (typeof NAV_TIMEFRAMES !== 'undefined') ? NAV_TIMEFRAMES.find(function(t){ return t.key === chartTimeframe; }) : null;
+                if (tfDef && tfDef.days !== null) {
+                    var cd = new Date(); cd.setDate(cd.getDate() - tfDef.days);
+                    tmCutoff = cd.toISOString().slice(0,10);
+                } else if (chartTimeframe === 'YTD') {
+                    tmCutoff = new Date().getFullYear() + '-01-01';
+                }
+            }
             filteredFunds.forEach(function(f) {
                 var mv = f.nav * f.units;
                 var val = _tmMode === 'marketValue' ? mv : f.invested;
-                if (!merged[f.name]) merged[f.name] = { name: f.name, val: 0, mv: 0, invested: 0, assetClass: f.assetClass };
+                if (!merged[f.name]) merged[f.name] = { name: f.name, val: 0, mv: 0, invested: 0, assetClass: f.assetClass, history: [] };
                 merged[f.name].val      += Math.max(val, 0);
                 merged[f.name].mv       += mv;
                 merged[f.name].invested += f.invested;
+                (f.history || []).forEach(function(h) {
+                    if (!merged[f.name].history.find(function(x){ return x.date === h.date; })) merged[f.name].history.push(h);
+                });
             });
             var items = Object.values(merged).filter(function(x){ return x.val > 0; })
-                .map(function(x){ x.pct = x.invested > 0 ? (x.mv - x.invested) / x.invested * 100 : 0; return x; })
+                .map(function(x){
+                    // Period-aware gain: NAV change from period start to now
+                    if (tmCutoff && x.history && x.history.length > 0) {
+                        var sorted = x.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                        var startEntry = sorted.filter(function(h){ return h.date <= tmCutoff; }).pop()
+                                      || sorted[0]; // fallback to earliest
+                        var endEntry = sorted[sorted.length - 1];
+                        var startNav = parseFloat(startEntry.nav);
+                        var endNav   = parseFloat(endEntry.nav);
+                        x.pct = startNav > 0 ? (endNav - startNav) / startNav * 100 : 0;
+                    } else {
+                        x.pct = x.invested > 0 ? (x.mv - x.invested) / x.invested * 100 : 0;
+                    }
+                    return x;
+                })
                 .sort(function(a,b){ return b.val - a.val; });
             var total = items.reduce(function(s,i){ return s + i.val; }, 0);
             if (!total) { chartDiv.innerHTML = ''; return; }
@@ -6361,6 +6448,21 @@
 
             if (!Object.keys(monthlyData).length) { grid.innerHTML = '<p class="text-xs text-slate-400 italic">Not enough history to build heatmap. Need NAV data across at least 2 consecutive months.</p>'; return; }
             var allYMs = Object.keys(monthlyData).sort();
+
+            // Filter months by selected period (chartTimeframe)
+            var hmCutoff = null;
+            if (typeof chartTimeframe !== 'undefined' && chartTimeframe && chartTimeframe !== 'ALL') {
+                var tfDef = (typeof NAV_TIMEFRAMES !== 'undefined') ? NAV_TIMEFRAMES.find(function(t){ return t.key === chartTimeframe; }) : null;
+                if (tfDef && tfDef.days !== null) {
+                    var hd = new Date(); hd.setDate(hd.getDate() - tfDef.days);
+                    hmCutoff = hd.toISOString().slice(0,7); // YYYY-MM
+                } else if (chartTimeframe === 'YTD') {
+                    hmCutoff = new Date().getFullYear() + '-01';
+                }
+            }
+            if (hmCutoff) allYMs = allYMs.filter(function(ym){ return ym >= hmCutoff; });
+            if (!allYMs.length) { grid.innerHTML = '<p class="text-xs text-slate-400 italic">No data in the selected period.</p>'; return; }
+
             var years = [...new Set(allYMs.map(function(s){ return s.slice(0,4); }))].sort();
             var mLabels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
             var maxAbs = Math.max.apply(null, Object.values(monthlyData).map(Math.abs)) || 1;
@@ -6430,37 +6532,80 @@
                 var pts = [];
                 Object.values(fundMap).forEach(function(f) {
                     if (!f.history || f.history.length < 10) return;
-                    var sorted = f.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                    var allSorted = f.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+
+                    // ── Period cutoff: filter history to selected timeframe ──────────
+                    var periodCutoff = null;
+                    if (typeof chartTimeframe !== 'undefined' && chartTimeframe && chartTimeframe !== 'ALL') {
+                        var tfD = (typeof NAV_TIMEFRAMES !== 'undefined') ? NAV_TIMEFRAMES.find(function(t){ return t.key === chartTimeframe; }) : null;
+                        if (tfD && tfD.days !== null) {
+                            var cd = new Date(); cd.setDate(cd.getDate() - tfD.days);
+                            periodCutoff = cd.toISOString().slice(0,10);
+                        } else if (chartTimeframe === 'YTD') {
+                            periodCutoff = new Date().getFullYear() + '-01-01';
+                        }
+                    }
+                    var sorted = periodCutoff
+                        ? allSorted.filter(function(h){ return h.date >= periodCutoff; })
+                        : allSorted;
+                    if (sorted.length < 5) sorted = allSorted; // fallback if period has too few points
+
+                    // ── Volatility (daily NAV std dev) ──────────────────────────────
                     var returns = [];
                     for (var i = 1; i < sorted.length; i++) {
                         var p = parseFloat(sorted[i-1].nav), c = parseFloat(sorted[i].nav);
-                        if (p > 0) returns.push((c - p) / p * 100);
+                        if (p > 0 && c > 0) returns.push((c - p) / p * 100);
                     }
                     if (returns.length < 5) return;
                     var mean = returns.reduce(function(s,r){ return s+r; },0) / returns.length;
                     var variance = returns.reduce(function(s,r){ return s + (r-mean)*(r-mean); },0) / returns.length;
                     var vol = Math.sqrt(variance);
 
-                    // Y value: either XIRR or CAGR
+                    // ── CAGR / XIRR ─────────────────────────────────────────────────
                     var yVal = null;
+
                     if (_rrMetric === 'xirr' && typeof buildXIRRCashFlows === 'function' && typeof calculateXIRR === 'function') {
                         try {
                             var currentValue = f.nav * f.units;
                             var cashflows = buildXIRRCashFlows(f.funds, currentValue);
                             yVal = calculateXIRR(cashflows);
+                            // Sanity check: XIRR > 500% or < -99% is almost certainly a data error
+                            if (yVal !== null && (!isFinite(yVal) || yVal > 500 || yVal < -99)) yVal = null;
                         } catch(err) { yVal = null; }
                     }
+
                     if (yVal === null || yVal === undefined || !isFinite(yVal)) {
-                        // Fall back to CAGR
+                        // ── CAGR fallback ───────────────────────────────────────────
+                        // KEY FIX: use the NAV at the user's startDate from history,
+                        // not sorted[0].nav — SSF/share-class funds have history going
+                        // back to parent fund inception, far before the user bought.
                         var firstDate = f.startDate || sorted[0].date;
                         var yrs = (new Date() - new Date(firstDate)) / (365.25 * 86400000);
-                        if (yrs < 0.1) return;
-                        var firstNav = parseFloat(sorted[0].nav), lastNav = parseFloat(sorted[sorted.length-1].nav);
-                        if (firstNav <= 0) return;
+                        if (yrs < 0.08) return; // need at least ~1 month
+
+                        // Find NAV at or just after firstDate in full history
+                        var firstEntry = allSorted.find(function(h){ return h.date >= firstDate; }) || allSorted[0];
+                        var lastEntry  = allSorted[allSorted.length - 1];
+                        var firstNav   = parseFloat(firstEntry.nav);
+                        var lastNav    = parseFloat(lastEntry.nav);
+
+                        if (firstNav <= 0 || lastNav <= 0) return;
+
+                        // If the period filter shifts the window, use period start/end NAV instead
+                        if (periodCutoff && sorted.length >= 2) {
+                            var pFirst = parseFloat(sorted[0].nav);
+                            var pLast  = parseFloat(sorted[sorted.length-1].nav);
+                            var pYrs   = (new Date(sorted[sorted.length-1].date) - new Date(sorted[0].date)) / (365.25 * 86400000);
+                            if (pFirst > 0 && pLast > 0 && pYrs >= 0.03) {
+                                firstNav = pFirst; lastNav = pLast; yrs = pYrs;
+                            }
+                        }
+
                         yVal = (Math.pow(lastNav / firstNav, 1 / yrs) - 1) * 100;
+                        // Sanity check: CAGR > 500% or < -99% is almost certainly a data error
+                        if (!isFinite(yVal) || yVal > 500 || yVal < -99) return;
                     }
-                    if (!isFinite(yVal)) return;
-                    // Clamp extreme outliers for readability (still shown in tooltip)
+
                     pts.push({ x: parseFloat(vol.toFixed(3)), y: parseFloat(yVal.toFixed(2)), label: f.name, assetClass: f.assetClass });
                 });
 
