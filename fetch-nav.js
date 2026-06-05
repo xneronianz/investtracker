@@ -1,6 +1,6 @@
 /**
- * fetch-nav.js v17 — All previously-manual SSF funds now auto-syncing via confirmed proj_ids
- * 46 funds total, proj_ids verified via Finnomena factsheet URLs
+ * fetch-nav.js v18 — added K-US500X-A(A) (M0257_2564), TLA-GFIX (M0070_2569)
+ * 48 funds total, proj_ids verified via Finnomena factsheet URLs
  * Note: SSF/SSFE/SSFA share classes may use same proj_id as parent — NAV differs by <0.2%
  *
  * GitHub Secrets: SEC_KEY_DAILYINFO
@@ -29,6 +29,7 @@ const FUND_MAP = [
   ['KFGGSSF',               'M0379_2564'],
   ['KF-LATAM',              'M0028_2553'],
   ['K-GOLD-A(A)',           'M0447_2551'],
+  ['K-US500X-A(A)',         'M0257_2564'],   // ← new: Kasikorn US500 Extra Fund A
   ['KKP CHINA-H-SSF',       'M0432_2565'],   // confirmed
   ['KKP EQ THAI ESG',       'M0851_2566'],
   ['KKP GB THAI ESG',       'M0840_2566'],
@@ -57,6 +58,7 @@ const FUND_MAP = [
   ['TDSThaiESG-A',         'M0793_2567'],
   ['TISCOCHA-SSF',         'M0258_2562'],   // confirmed
   ['TLA-GEQ',              'M0563_2568'],
+  ['TLA-GFIX',             'M0070_2569'],   // ← new: Talis Global Fixed Income
   ['TLAWSRMF',             'M0948_2568'],
   ['TLFVMR-ASIAX',         'M0096_2567'],
   ['UCHINA-SSF',            'M0533_2561'],   // confirmed
