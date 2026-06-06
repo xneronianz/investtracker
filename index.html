@@ -1030,270 +1030,67 @@
 
     <div id="allTxModal" class="modal" style="z-index: 2000;">
         <div class="bg-white p-8 rounded-[2rem] shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <div class="flex justify-between items-center mb-4 border-b pb-4 sticky top-0 bg-white z-10">
                 <h2 class="text-2xl font-black text-slate-800">Complete Transaction Ledger</h2>
                 <button onclick="closeModal('allTxModal')" class="text-slate-400 font-black hover:text-rose-500 transition-colors text-xl">✕ CLOSE</button>
             </div>
-            
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-xs min-w-full">
                     <thead>
-                        <tr class="text-slate-400 font-black border-b text-[10px] uppercase tracking-wider">
-                            <th class="pb-3 px-2">Date</th>
-                            <th class="pb-3 px-2">Fund Name</th>
-                            <th class="pb-3 px-2 text-center">Type</th>
-                            <th class="pb-3 px-2 text-right">Amount (THB)</th>
-                            <th class="pb-3 px-2 text-right">Units</th>
-                            <th class="pb-3 px-2 text-right">Realized P/L</th>
-                            <th class="pb-3 px-2 text-center">Revert</th>
+                        <tr class="text-slate-400 font-black border-b text-[10px] uppercase tracking-wider bg-slate-50">
+                            <th class="pb-3 px-2 relative">
+                                <div class="flex items-center gap-1 whitespace-nowrap">
+                                    Date
+                                    <button id="txFilterBtn_date" onclick="openTxFilter('date',this)" class="ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black text-slate-300 hover:text-indigo-500 transition-all">▾</button>
+                                </div>
+                            </th>
+                            <th class="pb-3 px-2 relative">
+                                <div class="flex items-center gap-1 whitespace-nowrap">
+                                    Fund Name
+                                    <button id="txFilterBtn_fundName" onclick="openTxFilter('fundName',this)" class="ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black text-slate-300 hover:text-indigo-500 transition-all">▾</button>
+                                </div>
+                            </th>
+                            <th class="pb-3 px-2 relative">
+                                <div class="flex items-center gap-1 whitespace-nowrap">
+                                    Portfolio
+                                    <button id="txFilterBtn_portfolio" onclick="openTxFilter('portfolio',this)" class="ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black text-slate-300 hover:text-indigo-500 transition-all">▾</button>
+                                </div>
+                            </th>
+                            <th class="pb-3 px-2 relative">
+                                <div class="flex items-center gap-1 whitespace-nowrap">
+                                    Type
+                                    <button id="txFilterBtn_type" onclick="openTxFilter('type',this)" class="ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black text-slate-300 hover:text-indigo-500 transition-all">▾</button>
+                                </div>
+                            </th>
+                            <th class="pb-3 px-2 text-right whitespace-nowrap">
+                                <div class="flex items-center justify-end gap-1">
+                                    Amount (THB)
+                                    <button id="txFilterBtn_amount" onclick="openTxNumFilter('amount',this)" class="ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black text-slate-300 hover:text-indigo-500 transition-all">▾</button>
+                                </div>
+                            </th>
+                            <th class="pb-3 px-2 text-right whitespace-nowrap">
+                                <div class="flex items-center justify-end gap-1">
+                                    Units
+                                    <button id="txFilterBtn_units" onclick="openTxNumFilter('units',this)" class="ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black text-slate-300 hover:text-indigo-500 transition-all">▾</button>
+                                </div>
+                            </th>
+                            <th class="pb-3 px-2 text-right whitespace-nowrap">
+                                <div class="flex items-center justify-end gap-1">
+                                    Realized P/L
+                                    <button id="txFilterBtn_pl" onclick="openTxNumFilter('pl',this)" class="ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black text-slate-300 hover:text-indigo-500 transition-all">▾</button>
+                                </div>
+                            </th>
+                            <th class="pb-3 px-2 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="allTxBody" class="divide-y text-slate-600">
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-16</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">SCBCHA-SSF</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-rose-600 whitespace-nowrap">Switch Out</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿3,716.32</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">400.0000</td>
-                    <td class="py-3 px-2 text-right border-b"><span class="font-bold text-rose-500">-฿42.84</span></td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773570932048', 'SCBCHA-SSF||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773570932048')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-16</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">SCBEUROPE(SSF)</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Switch In</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿3,716.32</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">464.1745</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773570932048', 'SCBEUROPE(SSF)||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773570932048')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-16</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">SCBGOLDH-SSF</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-rose-600 whitespace-nowrap">Switch Out</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿11,735.46</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">600.0000</td>
-                    <td class="py-3 px-2 text-right border-b"><span class="font-bold text-emerald-500">+฿3670.59</span></td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773569724612', 'SCBGOLDH-SSF||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773569724612')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-16</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">SCBVIET(SSFA)</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Switch In</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿11,735.46</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">1,574.3842</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773569724612', 'SCBVIET(SSFA)||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773569724612')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-16</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">KKP EMXCN-H-SSF</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-rose-600 whitespace-nowrap">Switch Out</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿11,952.00</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">900.0000</td>
-                    <td class="py-3 px-2 text-right border-b"><span class="font-bold text-emerald-500">+฿2127.78</span></td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773569292357', 'KKP EMXCN-H-SSF||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773569292357')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-16</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">KKP US500-UH-SSF</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Switch In</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿11,952.00</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">1,057.6991</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773569292357', 'KKP US500-UH-SSF||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773569292357')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-13</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">SCBAXJ(SSF)</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-rose-600 whitespace-nowrap">Switch Out</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿21,572.47</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">1,747.1831</td>
-                    <td class="py-3 px-2 text-right border-b"><span class="font-bold text-emerald-500">+฿1860.40</span></td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773392311664', 'SCBAXJ(SSF)||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773392311664')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-13</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">SCBNDQ(SSF)</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Switch In</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿21,749.46</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">1,639.2418</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773392311664', 'SCBNDQ(SSF)||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773392311664')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-11</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">KKP EQ THAI ESG</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Switch In</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿39,000.15</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">3,900.0150</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773203910310', 'KKP EQ THAI ESG||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773203910310')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-11</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">KKP GB THAI ESG</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-Tax</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-rose-600 whitespace-nowrap">Switch Out</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿37,724.05</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">3,500.0000</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773203910310', 'KKP GB THAI ESG||Finnomena-Tax')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773203910310')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-10</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">KT-BOND</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-AWS</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Buy</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿12,500.00</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">1,139.8246</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773052845289', 'KT-BOND||Finnomena-AWS')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773052845289')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-10</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">SCBCOMP</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-AWS</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Buy</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿25,000.00</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">3,329.9590</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773052795078', 'SCBCOMP||Finnomena-AWS')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773052795078')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-10</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">TLA-GEQ</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-AWS</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Buy</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿37,500.00</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">3,462.6359</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773052705544', 'TLA-GEQ||Finnomena-AWS')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773052705544')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-10</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">KF-LATAM</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-AWS</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Buy</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿50,000.00</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">5,166.4101</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773052647075', 'KF-LATAM||Finnomena-AWS')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773052647075')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-10</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">TLFVMR-ASIAX</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-AWS</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Buy</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿62,500.00</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">5,558.1741</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773052614279', 'TLFVMR-ASIAX||Finnomena-AWS')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773052614279')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">2026-03-10</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">K-GOLD-A(A)</span><br>
-                        <span class="text-[9px] text-slate-400">Finnomena-AWS</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold text-emerald-600 whitespace-nowrap">Buy</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿62,500.00</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">2,309.1616</td>
-                    <td class="py-3 px-2 text-right border-b">-</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('1773052547222', 'K-GOLD-A(A)||Finnomena-AWS')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('1773052547222')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
-
+    <!-- Shared TX filter dropdown panel (appended to body, positioned fixed) -->
+    <div id="txFilterPanel" style="display:none;position:fixed;z-index:9999;width:220px;" class="bg-white rounded-xl shadow-2xl border border-slate-200 p-3"></div>
     <div id="editTxModal" class="modal" style="z-index: 2100;">
         <div class="bg-white p-8 rounded-[2rem] shadow-2xl w-full max-w-md">
             <h2 class="text-xl font-black mb-6 text-center text-amber-500">Edit Transaction</h2>
@@ -3009,6 +2806,7 @@
             var result;
 
             if (type === 'Sell') {
+                // amount = actual proceeds the user entered (market value at time of sale)
                 result = applyTxToFund(sourceId, 'Sell', amount, sourceUnits, date, txGroupId);
                 if (!result.ok) { alert(result.err); return; }
 
@@ -3017,9 +2815,11 @@
                 if (!result.ok) { alert(result.err); return; }
 
             } else if (type === 'Switch') {
-                // Snapshot source cost basis BEFORE any mutation
-                var srcFund   = allFunds.find(function(x) { return (x.name + "||" + x.portfolio) === sourceId; });
-                var switchAmt = (srcFund && srcFund.units > 0) ? parseFloat(((srcFund.invested / srcFund.units) * sourceUnits).toFixed(2)) : amount;
+                // BUG FIX: switchAmt should be the actual market value switched out (= amount
+                // the user typed as "Switch Out value"), NOT the cost basis of those units.
+                // The cost basis is used only to compute realizedPL inside applyTxToFund.
+                // amount = market value received by target fund = market value leaving source fund.
+                var switchAmt = amount; // ← actual switch-out proceeds, as filled in by user
 
                 result = applyTxToFund(sourceId, 'Switch Out', switchAmt, sourceUnits, date, txGroupId);
                 if (!result.ok) { alert(result.err); return; }
@@ -3036,54 +2836,379 @@
         // ==========================================
         // ALL TRANSACTIONS LOG MODAL
         // ==========================================
+        // ── TX LEDGER FILTER STATE ──────────────────────────────────────────────
+        var _txFs = { date: null, fundName: null, portfolio: null, type: null };
+        var _txSearch = { date: '', fundName: '', portfolio: '', type: '' };
+        var _txOpenCol = null;
+
+        function _allTxFlat() {
+            var rows = [];
+            allFunds.forEach(function(f) {
+                (f.transactions || []).forEach(function(t) {
+                    rows.push(Object.assign({}, t, { fundName: f.name, portfolio: f.portfolio || '', fId: f.name + '||' + (f.portfolio || '') }));
+                });
+            });
+            rows.sort(function(a,b){ return b.date.localeCompare(a.date) || b.id.localeCompare(a.id); });
+            return rows;
+        }
+
+        function _txColVal(row, col) {
+            if (col === 'date')      return row.date;
+            if (col === 'fundName')  return row.fundName;
+            if (col === 'portfolio') return row.portfolio;
+            if (col === 'type')      return row.type;
+            return '';
+        }
+
+        function _txAllVals(col) {
+            var s = new Set();
+            _allTxFlat().forEach(function(r){ s.add(_txColVal(r, col)); });
+            return Array.from(s).sort();
+        }
+
+        function _buildCheckboxList(col) {
+            var allVals = _txAllVals(col);
+            var search = _txSearch[col] || '';
+            var selected = _txFs[col];
+            var visible = search ? allVals.filter(function(v){ return v.toLowerCase().includes(search.toLowerCase()); }) : allVals;
+            var safeCol = col.replace(/'/g,'&#39;');
+            if (!visible.length) return '<p style="font-size:10px;color:#94a3b8;text-align:center;padding:8px;">No matches</p>';
+            return visible.map(function(v) {
+                var checked = selected === null || selected.has(v);
+                var safeV = v.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+                return '<label style="display:flex;align-items:center;gap:8px;padding:4px;cursor:pointer;">' +
+                    '<input type="checkbox" value="' + safeV + '" ' + (checked ? 'checked' : '') +
+                    ' onchange="_txToggle(&#39;' + safeCol + '&#39;,this.value,this.checked)"' +
+                    ' style="width:14px;height:14px;cursor:pointer;">' +
+                    '<span style="font-size:11px;font-weight:600;color:#334155;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + (v || '(blank)') + '</span></label>';
+            }).join('');
+        }
+
+        function _buildTxPanel(col) {
+            var safeCol2  = col.replace(/'/g,'&#39;');
+            var isActive  = _txFs[col] !== null;
+            return '<div style="margin-bottom:8px;">' +
+                '<input type="text" id="txSearchInput_' + col + '" placeholder="Search\u2026"' +
+                ' oninput="_txSearchUpdate(&#39;' + safeCol2 + '&#39;,this.value)"' +
+                ' autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"' +
+                ' style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;outline:none;box-sizing:border-box;">' +
+                '</div>' +
+                '<div style="display:flex;gap:4px;margin-bottom:8px;">' +
+                '<button onclick="_txSelectAll(&#39;' + safeCol2 + '&#39;)"' +
+                ' style="flex:1;font-size:9px;font-weight:900;border-radius:8px;padding:4px;background:#f1f5f9;border:none;cursor:pointer;">All</button>' +
+                '<button onclick="_txSelectNone(&#39;' + safeCol2 + '&#39;)"' +
+                ' style="flex:1;font-size:9px;font-weight:900;border-radius:8px;padding:4px;background:#f1f5f9;border:none;cursor:pointer;">None</button>' +
+                (isActive ? '<button onclick="_txReset(&#39;' + safeCol2 + '&#39;)"' +
+                ' style="flex:1;font-size:9px;font-weight:900;border-radius:8px;padding:4px;background:#e0e7ff;color:#4f46e5;border:none;cursor:pointer;">\u2715 Clear</button>' : '') +
+                '</div>' +
+                '<div id="txCheckboxList_' + col + '" style="max-height:192px;overflow-y:auto;margin-bottom:8px;">' +
+                _buildCheckboxList(col) +
+                '</div>' +
+                '<button onclick="closeTxFilter()"' +
+                ' style="width:100%;font-size:10px;font-weight:900;background:#6366f1;color:#fff;border:none;border-radius:8px;padding:6px;cursor:pointer;">\u2713 Done</button>';
+        }
+
+        function openTxFilter(col, btn) {
+            if (_txOpenCol === col) { closeTxFilter(); return; }
+            closeTxFilter();
+            _txOpenCol = col;
+            _txSearch[col] = ''; // clear search when reopening
+            var panel = document.getElementById('txFilterPanel');
+            if (!panel) return;
+            panel.innerHTML = _buildTxPanel(col);
+            var rect = btn.getBoundingClientRect();
+            var panelW = 220;
+            var left = Math.min(rect.left, window.innerWidth - panelW - 8);
+            var top  = rect.bottom + 4;
+            if (top + 340 > window.innerHeight) top = Math.max(4, rect.top - 340);
+            panel.style.top  = top + 'px';
+            panel.style.left = left + 'px';
+            panel.style.display = 'block';
+            // Focus the input without replacing it
+            setTimeout(function(){ var inp = document.getElementById('txSearchInput_' + col); if(inp) inp.focus(); }, 80);
+        }
+
+        function closeTxFilter() {
+            var panel = document.getElementById('txFilterPanel');
+            if (panel) panel.style.display = 'none';
+            _txOpenCol = null;
+        }
+
+        function _txSearchUpdate(col, val) {
+            _txSearch[col] = val;
+            // KEY FIX: only update the checkbox list — never replace the input element
+            // Replacing innerHTML kills focus and dismisses the mobile keyboard
+            var listEl = document.getElementById('txCheckboxList_' + col);
+            if (listEl) listEl.innerHTML = _buildCheckboxList(col);
+        }
+
+        function _txToggle(col, val, checked) {
+            var allVals = _txAllVals(col);
+            if (_txFs[col] === null) _txFs[col] = new Set(allVals);
+            if (checked) _txFs[col].add(val); else _txFs[col].delete(val);
+            if (_txFs[col].size >= allVals.length) _txFs[col] = null;
+            _txUpdateHeaders(); renderAllTransactionsTable();
+        }
+
+        function _txSelectAll(col) {
+            _txFs[col] = null; _txSearch[col] = '';
+            var panel = document.getElementById('txFilterPanel');
+            if (panel) panel.innerHTML = _buildTxPanel(col);
+            _txUpdateHeaders(); renderAllTransactionsTable();
+        }
+
+        function _txSelectNone(col) {
+            _txFs[col] = new Set();
+            var panel = document.getElementById('txFilterPanel');
+            if (panel) panel.innerHTML = _buildTxPanel(col);
+            _txUpdateHeaders(); renderAllTransactionsTable();
+        }
+
+        function _txReset(col) {
+            _txFs[col] = null; _txSearch[col] = '';
+            var panel = document.getElementById('txFilterPanel');
+            if (panel) panel.innerHTML = _buildTxPanel(col);
+            _txUpdateHeaders(); renderAllTransactionsTable();
+        }
+
+        function _txUpdateHeaders() {
+            ['date','fundName','portfolio','type'].forEach(function(col) {
+                var btn = document.getElementById('txFilterBtn_' + col);
+                if (!btn) return;
+                var active = _txFs[col] !== null;
+                btn.textContent = active ? '\u25be\u25cf' : '\u25be';
+                btn.className = 'ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black transition-all ' +
+                    (active ? 'bg-indigo-500 text-white' : 'text-slate-300 hover:text-indigo-500');
+            });
+            ['amount','units','pl'].forEach(function(col) {
+                var btn = document.getElementById('txFilterBtn_' + col);
+                if (!btn) return;
+                var f = _txNumFs[col];
+                var active = f && (f.exact !== '' || f.min !== '' || f.max !== '');
+                btn.textContent = active ? '\u25be\u25cf' : '\u25be';
+                btn.className = 'ml-0.5 text-[10px] rounded-md px-1 py-0.5 font-black transition-all ' +
+                    (active ? 'bg-indigo-500 text-white' : 'text-slate-300 hover:text-indigo-500');
+            });
+        }
+
+        // ── NUMERIC COLUMN FILTER STATE ─────────────────────────────────────────
+        // mode: 'exact' | 'gt' | 'lt' | 'between'
+        var _txNumFs = {
+            amount: { mode: 'between', exact: '', min: '', max: '' },
+            units:  { mode: 'between', exact: '', min: '', max: '' },
+            pl:     { mode: 'between', exact: '', min: '', max: '' }
+        };
+        var _txNumOpenCol = null;
+
+        function _txNumColVal(row, col) {
+            if (col === 'amount') return row.amount || 0;
+            if (col === 'units')  return row.units  || 0;
+            if (col === 'pl')     return row.realizedPL || 0;
+            return 0;
+        }
+
+        function _txNumLabel(col) {
+            if (col === 'amount') return 'Amount (THB)';
+            if (col === 'units')  return 'Units';
+            if (col === 'pl')     return 'Realized P/L';
+            return col;
+        }
+
+        function _buildNumPanel(col) {
+            var f = _txNumFs[col];
+            var label = _txNumLabel(col);
+            var safeCol = col.replace(/'/g,'&#39;');
+            var modes = [
+                { val: 'exact',   lbl: '# Contains number' },
+                { val: 'gt',      lbl: '> Greater than' },
+                { val: 'lt',      lbl: '< Less than' },
+                { val: 'between', lbl: '↔ Between' }
+            ];
+            var modeHtml = modes.map(function(m) {
+                return '<label style="display:flex;align-items:center;gap:6px;padding:4px 2px;cursor:pointer;">' +
+                    '<input type="radio" name="numMode_' + col + '" value="' + m.val + '"' +
+                    (f.mode === m.val ? ' checked' : '') +
+                    ' onchange="_txNumSetMode(&#39;' + safeCol + '&#39;,this.value)"' +
+                    ' style="cursor:pointer;">' +
+                    '<span style="font-size:11px;color:#334155;font-weight:600;">' + m.lbl + '</span></label>';
+            }).join('');
+
+            var inputsHtml = '';
+            if (f.mode === 'exact') {
+                inputsHtml = '<input type="number" step="any" id="txNum_exact_' + col + '" value="' + (f.exact || '') + '"' +
+                    ' oninput="_txNumUpdate(&#39;' + safeCol + '&#39;)" placeholder="e.g. 1000 or 10.5"' +
+                    ' autocomplete="off" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;outline:none;box-sizing:border-box;">';
+            } else if (f.mode === 'gt') {
+                inputsHtml = '<input type="number" step="any" id="txNum_min_' + col + '" value="' + (f.min || '') + '"' +
+                    ' oninput="_txNumUpdate(&#39;' + safeCol + '&#39;)" placeholder="Greater than"' +
+                    ' autocomplete="off" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;outline:none;box-sizing:border-box;">';
+            } else if (f.mode === 'lt') {
+                inputsHtml = '<input type="number" step="any" id="txNum_max_' + col + '" value="' + (f.max || '') + '"' +
+                    ' oninput="_txNumUpdate(&#39;' + safeCol + '&#39;)" placeholder="Less than"' +
+                    ' autocomplete="off" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;outline:none;box-sizing:border-box;">';
+            } else { // between
+                inputsHtml =
+                    '<input type="number" step="any" id="txNum_min_' + col + '" value="' + (f.min || '') + '"' +
+                    ' oninput="_txNumUpdate(&#39;' + safeCol + '&#39;)" placeholder="From"' +
+                    ' autocomplete="off" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;outline:none;box-sizing:border-box;margin-bottom:4px;">' +
+                    '<input type="number" step="any" id="txNum_max_' + col + '" value="' + (f.max || '') + '"' +
+                    ' oninput="_txNumUpdate(&#39;' + safeCol + '&#39;)" placeholder="To"' +
+                    ' autocomplete="off" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;outline:none;box-sizing:border-box;">';
+            }
+
+            return '<p style="font-size:9px;font-weight:900;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">' + label + '</p>' +
+                '<div style="margin-bottom:10px;">' + modeHtml + '</div>' +
+                '<div id="txNumInputs_' + col + '" style="margin-bottom:10px;">' + inputsHtml + '</div>' +
+                '<div style="display:flex;gap:4px;">' +
+                '<button onclick="_txNumReset(&#39;' + safeCol + '&#39;)"' +
+                ' style="flex:1;font-size:9px;font-weight:900;border-radius:8px;padding:4px;background:#f1f5f9;border:none;cursor:pointer;">\u2715 Clear</button>' +
+                '<button onclick="closeTxFilter()"' +
+                ' style="flex:1;font-size:10px;font-weight:900;background:#6366f1;color:#fff;border:none;border-radius:8px;padding:5px;cursor:pointer;">\u2713 Done</button>' +
+                '</div>';
+        }
+
+        function openTxNumFilter(col, btn) {
+            // Close text filter panel if open
+            closeTxFilter();
+            if (_txNumOpenCol === col) { closeTxNumFilter(); return; }
+            closeTxNumFilter();
+            _txNumOpenCol = col;
+            var panel = document.getElementById('txFilterPanel');
+            if (!panel) return;
+            panel.innerHTML = _buildNumPanel(col);
+            var rect = btn.getBoundingClientRect();
+            var panelW = 230;
+            var left = Math.min(rect.left, window.innerWidth - panelW - 8);
+            var top  = rect.bottom + 4;
+            if (top + 280 > window.innerHeight) top = Math.max(4, rect.top - 280);
+            panel.style.left = left + 'px';
+            panel.style.top  = top + 'px';
+            panel.style.display = 'block';
+            // Focus first input
+            setTimeout(function() {
+                var inp = panel.querySelector('input[type=number]');
+                if (inp) inp.focus();
+            }, 80);
+        }
+
+        function closeTxNumFilter() {
+            var panel = document.getElementById('txFilterPanel');
+            if (panel) panel.style.display = 'none';
+            _txNumOpenCol = null;
+        }
+
+        function _txNumSetMode(col, mode) {
+            _txNumFs[col].mode = mode;
+            // Rebuild only the inputs section — keeps radio focus intact
+            var inputsEl = document.getElementById('txNumInputs_' + col);
+            if (inputsEl) {
+                // rebuild just the inputs portion
+                var panel = document.getElementById('txFilterPanel');
+                if (panel) panel.innerHTML = _buildNumPanel(col);
+            }
+            renderAllTransactionsTable();
+        }
+
+        function _txNumUpdate(col) {
+            var f = _txNumFs[col];
+            var exactEl = document.getElementById('txNum_exact_' + col);
+            var minEl   = document.getElementById('txNum_min_'   + col);
+            var maxEl   = document.getElementById('txNum_max_'   + col);
+            f.exact = exactEl ? exactEl.value : '';
+            f.min   = minEl   ? minEl.value   : '';
+            f.max   = maxEl   ? maxEl.value   : '';
+            _txUpdateHeaders();
+            renderAllTransactionsTable();
+        }
+
+        function _txNumReset(col) {
+            _txNumFs[col] = { mode: 'between', exact: '', min: '', max: '' };
+            var panel = document.getElementById('txFilterPanel');
+            if (panel) panel.innerHTML = _buildNumPanel(col);
+            _txUpdateHeaders();
+            renderAllTransactionsTable();
+        }
+
+        function _txNumPassRow(row) {
+            return ['amount','units','pl'].every(function(col) {
+                var f = _txNumFs[col];
+                var exact = f.exact.trim(), min = f.min.trim(), max = f.max.trim();
+                if (!exact && !min && !max) return true; // no filter
+                var v = _txNumColVal(row, col);
+                if (f.mode === 'exact' && exact !== '') return String(Math.abs(v).toFixed(4)).includes(exact) || String(v.toFixed(2)).includes(exact);
+                if (f.mode === 'gt'    && min   !== '') return v > parseFloat(min);
+                if (f.mode === 'lt'    && max   !== '') return v < parseFloat(max);
+                if (f.mode === 'between') {
+                    if (min !== '' && v < parseFloat(min)) return false;
+                    if (max !== '' && v > parseFloat(max)) return false;
+                }
+                return true;
+            });
+        }
+
+        document.addEventListener('click', function(e) {
+            var panel = document.getElementById('txFilterPanel');
+            if (!panel || panel.style.display === 'none') return;
+            if (e.target.closest && (e.target.closest('#txFilterPanel') ||
+                e.target.closest('[id^="txFilterBtn_"]'))) return;
+            closeTxFilter();
+            closeTxNumFilter();
+        });
+
         function openAllTransactionsModal() {
+            _txFs = { date: null, fundName: null, portfolio: null, type: null };
+            _txSearch = { date: '', fundName: '', portfolio: '', type: '' };
+            _txNumFs = {
+                amount: { mode: 'between', exact: '', min: '', max: '' },
+                units:  { mode: 'between', exact: '', min: '', max: '' },
+                pl:     { mode: 'between', exact: '', min: '', max: '' }
+            };
+            _txOpenCol = null; _txNumOpenCol = null;
+            _txUpdateHeaders();
             renderAllTransactionsTable();
             document.getElementById('allTxModal').classList.add('active');
         }
 
         function renderAllTransactionsTable() {
-            let flatTx = [];
-            allFunds.forEach(f => {
-                (f.transactions || []).forEach(t => {
-                    flatTx.push({ ...t, fundName: f.name, portfolio: f.portfolio, fId: f.name + "||" + f.portfolio });
-                });
+            var rows = _allTxFlat();
+            ['date','fundName','portfolio','type'].forEach(function(col) {
+                if (_txFs[col] !== null) {
+                    rows = rows.filter(function(r){ return _txFs[col].has(_txColVal(r, col)); });
+                }
             });
-            
-            flatTx.sort((a,b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
-
-            const tbody = document.getElementById('allTxBody');
-            if (flatTx.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-300 font-bold text-lg">No transactions recorded across portfolio.</td></tr>';
+            // Apply numeric column filters
+            rows = rows.filter(function(r){ return _txNumPassRow(r); });
+            var tbody = document.getElementById('allTxBody');
+            if (!tbody) return;
+            if (rows.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-slate-300 font-bold text-lg">No transactions match the current filters.</td></tr>';
                 return;
             }
-
-            tbody.innerHTML = flatTx.map(t => {
-                let typeColor = 'text-amber-600';
-                if(t.type === 'Buy' || t.type === 'Switch In') typeColor = 'text-emerald-600';
-                if(t.type === 'Sell' || t.type === 'Switch Out') typeColor = 'text-rose-600';
-
-                const plHTML = t.realizedPL !== 0 ? `<span class="font-bold ${t.realizedPL > 0 ? 'text-emerald-500':'text-rose-500'}">${t.realizedPL > 0 ? '+฿' : '-฿'}${Math.abs(t.realizedPL).toFixed(2)}</span>` : '-';
-
-                return `
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-3 px-2 border-b font-medium whitespace-nowrap">${t.date}</td>
-                    <td class="py-3 px-2 border-b">
-                        <span class="font-bold text-slate-700">${t.fundName}</span><br>
-                        <span class="text-[9px] text-slate-400">${t.portfolio}</span>
-                    </td>
-                    <td class="py-3 px-2 border-b text-center font-bold ${typeColor} whitespace-nowrap">${t.type}</td>
-                    <td class="py-3 px-2 text-right border-b font-black text-slate-700">฿${t.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                    <td class="py-3 px-2 text-right border-b font-bold text-slate-500">${t.units.toLocaleString(undefined, {minimumFractionDigits:4})}</td>
-                    <td class="py-3 px-2 text-right border-b">${plHTML}</td>
-                    <td class="py-3 px-2 text-center border-b">
-                        <div class="flex gap-1 justify-center"><button onclick="openEditTx('${t.id}', '${t.fId}')" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button><button onclick="revertGlobalTransaction('${t.id}')" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]" title="Delete this record and revert its math.">Revert</button></div>
-                    </td>
-                </tr>
-            `;}).join('');
+            function fmtB(n) { return '\u0e3f' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','); }
+            tbody.innerHTML = rows.map(function(t) {
+                var tc = t.type === 'Buy' || t.type === 'Switch In' ? 'text-emerald-600' :
+                         t.type === 'Sell'|| t.type === 'Switch Out'? 'text-rose-600' : 'text-amber-600';
+                var plHTML = (t.realizedPL !== undefined && t.realizedPL !== 0)
+                    ? '<span class="font-bold ' + (t.realizedPL > 0 ? 'text-emerald-500' : 'text-rose-500') + '">' +
+                      (t.realizedPL > 0 ? '+' : '-') + fmtB(Math.abs(t.realizedPL)) + '</span>' : '-';
+                var safeId  = (t.id  || '').replace(/'/g,"\'");
+                var safeFId = (t.fId || '').replace(/'/g,"\'");
+                return '<tr class="hover:bg-slate-50 transition-colors">' +
+                    '<td class="py-3 px-2 border-b font-medium whitespace-nowrap">' + t.date + '</td>' +
+                    '<td class="py-3 px-2 border-b font-bold text-slate-700 whitespace-nowrap">' + t.fundName + '</td>' +
+                    '<td class="py-3 px-2 border-b text-[10px] text-slate-400 whitespace-nowrap">' + t.portfolio + '</td>' +
+                    '<td class="py-3 px-2 border-b text-center font-bold ' + tc + ' whitespace-nowrap">' + t.type + '</td>' +
+                    '<td class="py-3 px-2 text-right border-b font-black text-slate-700">' + fmtB(t.amount) + '</td>' +
+                    '<td class="py-3 px-2 text-right border-b font-bold text-slate-500">' + t.units.toLocaleString(undefined,{minimumFractionDigits:4}) + '</td>' +
+                    '<td class="py-3 px-2 text-right border-b">' + plHTML + '</td>' +
+                    '<td class="py-3 px-2 text-center border-b"><div class="flex gap-1 justify-center">' +
+                    '<button data-txid="' + safeId + '" data-fid="' + safeFId + '" onclick="openEditTx(this.dataset.txid,this.dataset.fid)" class="bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Edit</button>' +
+                    '<button data-txid="' + safeId + '" onclick="revertGlobalTransaction(this.dataset.txid)" class="bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white font-bold px-2 py-1 rounded-lg transition-all text-[9px]">Revert</button>' +
+                    '</div></td></tr>';
+            }).join('');
         }
 
-        
-        function openEditTx(txId, fundId) {
+                function openEditTx(txId, fundId) {
             const f = allFunds.find(x => (x.name + "||" + x.portfolio) === fundId);
             if (!f || !f.transactions) return;
             const t = f.transactions.find(tx => tx.id === txId);
