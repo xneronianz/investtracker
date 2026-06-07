@@ -1933,11 +1933,12 @@
                 var bar = document.getElementById(barId);
                 if (!bar) return;
                 bar.innerHTML = TF_BAR_KEYS.map(function(key) {
-                    // Use same onclick as main hist perf chart — all share setChartTimeframe
+                    var isActive = key === chartTimeframe;
+                    var cls = isActive
+                        ? 'tf-btn px-2 py-0.5 text-[9px] font-black rounded-md bg-indigo-500 text-white shadow-sm transition-all'
+                        : 'tf-btn px-2 py-0.5 text-[9px] font-black rounded-md text-slate-500 hover:text-indigo-600 transition-all';
                     return '<button onclick="setChartTimeframe(\'' + key + '\')" ' +
-                        'data-tfbar="' + key + '" ' +
-                        'class="tf-btn px-2 py-0.5 text-[9px] font-black rounded-md text-slate-500 hover:text-indigo-600 transition-all">' +
-                        key + '</button>';
+                        'data-tfbar="' + key + '" class="' + cls + '">' + key + '</button>';
                 }).join('');
             });
         }
@@ -3716,6 +3717,8 @@
 
         function renderAll() {
             fitFundTable();
+            // Rebuild period selector bars on every render (they get wiped when chart cards re-render)
+            if (typeof buildPeriodBars === 'function') buildPeriodBars();
             const inv = filteredFunds.reduce((sum, f) => sum + f.invested, 0);
             const cur = filteredFunds.reduce((sum, f) => sum + f.currentValue, 0);
             const divTotal = filteredFunds.reduce((sum, f) => sum + f.divSum, 0);
