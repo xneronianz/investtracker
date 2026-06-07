@@ -631,7 +631,7 @@
                         {"proName":"TVC:HSI","title":"Hang Seng"},
                         {"proName":"SSE:000300","title":"CSI 300"},
                         {"proName":"TVC:GOLD","title":"Gold"},
-                        {"proName":"FX:USDTHB","title":"USD/THB"},
+                        {"proName":"USDTHB","title":"USD/THB"},
                         {"proName":"CAPITALCOM:CN50","title":"China A50"},
                         {"proName":"HOSE:VNINDEX","title":"VN Index"},
                         {"proName":"TVC:US10Y","title":"US 10Y Yield"}
@@ -691,7 +691,7 @@
                                 {"s":"NASDAQ:DRIV","d":"EV & Transport ETF"},
                                 {"s":"AMEX:MOO","d":"Agri & Food ETF"},
                                 {"s":"AMEX:CQQQ","d":"China Tech ETF"},
-                                {"s":"NASDAQ:FTEC","d":"US Tech Sector ETF"},
+                                {"s":"AMEX:FTEC","d":"US Tech Sector ETF"},
                                 {"s":"AMEX:ARKK","d":"Innovation ETF"}
                             ],
                             "originalTitle": "ETFs"
@@ -711,12 +711,12 @@
                         {
                             "title": "THB FX",
                             "symbols": [
-                                {"s":"FX:USDTHB","d":"USD/THB"},
-                                {"s":"FX:EURTHB","d":"EUR/THB"},
-                                {"s":"FX_IDC:JPYTHB","d":"JPY/THB"},
-                                {"s":"FX_IDC:CNYTHB","d":"CNY/THB"},
-                                {"s":"FX_IDC:VNDTHB","d":"VND/THB"},
-                                {"s":"FX_IDC:SGDTHB","d":"SGD/THB"}
+                                {"s":"USDTHB","d":"USD/THB"},
+                                {"s":"EURTHB","d":"EUR/THB"},
+                                {"s":"JPYTHB","d":"JPY/THB"},
+                                {"s":"CNYTHB","d":"CNY/THB"},
+                                {"s":"VNDTHB","d":"VND/THB"},
+                                {"s":"SGDTHB","d":"SGD/THB"}
                             ],
                             "originalTitle": "THB FX"
                         },
@@ -744,14 +744,15 @@
 
         <!-- ECONOMIC CALENDAR -->
         <div class="bg-white p-5 rounded-[2rem] shadow-xl border border-slate-100 mb-4">
-            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">📅 Economic Calendar</h3>
-            <!-- Column headers matching TradingView widget layout -->
-            <div class="flex justify-end gap-0 text-[9px] font-black text-slate-400 uppercase tracking-wider mb-1 pr-1" style="padding-right:2px;">
-                <span style="min-width:90px;text-align:right;">Actual</span>
-                <span style="min-width:90px;text-align:right;">Forecast</span>
-                <span style="min-width:90px;text-align:right;">Previous</span>
+            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">📅 Economic Calendar</h3>
+            <!-- Column headers: shift left to align with widget's data columns -->
+            <div style="display:flex; padding: 0 0 6px 0; border-bottom: 1px solid #f1f5f9; margin-bottom:2px;">
+                <div style="flex:0 0 45%; min-width:0;"></div>
+                <div style="flex:1; text-align:right; font-size:9px; font-weight:900; color:#94a3b8; letter-spacing:0.08em; text-transform:uppercase; padding-right:4px;">Actual</div>
+                <div style="flex:1; text-align:right; font-size:9px; font-weight:900; color:#94a3b8; letter-spacing:0.08em; text-transform:uppercase; padding-right:4px;">Forecast</div>
+                <div style="flex:1; text-align:right; font-size:9px; font-weight:900; color:#94a3b8; letter-spacing:0.08em; text-transform:uppercase; padding-right:4px;">Previous</div>
             </div>
-            <div class="tradingview-widget-container" style="height:450px;">
+            <div class="tradingview-widget-container" style="height:440px;">
                 <div class="tradingview-widget-container__widget" style="height:100%;"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
                 {
