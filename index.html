@@ -2238,14 +2238,20 @@
                 if (!cashFlows || cashFlows.length < 2) return null;
                 const validFlows = cashFlows.filter(cf => cf.amount !== 0 && cf.date);
                 if (validFlows.length < 2) return null;
-                // Must have at least one positive and one negative flow
                 const hasPos = validFlows.some(cf => cf.amount > 0);
                 const hasNeg = validFlows.some(cf => cf.amount < 0);
                 if (!hasPos || !hasNeg) return null;
 
                 validFlows.sort((a, b) => new Date(a.date) - new Date(b.date));
                 const t0 = new Date(validFlows[0].date);
+                const t1 = new Date(validFlows[validFlows.length - 1].date);
                 const MS_PER_YEAR = 365.25 * 24 * 3600 * 1000;
+                const spanYears = (t1 - t0) / MS_PER_YEAR;
+
+                // ── Require at least 90 days of holding history ──────────────
+                // Shorter periods produce misleading annualized figures that
+                // are technically correct but economically meaningless.
+                if (spanYears < 90 / 365.25) return null;
 
                 const flows = validFlows.map(cf => ({
                     t: (new Date(cf.date) - t0) / MS_PER_YEAR,
@@ -2262,21 +2268,39 @@
                 const totalAbs = flows.reduce((s, cf) => s + Math.abs(cf.v), 0);
                 const tolerance = totalAbs * 1e-6;
 
-                // Try multiple starting guesses
+                let best = null;
                 for (const guess of [0.1, 0.0, 0.2, 0.5, -0.05, 0.01, 0.3]) {
                     let r = guess;
                     for (let i = 0; i < 300; i++) {
                         const fv = npv(r);
-                        if (Math.abs(fv) < tolerance) return r * 100;
+                        if (Math.abs(fv) < tolerance) { best = r * 100; break; }
                         const dfv = dnpv(r);
                         if (Math.abs(dfv) < 1e-10) break;
                         const nr = r - fv / dfv;
                         if (!isFinite(nr) || nr < -0.9999) break;
-                        if (Math.abs(nr - r) < 1e-9) return nr * 100;
+                        if (Math.abs(nr - r) < 1e-9) { best = nr * 100; break; }
                         r = nr;
                     }
+                    if (best !== null) break;
                 }
-                return null;
+                if (best === null || !isFinite(best)) return null;
+
+                // ── Sanity cross-check against simple return ─────────────────
+                // XIRR should not wildly diverge from simple annualized return.
+                // If it does, the cashflow data is unreliable — return null so
+                // the scatter falls back to CAGR for that fund.
+                const totalOut = Math.abs(validFlows.filter(f => f.amount < 0).reduce((s, f) => s + f.amount, 0));
+                const totalIn  = validFlows.filter(f => f.amount > 0).reduce((s, f) => s + f.amount, 0);
+                if (totalOut > 0) {
+                    const simpleAnnual = ((totalIn / totalOut) - 1) / spanYears * 100;
+                    // If XIRR is more than 5× the simple annual return, trust neither
+                    if (Math.abs(best) > 5 * Math.abs(simpleAnnual) && Math.abs(simpleAnnual) < 200) return null;
+                }
+
+                // Hard cap: >150% annualized is almost certainly a data error for a mutual fund
+                if (best > 150 || best < -95) return null;
+
+                return best;
             } catch(e) { return null; }
         }
 
@@ -6740,8 +6764,8 @@
                             var currentValue = f.nav * f.units;
                             var cashflows = buildXIRRCashFlows(f.funds, currentValue);
                             yVal = calculateXIRR(cashflows);
-                            // Sanity check: XIRR > 500% or < -99% is almost certainly a data error
-                            if (yVal !== null && (!isFinite(yVal) || yVal > 500 || yVal < -99)) yVal = null;
+                            // Sanity check: now enforced in calculateXIRR; belt-and-suspenders guard is almost certainly a data error
+                            if (yVal !== null && (!isFinite(yVal) || yVal > 150 || yVal < -95)) yVal = null;
                         } catch(err) { yVal = null; }
                     }
 
@@ -6774,7 +6798,7 @@
 
                         yVal = (Math.pow(lastNav / firstNav, 1 / yrs) - 1) * 100;
                         // Sanity check: CAGR > 500% or < -99% is almost certainly a data error
-                        if (!isFinite(yVal) || yVal > 500 || yVal < -99) return;
+                        if (!isFinite(yVal) || yVal > 150 || yVal < -95) return;
                     }
 
                     pts.push({ x: parseFloat(vol.toFixed(3)), y: parseFloat(yVal.toFixed(2)), label: f.name, assetClass: f.assetClass });
