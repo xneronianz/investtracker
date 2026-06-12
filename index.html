@@ -1614,7 +1614,7 @@
                 <div><label class="text-[10px] font-black uppercase mb-1">Asset Class</label><input type="text" id="in_geo" class="w-full p-3 bg-slate-50 rounded-xl border"></div>
                 <div><label class="text-[10px] font-black uppercase mb-1">Total Units (4D)</label><input type="number" id="in_units" step="0.0001" class="w-full p-3 bg-slate-50 rounded-xl border" title="Base units. Buys/Sells are added/subtracted automatically from this."></div>
                 <div><label class="text-[10px] font-black uppercase mb-1">Base Invested (THB)</label><input type="number" id="in_invested" oninput="calculateAddFundUnits()" class="w-full p-3 bg-slate-50 rounded-xl border" title="Base capital. Buys/Sells affect this automatically."></div>
-                <div><label class="text-[10px] font-black uppercase mb-1 text-indigo-600">Current NAV (4D)</label><input type="number" id="in_nav" step="0.0001" oninput="calculateAddFundUnits()" class="w-full p-3 bg-slate-50 rounded-xl border"></div>
+                <div><label class="text-[10px] font-black uppercase mb-1 text-indigo-600">Purchased NAV (4D)</label><input type="number" id="in_nav" step="0.0001" oninput="calculateAddFundUnits()" class="w-full p-3 bg-slate-50 rounded-xl border"></div>
                 <div class="col-span-2"><label class="text-[10px] font-black uppercase mb-1">Source URL</label><input type="text" id="in_source" class="w-full p-3 bg-slate-50 rounded-xl border" placeholder="Paste Full URL or type 'Finnomena'"></div>
                 <div><label class="text-[10px] font-black uppercase mb-1 text-emerald-600">📅 Start Date <span class="text-slate-400 normal-case font-normal">(first purchase, for CAGR)</span></label><input type="date" id="in_start_date" class="w-full p-3 bg-slate-50 rounded-xl border"></div>
                 <div><label class="text-[10px] font-black uppercase mb-1 text-sky-600">🔄 NAV Sync</label>
@@ -4355,7 +4355,10 @@
             document.getElementById('editKey').value = id;
             document.getElementById('in_name').value = f.name; document.getElementById('in_port').value = f.portfolio;
             document.getElementById('in_geo').value = f.assetClass; document.getElementById('in_units').value = f.units.toFixed(4);
-            document.getElementById('in_invested').value = f.invested.toFixed(2); document.getElementById('in_nav').value = f.nav.toFixed(4);
+            document.getElementById('in_invested').value = f.invested.toFixed(2);
+            // Show avg purchased NAV (invested ÷ units) — NOT f.nav which is the live auto-synced NAV
+            var purchasedNavVal = (f.units > 0) ? (f.invested / f.units) : f.nav;
+            document.getElementById('in_nav').value = purchasedNavVal.toFixed(4);
             document.getElementById('in_source').value = f.source || "";
             document.getElementById('in_start_date').value = f.startDate || '';
             // Show current sync mode: manual if in MANUAL_NAV_FUNDS or explicitly marked
@@ -4365,6 +4368,10 @@
         }
 
         function calculateAddFundUnits() {
+            // Only auto-calculate units for NEW funds (editKey is empty).
+            // For existing funds, units come from real transactions — never overwrite them.
+            const id = document.getElementById('editKey').value;
+            if (id) return; // editing existing fund — leave units alone
             const invested = parseFloat(document.getElementById('in_invested').value);
             const nav = parseFloat(document.getElementById('in_nav').value);
             const unitsField = document.getElementById('in_units');
@@ -4375,7 +4382,9 @@
 
         function submitData() {
             const id = document.getElementById('editKey').value;
-            const newNav = parseFloat(parseFloat(document.getElementById('in_nav').value).toFixed(4)) || 0;
+            // in_nav holds the PURCHASED nav (avg cost) — used only to derive units
+            // It must NOT overwrite f.nav (the live auto-synced current NAV)
+            const purchasedNav = parseFloat(parseFloat(document.getElementById('in_nav').value).toFixed(4)) || 0;
             const dateStr = new Date().toISOString().split('T')[0];
             const navSyncMode = document.getElementById('in_nav_sync').value || 'manual';
 
@@ -4385,7 +4394,9 @@
                 assetClass: document.getElementById('in_geo').value, 
                 units: parseFloat(parseFloat(document.getElementById('in_units').value).toFixed(4)) || 0,
                 invested: parseFloat(parseFloat(document.getElementById('in_invested').value).toFixed(2)) || 0, 
-                nav: newNav, navDate: dateStr, source: document.getElementById('in_source').value || "Manual",
+                // For NEW funds: nav starts at purchasedNav (no auto-sync data yet)
+                // For EXISTING funds: nav is preserved below from allFunds[idx].nav
+                nav: purchasedNav, navDate: dateStr, source: document.getElementById('in_source').value || "Manual",
                 startDate: document.getElementById('in_start_date').value || "",
                 navSyncMode: navSyncMode
             };
@@ -4400,25 +4411,29 @@
 
             if (id) { 
                 const idx = allFunds.findIndex(x => (x.name + "||" + x.portfolio) === id); 
-                const oldNav = allFunds[idx].nav;
+                // Preserve the live auto-synced nav — do NOT overwrite it with purchasedNav
+                data.nav = allFunds[idx].nav;
+                data.navDate = allFunds[idx].navDate;
                 data.history = allFunds[idx].history || [];
                 data.dividends = allFunds[idx].dividends || [];
                 data.transactions = allFunds[idx].transactions || [];
-                
-                if (oldNav !== newNav) {
+                // Only add a history entry if invested/units changed (not on nav-only edits)
+                const oldInvested = allFunds[idx].invested;
+                const oldUnits    = allFunds[idx].units;
+                if (Math.abs(oldInvested - data.invested) > 0.01 || Math.abs(oldUnits - data.units) > 0.0001) {
                     const existingIdx = data.history.findIndex(h => h.date === dateStr);
                     if (existingIdx >= 0) {
-                        data.history[existingIdx].nav = newNav;
                         data.history[existingIdx].invested = data.invested;
-                        data.history[existingIdx].units = data.units;
-                        data.history[existingIdx].source = "Manual Entry";
+                        data.history[existingIdx].units    = data.units;
+                        data.history[existingIdx].source   = "Manual Entry";
                     } else {
-                        data.history.push({ date: dateStr, nav: newNav, invested: data.invested, units: data.units, source: "Manual Entry", link: "" });
+                        data.history.push({ date: dateStr, nav: data.nav, invested: data.invested, units: data.units, source: "Manual Entry", link: "" });
                     }
                 }
                 allFunds[idx] = { ...allFunds[idx], ...data }; 
             } else { 
-                data.history = [{ date: dateStr, nav: newNav, invested: data.invested, units: data.units, source: "Initial Entry", link: "" }];
+                // New fund: nav starts at purchasedNav until auto-sync provides a live price
+                data.history = [{ date: dateStr, nav: purchasedNav, invested: data.invested, units: data.units, source: "Initial Entry", link: "" }];
                 data.dividends = []; data.transactions = [];
                 allFunds.push(data); 
             }
