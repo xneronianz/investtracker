@@ -3727,7 +3727,11 @@
                 
                 const pl = curVal - f.invested;
                 const totalReturn = pl + divSum + transPLSum;
-                const cagr = calculateCAGR(f.invested, curVal + divSum + transPLSum, getFundStartDate(f), f.startDate || '');
+                // CAGR and % return are based on current holdings only (pl / invested).
+                // transPLSum and divSum were earned on different capital bases — adding them
+                // to the numerator while keeping only current f.invested as denominator
+                // inflates the %, especially after Switch Out transactions.
+                const cagr = calculateCAGR(f.invested, curVal, getFundStartDate(f), f.startDate || '');
                 const navPct = calcNavPct(f, navPctKey);
                 
                 return { 
@@ -3737,7 +3741,7 @@
                     realizedPLSum: parseFloat(transPLSum.toFixed(2)),
                     pl: pl, 
                     totalReturn: totalReturn, 
-                    trPercent: (totalReturn/(f.invested || 1))*100, 
+                    trPercent: (pl/(f.invested || 1))*100,
                     cagr: cagr,
                     navPct: navPct
                 };
@@ -4162,7 +4166,7 @@
                 }
 
                 const dailyTax = includeTaxInReturn ? (date === latestChartDate ? liveTotals.tax : taxSavings.filter(t => t.date <= date).reduce((s, t) => s + t.amount, 0)) : 0;
-                let dailyTR = dailyCurrent + dailyDividends + dailyRealized + dailyTax - dailyInvested;
+                let dailyTR = dailyCurrent - dailyInvested;
                 let dailyTRPercent = dailyInvested > 0 ? (dailyTR / dailyInvested) * 100 : 0;
                 // Skip dates where NO fund had started yet — avoids flat-zero leading bars
                 if (dailyInvested === 0 && dailyCurrent === 0 && date !== latestChartDate) return;
