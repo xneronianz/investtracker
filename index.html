@@ -951,7 +951,7 @@
                                         <option value="3Y">3Y</option>
                                         <option value="5Y">5Y</option>
                                         <option value="10Y">10Y</option>
-                                        <option value="SI">Inception</option>
+                                        <option value="ALL">ALL (Inception)</option>
                                     </select>
                                     <span class="text-[9px] font-black text-slate-500 uppercase tracking-wide">% NAV Change</span>
                                     <span class="text-[9px] text-slate-400 cursor-pointer hover:text-indigo-500" onclick="sortTable('navPct')">↕ Sort</span>
@@ -1809,16 +1809,22 @@
                 .sort(function(a,b){ return b.pct - a.pct; });
             if (label) label.textContent = '(' + (navPctKey || '1D') + ')';
 
-            // Deduplicate by fund name — keep highest pct for winners, lowest for losers
-            function dedupeTop(arr) {
+            // Deduplicate by fund name — keep highest pct for winners, lowest for losers.
+            // Only include funds that are genuinely positive (winners) or negative (losers) —
+            // a flat 0.00% fund should never appear in either list even if it's among the
+            // top/bottom 3 by rank position.
+            function dedupeTop(arr, wantPositive) {
                 var seen = new Set(); var out = [];
                 for (var i = 0; i < arr.length && out.length < 3; i++) {
-                    if (!seen.has(arr[i].name)) { seen.add(arr[i].name); out.push(arr[i]); }
+                    var f = arr[i];
+                    if (wantPositive && f.pct <= 0) continue;
+                    if (!wantPositive && f.pct >= 0) continue;
+                    if (!seen.has(f.name)) { seen.add(f.name); out.push(f); }
                 }
                 return out;
             }
-            var top3 = dedupeTop(ranked);
-            var bot3 = dedupeTop(ranked.slice().reverse());
+            var top3 = dedupeTop(ranked, true);
+            var bot3 = dedupeTop(ranked.slice().reverse(), false);
 
             function trendRowHTML(f, rank, isWin) {
                 var sign = f.pct >= 0 ? '+' : '';
@@ -1830,8 +1836,8 @@
                     '<span class="trend-pct" style="color:' + color + '">' + sign + f.pct.toFixed(2) + '%</span>' +
                 '</div>';
             }
-            winners.innerHTML = top3.length ? top3.map(function(f,i){ return trendRowHTML(f, i+1, true); }).join('') : '<div class="text-xs text-slate-400 p-2">No data</div>';
-            losers.innerHTML  = bot3.length ? bot3.map(function(f,i){ return trendRowHTML(f, i+1, false); }).join('') : '<div class="text-xs text-slate-400 p-2">No data</div>';
+            winners.innerHTML = top3.length ? top3.map(function(f,i){ return trendRowHTML(f, i+1, true); }).join('') : '<div class="text-xs text-slate-400 p-2 italic">No funds gained in this period</div>';
+            losers.innerHTML  = bot3.length ? bot3.map(function(f,i){ return trendRowHTML(f, i+1, false); }).join('') : '<div class="text-xs text-slate-400 p-2 italic">No funds lost in this period</div>';
             // Draw mini sparklines in trend rows
             setTimeout(function() {
                 // Compute cutoff date based on selected navPctKey timeframe — same as table
@@ -1998,14 +2004,11 @@
 
         function setChartTimeframe(tf) {
             chartTimeframe = tf;
-            // Sync % NAV change column — ALL and YTD map to nearest navPctKey
-            const validNavKeys = ['1D','1W','1M','3M','6M','1Y','3Y','5Y','10Y'];
+            // Sync % NAV change column to the exact same timeframe — no more lossy fallback.
+            // calcNavPct now natively supports 'ALL' (since-inception), so we pass it straight through.
+            const validNavKeys = ['1D','1W','1M','3M','6M','1Y','3Y','5Y','10Y','YTD','ALL'];
             if (validNavKeys.includes(tf)) {
                 navPctKey = tf;
-            } else if (tf === 'YTD') {
-                navPctKey = 'YTD';
-            } else if (tf === 'ALL') {
-                navPctKey = '1Y'; // best fallback for table column
             }
             const npSel = document.getElementById('navPctSelect');
             if (npSel) npSel.value = navPctKey;
@@ -2123,7 +2126,8 @@
             { key:'3Y',  label:'3Y',        days:1095 },
             { key:'5Y',  label:'5Y',        days:1825 },
             { key:'10Y', label:'10Y',       days:3650 },
-            { key:'SI',  label:'Inception', days:null }  // special
+            { key:'SI',  label:'Inception', days:null }, // special — alias of ALL
+            { key:'ALL', label:'All (Inception)', days:null }  // special — since-inception, same as SI
         ];
 
         loadFromLocalStorage();
@@ -2152,7 +2156,7 @@
             let cutoff;
             if (tfKey === 'YTD') {
                 cutoff = new Date(today.getFullYear(), 0, 1).toISOString().split('T')[0];
-            } else if (tfKey === 'SI') {
+            } else if (tfKey === 'SI' || tfKey === 'ALL') {
                 cutoff = sorted[0].date;
             } else {
                 const tf = NAV_TIMEFRAMES.find(t => t.key === tfKey);
@@ -2167,7 +2171,7 @@
             if (past.length > 0) {
                 refEntry = past[past.length - 1];
                 // Check if it was exactly on the cutoff date
-                exact = (refEntry.date === cutoff) || tfKey === 'SI';
+                exact = (refEntry.date === cutoff) || tfKey === 'SI' || tfKey === 'ALL';
             } else {
                 // No entry on or before cutoff — use the earliest entry we have (closest available)
                 refEntry = sorted[0];
