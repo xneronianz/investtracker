@@ -1674,7 +1674,7 @@
         let chartTimeframe = 'ALL'; // Default Timeframe
         let chartExcludedAssets = new Set(['Real Estate', 'Insurance', 'Provident', 'Cash']); // Hidden by default
         let simulatorSettings = {
-            annualReturn: 7, years: 20, monthly: 0,
+            annualReturn: 7, years: 20, monthly: 0, contribGrowth: 0,
             target: 18000000, inflation: 3, fee: 1.5
         };
 
@@ -6015,6 +6015,7 @@
             document.getElementById('sim_return').value    = simulatorSettings.annualReturn ?? 7;
             document.getElementById('sim_years').value     = simulatorSettings.years ?? 20;
             document.getElementById('sim_monthly').value   = simulatorSettings.monthly ?? 0;
+            document.getElementById('sim_contrib_growth').value = simulatorSettings.contribGrowth ?? 0;
             document.getElementById('sim_target').value    = simulatorSettings.target ?? 18000000;
             document.getElementById('sim_inflation').value = simulatorSettings.inflation ?? 3;
             document.getElementById('sim_fee').value       = simulatorSettings.fee ?? 1.5;
@@ -6036,6 +6037,7 @@
             const annualReturn = parseFloat(document.getElementById('sim_return').value) / 100;
             const years = parseInt(document.getElementById('sim_years').value) || 20;
             const monthly = parseFloat(document.getElementById('sim_monthly').value) || 0;
+            const contribGrowth = parseFloat(document.getElementById('sim_contrib_growth').value) / 100 || 0;
             const target = parseFloat(document.getElementById('sim_target').value) || 0;
             const inflation = parseFloat(document.getElementById('sim_inflation').value) / 100;
             const fee = parseFloat(document.getElementById('sim_fee').value) / 100;
@@ -6058,10 +6060,13 @@
             contributedVals.push(Math.round(totalIn));
 
             for (let y = 1; y <= years; y++) {
+                // Step up monthly contribution at the start of each year (after year 1)
+                // to reflect salary increments — e.g. 5%/yr growth
+                const currentMonthly = monthly * Math.pow(1 + contribGrowth, y - 1);
                 // Compound monthly
                 for (let m = 0; m < 12; m++) {
-                    nomVal = nomVal * (1 + monthlyRate) + monthly;
-                    totalIn += monthly;
+                    nomVal = nomVal * (1 + monthlyRate) + currentMonthly;
+                    totalIn += currentMonthly;
                 }
                 cumulativeInflation *= (1 + inflation);
                 const realVal = nomVal / cumulativeInflation; // deflate to today's money
@@ -7085,6 +7090,10 @@
                 <div>
                     <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Monthly Contribution (฿)</label>
                     <input type="number" id="sim_monthly" oninput="simulatorSettings.monthly=parseFloat(this.value)||0;saveToLocalStorage();runSimulation()" value="0" step="1000" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Contribution Increase /yr (%) <span class="text-slate-500 normal-case font-normal">(optional)</span></label>
+                    <input type="number" id="sim_contrib_growth" oninput="simulatorSettings.contribGrowth=parseFloat(this.value)||0;saveToLocalStorage();runSimulation()" value="0" step="0.5" min="0" oninput="saveToLocalStorage();autoRunSimulation()" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-600 text-white font-bold text-sm">
                 </div>
                 <div>
                     <label class="text-[10px] font-black uppercase text-cyan-400 mb-1 block">Target Wealth (฿) <span class="text-slate-500 normal-case font-normal">(optional)</span></label>
