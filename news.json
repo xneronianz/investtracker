@@ -1,6 +1,86 @@
 {
-  "updated": "2026-06-26T05:07:13.057Z",
+  "updated": "2026-06-26T10:22:24.043Z",
   "items": [
+    {
+      "title": "Ryanair Stops Charging for Parents to Sit With Their Children",
+      "body": "The airline said it had “reluctantly” changed course after a British regulator began investigating whether its fees were illegal.",
+      "link": "https://www.nytimes.com/2026/06/26/world/europe/ryanair-fee-children-seats.html",
+      "date": "2026-06-26T10:15:15.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "How a Jet Fuel Refinery Is Scrambling After the Iran War Oil Shock",
+      "body": "For a mega-refinery in Ulsan, South Korea, a top exporter of jet fuel to the West Coast of the United States and other places, weaning off Middle Eastern oil is no small feat.",
+      "link": "https://www.nytimes.com/2026/06/26/world/asia/iran-war-korea-jet-fuel.html",
+      "date": "2026-06-26T09:40:09.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Volkswagen to cut up to 100,000 jobs",
+      "body": "BERLIN &mdash; Volkswagen CEO Oliver Blume aims ​to cut up to &zwnj;100,000 jobs from the current workforce worldwide over the next few years and discontinue production at four of the group's German plants, Manager Magaz...",
+      "link": "https://www.bangkokpost.com/business/motoring/3276987/volkswagen-ceo-aims-to-cut-up-to-100000-jobs-in-next-years-manager-magazin-reports",
+      "date": "2026-06-26T09:18:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Intel’s Chip Business Shows Signs of Life After Years of Struggle",
+      "body": "It is the centerpiece of President Trump’s drive to make more chips in the United States, but the company still has a long way to go before it can be called a complete turnaround.",
+      "link": "https://www.nytimes.com/2026/06/26/technology/intel-turnaround.html",
+      "date": "2026-06-26T08:54:16.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Apple raises prices on Macs and iPads amid the AI boom",
+      "body": "NEW YORK &mdash; Apple raised the prices of its Macs and iPads on Thursday, citing the soaring costs of memory and storage chips as the artificial intelligence (AI) boom has created a frenzy for the components.",
+      "link": "https://www.bangkokpost.com/business/general/3276975/apple-raises-prices-on-macs-and-ipads-amid-the-artificial-intelligence-ai-boom",
+      "date": "2026-06-26T08:50:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "The High School Pipeline to South Korea’s Chip-Making Fortunes",
+      "body": "Huge memory-chip profits from the global A.I. boom have increased interest in semiconductor factory work. But behind the hype are uncertain job prospects.",
+      "link": "https://www.nytimes.com/2026/06/26/business/korea-chip-high-school.html",
+      "date": "2026-06-26T07:34:38.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Asia stock markets slide as tech shares slump",
+      "body": "Trading on South Korea's Kospi index was halted for the third time this week to prevent panic selling.",
+      "link": "https://www.bbc.co.uk/news/articles/ce8jz40k00ro?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-06-26T07:33:10.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Gold Price Forecast 2026: Why Is Gold Falling Below $4,000 and Is It Time to Buy? - Mitrade",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMif0FVX3lxTE84X3pkZkppY0I2NDFBMHBNOXNNT21aaGFJc0lkeWdYRFdFZ0FxcEk5Rk02VnViSjgyT0VxOWJ0UHA3emtKVFRXLXAza1JzRDY2djE3YkRlUk1LcVRGQVltQVhNZ2tUeW9zN3dXaG1ZQjh5ZHJVNGFXY0FZSGlFcE...",
+      "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE84X3pkZkppY0I2NDFBMHBNOXNNT21aaGFJc0lkeWdYRFdFZ0FxcEk5Rk02VnViSjgyT0VxOWJ0UHA3emtKVFRXLXAza1JzRDY2djE3YkRlUk1LcVRGQVltQVhNZ2tUeW9zN3dXaG1ZQjh5ZHJVNGFXY0FZSGlFcE0?oc=5",
+      "date": "2026-06-26T07:17:21.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
+      "title": "Your horoscope for June 26 - July 2",
+      "body": "Your spot-on horoscope for work, money and relationship from Guru by the Bangkok Post's famously accurate fortune teller. Let's see how you will fare this week and beyond.",
+      "link": "https://www.bangkokpost.com/life/social-and-lifestyle/3276940/your-horoscope-for-june-26-july-2",
+      "date": "2026-06-26T06:47:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Gold, silver prices today, June 26: Check retail rates of 24K, 22K gold, 999 silver in Delhi, Mumbai and Kolkata - Mint",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMihAJBVV95cUxOTmRHUmg5aUVMdEZRTFYySjc1TEdWY2gtY3ZHc25jMGh2Rm9PRUpSRXcwcVFnQmNmSlluc1AxalVTbDJVclJ3dXhGUmYydU80bGVnODdzSzRMTVJiQmhWaEp5a1pDMzZCQWVnb2VDVnZDNDJuSWlsLTJ5ZUl5MF...",
+      "link": "https://news.google.com/rss/articles/CBMihAJBVV95cUxOTmRHUmg5aUVMdEZRTFYySjc1TEdWY2gtY3ZHc25jMGh2Rm9PRUpSRXcwcVFnQmNmSlluc1AxalVTbDJVclJ3dXhGUmYydU80bGVnODdzSzRMTVJiQmhWaEp5a1pDMzZCQWVnb2VDVnZDNDJuSWlsLTJ5ZUl5MFJVdXhZZGpQUmNIUHNhVENockwteEMxM2hQdFM3OHd5WEZTbWZqSTZfalp5NEJ3U1lUTEgyQUVRMmZvMXpGdmdGWnlEcUVvNGlTX0VzV05OaXNIQjBaaTlOZzFybkxtNFF4M3NkY2hWekxYRWFwUjFOZEtwbDRlQ1cyQ25PZlZkX1dwMnIxbNIBigJBVV95cUxPSk1hdkhHb3BGU09Xd1JYc1Jxc3dBT3dTQzdhYm1ZQmZRd1B1X181NU1UY0JmWGVIMFYxQjFVbV9IQXMyd3YtdE9YRUhPbW5rUy1Mc0tqTkh3YXhEOUFuRmFvd3h1T094UXNMODdvajBqNW55NW1RaTUydW9KaXdKUmRKX3pIUVJyRjdZU1JOSkljbURJMHQ1cU85Rjl4TURmdmstU09RN1dnV1V2dzQ2X0RjTU9GSGpUYjhaYWlSYVQ4a0lEQXJteXUxNWFZSFUwSUZCT1NlRHJKZ3RzNHNmbFgxSmt4ZkdEZzFpNnhteGUzeXJSZkFFMmI5T200eDcxMENDWEp6S21aUQ?oc=5",
+      "date": "2026-06-26T04:41:23.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
     {
       "title": "Oil down 2% amid resumption of Hormuz shipments even as vessel hit near Oman",
       "body": "NEW DELHI &mdash; Crude prices sank 2% on Friday and were headed for steep weekly losses amid easing supply concerns as more stranded oil tankers exited the Strait of Hormuz, even though a cargo vessel was hit near Oman ...",
@@ -8,14 +88,6 @@
       "date": "2026-06-26T04:38:00.000Z",
       "source": "Bangkok Post",
       "badge": "thai"
-    },
-    {
-      "title": "Medical Journal Retracts Study Claiming Cancer Therapy Is More Effective When Given in the Morning",
-      "body": "In a notice flagging a series of problems with a clinical trial, the journal Nature Medicine said its editors “no longer have confidence in the integrity of the results.”",
-      "link": "https://www.nytimes.com/2026/06/25/business/china-cancer-treatment-research-retraction.html",
-      "date": "2026-06-26T02:27:02.000Z",
-      "source": "NY Times",
-      "badge": "global"
     },
     {
       "title": "Executive summary – Southeast Asia Energy Outlook 2026 – Analysis - IEA – International Energy Agency",
@@ -26,7 +98,7 @@
       "badge": "em"
     },
     {
-      "title": "Warning over power bank fire risk on flights as summer holidays begin",
+      "title": "Power banks and vapes now biggest fire risk on planes",
       "body": "Lithium battery fires are the number one safety risk to aircraft, yet the number of devices found in hold bags has nearly doubled in a year.",
       "link": "https://www.bbc.co.uk/news/articles/cly716qd146o?at_medium=RSS&amp;at_campaign=rss",
       "date": "2026-06-25T23:28:13.000Z",
@@ -50,14 +122,6 @@
       "badge": "thai"
     },
     {
-      "title": "Movement Through Strait of Hormuz Is Halted After Attack on Cargo Ship",
-      "body": "The strike on a vessel near the coast of Oman prompted a U.N. agency to pause an evacuation of ships from the Persian Gulf.",
-      "link": "https://www.nytimes.com/2026/06/25/business/hormuz-ship-attack-iran.html",
-      "date": "2026-06-25T23:13:11.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
       "title": "FedEx Freight takes a step forward in its independent journey. Here&apos;s why we like the stock",
       "body": "FedEx Freight had plenty of encouraging things to say on its first earnings call as a standalone company.",
       "link": "https://www.cnbc.com/2026/06/25/fedex-freight-takes-a-step-forward-in-its-independent-journey-heres-why-we-like-the-stock.html",
@@ -74,7 +138,7 @@
       "badge": "thai"
     },
     {
-      "title": "Yes, there have been rows but here's how I've made moving back home work",
+      "title": "I'm back at home again after uni - here's how I'm making it work",
       "body": "Rising costs are forcing more young adults to live with their parents, here's how not to come to blows.",
       "link": "https://www.bbc.co.uk/news/articles/cg53q6dl0plo?at_medium=RSS&amp;at_campaign=rss",
       "date": "2026-06-25T23:03:48.000Z",
@@ -90,43 +154,11 @@
       "badge": "thai"
     },
     {
-      "title": "Budget transfer plan under fire",
-      "body": "Opposition MPs have criticised the government's 10.3-billion-baht budget transfer bill, saying it would have little impact on the economy and questioning the priorities behind the spending plan.",
-      "link": "https://www.bangkokpost.com/thailand/politics/3276667/budget-transfer-plan-under-fire",
-      "date": "2026-06-25T22:49:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Bond market shrinks as investors mull quality",
-      "body": "Thailand's corporate bond market contracted during the first five months of 2026 as investors became increasingly selective amid concerns over credit quality, higher funding costs and a fragile economic outlook.",
-      "link": "https://www.bangkokpost.com/business/general/3276632/bond-market-shrinks-as-investors-mull-quality",
-      "date": "2026-06-25T22:21:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Bad loans still elevated as Iran war hammers firms",
-      "body": "The Bank of Thailand intends to focus on asset quality in the banking industry as non-performing loans (NPLs) remain at elevated levels, attributed in part to the impact of the Middle East conflict, says the central bank...",
-      "link": "https://www.bangkokpost.com/business/general/3276772/bad-loans-still-elevated-as-iran-war-hammers-firms",
-      "date": "2026-06-25T22:18:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "Chicago Fed President Goolsbee says inflation is too high; Williams sees price pressures easing",
       "body": "In a live CNBC interview from his home district, Goolsbee declined to speculate on where he thinks interest rates are headed.",
       "link": "https://www.cnbc.com/2026/06/25/chicago-fed-president-goolsbee-says-inflation-is-too-high-calls-warsh-a-serious-guy.html",
       "date": "2026-06-25T21:03:16.000Z",
       "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "OpenAI Leans Toward Holding Up I.P.O. Until Next Year",
-      "body": "The A.I. company’s advisers are pushing its chief executive, Sam Altman, to move slowly after SpaceX’s stock has been volatile and as the start-up grapples with financial challenges.",
-      "link": "https://www.nytimes.com/2026/06/25/technology/openai-ipo-artificial-intelligence.html",
-      "date": "2026-06-25T20:58:38.000Z",
-      "source": "NY Times",
       "badge": "global"
     },
     {
@@ -202,14 +234,6 @@
       "badge": "bond"
     },
     {
-      "title": "SpaceX IPO Shows How Investors in Public Companies Are Losing Power",
-      "body": "SpaceX has joined a growing cohort of companies that use dual class share structures to ensure many shareholders have little say in how they are run.",
-      "link": "https://www.nytimes.com/2026/06/25/business/spacex-shares-ipo.html",
-      "date": "2026-06-25T16:33:40.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
       "title": "IMF sees solid momentum in US economy; says Fed right to hold interest rate steady - Reuters",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMivAFBVV95cUxQUzhjVmRxZ1ByS1laeGhlWWxFU2trcmtxeUpUcy04NTRPVUJfNW4tOWU3eTlfLWZnUTNJWGNpSHh2Z1YtYXVrV0xzMjhYUnlBQmx2R2VEUnlYYTM5YjVnVno5MVBPdXpSWlBCd3gyZEE2VGNuMEdTNmdFNDFlMX...",
       "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQUzhjVmRxZ1ByS1laeGhlWWxFU2trcmtxeUpUcy04NTRPVUJfNW4tOWU3eTlfLWZnUTNJWGNpSHh2Z1YtYXVrV0xzMjhYUnlBQmx2R2VEUnlYYTM5YjVnVno5MVBPdXpSWlBCd3gyZEE2VGNuMEdTNmdFNDFlMXJIVVJaRG9CbnlxclVYUW5ldFNfWmVfOTRkTUN5WVVZNWNEalM5RDNiSTJMZHRnUjlQdWw3VDhRbWJ2a0E5NA?oc=5",
@@ -226,36 +250,12 @@
       "badge": "us"
     },
     {
-      "title": "Gold, silver: Domestic bullion rebounds, global market remains subdued - Business Standard",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMi2AFBVV95cUxNSWpDV0o3YlQxeVMtSDcwRk00NWpFNkZ3S3ZaZ2xhWW5ZaDllT01aOVBUeDdvZnVYYWtpOUx1S3BYNEFSdmc4Wko1Vl9FTmROc0Jic3duNFZTWW03UnBVYjVFSmVCaThjczZqajltRHJBUEI3OXVDdVhsdjlRST...",
-      "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNSWpDV0o3YlQxeVMtSDcwRk00NWpFNkZ3S3ZaZ2xhWW5ZaDllT01aOVBUeDdvZnVYYWtpOUx1S3BYNEFSdmc4Wko1Vl9FTmROc0Jic3duNFZTWW03UnBVYjVFSmVCaThjczZqajltRHJBUEI3OXVDdVhsdjlRSTZ2QUluUG9saVcxdVlOY2FjMGdDamhLY28yeDZpYzB3WkdJa3VfMjk3eGdUZVJ3WTE5UVFjUXVZaVN2eWlVWXZhVFN5YjZNdkF6YkdDVUVBUWZ1ZjQzVzZDN3DSAd4BQVVfeXFMT0lZaHZKYzdSNUJzRFRnVmEyWUtqVXhVdjE0b2ZJeVhRMFFBZzFsRXZmSE0xNGZTcS16SThIdDhJVWpqTTN4ZVQyNUE2MVg0T2lvUktnVzdQTWM5OHRtV3czeXQtbzZaUEVIU19wcTh1bkN2THh3QmxFQTRMaGZQMDJWclFVUW5yU040WS1GZVhDY0JJN3BzRC1XampEcGdaM3RwVGtGSmJmZS1YNHNYT0lWV1BHQi16eUxkMlUxRGxEQUpfMlhiaTQ3T0Z4RE4xbUF4eFhhOWt2US1wSy1R?oc=5",
-      "date": "2026-06-25T12:16:23.000Z",
-      "source": "Google News",
-      "badge": "commodity"
-    },
-    {
-      "title": "Ryanair says it will reluctantly not charge parents to sit next to children",
-      "body": "The airline had typically charged adults a fee of £8 each way to sit with their young children.",
-      "link": "https://www.bbc.co.uk/news/articles/cdr4zy4e1n1o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-06-25T12:08:33.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
       "title": "US bond market expects rate hikes the Fed may never deliver - Reuters",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMirAFBVV95cUxOb2xYMVNxREhIRmpJUjdXV3BXWTE1SmJER1YwOXhJVGozUkdScTdnWWRXLUxmOHhwWnAyOTY0MU9VVm5tZWNzd1ZmRUJCZGpNQ1I5Y0RTODJQZGFTNG9LYVpvT3hLa29uSkRjVjNXNFFoQmtCdG9CMHpRbktQY2...",
       "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOb2xYMVNxREhIRmpJUjdXV3BXWTE1SmJER1YwOXhJVGozUkdScTdnWWRXLUxmOHhwWnAyOTY0MU9VVm5tZWNzd1ZmRUJCZGpNQ1I5Y0RTODJQZGFTNG9LYVpvT3hLa29uSkRjVjNXNFFoQmtCdG9CMHpRbktQY2pXR3p3ZFg4YXpWd1NCQ3NsellISWpQbHNtVnl4WVM2cVlvV1cyWDBwMlZpV3Zs?oc=5",
       "date": "2026-06-25T10:09:07.000Z",
       "source": "Google News",
       "badge": "bond"
-    },
-    {
-      "title": "U.S. Inflation Problems Are Far From Over - The New York Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMihAFBVV95cUxNaEJ4aHVONHl0OURIbTY5eVlKTG13MFJnSWdWVzltWGZCVmtUb1IyM0hQWFloMndGSUZ0alNFakJzWjBFdmZkSFZwRUNzczF2MFktZ3hNa1dLV1pQd2RCck1URm5YYnRDbWY5SVg3SDUtWmh3NV92djdDMnFHQ3...",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNaEJ4aHVONHl0OURIbTY5eVlKTG13MFJnSWdWVzltWGZCVmtUb1IyM0hQWFloMndGSUZ0alNFakJzWjBFdmZkSFZwRUNzczF2MFktZ3hNa1dLV1pQd2RCck1URm5YYnRDbWY5SVg3SDUtWmh3NV92djdDMnFHQ3VmbG9oUjE?oc=5",
-      "date": "2026-06-25T09:03:56.000Z",
-      "source": "Google News",
-      "badge": "us"
     },
     {
       "title": "Thai Baht: BoT caution keeps policy on hold – Commerzbank - FXStreet",
@@ -280,6 +280,14 @@
       "date": "2026-06-24T22:33:45.000Z",
       "source": "CNBC US",
       "badge": "us"
+    },
+    {
+      "title": "BoT upgrades GDP growth forecast - Bangkok Post",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxQdHdEWjgxeHNjXzM4RF9EVnBncWxWTXVHc09tY1I5VEZ0UlVMNFA0LTJtYThIQUoxazcxa2NvS3VFNmpKdnVtSS1nRUppb3V6MW1KRmlIR3VScmxVeUlLVnhRQ1hyVjBQOUgtd28weklxR0NzaG9Pc0RBWkZ6dW...",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQdHdEWjgxeHNjXzM4RF9EVnBncWxWTXVHc09tY1I5VEZ0UlVMNFA0LTJtYThIQUoxazcxa2NvS3VFNmpKdnVtSS1nRUppb3V6MW1KRmlIR3VScmxVeUlLVnhRQ1hyVjBQOUgtd28weklxR0NzaG9Pc0RBWkZ6dW5JbTJJQ1BCNGtONGlwWmFR?oc=5",
+      "date": "2026-06-24T22:17:00.000Z",
+      "source": "Google News",
+      "badge": "economic"
     },
     {
       "title": "Markets News, June 24, 2026: S&P 500, Nasdaq Fall for 3rd Straight Day; Oil Prices Drop to Lowest Level Since Start of War - Investopedia",
@@ -314,6 +322,14 @@
       "badge": "em"
     },
     {
+      "title": "Bank of Thailand keeps interest rate steady at 1% and raises GDP growth forecast for 2026 to 2.3% - Thailand Business News",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMi4wFBVV95cUxPVzg0WDRUSlo4Tk5TV1hiVkh4Qk5pcXhWTHItU0w4N0Ntak9yTmVWX1lIdDJlUU5IaFhRaXVzUW5xTXFjX0FrMS1JYWtCN2pTakZqR3NXLU9WR3hSNHMwazJfTFJFYVdQQlN6eFJqTkRpLVAzRWk4b292ems5bG...",
+      "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPVzg0WDRUSlo4Tk5TV1hiVkh4Qk5pcXhWTHItU0w4N0Ntak9yTmVWX1lIdDJlUU5IaFhRaXVzUW5xTXFjX0FrMS1JYWtCN2pTakZqR3NXLU9WR3hSNHMwazJfTFJFYVdQQlN6eFJqTkRpLVAzRWk4b292ems5bGoydmE4X3Q0TkFyUWdtLUduWVlDMnlsSGpUUUVySXRZZnZ3bVE1Mzl3dVQ3R0JWMzIxWmJLemZpaG1Pdldkc1l2OGQtN0NCTFlEQ3FMbGx0c05EeXdsdjJJNF80blA5Tkg3cG1LZw?oc=5",
+      "date": "2026-06-24T16:37:27.000Z",
+      "source": "Google News",
+      "badge": "economic"
+    },
+    {
       "title": "The Bank of Thailand's Monetary Policy Committee (MPC) reveals that the El Niño phenomenon may push up Thai inflation in the second half of the year. ",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiWEFVX3lxTE9HelQzLXNYMVk5Vy1SQUdpM2lBZkphMEt6cXNkUnJlRjh4UU5udDhQQU5LTFR0NU9LV0RkTXg3MFQ4U2o1SmpxU3Fuck9rdzVTZGNwY0ZicTQ?oc=5\" target=\"_blank\">The Bank of Thailand's Monet...",
       "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9HelQzLXNYMVk5Vy1SQUdpM2lBZkphMEt6cXNkUnJlRjh4UU5udDhQQU5LTFR0NU9LV0RkTXg3MFQ4U2o1SmpxU3Fuck9rdzVTZGNwY0ZicTQ?oc=5",
@@ -328,14 +344,6 @@
       "date": "2026-06-24T01:50:24.000Z",
       "source": "Google News",
       "badge": "china"
-    },
-    {
-      "title": "Treasury yields fall despite rate hike concerns hitting tech stocks - CNBC",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMilgFBVV95cUxQQTN6VUFYenpib1A2VWY0d3NFVy1HYmJ3Q205ekJfQnpBZzZSd0NoTlg0c2ZrOE9YeEg1LUN6cXl1aTM0NjFiMDVlZm56QW9IdHpoT3VkbXAwYWRZUGRFc2xDV1VGcWp6UmZoOVNhTGVFR2FtMmJTUTA4dUZiV1...",
-      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQQTN6VUFYenpib1A2VWY0d3NFVy1HYmJ3Q205ekJfQnpBZzZSd0NoTlg0c2ZrOE9YeEg1LUN6cXl1aTM0NjFiMDVlZm56QW9IdHpoT3VkbXAwYWRZUGRFc2xDV1VGcWp6UmZoOVNhTGVFR2FtMmJTUTA4dUZiV1NobXFCZXpva0d5TF85QnZ4eTZUY1VqUlHSAZsBQVVfeXFMTWxFdlRyZ1gyNTBGeWpQU2VqNzlLUGpaMGdKNjkzWkNNM2NkZ1JDMjVyMXl4b2FVZUp4MTNQVDQzVDd0SFlpVzE2RHh5T3FKX2Rob3hiazB2VDRTbWJNSGJERjhnUjdyUXAyZEJ6Y3VDMUxRNV9lQlhKSGZPcEFpdkM4QnFkc2JydTlCS3VoaDdhMkVlamlBbGpKMlk?oc=5",
-      "date": "2026-06-23T09:08:16.000Z",
-      "source": "Google News",
-      "badge": "bond"
     },
     {
       "title": "Wall Street crash: Why S&P 500, Nasdaq futures tumbled today after KOSPI’s 10% fall; AI sell-off deepens - TradingView",
@@ -386,20 +394,12 @@
       "badge": "commodity"
     },
     {
-      "title": "Emerging Markets Equities ETFs - ETF Database",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiygJBVV95cUxNQVhWM0V4OEowY2xMTHhzRzFPRTNZRlM2czRVN19wWWNCdXJ5YnliSTNiNzhrRm9WbTFsQXdFQkRaaGlEeGMwdzlCd3dNSXQ0SWw2Q2tHWHFFekhvN09lYzFvSm1iLWg3eF9jbEhEc3h5VDJaWV9vc0VXNDg2MU...",
-      "link": "https://news.google.com/rss/articles/CBMiygJBVV95cUxNQVhWM0V4OEowY2xMTHhzRzFPRTNZRlM2czRVN19wWWNCdXJ5YnliSTNiNzhrRm9WbTFsQXdFQkRaaGlEeGMwdzlCd3dNSXQ0SWw2Q2tHWHFFekhvN09lYzFvSm1iLWg3eF9jbEhEc3h5VDJaWV9vc0VXNDg2MUk2YlVOVk1OY1pkQ2ZkZXNWdnBUQUdwMG9UenhGQkZreUQtVFhCZDZTSXZRX1ZSeW5iVmlfeFBNdHJvN1haWmo4VGxnd21YMHR0aUhiN1ZHNGxKeDFJck00LU5IT1R5MV91YVZybGVMVTRIRzliYWJock1kVG1jc0ViLTUwZThQU1NPeWFycjYwVWh5WFVkV2xWSF8tbFBFSzZYaGNNNnV1Y0MtSGFTRjR3YjNIRml6b0NSanowM1dFN0YyamVteDVWRzV5WmtFYW1mREE?oc=5",
-      "date": "2026-06-19T16:16:36.000Z",
+      "title": "Fed Holds Rates and Leans Toward Fighting Inflation With Future Increases - The New York Times",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiiAFBVV95cUxOWlo2eWRfMHQzRGk2MTdTdkR4R3FLWHlxWjdRekZCOWRhWk42ajJxamdDcmZlbER4TzVxZlFMa0F5d0wycHVMejh1Qk1vTGtWQW1qV05HdXp6ZFFOd3FEOXdaRmw5ZC1HdDd6WGl1Q3NnOS0xc3Y0YUdyQ3htLU...",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOWlo2eWRfMHQzRGk2MTdTdkR4R3FLWHlxWjdRekZCOWRhWk42ajJxamdDcmZlbER4TzVxZlFMa0F5d0wycHVMejh1Qk1vTGtWQW1qV05HdXp6ZFFOd3FEOXdaRmw5ZC1HdDd6WGl1Q3NnOS0xc3Y0YUdyQ3htLUlzTVJqRG9oalZM?oc=5",
+      "date": "2026-06-21T07:00:00.000Z",
       "source": "Google News",
-      "badge": "em"
-    },
-    {
-      "title": "ASEAN and Russia Agree to Deepen Cooperation During Special Summit in Kazan - The Diplomat – Asia-Pacific",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMirAFBVV95cUxPSXY3V25SdThvUndHMXZKUXhzcXpLNDlqNmFrY1NvRlMwTHQ4WFJ2NW1wNjNYTENjWENXaGlzV1NnaUZYQjhqOUpSSVlib2VOTmtSVXdVc0lOeGg0a1JOZmNtdnFsUXk3Q2UtaDBySTU2cGZlZkpMeWV3aDJaRm...",
-      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPSXY3V25SdThvUndHMXZKUXhzcXpLNDlqNmFrY1NvRlMwTHQ4WFJ2NW1wNjNYTENjWENXaGlzV1NnaUZYQjhqOUpSSVlib2VOTmtSVXdVc0lOeGg0a1JOZmNtdnFsUXk3Q2UtaDBySTU2cGZlZkpMeWV3aDJaRmN3VzYxV09xaEQ5bTc0bnRvWjE1MmhlRUNINnR4cV9lTnhjNkFXRXhZMnJmb1R4?oc=5",
-      "date": "2026-06-19T12:16:43.000Z",
-      "source": "Google News",
-      "badge": "em"
+      "badge": "us"
     }
   ]
 }
