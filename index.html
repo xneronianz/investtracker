@@ -2576,6 +2576,8 @@
                             '<input type="number" step="0.0001" inputmode="decimal" data-mnav="' + safeName + '" ' +
                                 'placeholder="NAV" autocomplete="off" ' +
                                 'class="p-1.5 text-xs font-bold text-right bg-white border border-slate-200 rounded-lg outline-none focus:border-purple-400 flex-shrink-0" style="width:78px;">' +
+                            '<button data-msave="' + safeName + '" onclick="saveManualNavSingle(this.dataset.msave)" ' +
+                                'class="text-[10px] font-black bg-purple-100 text-purple-600 hover:bg-purple-600 hover:text-white px-2.5 py-2 rounded-lg whitespace-nowrap transition-all flex-shrink-0">💾</button>' +
                         '</div>' +
                     '</div>';
                 }).join('');
@@ -2586,6 +2588,65 @@
                 });
             }
             document.getElementById('manualNavModal').classList.add('active');
+        }
+
+        // Shared core logic: save NAV for one fund name. Returns true if saved.
+        function _saveOneManualNav(fundName, navValue, dateStr) {
+            const parsed = parseFloat(navValue);
+            if (isNaN(parsed) || parsed <= 0) return false;
+            const nav4 = parseFloat(parsed.toFixed(4));
+            allFunds.forEach(function(f) {
+                if (f.name !== fundName) return;
+                f.nav = nav4;
+                f.navDate = dateStr;
+                if (!f.history) f.history = [];
+                const existingIdx = f.history.findIndex(h => h.date === dateStr);
+                if (existingIdx >= 0) {
+                    f.history[existingIdx].nav = nav4;
+                    f.history[existingIdx].invested = f.invested;
+                    f.history[existingIdx].units = f.units;
+                } else {
+                    f.history.push({ date: dateStr, nav: nav4, invested: f.invested, units: f.units, source: "Manual Entry" });
+                }
+            });
+            syncSharedNavHistory(fundName);
+            return true;
+        }
+
+        // Save a single row — keeps the modal open, refreshes that row's "Current" subline.
+        function saveManualNavSingle(fundName) {
+            const navInp  = document.querySelector('#manualNavList input[data-mnav="' + CSS.escape(fundName) + '"]');
+            const dateInp = document.querySelector('#manualNavList input[data-mdate="' + CSS.escape(fundName) + '"]');
+            if (!navInp) return;
+            const val = navInp.value.trim();
+            if (val === '') { navInp.focus(); return; }
+            const todayStr = new Date().toISOString().split('T')[0];
+            const dateStr = (dateInp && dateInp.value) ? dateInp.value : todayStr;
+            const ok = _saveOneManualNav(fundName, val, dateStr);
+            if (!ok) { navInp.focus(); return; }
+
+            saveToLocalStorage();
+            filterData(); // recompute & re-render dashboard/table behind the modal
+
+            // Update this row's "Current: ..." subline + clear its NAV input, modal stays open
+            const f = allFunds.find(function(x){ return x.name === fundName; });
+            const rowEl = navInp.closest('.flex.items-start');
+            if (rowEl && f) {
+                const sub = rowEl.querySelector('.text-slate-400');
+                if (sub) sub.textContent = 'Current: ฿' + f.nav.toFixed(4) + ' · ' + f.navDate;
+            }
+            navInp.value = '';
+            // Brief visual confirmation on the save button itself
+            const btn = document.querySelector('[data-msave="' + CSS.escape(fundName) + '"]');
+            if (btn) {
+                const original = btn.textContent;
+                btn.textContent = '✅';
+                btn.classList.add('bg-emerald-100','text-emerald-600');
+                setTimeout(function() {
+                    btn.textContent = original;
+                    btn.classList.remove('bg-emerald-100','text-emerald-600');
+                }, 1200);
+            }
         }
 
         function applyManualNavDateToAll() {
@@ -2603,30 +2664,10 @@
             inputs.forEach(function(inp) {
                 const val = inp.value.trim();
                 if (val === '') return; // blank = leave unchanged
-                const parsed = parseFloat(val);
-                if (isNaN(parsed) || parsed <= 0) return;
                 const fundName = inp.getAttribute('data-mnav');
-                const nav4 = parseFloat(parsed.toFixed(4));
-                // Read this row's own date field — each fund can use a different NAV date
                 const dateInp = document.querySelector('#manualNavList input[data-mdate="' + CSS.escape(fundName) + '"]');
                 const dateStr = (dateInp && dateInp.value) ? dateInp.value : todayStr;
-                // Update every portfolio holding this fund name
-                allFunds.forEach(function(f) {
-                    if (f.name !== fundName) return;
-                    f.nav = nav4;
-                    f.navDate = dateStr;
-                    if (!f.history) f.history = [];
-                    const existingIdx = f.history.findIndex(h => h.date === dateStr);
-                    if (existingIdx >= 0) {
-                        f.history[existingIdx].nav = nav4;
-                        f.history[existingIdx].invested = f.invested;
-                        f.history[existingIdx].units = f.units;
-                    } else {
-                        f.history.push({ date: dateStr, nav: nav4, invested: f.invested, units: f.units, source: "Manual Entry" });
-                    }
-                });
-                syncSharedNavHistory(fundName);
-                updatedCount++;
+                if (_saveOneManualNav(fundName, val, dateStr)) updatedCount++;
             });
             saveToLocalStorage();
             closeModal('manualNavModal');
