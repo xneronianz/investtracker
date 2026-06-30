@@ -676,6 +676,8 @@
                                 {"s":"KRX:KOSPI","d":"South Korea KOSPI"},
                                 {"s":"TWSE:IX0001","d":"Taiwan TAIEX"},
                                 {"s":"NSE:NIFTY","d":"India Nifty 50"},
+                                {"s":"TVC:NI225","d":"Nikkei 225"},
+                                {"s":"TSE:TOPIX","d":"TOPIX"},
                                 {"s":"HOSE:VNINDEX","d":"VN Index"}
                             ],
                             "originalTitle": "Indices"
@@ -1465,6 +1467,7 @@
             </div>
             <div class="grid grid-cols-2 gap-2 mb-3">
                 <button onclick="secNavRunSync(true)" class="bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-bold text-sm col-span-2">🔄 Apply NAV from nav-data.json</button>
+                <button onclick="closeModal('secNavModal'); openManualNavModal();" class="bg-purple-100 hover:bg-purple-500 hover:text-white text-purple-600 py-3 rounded-xl font-black text-sm col-span-2 transition-all">✋ Manual NAV (SSF/SSFE funds)</button>
                 <button onclick="(function(){var b=document.getElementById('secNavBtn');if(b){b.textContent='🔄 Auto NAV';b.disabled=false;}var p=document.getElementById('secNavProgress');if(p)p.classList.add('hidden');})()" class="bg-rose-100 hover:bg-rose-200 text-rose-600 py-2 rounded-xl font-bold text-xs col-span-2">↺ Reset If Stuck</button>
             </div>
             <div id="secNavProgress" class="hidden mt-2">
@@ -1484,6 +1487,34 @@
             <div class="text-[10px] text-slate-400 leading-relaxed border-t pt-3 mt-2">
                 <strong class="text-slate-500">How it works:</strong> GitHub Actions runs daily at 8am Bangkok time, fetches NAV from SEC Thailand, and saves to nav-data.json in your repo. The app reads this file directly — no CORS issues, no API keys needed in the app.
             </div>
+        </div>
+    </div>
+
+    <!-- Manual NAV Batch Entry Modal (for SSF/SSFE funds the SEC API can't distinguish) -->
+    <div id="manualNavModal" class="modal" style="z-index:3000;">
+        <div class="bg-white p-6 rounded-[2rem] shadow-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-xl font-black text-purple-600">✋ Manual NAV Update</h2>
+                <button onclick="closeModal('manualNavModal')" class="text-slate-400 hover:text-rose-500 font-black text-xl">✕</button>
+            </div>
+            <p class="text-[11px] text-slate-500 leading-relaxed mb-3">
+                These funds are SSF/SSFE share classes whose exact NAV the SEC daily feed can't distinguish from the parent fund. Tap <strong class="text-purple-600">🔗 Open</strong> to view the live NAV on Finnomena, read the circled price, then type the NAV and date for each fund below.
+            </p>
+            <div class="mb-4 flex items-end gap-2">
+                <div style="flex:1;">
+                    <label class="text-[10px] font-black uppercase text-purple-600 mb-1 block">Quick-fill date for all rows</label>
+                    <input type="date" id="manualNavDate" autocomplete="off" class="w-full p-2.5 text-sm font-bold bg-purple-50 border border-purple-200 rounded-xl outline-none focus:border-purple-400 text-slate-700">
+                </div>
+                <button onclick="applyManualNavDateToAll()" class="text-[11px] font-black bg-purple-100 hover:bg-purple-500 hover:text-white text-purple-600 px-3 py-2.5 rounded-xl transition-all whitespace-nowrap">Apply to All</button>
+            </div>
+            <div id="manualNavList" class="space-y-2 mb-4"></div>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="saveManualNavBatch()" class="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-black text-sm">💾 Save All</button>
+                <button onclick="closeModal('manualNavModal')" class="bg-slate-100 hover:bg-slate-200 text-slate-500 py-3 rounded-xl font-bold text-sm">Cancel</button>
+            </div>
+            <p class="text-[10px] text-slate-400 mt-3 leading-relaxed border-t pt-2">
+                Only funds you actually hold are shown. Blank fields are left unchanged. The selected NAV Date is stamped on each saved NAV.
+            </p>
         </div>
     </div>
 
@@ -2110,10 +2141,41 @@
         let sortKey = 'name'; let sortAsc = true;
         let navPctKey = '1D'; // default NAV % change timeframe
         const MANUAL_NAV_FUNDS = new Set([
-            // All previously-manual funds now have confirmed proj_ids and are auto-synced.
-            // This set is kept for any future funds that cannot be resolved via SEC API.
-            // Users can still override individual funds to manual via the NAV Sync toggle in Fund Details.
+            // SSF/SSFE share classes whose exact NAV the SEC daily API cannot distinguish
+            // from the parent fund (same proj_id). These must be updated manually from
+            // Finnomena. Use the "✋ Manual NAV" batch entry button for fast daily updates.
+            'ABGDD-SSF',
+            'SCBCHA-SSF',
+            'SCBCHA(SSFE)',
+            'SCBGOLDH-SSF',
+            'UCHINA-SSF',
+            'ES-GINNO-SSF',
+            'SCBVIET(SSFE)',
+            'KKP CHINA-H-SSF',
+            // SCBJAPAN(SSF) / SCBJAPAN(SSFE) share proj_id M0386_2564 but their NAVs
+            // diverge by ~4% (not just fee drift) — auto-sync would assign one NAV
+            // to both and be wrong for at least one. Must stay manual.
+            'SCBJAPAN(SSF)',
+            'SCBJAPAN(SSFE)',
         ]);
+        // Finnomena URL slug for each manual fund (for one-tap "open & read NAV" links).
+        // Most slugs match the fund name directly; override here when they differ.
+        const FINNOMENA_SLUGS = {
+            'ABGDD-SSF':       'ABGDD-SSF',
+            'SCBCHA-SSF':      'SCBCHA-SSF',
+            'SCBCHA(SSFE)':    'SCBCHA-SSFE',
+            'SCBGOLDH-SSF':    'SCBGOLDH-SSF',
+            'UCHINA-SSF':      'UCHINA-SSF',
+            'ES-GINNO-SSF':    'ES-GINNO-SSF',
+            'SCBVIET(SSFE)':   'SCBVIET-SSFE',
+            'KKP CHINA-H-SSF': 'KKP%20CHINA-H-SSF',
+            'SCBJAPAN(SSF)':   'SCBJAPAN-SSF',
+            'SCBJAPAN(SSFE)':  'SCBJAPAN-SSFE',
+        };
+        function finnomenaUrl(fundName) {
+            var slug = FINNOMENA_SLUGS[fundName] || encodeURIComponent(fundName);
+            return 'https://www.finnomena.com/fund/' + slug;
+        }
         const NAV_TIMEFRAMES = [
             { key:'1D',  label:'1D',        days:1 },
             { key:'1W',  label:'1W',        days:7 },
@@ -2480,10 +2542,107 @@
                     } else {
                         f.history.push({ date: dateStr, nav: f.nav, invested: f.invested, units: f.units, source: "Manual Entry" });
                     }
-                    // Sync this NAV + history to all other portfolios holding the same fund name
                     syncSharedNavHistory(f.name);
                     saveToLocalStorage(); renderAll();
                 }
+            }
+        }
+
+        // ── Batch Manual NAV entry for SSF/SSFE funds ──────────────────────────
+        function openManualNavModal() {
+            const dateEl = document.getElementById('manualNavDate');
+            const todayStr = new Date().toISOString().split('T')[0];
+            if (dateEl) { dateEl.max = todayStr; dateEl.value = todayStr; }
+            const listEl = document.getElementById('manualNavList');
+            if (!listEl) return;
+            // Find every held fund that is manual (in the set OR toggled manual), unique by name
+            const seen = new Set();
+            const manualFunds = [];
+            allFunds.forEach(function(f) {
+                const isManual = MANUAL_NAV_FUNDS.has(f.name) || f.navSyncMode === 'manual';
+                if (isManual && !seen.has(f.name)) {
+                    seen.add(f.name);
+                    manualFunds.push(f);
+                }
+            });
+            manualFunds.sort(function(a,b){ return a.name.localeCompare(b.name); });
+
+            if (manualFunds.length === 0) {
+                listEl.innerHTML = '<p class="text-xs text-slate-400 italic text-center py-4">No manual-NAV funds in your portfolio.</p>';
+            } else {
+                listEl.innerHTML = manualFunds.map(function(f) {
+                    var safeName = f.name.replace(/"/g,'&quot;');
+                    var url = finnomenaUrl(f.name);
+                    return '<div class="flex items-start justify-between gap-2 p-2 rounded-xl border border-slate-100 bg-slate-50">' +
+                        '<div style="min-width:0;">' +
+                            '<div class="text-xs font-black text-slate-700 truncate">' + f.name + '</div>' +
+                            '<div class="text-[10px] text-slate-400 truncate">Current: ฿' + (f.nav ? f.nav.toFixed(4) : '—') + (f.navDate ? ' · ' + f.navDate : '') + '</div>' +
+                        '</div>' +
+                        '<div class="flex items-center gap-1.5 flex-shrink-0">' +
+                            '<a href="' + url + '" target="_blank" rel="noopener" class="text-[10px] font-black bg-sky-100 text-sky-600 hover:bg-sky-500 hover:text-white px-2 py-2 rounded-lg whitespace-nowrap transition-all flex-shrink-0">🔗</a>' +
+                            '<input type="date" data-mdate="' + safeName + '" autocomplete="off" ' +
+                                'class="p-1.5 text-[10px] font-bold bg-white border border-slate-200 rounded-lg outline-none focus:border-purple-400 text-slate-600 flex-shrink-0" style="width:108px;">' +
+                            '<input type="number" step="0.0001" inputmode="decimal" data-mnav="' + safeName + '" ' +
+                                'placeholder="NAV" autocomplete="off" ' +
+                                'class="p-1.5 text-xs font-bold text-right bg-white border border-slate-200 rounded-lg outline-none focus:border-purple-400 flex-shrink-0" style="width:78px;">' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+                // Pre-fill every per-row date with today's date (each row independently editable)
+                listEl.querySelectorAll('input[data-mdate]').forEach(function(d) {
+                    d.value = todayStr;
+                    d.max = todayStr;
+                });
+            }
+            document.getElementById('manualNavModal').classList.add('active');
+        }
+
+        function applyManualNavDateToAll() {
+            const dateEl = document.getElementById('manualNavDate');
+            if (!dateEl || !dateEl.value) return;
+            document.querySelectorAll('#manualNavList input[data-mdate]').forEach(function(d) {
+                d.value = dateEl.value;
+            });
+        }
+
+        function saveManualNavBatch() {
+            const inputs = document.querySelectorAll('#manualNavList input[data-mnav]');
+            const todayStr = new Date().toISOString().split('T')[0];
+            let updatedCount = 0;
+            inputs.forEach(function(inp) {
+                const val = inp.value.trim();
+                if (val === '') return; // blank = leave unchanged
+                const parsed = parseFloat(val);
+                if (isNaN(parsed) || parsed <= 0) return;
+                const fundName = inp.getAttribute('data-mnav');
+                const nav4 = parseFloat(parsed.toFixed(4));
+                // Read this row's own date field — each fund can use a different NAV date
+                const dateInp = document.querySelector('#manualNavList input[data-mdate="' + CSS.escape(fundName) + '"]');
+                const dateStr = (dateInp && dateInp.value) ? dateInp.value : todayStr;
+                // Update every portfolio holding this fund name
+                allFunds.forEach(function(f) {
+                    if (f.name !== fundName) return;
+                    f.nav = nav4;
+                    f.navDate = dateStr;
+                    if (!f.history) f.history = [];
+                    const existingIdx = f.history.findIndex(h => h.date === dateStr);
+                    if (existingIdx >= 0) {
+                        f.history[existingIdx].nav = nav4;
+                        f.history[existingIdx].invested = f.invested;
+                        f.history[existingIdx].units = f.units;
+                    } else {
+                        f.history.push({ date: dateStr, nav: nav4, invested: f.invested, units: f.units, source: "Manual Entry" });
+                    }
+                });
+                syncSharedNavHistory(fundName);
+                updatedCount++;
+            });
+            saveToLocalStorage();
+            closeModal('manualNavModal');
+            filterData();
+            if (updatedCount > 0) {
+                // brief confirmation
+                if (typeof showToast === 'function') showToast(updatedCount + ' NAV' + (updatedCount>1?'s':'') + ' updated');
             }
         }
 
