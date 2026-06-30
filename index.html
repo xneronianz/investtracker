@@ -2160,21 +2160,12 @@
         ]);
         // Finnomena URL slug for each manual fund (for one-tap "open & read NAV" links).
         // Most slugs match the fund name directly; override here when they differ.
-        const FINNOMENA_SLUGS = {
-            'ABGDD-SSF':       'ABGDD-SSF',
-            'SCBCHA-SSF':      'SCBCHA-SSF',
-            'SCBCHA(SSFE)':    'SCBCHA-SSFE',
-            'SCBGOLDH-SSF':    'SCBGOLDH-SSF',
-            'UCHINA-SSF':      'UCHINA-SSF',
-            'ES-GINNO-SSF':    'ES-GINNO-SSF',
-            'SCBVIET(SSFE)':   'SCBVIET-SSFE',
-            'KKP CHINA-H-SSF': 'KKP%20CHINA-H-SSF',
-            'SCBJAPAN(SSF)':   'SCBJAPAN-SSF',
-            'SCBJAPAN(SSFE)':  'SCBJAPAN-SSFE',
-        };
+        // Finnomena URL: matches the exact same logic used in the fund table's Source link
+        // (see fundTableBody rendering) — fund name with spaces replaced by %20, nothing else.
+        // Parentheses, dashes, and all other characters are kept as-is.
         function finnomenaUrl(fundName) {
-            var slug = FINNOMENA_SLUGS[fundName] || encodeURIComponent(fundName);
-            return 'https://www.finnomena.com/fund/' + slug;
+            var fundUrlParam = fundName.replace(/\s+/g, '%20');
+            return 'https://www.finnomena.com/fund/' + fundUrlParam;
         }
         const NAV_TIMEFRAMES = [
             { key:'1D',  label:'1D',        days:1 },
