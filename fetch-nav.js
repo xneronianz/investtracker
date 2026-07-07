@@ -1,9 +1,19 @@
 /**
- * fetch-nav.js v18 — added K-US500X-A(A) (M0257_2564), TLA-GFIX (M0070_2569)
+ * fetch-nav.js v19 — migrated to the new SEC Open Data API (secopendata.sec.or.th)
+ * The legacy api-portal.sec.or.th portal shut down 2026-06-30; the old
+ * /FundDailyInfo/{proj_id}/dailynav/{date} path is gone. New endpoint:
+ *   GET https://api.sec.or.th/v2/fund/daily-info/nav
+ *       ?proj_id=...&start_nav_date=YYYY-MM-DD&end_nav_date=YYYY-MM-DD
+ * Same auth header (Ocp-Apim-Subscription-Key) but the KEY VALUE must be
+ * freshly issued by re-subscribing on the new portal — old keys don't carry over.
+ * Response is now a paginated wrapper: { message, page_size, next_cursor, items: [...] }
+ * — one GET now returns every NAV in the date window (was: up to 8 separate
+ * single-date calls per fund on the old API). last_val / nav_date field names unchanged.
+ *
  * 48 funds total, proj_ids verified via Finnomena factsheet URLs
  * Note: SSF/SSFE/SSFA share classes may use same proj_id as parent — NAV differs by <0.2%
  *
- * GitHub Secrets: SEC_KEY_DAILYINFO
+ * GitHub Secrets: SEC_KEY_DAILYINFO (must be re-issued from the new portal)
  */
 
 const https = require('https');
@@ -94,18 +104,26 @@ function dateStr(daysAgo) {
 }
 
 async function fetchNAV(projId) {
-  for (let i = 0; i <= 7; i++) {
-    const date = dateStr(i);
-    const r = await get(`/FundDailyInfo/${projId}/dailynav/${date}`, KEY_DI);
-    if (r.status === 204 || r.status === 404 || !r.data) continue;
-    if (r.status === 200 && r.data) {
-      const d = Array.isArray(r.data) ? r.data[0] : r.data;
-      const nav  = parseFloat(d.last_val || d.nav_value || d.nav || 0);
-      const date2 = (d.nav_date || date).substring(0, 10);
-      if (nav > 0) return { nav, nav_date: date2 };
-    }
-    await sleep(30);
+  // New API returns a list of NAV entries within a date range in ONE call —
+  // no more looping through individual dates like the old API required.
+  // A 10-day lookback comfortably covers weekends + most Thai public holidays.
+  const startDate = dateStr(10);
+  const endDate   = dateStr(0);
+  const path = `/v2/fund/daily-info/nav?proj_id=${encodeURIComponent(projId)}` +
+               `&start_nav_date=${startDate}&end_nav_date=${endDate}&page_size=20`;
+
+  const r = await get(path, KEY_DI);
+  if (r.status !== 200 || !r.data || !Array.isArray(r.data.items) || r.data.items.length === 0) {
+    return null;
   }
+
+  // Items aren't guaranteed sorted — sort ascending by nav_date and take the latest
+  const sorted = r.data.items.slice().sort((a, b) => (a.nav_date || '').localeCompare(b.nav_date || ''));
+  const latest = sorted[sorted.length - 1];
+  const nav = parseFloat(latest.last_val || 0);
+  const navDate = (latest.nav_date || endDate).substring(0, 10);
+
+  if (nav > 0) return { nav, nav_date: navDate };
   return null;
 }
 
