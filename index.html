@@ -1456,12 +1456,13 @@
             <details class="mb-4 text-xs text-slate-500 bg-slate-50 rounded-xl p-3 border border-slate-100">
                 <summary class="font-black text-slate-600 cursor-pointer">📋 One-time GitHub Actions Setup (click to expand)</summary>
                 <ol class="mt-2 space-y-1 list-decimal list-inside leading-relaxed">
+                    <li>Subscribe at <strong>secopendata.sec.or.th</strong> (the legacy api-portal.sec.or.th was decommissioned 30 Jun 2026) — one subscription covers both the Daily Info and Factsheet products</li>
                     <li>Go to your GitHub repo → <strong>Settings → Secrets → Actions</strong></li>
-                    <li>Add secret: <code>SEC_KEY_FACTSHEET</code> = your Fund Factsheet key</li>
-                    <li>Add secret: <code>SEC_KEY_DAILYINFO</code> = your Fund Daily Info key</li>
+                    <li>Add secret: <code>SEC_KEY_DAILYINFO</code> = your subscription key</li>
+                    <li>Add secret: <code>SEC_KEY_FACTSHEET</code> = same key value (one subscription, two secret names)</li>
                     <li>Upload <code>fetch-nav.js</code> and <code>.github/workflows/update-nav.yml</code> to repo root</li>
                     <li>Go to <strong>Actions tab</strong> → run <strong>"Update NAV Data"</strong> manually once</li>
-                    <li>After that it runs automatically at 8am Bangkok time every weekday</li>
+                    <li>After that it runs automatically at 9pm Bangkok time every weekday (after SEC publishes that day's NAV)</li>
                 </ol>
                 <p class="mt-2 text-emerald-600 font-bold">✓ Once set up, NAV updates daily with zero interaction needed.</p>
             </details>
@@ -1489,7 +1490,7 @@
                 <div id="secDebugLog" class="bg-slate-900 text-green-400 text-[10px] font-mono p-2 rounded-lg max-h-48 overflow-y-auto leading-relaxed whitespace-pre-wrap">Tap "Apply NAV" to sync...</div>
             </div>
             <div class="text-[10px] text-slate-400 leading-relaxed border-t pt-3 mt-2">
-                <strong class="text-slate-500">How it works:</strong> GitHub Actions runs daily at 8am Bangkok time, fetches NAV from SEC Thailand, and saves to nav-data.json in your repo. The app reads this file directly — no CORS issues, no API keys needed in the app.
+                <strong class="text-slate-500">How it works:</strong> GitHub Actions runs daily at 9pm Bangkok time (after SEC publishes that day's NAV), fetches NAV from the SEC Open Data API, and saves to nav-data.json in your repo. The app reads this file directly — no CORS issues, no API keys needed in the app.
             </div>
         </div>
     </div>
