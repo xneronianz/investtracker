@@ -10,7 +10,7 @@
  * — one GET now returns every NAV in the date window (was: up to 8 separate
  * single-date calls per fund on the old API). last_val / nav_date field names unchanged.
  *
- * 48 funds total, proj_ids verified via Finnomena factsheet URLs
+ * 52 funds total, proj_ids verified via Finnomena factsheet URLs
  * Note: SSF/SSFE/SSFA share classes may use same proj_id as parent — NAV differs by <0.2%
  *
  * GitHub Secrets: SEC_KEY_DAILYINFO (must be re-issued from the new portal)
@@ -50,6 +50,7 @@ const FUND_MAP = [
   ['K-VIETNAM-SSF',         'M0511_2565'],
   ['MEGA10CHINA-SSF',       'M0682_2566'],
   ['ONE-UGG-ASSF',          'M0717_2558'],
+  ['PRINCIPAL GOPP-SSF',    'M0166_2560'],   // ← new: Principal Global Opportunity SSF
   ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],
   ['SCBAXJ(SSF)',           'M0513_2564'],
   ['SCBCHA-SSF',            'M0005_2558'],   // confirmed
@@ -59,9 +60,12 @@ const FUND_MAP = [
   ['SCBEUROPE(SSF)',        'M0274_2564'],
   ['SCBEUROPE(SSFE)',       'M0274_2564'],
   ['SCBGOLDH-SSF',          'M0856_2553'],   // confirmed
+  ['SCBGOLDH(SSFE)',        'M0856_2553'],   // confirmed — same proj_id as SCBGOLDH-SSF, manual (share-class ambiguity)
   ['SCBNDQ(SSF)',           'M0311_2564'],   // confirmed
+  ['SCBNDQ(SSFE)',          'M0311_2564'],   // confirmed — same proj_id as SCBNDQ(SSF), manual (share-class ambiguity)
   ['SCBNEXT(SSFE)',         'M0163_2564'],
   ['SCBS&P500(SSFA)',       'M0643_2555'],   // confirmed
+  ['SCBS&P500(SSFE)',       'M0643_2555'],   // confirmed — same proj_id as SCBS&P500(SSFA), manual (share-class ambiguity)
   ['SCBVIET(SSFA)',         'M0539_2564'],   // confirmed
   ['SCBVIET(SSFE)',         'M0539_2564'],   // confirmed — same proj_id as SCBVIET(SSFA)
   ['SCBWORLD(SSFE)',        'M0465_2564'],
