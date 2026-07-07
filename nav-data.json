@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-07-07T07:31:30.249Z",
+  "updated_at": "2026-07-07T08:34:14.218Z",
   "date": "2026-07-07",
-  "count": 48,
+  "count": 52,
   "funds": {
     "ABGDD-SSF": {
       "nav": 12.0026,
@@ -193,6 +193,22 @@
     },
     "TLA-GFIX": {
       "nav": 10.1085,
+      "nav_date": "2026-07-02"
+    },
+    "PRINCIPAL GOPP-SSF": {
+      "nav": 21.6954,
+      "nav_date": "2026-07-01"
+    },
+    "SCBGOLDH(SSFE)": {
+      "nav": 15.8404,
+      "nav_date": "2026-07-03"
+    },
+    "SCBNDQ(SSFE)": {
+      "nav": 17.0358,
+      "nav_date": "2026-07-02"
+    },
+    "SCBS&P500(SSFE)": {
+      "nav": 37.2648,
       "nav_date": "2026-07-02"
     }
   }
