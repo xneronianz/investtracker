@@ -2216,6 +2216,12 @@
             // to both and be wrong for at least one. Must stay manual.
             'SCBJAPAN(SSF)',
             'SCBJAPAN(SSFE)',
+            // SCBGOLDH(SSFE), SCBNDQ(SSFE), SCBS&P500(SSFE) confirmed to share proj_id
+            // with their sibling class — same ambiguity risk as above, manual by default
+            // until divergence is confirmed negligible.
+            'SCBGOLDH(SSFE)',
+            'SCBNDQ(SSFE)',
+            'SCBS&P500(SSFE)',
         ]);
         // Finnomena URL slug for each manual fund (for one-tap "open & read NAV" links).
         // Most slugs match the fund name directly; override here when they differ.
