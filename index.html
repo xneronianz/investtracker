@@ -2223,6 +2223,25 @@
             'SCBNDQ(SSFE)',
             'SCBS&P500(SSFE)',
         ]);
+
+        // Single source of truth for "is this fund's NAV manual-only?" — used by every
+        // display check AND both auto-sync skip checks, so they can never drift apart again.
+        //
+        // Priority rule:
+        //   1. f.navSyncMode === 'manual' → always manual (explicit user choice)
+        //   2. f.navSyncMode === 'auto'   → always auto, EVEN IF the fund is in the
+        //      hardcoded MANUAL_NAV_FUNDS safety list — an explicit user override is
+        //      durable and always wins, so switching back to Auto in Fund Details
+        //      actually sticks across reloads instead of being silently re-forced
+        //      back to manual by the hardcoded list on next page load.
+        //   3. f.navSyncMode unset       → fall back to the hardcoded MANUAL_NAV_FUNDS
+        //      list as the safe recommended default for funds the user hasn't made
+        //      a deliberate choice about yet.
+        function isFundManual(f) {
+            if (f.navSyncMode === 'manual') return true;
+            if (f.navSyncMode === 'auto') return false;
+            return MANUAL_NAV_FUNDS.has(f.name);
+        }
         // Finnomena URL slug for each manual fund (for one-tap "open & read NAV" links).
         // Most slugs match the fund name directly; override here when they differ.
         // Finnomena URL: matches the exact same logic used in the fund table's Source link
@@ -2339,8 +2358,8 @@
             if (key === 'navSync') {
                 // Auto (0) before Manual (1) when ascending
                 allFunds.sort((a, b) => {
-                    const vA = (MANUAL_NAV_FUNDS.has(a.name) || a.navSyncMode === 'manual') ? 1 : 0;
-                    const vB = (MANUAL_NAV_FUNDS.has(b.name) || b.navSyncMode === 'manual') ? 1 : 0;
+                    const vA = isFundManual(a) ? 1 : 0;
+                    const vB = isFundManual(b) ? 1 : 0;
                     return sortAsc ? vA - vB : vB - vA;
                 });
                 filterData();
@@ -2615,7 +2634,7 @@
             const seen = new Set();
             const manualFunds = [];
             allFunds.forEach(function(f) {
-                const isManual = MANUAL_NAV_FUNDS.has(f.name) || f.navSyncMode === 'manual';
+                const isManual = isFundManual(f);
                 if (isManual && !seen.has(f.name)) {
                     seen.add(f.name);
                     manualFunds.push(f);
@@ -3980,7 +3999,7 @@
 
             filteredFunds = allFunds.filter(f => {
                 const str = Object.values(f).join(' ').toLowerCase();
-                const isManual = MANUAL_NAV_FUNDS.has(f.name) || f.navSyncMode === 'manual';
+                const isManual = isFundManual(f);
                 const navSyncMatch = selNavSync === '' || (selNavSync === 'auto' && !isManual) || (selNavSync === 'manual' && isManual);
                 return str.includes(gSearch) && (selNames.length===0||selNames.includes(f.name)) && (selPorts.length===0||selPorts.includes(f.portfolio)) && (selGeos.length===0||selGeos.includes(f.assetClass)) && navSyncMatch;
             }).map(f => {
@@ -4205,7 +4224,7 @@
                     </td>
                     <td class="p-4 text-center">${sourceHTML}</td>
                     <td class="p-4 text-center">
-                        ${(MANUAL_NAV_FUNDS.has(f.name) || f.navSyncMode === 'manual')
+                        ${isFundManual(f)
                             ? '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-black bg-amber-50 text-amber-600 border border-amber-200">✋ Manual</span>'
                             : '<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-[9px] font-black bg-emerald-50 text-emerald-600 border border-emerald-200">⚡ Auto</span>'
                         }
@@ -4619,7 +4638,7 @@
             document.getElementById('in_source').value = f.source || "";
             document.getElementById('in_start_date').value = f.startDate || '';
             // Show current sync mode: manual if in MANUAL_NAV_FUNDS or explicitly marked
-            const isManual = MANUAL_NAV_FUNDS.has(f.name) || f.navSyncMode === 'manual';
+            const isManual = isFundManual(f);
             setNavSyncMode(isManual ? 'manual' : 'auto');
             document.getElementById('deleteBtn').classList.remove('hidden'); document.getElementById('dataModal').classList.add('active');
         }
@@ -5673,8 +5692,12 @@
                     if (!f.name) return;
                     var src = (f.source || '').toLowerCase();
                     var cls = (f.assetClass || '').toLowerCase();
-                    // Skip funds the user has explicitly set to Manual NAV sync
-                    if (f.navSyncMode === 'manual') { skipped++; return; }
+                    // Skip funds explicitly flagged manual — either by the hardcoded
+                    // MANUAL_NAV_FUNDS safety list (share-class ambiguity funds) or by
+                    // the user's own per-holding NAV Sync toggle. Checking both here
+                    // (not just navSyncMode) closes a gap where a fund could *display*
+                    // as Manual everywhere without ever having navSyncMode explicitly saved.
+                    if (isFundManual(f)) { skipped++; return; }
                     if (src === 'manual' || cls === 'insurance' || cls === 'provident' || cls === 'cash') return;
 
                     var r = funds[f.name.toUpperCase()] || funds[f.name];
@@ -5715,7 +5738,7 @@
                 allFunds.forEach(function(f) {
                     if (!f.name) return;
                     var s = (f.source||'').toLowerCase(), c = (f.assetClass||'').toLowerCase();
-                    if (f.navSyncMode === 'manual') return;
+                    if (isFundManual(f)) return;
                     if (s==='manual'||c==='insurance'||c==='provident'||c==='cash') return;
                     var r = funds[f.name.toUpperCase()] || funds[f.name];
                     if (!r) return;
