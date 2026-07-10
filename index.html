@@ -5745,11 +5745,18 @@
                 var pathParts = location.pathname.split('/').filter(Boolean);
                 if (pathParts.length > 0) navUrl = '/' + pathParts[0] + '/nav-data.json';
             }
+            // Cache-bust: without this, the browser (and/or GitHub Pages' CDN) can
+            // silently serve a stale cached copy of nav-data.json even after the
+            // repo file has been updated — pressing the button repeatedly would
+            // just keep re-applying the same old data. A unique query string
+            // forces a genuinely fresh fetch every time.
+            navUrl += (navUrl.indexOf('?') === -1 ? '?' : '&') + 't=' + Date.now();
 
             secLog('Loading: ' + navUrl, 'ok');
 
             var xhr = new XMLHttpRequest();
             xhr.open('GET', navUrl, true);
+            xhr.setRequestHeader('Cache-Control', 'no-cache');
             xhr.timeout = 15000;
 
             xhr.onload = function() {
