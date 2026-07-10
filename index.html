@@ -2602,30 +2602,11 @@
             });
         }
 
-        function quickUpdateNAV(id) {
-            const f = allFunds.find(x => (x.name + "||" + x.portfolio) === id);
-            if (!f) return;
-            const manualNav = prompt(`Update NAV for: ${f.name}\nCurrent NAV is ฿${f.nav.toFixed(4)}`, f.nav);
-            if (manualNav !== null && manualNav.trim() !== "") {
-                const parsedNav = parseFloat(manualNav);
-                if (!isNaN(parsedNav) && parsedNav > 0) {
-                    f.nav = parseFloat(parsedNav.toFixed(4));
-                    const dateStr = new Date().toISOString().split('T')[0];
-                    f.navDate = dateStr;
-                    if (!f.history) f.history = [];
-                    const existingIdx = f.history.findIndex(h => h.date === dateStr);
-                    if (existingIdx >= 0) {
-                        f.history[existingIdx].nav = f.nav;
-                        f.history[existingIdx].invested = f.invested; 
-                        f.history[existingIdx].units = f.units; 
-                    } else {
-                        f.history.push({ date: dateStr, nav: f.nav, invested: f.invested, units: f.units, source: "Manual Entry" });
-                    }
-                    syncSharedNavHistory(f.name);
-                    saveToLocalStorage(); renderAll();
-                }
-            }
-        }
+        // quickUpdateNAV removed 2026-07-10 — always stamped today's date regardless
+        // of what NAV value/date the user actually intended, silently corrupting
+        // f.navDate and blocking future auto-sync (the sync guard correctly treats
+        // any date "older" than the stored navDate as stale and skips it). Use the
+        // Historical NAV window instead — it lets you pick the correct date explicitly.
 
         // ── Batch Manual NAV entry for SSF/SSFE funds ──────────────────────────
         function openManualNavModal() {
@@ -4248,7 +4229,6 @@
                     <td class="p-4">
                         <div class="flex flex-col gap-1 w-full max-w-[80px] mx-auto">
                             <button onclick="openEditById('${id}')" class="bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3 py-1 rounded-lg transition-all text-[10px] w-full">Edit</button>
-                            <button onclick="quickUpdateNAV('${id}')" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 font-bold px-3 py-1 rounded-lg transition-all text-[10px] w-full">NAV 📝</button>
                         </div>
                     </td>
                 </tr>`;
@@ -5796,13 +5776,6 @@
                     var navVal  = parseFloat(r.nav || 0);
                     var navDate = (r.nav_date || '').substring(0, 10);
                     if (!navVal || !navDate) return;
-
-                    // TEMPORARY DIAGNOSTIC — remove once the sync mismatch is resolved.
-                    // Logs the exact values being compared for every fund so we can see
-                    // precisely why a fund is or isn't being treated as "already current".
-                    secLog('DEBUG ' + f.name + ': app has nav=' + f.nav + ' date=' + f.navDate +
-                        ' | file has nav=' + navVal + ' date=' + navDate, 'ok');
-
                     if (f.navDate && navDate < f.navDate) return;
                     if (f.nav === navVal && f.navDate === navDate) return;
                     // Allow same-date update if value changed (intraday revision)
