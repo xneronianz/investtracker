@@ -5621,6 +5621,23 @@
         }
 
         function syncFundOverridesToGitHub() {
+            // Apply whatever's currently in the Project ID / Fund Class fields onto
+            // the fund actually being edited BEFORE building the payload — otherwise
+            // Push reads only the last-SAVED value, silently ignoring an edit the
+            // user just made but hasn't clicked "Save Changes" for yet. This keeps
+            // "what you see in the form" and "what gets pushed" always in sync.
+            const editingId = document.getElementById('editKey').value;
+            if (editingId) {
+                const f = allFunds.find(x => (x.name + "||" + x.portfolio) === editingId);
+                const projIdEl = document.getElementById('in_sec_projid');
+                const fundClassEl = document.getElementById('in_sec_fundclass');
+                if (f && projIdEl && fundClassEl) {
+                    f.secProjId = projIdEl.value.trim();
+                    f.secFundClass = fundClassEl.value.trim();
+                    saveToLocalStorage();
+                }
+            }
+
             const token = pagesCfg.token, user = pagesCfg.user, repo = pagesCfg.repo;
             if (!token || !user || !repo) {
                 alert('GitHub Pages isn\'t set up yet. Open Settings → GitHub Pages, fill in your token/username/repo, and save once — this reuses the same connection to push fund-overrides.json.');
