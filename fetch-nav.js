@@ -1,5 +1,16 @@
 /**
- * fetch-nav.js v21 — added fund_class_name filtering after discovering proj_ids
+ * fetch-nav.js v22 — fixed K-GOLD-A(A) and K-US500X-A(A), both wrongly picking up
+ * a SIBLING class's NAV under the correct fund's name. Root cause: earlier testing
+ * of these two funds was incomplete — K-GOLD's unfiltered test only sampled
+ * 2020-2023 history (no A(D) entries happened to appear in that window), and
+ * K-US500X's test was already pre-filtered to fund_class_name=a(a), so its
+ * sibling C(A) class was structurally invisible to that test. Confirmed via live
+ * current-date API query: K-GOLD-A(A) was silently getting K-GOLD-A(D)'s NAV
+ * (15.4908 instead of the correct 21.3621 on 2026-07-09); K-US500X-A(A) was
+ * getting K-US500X-C(A)'s NAV (19.7469 instead of the correct 15.6836 on
+ * 2026-07-07). Both now pinned to their exact fund_class_name.
+ *
+ * v21 — added fund_class_name filtering after discovering proj_ids
  * can silently mix MULTIPLE share classes together. Confirmed via live API test:
  * proj_id M0643_2555 (SCBS&P500) returns SIX distinct classes unfiltered — SSFA,
  * SSFE, A, P, E, -SSF — with genuinely different NAVs (SSFA vs SSFE diverge by a
@@ -60,8 +71,8 @@ const FUND_MAP = [
   ['KFCMEGASSF',            'M0397_2565'],
   ['KFGGSSF',               'M0379_2564'],
   ['KF-LATAM',              'M0028_2553'],
-  ['K-GOLD-A(A)',           'M0447_2551'],
-  ['K-US500X-A(A)',         'M0257_2564'],   // ← new: Kasikorn US500 Extra Fund A
+  ['K-GOLD-A(A)',           'M0447_2551', 'K-GOLD-A(A)'],   // FIXED 2026-07-10 — proj_id also has K-GOLD-A(D); without class filter we were silently getting A(D)'s NAV under the A(A) name
+  ['K-US500X-A(A)',         'M0257_2564', 'K-US500X-A(A)'], // FIXED 2026-07-10 — proj_id also has K-US500X-C(A); without class filter we were silently getting C(A)'s NAV under the A(A) name
   ['KKP CHINA-H-SSF',       'M0432_2565', 'KKP CHINA-H-SSF'],   // confirmed — proj_id also has KKP CHINA-H, KKP CHINA-H-F siblings   // confirmed
   ['KKP EQ THAI ESG',       'M0851_2566'],
   ['KKP GB THAI ESG',       'M0840_2566'],
