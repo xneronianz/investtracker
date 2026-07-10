@@ -1714,6 +1714,16 @@
                     </div>
                     <input type="hidden" id="in_nav_sync" value="auto">
                 </div>
+                <div><label class="text-[10px] font-black uppercase mb-1 text-violet-600">SEC Project ID <span class="text-slate-400 normal-case font-normal">(override)</span></label>
+                    <input type="text" id="in_sec_projid" autocomplete="off" placeholder="e.g. M0447_2551" class="w-full p-3 bg-slate-50 rounded-xl border font-mono text-xs">
+                </div>
+                <div><label class="text-[10px] font-black uppercase mb-1 text-violet-600">SEC Fund Class <span class="text-slate-400 normal-case font-normal">(override, optional)</span></label>
+                    <input type="text" id="in_sec_fundclass" autocomplete="off" placeholder="e.g. K-GOLD-A(A)" class="w-full p-3 bg-slate-50 rounded-xl border font-mono text-xs">
+                    <p class="text-[9px] text-slate-400 mt-1 leading-relaxed">Blank Project ID → uses the default auto-sync mapping already in fetch-nav.js. Filling in a Project ID overrides it for this fund; leave Fund Class blank too if the fund has only one share class.</p>
+                </div>
+            </div>
+            <div class="mt-2 flex justify-end">
+                <button type="button" onclick="syncFundOverridesToGitHub()" class="text-[10px] font-black text-violet-600 hover:text-violet-800 underline">☁️ Push Project ID / Fund Class overrides to GitHub now</button>
             </div>
             <div class="flex flex-col gap-3 mt-10">
                 <div class="flex gap-4"><button onclick="submitData()" class="flex-1 bg-indigo-600 text-white py-4 rounded-2xl font-bold shadow-lg">Save Changes</button><button onclick="closeModal('dataModal')" class="flex-1 bg-slate-100 py-4 rounded-2xl font-bold text-slate-500">Cancel</button></div>
@@ -4616,6 +4626,8 @@
             document.getElementById('in_units').value = ""; document.getElementById('in_invested').value = ""; document.getElementById('in_nav').value = "";
             document.getElementById('in_source').value = "";
             document.getElementById('in_start_date').value = '';
+            document.getElementById('in_sec_projid').value = "";
+            document.getElementById('in_sec_fundclass').value = "";
             setNavSyncMode('manual'); // default new funds to Manual
             document.getElementById('deleteBtn').classList.add('hidden'); document.getElementById('dataModal').classList.add('active');
         }
@@ -4631,6 +4643,8 @@
             document.getElementById('in_nav').value = purchasedNavVal.toFixed(4);
             document.getElementById('in_source').value = f.source || "";
             document.getElementById('in_start_date').value = f.startDate || '';
+            document.getElementById('in_sec_projid').value = f.secProjId || '';
+            document.getElementById('in_sec_fundclass').value = f.secFundClass || '';
             // Show current sync mode: manual if in MANUAL_NAV_FUNDS or explicitly marked
             const isManual = isFundManual(f);
             setNavSyncMode(isManual ? 'manual' : 'auto');
@@ -4668,7 +4682,14 @@
                 // For EXISTING funds: nav is preserved below from allFunds[idx].nav
                 nav: purchasedNav, navDate: dateStr, source: document.getElementById('in_source').value || "Manual",
                 startDate: document.getElementById('in_start_date').value || "",
-                navSyncMode: navSyncMode
+                navSyncMode: navSyncMode,
+                // Optional per-fund overrides for the GitHub Actions NAV fetcher.
+                // Blank secProjId = defer entirely to fetch-nav.js's own hardcoded
+                // default for this fund. A non-blank value overrides it; leaving
+                // secFundClass blank while secProjId is set means "no class filter"
+                // (fine for genuinely single-class funds, risky for multi-class ones).
+                secProjId: document.getElementById('in_sec_projid').value.trim(),
+                secFundClass: document.getElementById('in_sec_fundclass').value.trim()
             };
 
             // Update MANUAL_NAV_FUNDS set dynamically based on user choice
@@ -5574,6 +5595,75 @@
                     if (info) { info.className = 'mb-4 p-3 rounded-xl text-xs font-bold bg-rose-50 border border-rose-200 text-rose-700'; info.innerHTML = '✗ Deploy failed: ' + e.message; }
                     alert('Deploy failed:\n\n' + e.message);
                 });
+            });
+        }
+
+        // ============================================================
+        // FUND CONFIG OVERRIDES (Project ID / Fund Class) — pushed to GitHub
+        // so fetch-nav.js can read them at the start of each Actions run.
+        // Reuses the same repo credentials already configured for GitHub Pages,
+        // since this writes to the same repository.
+        // ============================================================
+        function buildFundOverridesPayload() {
+            const overrides = {};
+            const seen = {}; // detect conflicting secProjId/secFundClass across portfolios for the same fund name
+            allFunds.forEach(function(f) {
+                if (!f.name || !f.secProjId) return; // blank secProjId = no override for this fund
+                const entry = { proj_id: f.secProjId, fund_class: f.secFundClass || "" };
+                if (seen[f.name] && (seen[f.name].proj_id !== entry.proj_id || seen[f.name].fund_class !== entry.fund_class)) {
+                    console.warn('Conflicting SEC overrides for "' + f.name + '" across portfolios — using the first one found.');
+                    return;
+                }
+                seen[f.name] = entry;
+                overrides[f.name] = entry;
+            });
+            return { updated_at: new Date().toISOString(), overrides: overrides };
+        }
+
+        function syncFundOverridesToGitHub() {
+            const token = pagesCfg.token, user = pagesCfg.user, repo = pagesCfg.repo;
+            if (!token || !user || !repo) {
+                alert('GitHub Pages isn\'t set up yet. Open Settings → GitHub Pages, fill in your token/username/repo, and save once — this reuses the same connection to push fund-overrides.json.');
+                openPagesModal();
+                return;
+            }
+
+            const payload = buildFundOverridesPayload();
+            const fundCount = Object.keys(payload.overrides).length;
+            const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+
+            fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/fund-overrides.json', {
+                headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' }
+            })
+            .then(function(r) { return r.ok ? r.json() : null; })
+            .then(function(existing) {
+                const body = {
+                    message: 'Update fund-overrides.json (' + fundCount + ' override' + (fundCount === 1 ? '' : 's') + ')',
+                    content: b64,
+                    branch: 'main'
+                };
+                if (existing && existing.sha) body.sha = existing.sha;
+
+                return fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/fund-overrides.json', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Accept': 'application/vnd.github+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+            })
+            .then(function(r) {
+                if (r.status === 401) throw new Error('Token invalid or expired. Check your Personal Access Token has the "repo" scope.');
+                if (!r.ok) throw new Error('GitHub API error: HTTP ' + r.status);
+                return r.json();
+            })
+            .then(function() {
+                alert('✓ Synced ' + fundCount + ' fund override' + (fundCount === 1 ? '' : 's') + ' to fund-overrides.json.\n\nThe next time your NAV workflow runs (or if you trigger it manually), fetch-nav.js will pick these up automatically.');
+            })
+            .catch(function(e) {
+                alert('Failed to sync fund overrides:\n\n' + e.message);
             });
         }
 
