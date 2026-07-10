@@ -5631,8 +5631,9 @@
             const payload = buildFundOverridesPayload();
             const fundCount = Object.keys(payload.overrides).length;
             const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+            const apiUrl = 'https://api.github.com/repos/' + user + '/' + repo + '/contents/fund-overrides.json';
 
-            fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/fund-overrides.json', {
+            fetch(apiUrl, {
                 headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' }
             })
             .then(function(r) { return r.ok ? r.json() : null; })
@@ -5644,7 +5645,7 @@
                 };
                 if (existing && existing.sha) body.sha = existing.sha;
 
-                return fetch('https://api.github.com/repos/' + user + '/' + repo + '/contents/fund-overrides.json', {
+                return fetch(apiUrl, {
                     method: 'PUT',
                     headers: {
                         'Authorization': 'Bearer ' + token,
@@ -5655,9 +5656,19 @@
                 });
             })
             .then(function(r) {
-                if (r.status === 401) throw new Error('Token invalid or expired. Check your Personal Access Token has the "repo" scope.');
-                if (!r.ok) throw new Error('GitHub API error: HTTP ' + r.status);
-                return r.json();
+                if (r.ok) return r.json();
+                // Surface GitHub's own error message + the exact URL attempted,
+                // instead of a bare status code — makes the next failure (if any)
+                // self-diagnosing rather than requiring another round-trip.
+                return r.text().then(function(txt) {
+                    let ghMsg = '';
+                    try { ghMsg = JSON.parse(txt).message || ''; } catch(e) { ghMsg = txt.slice(0, 200); }
+                    let hint = '';
+                    if (r.status === 401) hint = ' — token invalid/expired, or missing "repo" scope.';
+                    else if (r.status === 404) hint = ' — repo not found at this exact path, OR the token lacks write access to it. Double-check the exact username/repo spelling in GitHub Pages settings (case-sensitive), and that the token has the "repo" scope (classic) or "Contents: Read and write" (fine-grained).';
+                    else if (r.status === 403) hint = ' — token doesn\'t have write permission to this repo.';
+                    throw new Error('HTTP ' + r.status + hint + (ghMsg ? '\n\nGitHub says: "' + ghMsg + '"' : '') + '\n\nURL attempted: ' + apiUrl);
+                });
             })
             .then(function() {
                 alert('✓ Synced ' + fundCount + ' fund override' + (fundCount === 1 ? '' : 's') + ' to fund-overrides.json.\n\nThe next time your NAV workflow runs (or if you trigger it manually), fetch-nav.js will pick these up automatically.');
