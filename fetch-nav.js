@@ -1,5 +1,17 @@
 /**
- * fetch-nav.js v20 — added client-side date-recency safety net after discovering
+ * fetch-nav.js v21 — added fund_class_name filtering after discovering proj_ids
+ * can silently mix MULTIPLE share classes together. Confirmed via live API test:
+ * proj_id M0643_2555 (SCBS&P500) returns SIX distinct classes unfiltered — SSFA,
+ * SSFE, A, P, E, -SSF — with genuinely different NAVs (SSFA vs SSFE diverge by a
+ * consistent ~7.2%, not fee drift). Without a class filter, v20's "pick latest by
+ * date" logic could grab ANY of the six classes' NAV under the wrong fund name.
+ * v21 adds an optional 3rd FUND_MAP element (class name suffix, e.g. 'ssfe') that
+ * gets passed as &fund_class_name=... in the query, plus a client-side re-check
+ * that the returned item's fund_class_name actually contains that suffix — same
+ * defense-in-depth pattern as the v20 date-recency safety net. SCBS&P500(SSFA)/
+ * (SSFE) are now correctly, safely auto-synced per-class instead of manual-only.
+ *
+ * v20 — added client-side date-recency safety net after discovering
  * K-GOLD-A(A), K-US500X-A(A), SCBS&P500(SSFE) received significantly wrong NAVs.
  * Root cause: start_nav_date/end_nav_date query params may be silently ignored by
  * the SEC API, returning full history since fund inception (e.g. dates from 2010)
@@ -37,20 +49,20 @@ if (!KEY_DI) { console.error('ERROR: SEC_KEY_DAILYINFO must be set'); process.ex
 // All funds below have confirmed proj_ids from Finnomena factsheet URLs.
 // NAV from API may differ by <0.2% from SSF/SSFE/SSFA share class NAV due to fee structures.
 const FUND_MAP = [
-  ['ABGDD-SSF',             'M0250_2564'],   // confirmed
+  ['ABGDD-SSF',             'M0250_2564', 'ABGDD-SSF'],   // confirmed — proj_id also has ABGDD-R, ABGDD-A siblings   // confirmed
   ['ASP-ThaiESG',           'M0804_2566'],
   ['B-FUTURESSF',           'M0053_2563'],
   ['B-GLOBALRMF',           'M0495_2558'],
   ['B-INNOTECHRMF',         'M0667_2559'],
   ['B-INNOTECHSSF',         'M0078_2565'],
-  ['ES-GINNO-SSF',          'M0479_2563'],   // confirmed
+  ['ES-GINNO-SSF',          'M0479_2563', 'ES-GINNO-SSF'],   // confirmed — proj_id also has ES-GINNO-A sibling   // confirmed
   ['K-CHANGE-SSF',          'M0131_2562'],
   ['KFCMEGASSF',            'M0397_2565'],
   ['KFGGSSF',               'M0379_2564'],
   ['KF-LATAM',              'M0028_2553'],
   ['K-GOLD-A(A)',           'M0447_2551'],
   ['K-US500X-A(A)',         'M0257_2564'],   // ← new: Kasikorn US500 Extra Fund A
-  ['KKP CHINA-H-SSF',       'M0432_2565'],   // confirmed
+  ['KKP CHINA-H-SSF',       'M0432_2565', 'KKP CHINA-H-SSF'],   // confirmed — proj_id also has KKP CHINA-H, KKP CHINA-H-F siblings   // confirmed
   ['KKP EQ THAI ESG',       'M0851_2566'],
   ['KKP GB THAI ESG',       'M0840_2566'],
   ['KKP GNP RMF-UH',        'M0369_2561'],
@@ -63,21 +75,23 @@ const FUND_MAP = [
   ['PRINCIPAL GOPP-SSF',    'M0166_2560'],   // ← new: Principal Global Opportunity SSF
   ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],
   ['SCBAXJ(SSF)',           'M0513_2564'],
-  ['SCBCHA-SSF',            'M0005_2558'],   // confirmed
-  ['SCBCHA(SSFE)',          'M0005_2558'],   // confirmed — same proj_id as SCBCHA-SSF
+  ['SCBCHA-SSF',            'M0005_2558', 'SCBCHA-SSF'],     // confirmed — proj_id has 6 classes (SCBCHA, SCBCHAE, SCBCHAP, SCBCHAA too)
+  ['SCBCHA(SSFE)',          'M0005_2558', 'SCBCHA(SSFE)'],   // confirmed — real divergence from SCBCHA-SSF, exact match required (SSF is a substring of SSFE)
   ['SCBCOMP',               'M0882_2554'],
   ['SCBCTECH(SSFE)',        'M0120_2564'],
   ['SCBEUROPE(SSF)',        'M0274_2564'],
   ['SCBEUROPE(SSFE)',       'M0274_2564'],
-  ['SCBGOLDH-SSF',          'M0856_2553'],   // confirmed
-  ['SCBGOLDH(SSFE)',        'M0856_2553'],   // confirmed — same proj_id as SCBGOLDH-SSF, manual (share-class ambiguity)
-  ['SCBNDQ(SSF)',           'M0311_2564'],   // confirmed
-  ['SCBNDQ(SSFE)',          'M0311_2564'],   // confirmed — same proj_id as SCBNDQ(SSF), manual (share-class ambiguity)
+  ['SCBGOLDH-SSF',          'M0856_2553', 'SCBGOLDH-SSF'],   // confirmed — proj_id has 5 classes total
+  ['SCBGOLDH(SSFE)',        'M0856_2553', 'SCBGOLDH(SSFE)'], // confirmed — ~1.85% real divergence from SCBGOLDH-SSF
+  ['SCBJAPAN(SSF)',         'M0386_2564', 'SCBJAPAN(SSF)'],  // NEW 2026-07-10 — proj_id has 4 classes (A/P too); ~3.95%/~4% real divergence confirmed by both live API test and user's historical Finnomena data
+  ['SCBJAPAN(SSFE)',        'M0386_2564', 'SCBJAPAN(SSFE)'], // NEW 2026-07-10 — exact match required (SSF substring of SSFE)
+  ['SCBNDQ(SSF)',           'M0311_2564', 'SCBNDQ(SSF)'],    // confirmed — proj_id has 5 classes total (A/E/P too)
+  ['SCBNDQ(SSFE)',          'M0311_2564', 'SCBNDQ(SSFE)'],   // confirmed — ~1.95% real divergence, exact match required (SSF substring of SSFE)
   ['SCBNEXT(SSFE)',         'M0163_2564'],
-  ['SCBS&P500(SSFA)',       'M0643_2555'],   // confirmed
-  ['SCBS&P500(SSFE)',       'M0643_2555'],   // confirmed — same proj_id as SCBS&P500(SSFA), manual (share-class ambiguity)
-  ['SCBVIET(SSFA)',         'M0539_2564'],   // confirmed
-  ['SCBVIET(SSFE)',         'M0539_2564'],   // confirmed — same proj_id as SCBVIET(SSFA)
+  ['SCBS&P500(SSFA)',      'M0643_2555', 'SCBS&P500(SSFA)'],   // confirmed — proj_id has 6 classes total
+  ['SCBS&P500(SSFE)',      'M0643_2555', 'SCBS&P500(SSFE)'],   // confirmed — ~7.2% real divergence from SSFA (NOT fee drift)
+  ['SCBVIET(SSFA)',        'M0539_2564', 'SCBVIET(SSFA)'],   // confirmed — proj_id has 5 classes (A/E/SSF too — note bare "(SSF)" is a DIFFERENT class from "(SSFA)")
+  ['SCBVIET(SSFE)',        'M0539_2564', 'SCBVIET(SSFE)'],   // confirmed — ~6.57% real divergence from SSFA, exact match required
   ['SCBWORLD(SSFE)',        'M0465_2564'],
   ['TDSThaiESG-A',         'M0793_2567'],
   ['TISCOCHA-SSF',         'M0258_2562'],   // confirmed
@@ -85,7 +99,7 @@ const FUND_MAP = [
   ['TLA-GFIX',             'M0070_2569'],   // ← new: Talis Global Fixed Income
   ['TLAWSRMF',             'M0948_2568'],
   ['TLFVMR-ASIAX',         'M0096_2567'],
-  ['UCHINA-SSF',            'M0533_2561'],   // confirmed
+  ['UCHINA-SSF',            'M0533_2561', 'UCHINA-SSF'],   // confirmed — proj_id also has UCHINA (non-SSF) sibling   // confirmed
   ['UGIS-SSF',             'M0002_2560'],
   ['UOBSA-SSF',            'M0233_2550'],
   ['UOBSD-SSF',             'M0116_2549'],   // confirmed
@@ -117,38 +131,61 @@ function dateStr(daysAgo) {
   return d.toISOString().split('T')[0];
 }
 
-async function fetchNAV(projId) {
+async function fetchNAV(projId, className) {
   // New API returns a list of NAV entries within a date range in ONE call —
   // no more looping through individual dates like the old API required.
   // A 10-day lookback comfortably covers weekends + most Thai public holidays.
   const startDate = dateStr(10);
   const endDate   = dateStr(0);
-  const path = `/v2/fund/daily-info/nav?proj_id=${encodeURIComponent(projId)}` +
-               `&start_nav_date=${startDate}&end_nav_date=${endDate}&page_size=50`;
+  let path = `/v2/fund/daily-info/nav?proj_id=${encodeURIComponent(projId)}` +
+             `&start_nav_date=${startDate}&end_nav_date=${endDate}&page_size=50`;
+  // Some proj_ids cover MULTIPLE share classes at once (confirmed: SCBS&P500's
+  // proj_id M0643_2555 mixes 6 distinct classes — SSFA, SSFE, A, P, E, -SSF —
+  // with genuinely different NAVs, not just fee-drift). When a fund needs a
+  // specific class, pin the query to it so we never pick up a sibling class's
+  // value by mistake.
+  if (className) {
+    path += `&fund_class_name=${encodeURIComponent(className)}`;
+  }
 
   const r = await get(path, KEY_DI);
   if (r.status !== 200 || !r.data || !Array.isArray(r.data.items) || r.data.items.length === 0) {
     return null;
   }
 
-  // SAFETY NET: never trust that the server actually honored start_nav_date/end_nav_date.
+  // SAFETY NET 1: never trust that the server actually honored start_nav_date/end_nav_date.
   // If it silently ignores the filter (some government APIs document params they don't
   // fully implement), it can return the fund's ENTIRE history back to inception —
   // e.g. dates from 2010 — and blindly picking "the latest of whatever came back" would
   // apply a wildly outdated NAV as if it were current. So we always re-filter client-side
   // to only entries genuinely within our intended recent window before picking anything.
-  const recentItems = r.data.items.filter(item => {
+  let candidates = r.data.items.filter(item => {
     const d = (item.nav_date || '').substring(0, 10);
     return d >= startDate && d <= endDate;
   });
 
-  if (recentItems.length === 0) {
-    // Server returned data, but none of it falls inside our recent window —
-    // treat as a failed fetch rather than risk applying stale/wrong data.
+  // SAFETY NET 2: never trust that fund_class_name filtering was honored server-side
+  // either. Re-check client-side using EXACT match (not substring/includes) against
+  // the full class name — confirmed necessary because "SSF" is a literal substring
+  // of "SSFE" (SCBCHA-SSF vs SCBCHA(SSFE), SCBNDQ(SSF) vs SCBNDQ(SSFE), SCBVIET(SSFA)
+  // vs SCBVIET(SSFE), SCBJAPAN(SSF) vs SCBJAPAN(SSFE) all hit this). A substring check
+  // would silently let one class's data satisfy another class's query. FUND_MAP now
+  // stores each fund's FULL exact fund_class_name string, not a short suffix.
+  if (className) {
+    const wantedUpper = className.toUpperCase();
+    candidates = candidates.filter(item => {
+      const cls = (item.fund_class_name || '').toUpperCase();
+      return cls === wantedUpper;
+    });
+  }
+
+  if (candidates.length === 0) {
+    // Server returned data, but none of it matches our recent window AND/OR the
+    // requested class — treat as a failed fetch rather than risk applying wrong data.
     return null;
   }
 
-  const sorted = recentItems.slice().sort((a, b) => (a.nav_date || '').localeCompare(b.nav_date || ''));
+  const sorted = candidates.slice().sort((a, b) => (a.nav_date || '').localeCompare(b.nav_date || ''));
   const latest = sorted[sorted.length - 1];
   const nav = parseFloat(latest.last_val || 0);
   const navDate = (latest.nav_date || endDate).substring(0, 10);
@@ -168,8 +205,8 @@ async function main() {
   const navData = {};
   let updated = 0; let failed = 0;
 
-  for (const [name, projId] of FUND_MAP) {
-    const result = await fetchNAV(projId);
+  for (const [name, projId, className] of FUND_MAP) {
+    const result = await fetchNAV(projId, className);
     if (result) {
       navData[name.toUpperCase()] = result;
       console.log(`  ✓ ${name}: ${result.nav} (${result.nav_date})`);

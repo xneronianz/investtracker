@@ -2200,28 +2200,22 @@
         let sortKey = 'name'; let sortAsc = true;
         let navPctKey = '1D'; // default NAV % change timeframe
         const MANUAL_NAV_FUNDS = new Set([
-            // SSF/SSFE share classes whose exact NAV the SEC daily API cannot distinguish
-            // from the parent fund (same proj_id). These must be updated manually from
-            // Finnomena. Use the "✋ Manual NAV" batch entry button for fast daily updates.
-            'ABGDD-SSF',
-            'SCBCHA-SSF',
-            'SCBCHA(SSFE)',
-            'SCBGOLDH-SSF',
-            'UCHINA-SSF',
-            'ES-GINNO-SSF',
-            'SCBVIET(SSFE)',
-            'KKP CHINA-H-SSF',
-            // SCBJAPAN(SSF) / SCBJAPAN(SSFE) share proj_id M0386_2564 but their NAVs
-            // diverge by ~4% (not just fee drift) — auto-sync would assign one NAV
-            // to both and be wrong for at least one. Must stay manual.
-            'SCBJAPAN(SSF)',
-            'SCBJAPAN(SSFE)',
-            // SCBGOLDH(SSFE), SCBNDQ(SSFE), SCBS&P500(SSFE) confirmed to share proj_id
-            // with their sibling class — same ambiguity risk as above, manual by default
-            // until divergence is confirmed negligible.
-            'SCBGOLDH(SSFE)',
-            'SCBNDQ(SSFE)',
-            'SCBS&P500(SSFE)',
+            // As of 2026-07-10, EVERY fund previously listed here (ABGDD-SSF,
+            // SCBCHA-SSF/(SSFE), SCBGOLDH-SSF/(SSFE), UCHINA-SSF, ES-GINNO-SSF,
+            // SCBVIET(SSFA)/(SSFE), KKP CHINA-H-SSF, SCBJAPAN(SSF)/(SSFE),
+            // SCBNDQ(SSF)/(SSFE), SCBS&P500(SSFA)/(SSFE)) has been confirmed via
+            // live SEC Open Data API testing to be safely auto-syncable using
+            // fund_class_name filtering in fetch-nav.js v21 — each share class's
+            // TRUE distinct NAV is now fetched individually and exactly, instead
+            // of risking a blended/wrong value from an unfiltered shared proj_id.
+            // Real per-class divergence confirmed (not fee drift):
+            //   SCBS&P500 SSFA vs SSFE: ~7.2%   SCBVIET SSFA vs SSFE: ~6.6%
+            //   SCBJAPAN SSF vs SSFE:   ~4.0%   SCBNDQ SSF vs SSFE:   ~2.0%
+            //   SCBGOLDH SSF vs SSFE:   ~1.9%
+            // This set is kept empty (not deleted) so it remains the designated
+            // home for any FUTURE fund found to need manual entry — e.g. if a
+            // proj_id's fund_class_name filtering is ever found to misbehave, or
+            // a brand-new multi-class fund is added before its classes are tested.
         ]);
 
         // Single source of truth for "is this fund's NAV manual-only?" — used by every
@@ -5712,7 +5706,15 @@
 
                     f.nav = navVal; f.navDate = navDate;
                     if (!f.history) f.history = [];
-                    if (!f.history.find(function(h) { return h.date === navDate; })) {
+                    var existingHistIdx = f.history.findIndex(function(h) { return h.date === navDate; });
+                    if (existingHistIdx >= 0) {
+                        // Correct an existing same-date entry (e.g. a previously wrong
+                        // auto-synced value) instead of silently leaving it stale —
+                        // otherwise CAGR/charts/sparklines keep using the bad number
+                        // even after f.nav itself looks corrected.
+                        f.history[existingHistIdx].nav = navVal;
+                        f.history[existingHistIdx].source = 'SEC Auto-sync (corrected)';
+                    } else {
                         f.history.push({ date: navDate, nav: navVal,
                             invested: f.invested, units: f.units, source: 'SEC Auto-sync' });
                     }
