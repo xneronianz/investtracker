@@ -5756,7 +5756,6 @@
 
             var xhr = new XMLHttpRequest();
             xhr.open('GET', navUrl, true);
-            xhr.setRequestHeader('Cache-Control', 'no-cache');
             xhr.timeout = 15000;
 
             xhr.onload = function() {
@@ -5797,6 +5796,13 @@
                     var navVal  = parseFloat(r.nav || 0);
                     var navDate = (r.nav_date || '').substring(0, 10);
                     if (!navVal || !navDate) return;
+
+                    // TEMPORARY DIAGNOSTIC — remove once the sync mismatch is resolved.
+                    // Logs the exact values being compared for every fund so we can see
+                    // precisely why a fund is or isn't being treated as "already current".
+                    secLog('DEBUG ' + f.name + ': app has nav=' + f.nav + ' date=' + f.navDate +
+                        ' | file has nav=' + navVal + ' date=' + navDate, 'ok');
+
                     if (f.navDate && navDate < f.navDate) return;
                     if (f.nav === navVal && f.navDate === navDate) return;
                     // Allow same-date update if value changed (intraday revision)
