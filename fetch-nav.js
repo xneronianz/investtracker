@@ -1,5 +1,14 @@
 /**
- * fetch-nav.js v22 — fixed K-GOLD-A(A) and K-US500X-A(A), both wrongly picking up
+ * fetch-nav.js v23 — added support for fund-overrides.json, an optional file the
+ * app can push (via Fund Details → SEC Project ID / SEC Fund Class fields →
+ * "Push overrides to GitHub") to override or extend FUND_MAP without editing
+ * this script directly. Priority: override present (with proj_id) > hardcoded
+ * FUND_MAP entry. Blank fund_class in an override means "no class filter" —
+ * fine for single-class funds, but re-introduces the class-mixing risk fixed in
+ * v21/v22 if used carelessly on a multi-class fund. Removing an override in the
+ * app and re-syncing correctly falls back to the hardcoded FUND_MAP default.
+ *
+ * v22 — fixed K-GOLD-A(A) and K-US500X-A(A), both wrongly picking up
  * a SIBLING class's NAV under the correct fund's name. Root cause: earlier testing
  * of these two funds was incomplete — K-GOLD's unfiltered test only sampled
  * 2020-2023 history (no A(D) entries happened to appear in that window), and
@@ -206,7 +215,42 @@ async function fetchNAV(projId, className) {
 }
 
 async function main() {
-  console.log(`Fetching NAV for ${FUND_MAP.length} funds...`);
+  // ── Fund config overrides (Project ID / Fund Class), optionally pushed by the
+  // app to fund-overrides.json in this repo. Priority rule:
+  //   - Fund NOT in overrides           -> use FUND_MAP's own hardcoded entry as-is
+  //   - Fund IN overrides (has proj_id) -> use the override's proj_id, and its
+  //     fund_class if non-empty (empty fund_class = no class filter applied)
+  //   - Fund in overrides but NOT in FUND_MAP at all -> treated as a brand new
+  //     fund, added using only the override's data
+  // This lets the app's Fund Details "SEC Project ID / Fund Class" fields
+  // override or extend this file without editing fetch-nav.js directly. Removing
+  // an override in the app (and re-syncing) makes that fund fall back to
+  // whatever FUND_MAP hardcodes here, since the override simply disappears.
+  let overrides = {};
+  try {
+    const raw = JSON.parse(fs.readFileSync('fund-overrides.json', 'utf8'));
+    overrides = raw.overrides || {};
+    console.log(`Loaded ${Object.keys(overrides).length} fund override(s) from fund-overrides.json`);
+  } catch (e) {
+    // File doesn't exist or is invalid — perfectly normal if the app has never
+    // pushed any overrides yet. Just proceed with the hardcoded FUND_MAP as-is.
+  }
+
+  const effectiveMap = FUND_MAP.map(([name, projId, className]) => {
+    const ov = overrides[name];
+    if (ov && ov.proj_id) {
+      return [name, ov.proj_id, ov.fund_class || undefined];
+    }
+    return [name, projId, className];
+  });
+  const mappedNames = new Set(FUND_MAP.map(e => e[0]));
+  for (const [name, ov] of Object.entries(overrides)) {
+    if (!mappedNames.has(name) && ov.proj_id) {
+      effectiveMap.push([name, ov.proj_id, ov.fund_class || undefined]);
+    }
+  }
+
+  console.log(`Fetching NAV for ${effectiveMap.length} funds...`);
   console.log('Start:', new Date().toISOString());
 
   let existing = {};
@@ -216,7 +260,7 @@ async function main() {
   const navData = {};
   let updated = 0; let failed = 0;
 
-  for (const [name, projId, className] of FUND_MAP) {
+  for (const [name, projId, className] of effectiveMap) {
     const result = await fetchNAV(projId, className);
     if (result) {
       navData[name.toUpperCase()] = result;
