@@ -1,5 +1,15 @@
 /**
- * fetch-nav.js v19 — migrated to the new SEC Open Data API (secopendata.sec.or.th)
+ * fetch-nav.js v20 — added client-side date-recency safety net after discovering
+ * K-GOLD-A(A), K-US500X-A(A), SCBS&P500(SSFE) received significantly wrong NAVs.
+ * Root cause: start_nav_date/end_nav_date query params may be silently ignored by
+ * the SEC API, returning full history since fund inception (e.g. dates from 2010)
+ * instead of the intended recent window — v19 blindly picked "latest of whatever
+ * came back," which could be a decade-old NAV. v20 re-validates every item's
+ * nav_date client-side and only accepts entries genuinely within the lookback
+ * window; if none qualify, returns null (fund keeps its last known-good cached
+ * NAV) rather than risk applying wrong data.
+ *
+ * v19 — migrated to the new SEC Open Data API (secopendata.sec.or.th)
  * The legacy api-portal.sec.or.th portal shut down 2026-06-30; the old
  * /FundDailyInfo/{proj_id}/dailynav/{date} path is gone. New endpoint:
  *   GET https://api.sec.or.th/v2/fund/daily-info/nav
@@ -114,15 +124,31 @@ async function fetchNAV(projId) {
   const startDate = dateStr(10);
   const endDate   = dateStr(0);
   const path = `/v2/fund/daily-info/nav?proj_id=${encodeURIComponent(projId)}` +
-               `&start_nav_date=${startDate}&end_nav_date=${endDate}&page_size=20`;
+               `&start_nav_date=${startDate}&end_nav_date=${endDate}&page_size=50`;
 
   const r = await get(path, KEY_DI);
   if (r.status !== 200 || !r.data || !Array.isArray(r.data.items) || r.data.items.length === 0) {
     return null;
   }
 
-  // Items aren't guaranteed sorted — sort ascending by nav_date and take the latest
-  const sorted = r.data.items.slice().sort((a, b) => (a.nav_date || '').localeCompare(b.nav_date || ''));
+  // SAFETY NET: never trust that the server actually honored start_nav_date/end_nav_date.
+  // If it silently ignores the filter (some government APIs document params they don't
+  // fully implement), it can return the fund's ENTIRE history back to inception —
+  // e.g. dates from 2010 — and blindly picking "the latest of whatever came back" would
+  // apply a wildly outdated NAV as if it were current. So we always re-filter client-side
+  // to only entries genuinely within our intended recent window before picking anything.
+  const recentItems = r.data.items.filter(item => {
+    const d = (item.nav_date || '').substring(0, 10);
+    return d >= startDate && d <= endDate;
+  });
+
+  if (recentItems.length === 0) {
+    // Server returned data, but none of it falls inside our recent window —
+    // treat as a failed fetch rather than risk applying stale/wrong data.
+    return null;
+  }
+
+  const sorted = recentItems.slice().sort((a, b) => (a.nav_date || '').localeCompare(b.nav_date || ''));
   const latest = sorted[sorted.length - 1];
   const nav = parseFloat(latest.last_val || 0);
   const navDate = (latest.nav_date || endDate).substring(0, 10);
