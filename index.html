@@ -3929,6 +3929,16 @@
                 f.history[hIndex].units = newUnits;
                 f.history[hIndex].source = "Manual Edit";
             }
+            // Recompute current NAV/date from whatever is now the latest history
+            // entry — editing a date (e.g. moving an entry off today) previously
+            // left f.nav/f.navDate orphaned at their old values, silently blocking
+            // future auto-sync (which treats any "older" incoming date as stale).
+            if (f.history && f.history.length > 0) {
+                const sortedDates = f.history.map(h => h.date).sort();
+                const latestDate = sortedDates[sortedDates.length - 1];
+                const latestEntry = f.history.find(h => h.date === latestDate);
+                if (latestEntry) { f.nav = latestEntry.nav; f.navDate = latestEntry.date; }
+            }
             // Save scroll position of history modal before re-opening
             const histModal = document.getElementById('histModal');
             const histScrollTop = histModal ? histModal.querySelector('.bg-white')?.scrollTop || 0 : 0;
@@ -3946,6 +3956,16 @@
             if(confirm("Are you sure you want to completely delete this historical record?")) {
                 const f = allFunds.find(x => (x.name + "||" + x.portfolio) === fundId);
                 f.history = f.history.filter(x => x.date !== origDate);
+                // Recompute current NAV/date from whatever remains — deleting the
+                // entry that happened to match f.navDate previously left f.nav/
+                // f.navDate orphaned at the just-deleted values, silently blocking
+                // future auto-sync (which treats any "older" incoming date as stale).
+                if (f.history && f.history.length > 0) {
+                    const sortedDates = f.history.map(h => h.date).sort();
+                    const latestDate = sortedDates[sortedDates.length - 1];
+                    const latestEntry = f.history.find(h => h.date === latestDate);
+                    if (latestEntry) { f.nav = latestEntry.nav; f.navDate = latestEntry.date; }
+                }
                 const histModal = document.getElementById('histModal');
                 const histScrollTop = histModal ? histModal.querySelector('.bg-white')?.scrollTop || 0 : 0;
                 saveToLocalStorage(); closeModal('histItemModal'); openHistory(fundId);
