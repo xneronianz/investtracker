@@ -1718,8 +1718,8 @@
                     <input type="text" id="in_sec_projid" autocomplete="off" placeholder="e.g. M0447_2551" class="w-full p-3 bg-slate-50 rounded-xl border font-mono text-xs">
                 </div>
                 <div><label class="text-[10px] font-black uppercase mb-1 text-violet-600">SEC Fund Class <span class="text-slate-400 normal-case font-normal">(override, optional)</span></label>
-                    <input type="text" id="in_sec_fundclass" autocomplete="off" placeholder="e.g. K-GOLD-A(A)" class="w-full p-3 bg-slate-50 rounded-xl border font-mono text-xs">
-                    <p class="text-[9px] text-slate-400 mt-1 leading-relaxed">Blank Project ID → uses the default auto-sync mapping already in fetch-nav.js. Filling in a Project ID overrides it for this fund; leave Fund Class blank too if the fund has only one share class.</p>
+                    <input type="text" id="in_sec_fundclass" autocomplete="off" placeholder="usually identical to Fund Name above" class="w-full p-3 bg-slate-50 rounded-xl border font-mono text-xs">
+                    <p class="text-[9px] text-slate-400 mt-1 leading-relaxed">Both fields blank → this fund uses whatever's already hardcoded in fetch-nav.js, unchanged. Fund Class must be the <strong>exact, full</strong> class name from the SEC API's <code>fund_class_name</code> field — NOT a shortened suffix (e.g. use the whole string "K-GOLD-A(A)", not just "A(A)"). In practice this is almost always identical to the Fund Name field above, character-for-character. Leave Fund Class blank only if you've confirmed this fund's Project ID has just one share class.</p>
                 </div>
             </div>
             <div class="mt-2 flex justify-end">
