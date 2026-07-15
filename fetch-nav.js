@@ -1,4 +1,22 @@
 /**
+ * fetch-nav.js v25 — fixed 10 more funds found via systematic pass: KKP US500-UH-SSF,
+ * ONE-UGG-ASSF, PRINCIPAL GOPP-SSF, PRINCIPAL iPROPEN-SSF, TISCOCHA-SSF, UGIS-SSF,
+ * UOBSA-SSF, UOBSD-SSF, MEGA10CHINA-SSF, TDSThaiESG-A — all confirmed multi-class
+ * via live API testing, none had any class filter before. Most divergences are
+ * small (0.003%-0.15%, closer to genuine fee drift), except PRINCIPAL GOPP-SSF
+ * at ~1.07% — a real, meaningful gap that was completely unfiltered. UOBSD-SSF
+ * currently shows 0% divergence from UOBSD but was fixed anyway for future-
+ * proofing, since exact matching costs nothing. Confirmed genuinely single-class
+ * (safe, no filter needed) in this pass: KKP GNP RMF-UH, TLAWSRMF.
+ *
+ * fetch-nav.js v24 — fixed 4 more funds (SCBCTECH(SSFE), SCBEUROPE(SSF)/(SSFE),
+ * SCBNEXT(SSFE), SCBWORLD(SSFE)) that had NO class-name filter despite sharing
+ * their proj_id with multiple classes — an oversight missed during the v21/v22
+ * fixes. Found via user-reported inaccurate SSFE NAVs; confirmed by live API
+ * test showing SCBEUROPE(SSF) and SCBEUROPE(SSFE) returning IDENTICAL values
+ * (8.7625/8.7625) despite genuinely diverging ~4.33% once correctly filtered.
+ * Real divergences confirmed: SCBEUROPE ~4.33%, SCBNEXT ~2.14%, SCBWORLD ~3.78%.
+ *
  * fetch-nav.js v23 — added support for fund-overrides.json, an optional file the
  * app can push (via Fund Details → SEC Project ID / SEC Fund Class fields →
  * "Push overrides to GitHub") to override or extend FUND_MAP without editing
@@ -76,7 +94,7 @@ const FUND_MAP = [
   ['B-INNOTECHRMF',         'M0667_2559'],
   ['B-INNOTECHSSF',         'M0078_2565'],
   ['ES-GINNO-SSF',          'M0479_2563', 'ES-GINNO-SSF'],   // confirmed — proj_id also has ES-GINNO-A sibling   // confirmed
-  ['K-CHANGE-SSF',          'M0131_2562'],
+  ['K-CHANGE-SSF',          'M0131_2562', 'K-CHANGE-SSF'],  // FIXED 2026-07-15 — proj_id has 3 classes (K-CHANGE-A(A), K-CHANGE-C(A) too); ~0.13% real divergence
   ['KFCMEGASSF',            'M0397_2565'],
   ['KFGGSSF',               'M0379_2564'],
   ['KF-LATAM',              'M0028_2553'],
@@ -86,43 +104,43 @@ const FUND_MAP = [
   ['KKP EQ THAI ESG',       'M0851_2566'],
   ['KKP GB THAI ESG',       'M0840_2566'],
   ['KKP GNP RMF-UH',        'M0369_2561'],
-  ['KKP EMXCN-H-SSF',      'M0077_2567'],
-  ['KKP US500-UH-SSF',      'M0301_2567'],
+  ['KKP EMXCN-H-SSF',      'M0077_2567', 'KKP EMXCN-H-SSF'],  // FIXED 2026-07-15 — proj_id has 3 classes (KKP EMXCN-H, KKP EMXCN-H-M too); divergence tiny (~0.002%) but exact match costs nothing
+  ['KKP US500-UH-SSF',      'M0301_2567', 'KKP US500-UH-SSF'],  // FIXED 2026-07-15 — proj_id has 4 classes (KKP US500-UH, -M, -E too); ~0.003% divergence
   ['KT-BOND',               'M0758_2554'],
   ['K-VIETNAM-SSF',         'M0511_2565'],
-  ['MEGA10CHINA-SSF',       'M0682_2566'],
-  ['ONE-UGG-ASSF',          'M0717_2558'],
-  ['PRINCIPAL GOPP-SSF',    'M0166_2560'],   // ← new: Principal Global Opportunity SSF
-  ['PRINCIPAL iPROPEN-SSF', 'M0625_2562'],
-  ['SCBAXJ(SSF)',           'M0513_2564'],
+  ['MEGA10CHINA-SSF',       'M0682_2566', 'MEGA10CHINA-SSF'],  // FIXED 2026-07-15 — proj_id also has MEGA10CHINA-A; ~0.035% divergence
+  ['ONE-UGG-ASSF',          'M0717_2558', 'ONE-UGG-ASSF'],  // FIXED 2026-07-15 — proj_id also has ONE-UGG-RA; ~0.13% divergence
+  ['PRINCIPAL GOPP-SSF',    'M0166_2560', 'PRINCIPAL GOPP-SSF'],  // FIXED 2026-07-15 — proj_id has 3 classes (GOPP-A, GOPP-C too); ~1.07% real divergence, was completely unfiltered
+  ['PRINCIPAL iPROPEN-SSF', 'M0625_2562', 'PRINCIPAL iPROPEN-SSF'],  // FIXED 2026-07-15 — proj_id has 4 classes (iPROPEN-A/C/D too); ~0.12% divergence
+  ['SCBAXJ(SSF)',           'M0513_2564', 'SCBAXJ(SSF)'],  // FIXED 2026-07-15 — proj_id has 4 classes (A/P/E too); ~7.83% real divergence, was completely unfiltered
   ['SCBCHA-SSF',            'M0005_2558', 'SCBCHA-SSF'],     // confirmed — proj_id has 6 classes (SCBCHA, SCBCHAE, SCBCHAP, SCBCHAA too)
   ['SCBCHA(SSFE)',          'M0005_2558', 'SCBCHA(SSFE)'],   // confirmed — real divergence from SCBCHA-SSF, exact match required (SSF is a substring of SSFE)
   ['SCBCOMP',               'M0882_2554'],
-  ['SCBCTECH(SSFE)',        'M0120_2564'],
-  ['SCBEUROPE(SSF)',        'M0274_2564'],
-  ['SCBEUROPE(SSFE)',       'M0274_2564'],
+  ['SCBCTECH(SSFE)',        'M0120_2564', 'SCBCTECH(SSFE)'],  // FIXED 2026-07-15 — proj_id has 5 classes (SCBCTECHA/E/P, SCBCTECH-SSF too); was unfiltered, likely picking up wrong class's NAV
+  ['SCBEUROPE(SSF)',        'M0274_2564', 'SCBEUROPE(SSF)'],  // FIXED 2026-07-15 — proj_id has 5 classes; SSF vs SSFE confirmed ~4.33% real divergence, exact match required (SSF substring of SSFE)
+  ['SCBEUROPE(SSFE)',       'M0274_2564', 'SCBEUROPE(SSFE)'], // FIXED 2026-07-15 — see above; SCBEUROPE(SSF)/(SSFE) previously showed IDENTICAL values (8.7625/8.7625) confirming both were getting the wrong, unfiltered "latest" class
   ['SCBGOLDH-SSF',          'M0856_2553', 'SCBGOLDH-SSF'],   // confirmed — proj_id has 5 classes total
   ['SCBGOLDH(SSFE)',        'M0856_2553', 'SCBGOLDH(SSFE)'], // confirmed — ~1.85% real divergence from SCBGOLDH-SSF
   ['SCBJAPAN(SSF)',         'M0386_2564', 'SCBJAPAN(SSF)'],  // NEW 2026-07-10 — proj_id has 4 classes (A/P too); ~3.95%/~4% real divergence confirmed by both live API test and user's historical Finnomena data
   ['SCBJAPAN(SSFE)',        'M0386_2564', 'SCBJAPAN(SSFE)'], // NEW 2026-07-10 — exact match required (SSF substring of SSFE)
   ['SCBNDQ(SSF)',           'M0311_2564', 'SCBNDQ(SSF)'],    // confirmed — proj_id has 5 classes total (A/E/P too)
   ['SCBNDQ(SSFE)',          'M0311_2564', 'SCBNDQ(SSFE)'],   // confirmed — ~1.95% real divergence, exact match required (SSF substring of SSFE)
-  ['SCBNEXT(SSFE)',         'M0163_2564'],
+  ['SCBNEXT(SSFE)',         'M0163_2564', 'SCBNEXT(SSFE)'],   // FIXED 2026-07-15 — proj_id has 4 classes (A/E too, plus bare "(SSF)" which is a DIFFERENT class from "(SSFE)"); ~2.14% real divergence confirmed, exact match required (SSF substring of SSFE)
   ['SCBS&P500(SSFA)',      'M0643_2555', 'SCBS&P500(SSFA)'],   // confirmed — proj_id has 6 classes total
   ['SCBS&P500(SSFE)',      'M0643_2555', 'SCBS&P500(SSFE)'],   // confirmed — ~7.2% real divergence from SSFA (NOT fee drift)
   ['SCBVIET(SSFA)',        'M0539_2564', 'SCBVIET(SSFA)'],   // confirmed — proj_id has 5 classes (A/E/SSF too — note bare "(SSF)" is a DIFFERENT class from "(SSFA)")
   ['SCBVIET(SSFE)',        'M0539_2564', 'SCBVIET(SSFE)'],   // confirmed — ~6.57% real divergence from SSFA, exact match required
-  ['SCBWORLD(SSFE)',        'M0465_2564'],
-  ['TDSThaiESG-A',         'M0793_2567'],
-  ['TISCOCHA-SSF',         'M0258_2562'],   // confirmed
+  ['SCBWORLD(SSFE)',        'M0465_2564', 'SCBWORLD(SSFE)'],  // FIXED 2026-07-15 — proj_id has 5 classes (A/E/P too, plus bare "(SSF)" distinct from "(SSFE)"); ~3.78% real divergence confirmed, exact match required
+  ['TDSThaiESG-A',         'M0793_2567', 'TDSThaiESG-A'],  // FIXED 2026-07-15 — proj_id also has TDSThaiESG-D; ~0.0015% divergence, exact match for future-proofing
+  ['TISCOCHA-SSF',         'M0258_2562', 'TISCOCHA-SSF'],  // FIXED 2026-07-15 — proj_id also has TISCOCHA-A; ~0.03% divergence
   ['TLA-GEQ',              'M0563_2568'],
   ['TLA-GFIX',             'M0070_2569'],   // ← new: Talis Global Fixed Income
   ['TLAWSRMF',             'M0948_2568'],
   ['TLFVMR-ASIAX',         'M0096_2567'],
   ['UCHINA-SSF',            'M0533_2561', 'UCHINA-SSF'],   // confirmed — proj_id also has UCHINA (non-SSF) sibling   // confirmed
-  ['UGIS-SSF',             'M0002_2560'],
-  ['UOBSA-SSF',            'M0233_2550'],
-  ['UOBSD-SSF',             'M0116_2549'],   // confirmed
+  ['UGIS-SSF',             'M0002_2560', 'UGIS-SSF'],  // FIXED 2026-07-15 — proj_id has 3 classes (UGIS-A, UGIS-N too); ~0.015% divergence
+  ['UOBSA-SSF',            'M0233_2550', 'UOBSA-SSF'],  // FIXED 2026-07-15 — proj_id also has UOBSA; ~0.03% divergence
+  ['UOBSD-SSF',             'M0116_2549', 'UOBSD-SSF'],  // FIXED 2026-07-15 — proj_id also has UOBSD; currently ~0% divergence (identical) but exact match added for future-proofing
 ];
 
 function get(path, key) {
