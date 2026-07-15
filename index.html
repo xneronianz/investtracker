@@ -1996,7 +1996,7 @@
                 }
                 function drawTrend(canvasId, fund) {
                     var c = document.getElementById(canvasId); if (!c || !fund) return;
-                    var sorted = (fund.history || []).slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                    ensureSortedHistory(fund); var sorted = fund.history || []; // already sorted — avoid redundant re-sort on every render
                     var hist;
                     if (tfCutoff) {
                         var past = sorted.filter(function(h){ return h.date <= tfCutoff; });
@@ -2564,8 +2564,8 @@
                 } else {
                     // No transaction history: use invested amount at startDate.
                     // Use history-based invested snapshots if available (more accurate for DCA).
-                    const hist = (f.history || []).filter(h => h.invested > 0 && h.date)
-                        .sort((a, b) => a.date.localeCompare(b.date));
+                    ensureSortedHistory(f); // already sorted — avoid redundant re-sort on every render
+                    const hist = (f.history || []).filter(h => h.invested > 0 && h.date);
 
                     if (hist.length >= 2) {
                         // Reconstruct purchases from increases in invested amount across history
@@ -4306,9 +4306,7 @@
                         const included = [...new Set(xirrFunds.map(f => f.assetClass).filter(Boolean))];
                         xirrScopeLbl.innerText = included.length ? included.join(', ') : 'No classes selected';
                     }
-                    console.log('XIRR debug: flows=', xirrFlows.length, 'curVal=', xirrCurrentVal, 'sample=', xirrFlows.slice(0,3));
                     const xirr = calculateXIRR(xirrFlows);
-                    console.log('XIRR result:', xirr);
                     if (xirr !== null && isFinite(xirr)) {
                         xirrEl.innerText = xirr.toFixed(2) + '%';
                         xirrEl.className = `font-black ${xirr >= 0 ? 'text-sky-500' : 'text-rose-500'}`;
@@ -4531,6 +4529,25 @@
                 tax:      includeTaxInReturn  ? taxSavings.reduce((s, t) => s + t.amount, 0) : 0
             };
 
+            // PERF FIX: previously, for EVERY date in sortedDates (often 2000+ after
+            // the 10-year bulk historical backfill), EVERY fund's ENTIRE history
+            // array was re-filtered AND re-sorted from scratch just to find "the
+            // most recent entry on or before this date" — O(dates × funds ×
+            // historyLength log historyLength), which could reach into the
+            // billions of operations and was almost certainly the dominant cause
+            // of multi-second lag when switching filters. Since sortedDates and
+            // each fund's history are already in ascending date order, a single
+            // forward-only pointer per fund finds the same answer in amortized
+            // O(1) per date — each pointer only ever advances, for a total cost
+            // of O(historyLength) per fund across the ENTIRE outer loop.
+            const fundMeta = chartFilteredFunds.map(f => {
+                ensureSortedHistory(f);
+                const hist = f.history || [];
+                const earliestHistoryDate = hist.length > 0 ? hist[0].date : null;
+                const fundStartDate = f.startDate || earliestHistoryDate;
+                return { f, hist, fundStartDate, ptr: 0 };
+            });
+
             let historyData = [];
             sortedDates.forEach(date => {
                 let dailyInvested = 0; let dailyCurrent = 0; let dailyDividends = 0; let dailyRealized = 0;
@@ -4542,38 +4559,33 @@
                     dailyDividends = liveTotals.divs;
                     dailyRealized  = liveTotals.realized;
                 } else {
-                    chartFilteredFunds.forEach(f => {
-                        // Determine the fund's effective start date.
-                        // Priority: explicit f.startDate (user's first purchase date),
-                        // then fall back to earliest history entry.
-                        let fundStartDate = f.startDate || null;
-                        let earliestHistoryDate = null;
-                        if (f.history && f.history.length > 0) {
-                            let dates = f.history.map(h => h.date).filter(d => d).sort();
-                            if (dates.length > 0) earliestHistoryDate = dates[0];
-                        }
-                        if (!fundStartDate) fundStartDate = earliestHistoryDate;
+                    fundMeta.forEach(meta => {
+                        const f = meta.f;
                         // Before the fund's first purchase — it didn't exist in the portfolio yet
-                        if (fundStartDate && date < fundStartDate) return;
+                        if (meta.fundStartDate && date < meta.fundStartDate) return;
 
                         let activeNav = f.nav; let activeInvested = f.invested; let activeUnits = f.units;
 
-                        if (f.history && f.history.length > 0) {
-                            // Most recent NAV entry on or before this date
-                            let pastEntries = f.history.filter(h => h.date && h.date <= date).sort((a,b) => b.date.localeCompare(a.date));
-                            if (pastEntries.length > 0) {
-                                activeNav      = pastEntries[0].nav;
-                                if (pastEntries[0].invested !== undefined) activeInvested = pastEntries[0].invested;
-                                if (pastEntries[0].units    !== undefined) activeUnits    = pastEntries[0].units;
+                        if (meta.hist.length > 0) {
+                            // Advance the pointer forward while the NEXT entry is still <= date.
+                            // Monotonic: sortedDates only increases, so this pointer never needs
+                            // to move backward across the whole outer loop.
+                            while (meta.ptr < meta.hist.length - 1 && meta.hist[meta.ptr + 1].date <= date) {
+                                meta.ptr++;
+                            }
+                            const entryAtPtr = meta.hist[meta.ptr];
+                            if (entryAtPtr.date <= date) {
+                                // Most recent entry on or before this date
+                                activeNav = entryAtPtr.nav;
+                                if (entryAtPtr.invested !== undefined) activeInvested = entryAtPtr.invested;
+                                if (entryAtPtr.units    !== undefined) activeUnits    = entryAtPtr.units;
                             } else {
                                 // Gap: date is AFTER startDate but BEFORE earliest history entry.
                                 // Use the earliest history entry's invested/units (closest snapshot we have).
-                                let futureEntries = f.history.filter(h => h.date).sort((a,b) => a.date.localeCompare(b.date));
-                                if (futureEntries.length > 0) {
-                                    activeNav      = futureEntries[0].nav;
-                                    if (futureEntries[0].invested !== undefined) activeInvested = futureEntries[0].invested;
-                                    if (futureEntries[0].units    !== undefined) activeUnits    = futureEntries[0].units;
-                                }
+                                const earliest = meta.hist[0];
+                                activeNav = earliest.nav;
+                                if (earliest.invested !== undefined) activeInvested = earliest.invested;
+                                if (earliest.units    !== undefined) activeUnits    = earliest.units;
                             }
                         }
 
@@ -6603,7 +6615,7 @@
         }
 
         function analyseFund(f) {
-            const hist = (f.history||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+            ensureSortedHistory(f); const hist = f.history || []; // already sorted — avoid redundant re-sort on every render
             if (hist.length < 15) return null;
             const prices = hist.map(h=>h.nav);
             const dates = hist.map(h=>h.date);
