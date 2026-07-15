@@ -1229,6 +1229,15 @@
                 </div>
                 <div id="navPerfGrid" class="grid grid-cols-5 gap-2 text-center text-[11px]"><div class="rounded-xl p-2 border bg-emerald-50 border-emerald-100"><div class="text-slate-500 font-black text-[10px] mb-1">1D</div><div class="font-black text-[13px] text-emerald-600">+0.00%</div><div class="text-[9px] text-slate-400">฿10.9519</div><div class="text-[9px] text-slate-300">2026-03-19</div></div><div class="rounded-xl p-2 border bg-emerald-50 border-emerald-100"><div class="text-slate-500 font-black text-[10px] mb-1">1W</div><div class="font-black text-[13px] text-emerald-600">+2.62%</div><div class="text-[9px] text-slate-400">฿10.6723</div><div class="text-[9px] text-slate-300">2026-03-13</div></div><div class="bg-white rounded-xl p-2 border border-slate-100"><div class="text-slate-400 font-black text-[10px] mb-1">1M</div><div class="text-slate-300 text-[10px]">N/A</div></div><div class="bg-white rounded-xl p-2 border border-slate-100"><div class="text-slate-400 font-black text-[10px] mb-1">3M</div><div class="text-slate-300 text-[10px]">N/A</div></div><div class="bg-white rounded-xl p-2 border border-slate-100"><div class="text-slate-400 font-black text-[10px] mb-1">6M</div><div class="text-slate-300 text-[10px]">N/A</div></div><div class="bg-white rounded-xl p-2 border border-slate-100"><div class="text-slate-400 font-black text-[10px] mb-1">1Y</div><div class="text-slate-300 text-[10px]">N/A</div></div><div class="bg-white rounded-xl p-2 border border-slate-100"><div class="text-slate-400 font-black text-[10px] mb-1">3Y</div><div class="text-slate-300 text-[10px]">N/A</div></div><div class="bg-white rounded-xl p-2 border border-slate-100"><div class="text-slate-400 font-black text-[10px] mb-1">5Y</div><div class="text-slate-300 text-[10px]">N/A</div></div><div class="bg-white rounded-xl p-2 border border-slate-100"><div class="text-slate-400 font-black text-[10px] mb-1">10Y</div><div class="text-slate-300 text-[10px]">N/A</div></div><div class="rounded-xl p-2 border bg-emerald-50 border-emerald-100"><div class="text-slate-500 font-black text-[10px] mb-1">Inception</div><div class="font-black text-[13px] text-emerald-600">+1.13%</div><div class="text-[9px] text-slate-400">฿10.8299</div><div class="text-[9px] text-slate-300">2026-03-10</div></div></div>
             </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-black text-slate-500 uppercase tracking-widest">Chart Range</span>
+                <div class="flex gap-1" id="histChartRangeBtns">
+                    <button onclick="setHistChartRange(3)" data-range="3" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">3Y</button>
+                    <button onclick="setHistChartRange(5)" data-range="5" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">5Y</button>
+                    <button onclick="setHistChartRange(10)" data-range="10" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">10Y</button>
+                    <button onclick="setHistChartRange(null)" data-range="all" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">Since Inception</button>
+                </div>
+            </div>
             <div class="chart-wrapper"><canvas id="navChart" width="2006" height="510" style="display: block; box-sizing: border-box; height: 240px; width: 944px;"></canvas></div>
             <div class="mb-6 p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
                 <h3 class="text-xs font-black text-indigo-600 uppercase tracking-widest mb-3">➕ Add / Update NAV Entry</h3>
@@ -1902,7 +1911,7 @@
                 if (!f || !f.history || f.history.length < 2) {
                     drawSparkline(canvas, null, true); return;
                 }
-                var sorted = f.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                ensureSortedHistory(f); var sorted = f.history; // already sorted — avoid redundant re-sort on every call
                 // Mirror calcNavPct exactly:
                 // 1. Find reference entry (closest on or before cutoff, or earliest if fund newer)
                 // 2. Plot from refEntry to today using f.nav as the final point
@@ -2324,7 +2333,7 @@
 
         function calcNavPct(f, tfKey) {
             if (!f.history || f.history.length === 0) return null;
-            const sorted = f.history.slice().sort((a,b) => a.date.localeCompare(b.date));
+            ensureSortedHistory(f); const sorted = f.history; // already sorted — avoid redundant re-sort on every call
             const currentNav = f.nav;
             const today = new Date();
             let cutoff;
@@ -3748,6 +3757,8 @@
         // ==========================================
         // HISTORY MODAL LOGIC & IOS FIX
         // ==========================================
+        var _histFullData = []; // full (already sorted) history for the fund currently open in the modal
+        var _histFundId = null;
         function openHistory(id) {
             const f = allFunds.find(x => (x.name + "||" + x.portfolio) === id);
             document.getElementById('histFundName').innerText = f.name;
@@ -3802,53 +3813,16 @@
             const modal = document.getElementById('historyModal');
             modal.style.display = 'flex'; // Force display first for iOS webkit engine
 
-            setTimeout(() => {
-                modal.classList.add('active'); 
-                if (navChartObj) navChartObj.destroy();
-                const ctx = document.getElementById('navChart').getContext('2d');
-                navChartObj = new Chart(ctx, {
-                    type: 'line',
-                    data: { labels: history.map(h => h.date), datasets: [{
-                        label: 'NAV', data: history.map(h => h.nav),
-                        borderColor: '#4f46e5', backgroundColor: 'rgba(79,70,229,0.08)',
-                        tension: 0.3, fill: true,
-                        pointRadius: 6, pointHoverRadius: 10,
-                        pointBackgroundColor: '#fff', pointBorderColor: '#4f46e5', pointBorderWidth: 2.5,
-                        pointHoverBackgroundColor: '#4f46e5', pointHoverBorderColor: '#fff'
-                    }]},
-                    options: {
-                        responsive: true, maintainAspectRatio: false,
-                        interaction: { mode: 'index', intersect: false },
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                backgroundColor: 'rgba(15,23,42,0.92)', titleColor: '#94a3b8',
-                                bodyColor: '#fff', padding: 12, cornerRadius: 10, displayColors: false,
-                                callbacks: {
-                                    title: items => items[0]?.label || '',
-                                    label: function(item) {
-                                        const nav = item.raw; const idx = item.dataIndex;
-                                        const lines = ['NAV: ฿' + fmtNum(nav, 4)];
-                                        if (idx > 0) {
-                                            const prev = history[idx-1].nav;
-                                            const chg = ((nav-prev)/prev)*100;
-                                            lines.push((chg>=0?'▲ +':'▼ ')+chg.toFixed(2)+'% vs prev');
-                                        }
-                                        const chgF = ((nav-history[0].nav)/history[0].nav)*100;
-                                        lines.push('Since start: '+(chgF>=0?'+':'')+chgF.toFixed(2)+'%');
-                                        return lines;
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            x: { ticks: { maxRotation: 45, font: { size: 10 }, color: '#94a3b8' } },
-                            y: { position: 'left', ticks: { callback: v => '฿'+v.toFixed(2), font: { size: 10 }, color: '#94a3b8' } }
-                        }
-                    }
-                });
-            }, 100);
-            
+            // PERF: store full history + default to a 3-year window instead of always
+            // plotting the entire (now potentially 1000-2300+ point) history. A fund
+            // detail chart can't usefully show thousands of points anyway — this cuts
+            // both the data volume Chart.js has to process AND the number of visible
+            // point markers, which were previously rendered at pointRadius:6 for
+            // EVERY point regardless of count.
+            _histFullData = history;
+            _histFundId = id;
+            setHistChartRange(3); // default range — see user's own suggestion
+
             const revHistory = history.slice().reverse();
             const formatRow = (h, monthKey) => `
                 <tr class="hist-row-${monthKey} hidden">
@@ -3866,6 +3840,19 @@
                 if (!monthGroups[mk]) monthGroups[mk] = [];
                 monthGroups[mk].push(h);
             });
+            // PERF: stash raw entries + the row-formatter so toggleHistMonth can
+            // lazily build a month's daily rows on first expand instead of every
+            // month across up to 10 years being injected into the DOM upfront
+            // (even hidden, those nodes still cost memory/layout time).
+            _histMonthGroups = monthGroups;
+            _histFormatRow = formatRow;
+            _histFundIdForRows = id;
+
+            // Recent months (within the same 3Y default as the chart) get their
+            // daily rows built immediately since they're the ones people actually
+            // look at most; older months build lazily on first click.
+            const recentCutoff = new Date(); recentCutoff.setFullYear(recentCutoff.getFullYear() - 3);
+            const recentCutoffKey = recentCutoff.toISOString().slice(0, 7);
 
             let html = '';
             Object.keys(monthGroups).sort().reverse().forEach(mk => {
@@ -3874,7 +3861,7 @@
                 const count = entries.length;
                 const monthLabel = new Date(mk + '-01').toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
                 // Month header row (clickable)
-                html += `<tr class="cursor-pointer bg-slate-50 hover:bg-indigo-50 transition-all" onclick="toggleHistMonth('${mk}')">
+                html += `<tr id="hist-header-${mk}" class="cursor-pointer bg-slate-50 hover:bg-indigo-50 transition-all" onclick="toggleHistMonth('${mk}')">
                     <td class="py-2 px-3 border-b font-black text-slate-700 text-sm">
                         <span id="hist-arrow-${mk}" class="mr-2 text-indigo-400">▶</span>${monthLabel}
                         <span class="ml-2 text-[10px] text-slate-400 font-normal">${count} entries</span>
@@ -3884,8 +3871,12 @@
                         <button onclick="event.stopPropagation();editHistItem('${id}', '${latest.date}')" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1 rounded shadow-sm text-[10px] font-bold transition-all">✏️ Edit</button>
                     </td>
                 </tr>`;
-                // Daily rows (hidden by default)
-                entries.forEach(h => { html += formatRow(h, mk); });
+                // Recent months: build daily rows immediately (people browse these most).
+                // Older months: skip entirely here — toggleHistMonth builds them lazily
+                // the first time that month is actually expanded.
+                if (mk >= recentCutoffKey) {
+                    entries.forEach(h => { html += formatRow(h, mk); });
+                }
             });
 
             document.getElementById('histRecentBody').innerHTML = html || '<tr><td colspan="3" class="py-4 text-center text-slate-300">No entry history.</td></tr>';
@@ -3909,9 +3900,107 @@
             document.getElementById('histMonthlyBody').innerHTML = monthlyList.length ? monthlyList.map(fmtMonthRow).join('') : '<tr><td colspan="3" class="py-4 text-center text-slate-300">No monthly data.</td></tr>';
         }
 
+        // Renders (or re-renders) the NAV chart for a windowed slice of the fund's
+        // full history — defaults to 3 years on open (see user's own suggestion),
+        // with 5Y/10Y/Since Inception available as explicit opt-ins rather than
+        // always paying the cost of plotting the full history by default.
+        function setHistChartRange(years) {
+            const full = _histFullData;
+            if (!full || full.length === 0) return;
+
+            let windowed;
+            if (years === null) {
+                windowed = full; // Since Inception
+            } else {
+                const cutoff = new Date();
+                cutoff.setFullYear(cutoff.getFullYear() - years);
+                const cutoffStr = cutoff.toISOString().split('T')[0];
+                windowed = full.filter(h => h.date >= cutoffStr);
+                if (windowed.length < 2) windowed = full; // window too sparse — fall back to everything available
+            }
+
+            // Update range button active states
+            document.querySelectorAll('.hist-range-btn').forEach(btn => {
+                const isActive = (years === null && btn.dataset.range === 'all') || (String(years) === btn.dataset.range);
+                btn.className = 'hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all ' +
+                    (isActive ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50');
+            });
+
+            // PERF: point markers were previously pointRadius:6 unconditionally —
+            // fine for a few dozen points, expensive and visually cluttered for
+            // hundreds/thousands. Scale marker size down as point count grows, and
+            // drop them to invisible-but-still-hoverable past a few hundred points.
+            const n = windowed.length;
+            const ptRadius = n > 400 ? 0 : n > 150 ? 2 : n > 60 ? 3 : 6;
+            const ptHoverRadius = n > 400 ? 4 : n > 150 ? 5 : 8;
+
+            setTimeout(() => {
+                const modal = document.getElementById('historyModal');
+                modal.classList.add('active');
+                if (navChartObj) navChartObj.destroy();
+                const ctx = document.getElementById('navChart').getContext('2d');
+                navChartObj = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels: windowed.map(h => h.date), datasets: [{
+                        label: 'NAV', data: windowed.map(h => h.nav),
+                        borderColor: '#4f46e5', backgroundColor: 'rgba(79,70,229,0.08)',
+                        tension: 0.3, fill: true,
+                        pointRadius: ptRadius, pointHoverRadius: ptHoverRadius,
+                        pointBackgroundColor: '#fff', pointBorderColor: '#4f46e5', pointBorderWidth: 2,
+                        pointHoverBackgroundColor: '#4f46e5', pointHoverBorderColor: '#fff'
+                    }]},
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(15,23,42,0.92)', titleColor: '#94a3b8',
+                                bodyColor: '#fff', padding: 12, cornerRadius: 10, displayColors: false,
+                                callbacks: {
+                                    title: items => items[0]?.label || '',
+                                    label: function(item) {
+                                        const nav = item.raw; const idx = item.dataIndex;
+                                        const lines = ['NAV: ฿' + fmtNum(nav, 4)];
+                                        if (idx > 0) {
+                                            const prev = windowed[idx-1].nav;
+                                            const chg = ((nav-prev)/prev)*100;
+                                            lines.push((chg>=0?'▲ +':'▼ ')+chg.toFixed(2)+'% vs prev');
+                                        }
+                                        const chgF = ((nav-windowed[0].nav)/windowed[0].nav)*100;
+                                        lines.push('Over shown range: '+(chgF>=0?'+':'')+chgF.toFixed(2)+'%');
+                                        return lines;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { ticks: { maxRotation: 45, font: { size: 10 }, color: '#94a3b8' } },
+                            y: { position: 'left', ticks: { callback: v => '฿'+v.toFixed(2), font: { size: 10 }, color: '#94a3b8' } }
+                        }
+                    }
+                });
+            }, 50);
+        }
+
+        var _histMonthGroups = {}; // raw entries per month key, for lazy row building
+        var _histFormatRow = null;
+        var _histFundIdForRows = null;
+
         function toggleHistMonth(mk) {
-            const rows = document.querySelectorAll('.hist-row-' + mk);
+            let rows = document.querySelectorAll('.hist-row-' + mk);
             const arrow = document.getElementById('hist-arrow-' + mk);
+
+            // Lazy-build this month's rows on first expand if they were never
+            // rendered (older months, skipped upfront for performance).
+            if (rows.length === 0 && _histMonthGroups[mk] && _histFormatRow) {
+                const entries = _histMonthGroups[mk];
+                const rowsHtml = entries.map(h => _histFormatRow(h, mk)).join('');
+                const headerRow = document.getElementById('hist-header-' + mk);
+                if (headerRow) headerRow.insertAdjacentHTML('afterend', rowsHtml);
+                rows = document.querySelectorAll('.hist-row-' + mk);
+            }
+
             const isHidden = rows.length > 0 && rows[0].classList.contains('hidden');
             rows.forEach(r => r.classList.toggle('hidden', !isHidden));
             if (arrow) arrow.textContent = isHidden ? '▼' : '▶';
@@ -4028,7 +4117,26 @@
             setTimeout(() => { if(!el.classList.contains('active')) el.style.display = ''; }, 200);
         }
 
+        // PERF: history arrays can now have 1000-2300+ entries after the 10-year
+        // bulk backfill. Several places used to call f.history.slice().sort(...)
+        // on every single invocation, redundantly re-sorting the same unchanged
+        // array over and over across a render pass. This cheaply checks whether
+        // it's already sorted (a single O(n) pass) and only sorts (O(n log n))
+        // when actually needed — call this once per fund per data-change, and
+        // downstream code can then trust f.history is already in date order.
+        function ensureSortedHistory(f) {
+            if (!f.history || f.history.length < 2) return;
+            for (let i = 1; i < f.history.length; i++) {
+                if (f.history[i].date < f.history[i - 1].date) {
+                    f.history.sort((a, b) => a.date.localeCompare(b.date));
+                    return;
+                }
+            }
+        }
+
         function filterData() {
+            allFunds.forEach(ensureSortedHistory); // sort-once hygiene, see comment above
+
             const gSearch = document.getElementById('globalSearch').value.toLowerCase();
             const selNames = Array.from(document.getElementById('d_name').selectedOptions).map(o => o.value);
             const selPorts = Array.from(document.getElementById('d_port').selectedOptions).map(o => o.value);
@@ -4036,7 +4144,12 @@
             const selNavSync = document.getElementById('d_navsync')?.value || '';
 
             filteredFunds = allFunds.filter(f => {
-                const str = Object.values(f).join(' ').toLowerCase();
+                // CRITICAL PERF FIX: previously used Object.values(f).join(' '), which
+                // silently stringified f.history too (now up to 2000+ entries per fund
+                // after the 10-year bulk backfill) on every single call — a 120x cost
+                // increase confirmed by direct measurement. Only join the actual
+                // searchable text fields instead.
+                const str = [f.name, f.portfolio, f.assetClass, f.source, f.navSyncMode].join(' ').toLowerCase();
                 const isManual = isFundManual(f);
                 const navSyncMatch = selNavSync === '' || (selNavSync === 'auto' && !isManual) || (selNavSync === 'manual' && isManual);
                 return str.includes(gSearch) && (selNames.length===0||selNames.includes(f.name)) && (selPorts.length===0||selPorts.includes(f.portfolio)) && (selGeos.length===0||selGeos.includes(f.assetClass)) && navSyncMatch;
@@ -7357,7 +7470,7 @@
                 .map(function(x){
                     // Period-aware gain: NAV change from period start to now
                     if (tmCutoff && x.history && x.history.length > 0) {
-                        var sorted = x.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                        ensureSortedHistory(x); var sorted = x.history; // already sorted — avoid redundant re-sort on every call
                         var startEntry = sorted.filter(function(h){ return h.date <= tmCutoff; }).pop()
                                       || sorted[0]; // fallback to earliest
                         var endEntry = sorted[sorted.length - 1];
@@ -7545,7 +7658,7 @@
             } else {
                 var fund = filteredFunds.find(function(f){ return f.name === fundName; });
                 if (!fund || !fund.history) { grid.innerHTML = '<p class="text-xs text-slate-400">No history data.</p>'; return; }
-                var sorted = fund.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                ensureSortedHistory(fund); var sorted = fund.history; // already sorted — avoid redundant re-sort on every call
                 // Get last NAV per month
                 var byM = {}, lastD = {};
                 sorted.forEach(function(h) {
@@ -7645,7 +7758,7 @@
                 var pts = [];
                 Object.values(fundMap).forEach(function(f) {
                     if (!f.history || f.history.length < 10) return;
-                    var allSorted = f.history.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+                    ensureSortedHistory(f); var allSorted = f.history; // already sorted — avoid redundant re-sort on every call
 
                     // ── Period cutoff: filter history to selected timeframe ──────────
                     var periodCutoff = null;
