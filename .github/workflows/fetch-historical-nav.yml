@@ -1,0 +1,40 @@
+name: Bulk Historical NAV Fetch (manual, occasional)
+
+# Intentionally NO schedule trigger — this is a heavy, occasional job (can take
+# 10-20+ minutes across all funds), separate from the fast daily update-nav.yml.
+# Trigger it from the app ("Bulk Historical NAV" button) or manually here on
+# GitHub: Actions tab → Bulk Historical NAV Fetch → Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      years_back:
+        description: 'How many years of history to fetch'
+        required: false
+        default: '10'
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-historical:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run bulk historical fetch
+        env:
+          SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
+          YEARS_BACK: ${{ github.event.inputs.years_back }}
+        run: node fetch-historical-nav.js
+
+      - name: Commit nav-history-bulk.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add nav-history-bulk.json
+          git diff --staged --quiet || git commit -m "Bulk historical NAV fetch $(date +'%Y-%m-%d')"
+          git push
