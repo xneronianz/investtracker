@@ -5340,6 +5340,23 @@
             }, 10000); // wait 10 seconds, then push once
         }
 
+        // GitHub's Gist API truncates a file's inline "content" (with truncated:true)
+        // once it exceeds roughly 1MB — increasingly likely now that bulk historical
+        // NAV data (thousands of entries x 54 funds) can push the payload well past
+        // that. This helper follows the documented fallback: fetch raw_url for the
+        // full, untruncated content instead of trusting the possibly-cut-off inline
+        // field, which would otherwise fail to JSON.parse (invalid, truncated JSON).
+        function gistFetchFullContent(gistApiData) {
+            var file = gistApiData.files && gistApiData.files['investtracker.json'];
+            if (!file) return Promise.reject(new Error('No investtracker.json file found in Gist.'));
+            if (!file.truncated) return Promise.resolve(file.content);
+            if (!file.raw_url) return Promise.reject(new Error('Gist file is truncated and no raw_url was provided.'));
+            return fetch(file.raw_url).then(function(r) {
+                if (!r.ok) throw new Error('Failed to fetch full Gist content (HTTP ' + r.status + ')');
+                return r.text();
+            });
+        }
+
         function gistPush(silent) {
             if (!gistCfg.token || !gistCfg.gistId) {
                 if (!silent) alert('Please create or connect a Gist first (click ☁️ GitHub Sync).');
@@ -5413,8 +5430,9 @@
                 return r.json();
             })
             .then(function(data) {
-                var fileContent = data.files && data.files['investtracker.json'] && data.files['investtracker.json'].content;
-                if (!fileContent) throw new Error('No investtracker.json file found in Gist.');
+                return gistFetchFullContent(data);
+            })
+            .then(function(fileContent) {
                 var parsed = JSON.parse(fileContent);
                 if (!parsed.allFunds) throw new Error('Gist data appears invalid.');
 
@@ -5459,8 +5477,10 @@
             })
             .then(function(r) { return r.ok ? r.json() : null; })
             .then(function(data) {
-                if (!data) return;
-                var fileContent = data.files && data.files['investtracker.json'] && data.files['investtracker.json'].content;
+                if (!data) return null;
+                return gistFetchFullContent(data);
+            })
+            .then(function(fileContent) {
                 if (!fileContent) return;
                 var parsed = JSON.parse(fileContent);
                 if (!parsed.allFunds || !parsed.version) return;
@@ -5473,7 +5493,12 @@
                     gistSyncStatusUI('☁ Connected', '#0d9488');
                 }
             })
-            .catch(function() { /* silent fail */ });
+            .catch(function(e) {
+                // No longer fully silent — a truncated/corrupt Gist read should be
+                // visible in the status indicator, not vanish without a trace.
+                gistSyncStatusUI('✗ Auto-sync failed', '#ef4444');
+                console.error('Gist auto-sync failed:', e);
+            });
         }
 
         // ============================================================
