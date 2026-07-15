@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-15T15:25:07.323Z",
+  "updated_at": "2026-07-15T15:48:39.687Z",
   "date": "2026-07-15",
   "count": 54,
   "funds": {
@@ -24,7 +24,7 @@
       "nav_date": "2026-07-13"
     },
     "K-CHANGE-SSF": {
-      "nav": 20.8358,
+      "nav": 20.5794,
       "nav_date": "2026-07-13"
     },
     "KFCMEGASSF": {
@@ -60,7 +60,7 @@
       "nav_date": "2026-07-14"
     },
     "MEGA10CHINA-SSF": {
-      "nav": 12.3308,
+      "nav": 12.3265,
       "nav_date": "2026-07-14"
     },
     "ONE-UGG-ASSF": {
@@ -68,11 +68,11 @@
       "nav_date": "2026-07-13"
     },
     "PRINCIPAL IPROPEN-SSF": {
-      "nav": 9.2219,
+      "nav": 9.2078,
       "nav_date": "2026-07-14"
     },
     "SCBAXJ(SSF)": {
-      "nav": 14.5878,
+      "nav": 13.4757,
       "nav_date": "2026-07-14"
     },
     "SCBCOMP": {
@@ -80,7 +80,7 @@
       "nav_date": "2026-07-10"
     },
     "SCBCTECH(SSFE)": {
-      "nav": 5.1396,
+      "nav": 5.3623,
       "nav_date": "2026-07-13"
     },
     "SCBEUROPE(SSF)": {
@@ -88,7 +88,7 @@
       "nav_date": "2026-07-13"
     },
     "SCBEUROPE(SSFE)": {
-      "nav": 8.4457,
+      "nav": 8.8214,
       "nav_date": "2026-07-13"
     },
     "SCBNDQ(SSF)": {
@@ -96,7 +96,7 @@
       "nav_date": "2026-07-13"
     },
     "SCBNEXT(SSFE)": {
-      "nav": 8.1795,
+      "nav": 8.3589,
       "nav_date": "2026-07-13"
     },
     "SCBVIET(SSFA)": {
@@ -132,7 +132,7 @@
       "nav_date": "2026-07-13"
     },
     "UGIS-SSF": {
-      "nav": 11.6619,
+      "nav": 11.6601,
       "nav_date": "2026-07-13"
     },
     "KKP EMXCN-H-SSF": {
@@ -140,7 +140,7 @@
       "nav_date": "2026-07-13"
     },
     "KKP US500-UH-SSF": {
-      "nav": 13.3595,
+      "nav": 13.3272,
       "nav_date": "2026-07-13"
     },
     "SCBGOLDH-SSF": {
@@ -196,7 +196,7 @@
       "nav_date": "2026-07-13"
     },
     "PRINCIPAL GOPP-SSF": {
-      "nav": 21.3849,
+      "nav": 21.1166,
       "nav_date": "2026-07-13"
     },
     "SCBGOLDH(SSFE)": {
