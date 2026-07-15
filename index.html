@@ -867,6 +867,7 @@
                             <button id="autoSyncToggleBtn" onclick="toggleGistAutoSync()" class="text-left w-full px-3 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all border" style="background:#f0fdf4;color:#059669;border-color:#bbf7d0;">🔄 Auto-sync: ON</button>
                             <button onclick="openPagesModal();closeSettingsPanel()" class="text-left w-full px-3 py-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs flex items-center gap-2 transition-all">🚀 GitHub Pages</button>
                             <button onclick="openDriveModal();closeSettingsPanel()" class="text-left w-full px-3 py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs flex items-center gap-2 transition-all">🔵 Google Drive</button>
+                            <button onclick="openBulkHistNavModal();closeSettingsPanel()" class="text-left w-full px-3 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold text-xs flex items-center gap-2 transition-all">📊 Bulk Historical NAV</button>
                             <button onclick="saveToFile();closeSettingsPanel()" class="text-left w-full px-3 py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs flex items-center gap-2 transition-all">💾 Backup HTML</button>
                             <button onclick="exportToCSV();closeSettingsPanel()" class="text-left w-full px-3 py-2.5 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-700 font-bold text-xs flex items-center gap-2 transition-all">📥 Export Excel</button>
                             <div class="border-t border-slate-100 my-1"></div>
@@ -1633,6 +1634,38 @@
             </div>
             <p class="text-[10px] text-slate-400 leading-relaxed border-t pt-2">
                 Anthropic/Claude never sees your Drive files or credentials — the connection runs entirely in your browser between you and Google. Uploads use Google's restricted "drive.file" permission, which only lets this app create new files in the folders you specify — it cannot read, list, or modify anything else in your Drive.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bulk Historical NAV Modal -->
+    <div id="bulkHistNavModal" class="modal" style="z-index:3000;">
+        <div class="bg-white p-8 rounded-[2rem] shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-black text-amber-600">📊 Bulk Historical NAV</h2>
+                <button onclick="closeModal('bulkHistNavModal')" class="text-slate-400 hover:text-rose-500 font-black text-xl">✕</button>
+            </div>
+
+            <div class="mb-4 p-3 rounded-xl text-xs font-bold bg-amber-50 border border-amber-100 text-amber-700 leading-relaxed">
+                Backfills years of historical NAV for every fund, using the same accurate class-name-aware fetch as your daily sync. This is a heavy, occasional job — separate from the fast daily "Auto NAV" button, which stays untouched and only handles the latest NAV.
+            </div>
+
+            <div class="mb-4">
+                <label class="text-[10px] font-black uppercase mb-1 block text-slate-500 tracking-wider">Years of history to fetch</label>
+                <input type="number" id="bulkHistYears" value="10" min="1" max="20" class="w-full p-3 bg-slate-50 rounded-xl border font-bold">
+            </div>
+
+            <div class="grid grid-cols-1 gap-2 mb-3">
+                <button onclick="triggerBulkHistNavWorkflow()" class="bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-xl font-bold text-sm">🚀 Trigger GitHub Action Now</button>
+                <button onclick="applyBulkHistNav()" class="bg-emerald-100 hover:bg-emerald-500 hover:text-white text-emerald-700 py-3 rounded-xl font-bold text-sm transition-all">📥 Apply nav-history-bulk.json</button>
+            </div>
+
+            <p class="text-[10px] text-slate-400 leading-relaxed border-t pt-2">
+                <strong>Step 1:</strong> Trigger the Action, then check your repo's Actions tab — a full 10-year fetch across all funds can take 10–20+ minutes (many paced API calls per fund), so this won't finish instantly.<br><br>
+                <strong>Step 2:</strong> Once the workflow shows a green checkmark (it commits <code>nav-history-bulk.json</code>), come back and tap Apply.<br><br>
+                <strong>What Apply does:</strong> for each date, if SEC now has data, it <strong>replaces</strong> your existing NAV with the more accurate value (using class-name filtering). Any date SEC doesn't cover is left <strong>untouched</strong> — nothing existing is ever deleted. Dates SEC has that you don't are added.<br><br>
+                <strong class="text-rose-600">⚠️ Back up first:</strong> if Gist auto-sync is on (default), applying this will also overwrite your existing cloud backup with the new data — so it won't help you undo a bad result. Before tapping Apply, go to Settings → <strong>💾 Backup HTML</strong> to download a snapshot to your device. That file is untouched by auto-sync and can be reopened to restore your prior data if needed.<br><br>
+                <strong>One-time setup:</strong> upload <code>fetch-historical-nav.js</code> and <code>.github/workflows/fetch-historical-nav.yml</code> to your repo (same place as fetch-nav.js). Your GitHub Pages token needs the <strong>"workflow"</strong> scope in addition to "repo" for the Trigger button to work — add it at github.com/settings/tokens if triggering fails.
             </p>
         </div>
     </div>
@@ -5693,6 +5726,149 @@
             .catch(function(e) {
                 alert('Failed to sync fund overrides:\n\n' + e.message);
             });
+        }
+
+        // ============================================================
+        // BULK HISTORICAL NAV (up to 10 years) — separate, occasional,
+        // heavy operation. Does NOT touch the fast daily Auto NAV path.
+        // ============================================================
+        function openBulkHistNavModal() {
+            document.getElementById('bulkHistNavModal').classList.add('active');
+        }
+
+        function triggerBulkHistNavWorkflow() {
+            const token = pagesCfg.token, user = pagesCfg.user, repo = pagesCfg.repo;
+            if (!token || !user || !repo) {
+                alert('GitHub Pages isn\'t set up yet. Open Settings → GitHub Pages, fill in your token/username/repo, and save once — this reuses the same connection.');
+                openPagesModal();
+                return;
+            }
+            const yearsBack = document.getElementById('bulkHistYears').value || '10';
+            const apiUrl = 'https://api.github.com/repos/' + user + '/' + repo +
+                '/actions/workflows/fetch-historical-nav.yml/dispatches';
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': 'application/vnd.github+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ref: 'main', inputs: { years_back: String(yearsBack) } })
+            })
+            .then(function(r) {
+                if (r.status === 204) {
+                    alert('✓ Triggered! A full ' + yearsBack + '-year fetch across all funds can take 10–20+ minutes. Check the Actions tab on GitHub to watch progress. Once it finishes (green checkmark, commits nav-history-bulk.json), come back here and tap "Apply nav-history-bulk.json".');
+                    return null;
+                }
+                return r.text().then(function(txt) {
+                    let ghMsg = '';
+                    try { ghMsg = JSON.parse(txt).message || ''; } catch(e) { ghMsg = txt.slice(0, 200); }
+                    let hint = '';
+                    if (r.status === 404) hint = ' — check fetch-historical-nav.yml has been uploaded to .github/workflows/ in your repo, and that the workflow filename matches exactly.';
+                    else if (r.status === 401 || r.status === 403) hint = ' — your token needs the "workflow" scope in addition to "repo". Regenerate it at github.com/settings/tokens with both ticked, then re-save in GitHub Pages settings.';
+                    throw new Error('HTTP ' + r.status + hint + (ghMsg ? '\n\nGitHub says: "' + ghMsg + '"' : ''));
+                });
+            })
+            .catch(function(e) {
+                if (e) alert('Failed to trigger workflow:\n\n' + e.message);
+            });
+        }
+
+        function applyBulkHistNav() {
+            // IMPORTANT: saveToLocalStorage() below auto-pushes to your Gist if
+            // auto-sync is on (the default) — meaning your EXISTING cloud backup
+            // would get overwritten with this bulk update's result too, leaving
+            // no easy way back if something's wrong. Give the user one explicit
+            // chance to back up first via a separate, untouched channel (a
+            // downloaded HTML file isn't affected by any in-app auto-sync).
+            const proceed = confirm(
+                '⚠️ Before applying bulk historical NAV:\n\n' +
+                'This will overwrite matching-date NAVs across ALL your funds, ' +
+                'and your existing Gist cloud backup will ALSO get overwritten ' +
+                'right after this (if auto-sync is on) — so it won\'t help you undo this.\n\n' +
+                'Recommended: tap Cancel now, go to Settings → 💾 Backup HTML to download ' +
+                'a snapshot of your current data to your device first, then come back and Apply.\n\n' +
+                'Tap OK only if you already have a recent backup, or are fine proceeding without one.'
+            );
+            if (!proceed) return;
+
+            var navUrl = '/nav-history-bulk.json';
+            if (location.hostname.endsWith('github.io')) {
+                var pathParts = location.pathname.split('/').filter(Boolean);
+                if (pathParts.length > 0) navUrl = '/' + pathParts[0] + '/nav-history-bulk.json';
+            }
+            navUrl += '?t=' + Date.now(); // cache-bust, same fix as the daily nav-data.json fetch
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', navUrl, true);
+            xhr.timeout = 30000;
+            xhr.onload = function() {
+                if (xhr.status !== 200) {
+                    alert('Could not load nav-history-bulk.json (HTTP ' + xhr.status + '). Has the GitHub Action finished running yet? Check the Actions tab.');
+                    return;
+                }
+                var data;
+                try { data = JSON.parse(xhr.responseText); }
+                catch(e) { alert('nav-history-bulk.json exists but isn\'t valid JSON yet — the workflow may still be running.'); return; }
+
+                var funds = data.funds || {};
+                var fundsTouched = 0, datesReplaced = 0, datesAdded = 0, datesPreserved = 0;
+
+                allFunds.forEach(function(f) {
+                    if (!f.name) return;
+                    var secHistory = funds[f.name.toUpperCase()] || funds[f.name];
+                    if (!secHistory || !Array.isArray(secHistory) || secHistory.length === 0) return;
+
+                    if (!f.history) f.history = [];
+                    var secByDate = {};
+                    secHistory.forEach(function(h) { secByDate[h.date] = h.nav; });
+
+                    var existingDates = {};
+                    f.history.forEach(function(h) { existingDates[h.date] = true; });
+
+                    // Replace matching dates with SEC's (more accurate) value —
+                    // never delete existing dates SEC doesn't cover.
+                    f.history.forEach(function(h) {
+                        if (secByDate.hasOwnProperty(h.date)) {
+                            if (h.nav !== secByDate[h.date]) {
+                                h.nav = secByDate[h.date];
+                                h.source = 'SEC Historical Bulk';
+                                datesReplaced++;
+                            }
+                        } else {
+                            datesPreserved++;
+                        }
+                    });
+                    // Add dates SEC has that the app doesn't yet
+                    Object.keys(secByDate).forEach(function(d) {
+                        if (!existingDates[d]) {
+                            f.history.push({ date: d, nav: secByDate[d], invested: f.invested, units: f.units, source: 'SEC Historical Bulk' });
+                            datesAdded++;
+                        }
+                    });
+                    f.history.sort(function(a,b){ return a.date.localeCompare(b.date); });
+
+                    // Recompute current NAV/date from the true latest entry
+                    var sortedDates = f.history.map(function(h){ return h.date; }).sort();
+                    var latestDate = sortedDates[sortedDates.length - 1];
+                    var latestEntry = f.history.find(function(h){ return h.date === latestDate; });
+                    if (latestEntry) { f.nav = latestEntry.nav; f.navDate = latestEntry.date; }
+
+                    fundsTouched++;
+                });
+
+                saveToLocalStorage();
+                filterData();
+                alert('✓ Historical NAV applied.\n\n' +
+                    'Funds touched: ' + fundsTouched + '\n' +
+                    'Dates replaced (SEC more accurate): ' + datesReplaced + '\n' +
+                    'Dates added (new from SEC): ' + datesAdded + '\n' +
+                    'Existing dates preserved (SEC had no data): ' + datesPreserved);
+            };
+            xhr.onerror = function() { alert('Network error loading nav-history-bulk.json.'); };
+            xhr.ontimeout = function() { alert('Timed out loading nav-history-bulk.json — the file may be large; try again.'); };
+            xhr.send();
         }
 
         // ============================================================
