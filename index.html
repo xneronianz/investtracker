@@ -4240,23 +4240,22 @@
             fitFundTable();
             // Rebuild period selector bars on every render (they get wiped when chart cards re-render)
             if (typeof buildPeriodBars === 'function') buildPeriodBars();
-            // FIX: the dashboard headline figures (Total Invested, Market Value, etc.)
-            // previously summed ALL of filteredFunds regardless of the asset-class
-            // toggles (Bond/CN/.../Insurance/Real Estate/etc.) — while the Historical
-            // Performance chart, XIRR, and Wealth Simulator's auto-filled "Current
-            // Portfolio Value" all already respected those same toggles via
-            // chartExcludedAssets. This produced two genuinely different totals
-            // (e.g. Market Value ฿4,374,925.59 vs chart's Total Value ฿4,355,159.24)
-            // that looked like they should represent the same thing. Now the
-            // dashboard summary uses the identical fund scope as everywhere else,
-            // so all these figures stay consistent with each other. The fund TABLE
-            // itself is untouched — it still lists every fund matching your
-            // search/portfolio filters regardless of chart asset-class toggles.
-            const summaryFunds = filteredFunds.filter(f => !chartExcludedAssets.has(f.assetClass));
-            const inv = summaryFunds.reduce((sum, f) => sum + f.invested, 0);
-            const cur = summaryFunds.reduce((sum, f) => sum + f.currentValue, 0);
-            const divTotal = summaryFunds.reduce((sum, f) => sum + f.divSum, 0);
-            const realizedTotal = summaryFunds.reduce((sum, f) => sum + f.realizedPLSum, 0);
+            // The dashboard headline figures (Total Invested, Market Value, etc.)
+            // always reflect the user's TRUE total across every matching fund —
+            // independent of the Historical Performance chart's own asset-class
+            // toggles (chartExcludedAssets), which default to hiding Insurance/
+            // Real Estate/Provident/Cash from the CHART specifically. "Clear
+            // Filter" resets search/portfolio/name filters, but intentionally
+            // does not touch those chart-only toggles — so the dashboard must
+            // not depend on them either, or holdings like insurance/real estate
+            // would silently vanish from the headline total. The chart, XIRR,
+            // and Wealth Simulator remain a deliberately filtered SUBSET view
+            // (the Simulator's own caption says as much) and keep using
+            // chartExcludedAssets separately, further down in this function.
+            const inv = filteredFunds.reduce((sum, f) => sum + f.invested, 0);
+            const cur = filteredFunds.reduce((sum, f) => sum + f.currentValue, 0);
+            const divTotal = filteredFunds.reduce((sum, f) => sum + f.divSum, 0);
+            const realizedTotal = filteredFunds.reduce((sum, f) => sum + f.realizedPLSum, 0);
             
             const taxTotal  = taxSavings.reduce((s, t) => s + t.amount, 0);
             const taxEff    = includeTaxInReturn  ? taxTotal      : 0;
@@ -4277,10 +4276,10 @@
             document.getElementById('sumTotalReturn').innerText = formatBaht(tr);
             document.getElementById('sumTRPercent').innerText = (tr >= 0 ? '▲ ' : '▼ ') + (tr/(inv || 1)*100).toFixed(2) + "%";
             document.getElementById('sumTRPercent').className = `text-sm font-bold ${tr >= 0 ? 'text-emerald-300' : 'text-rose-300'}`;
-            document.getElementById('fundCount').innerText = summaryFunds.length;
+            document.getElementById('fundCount').innerText = filteredFunds.length;
 
             // Overall CAGR: use the earliest start date across all filtered funds
-            let allStartDates = summaryFunds.map(f => getFundStartDate(f)).filter(Boolean);
+            let allStartDates = filteredFunds.map(f => getFundStartDate(f)).filter(Boolean);
             let overallStartDate = allStartDates.length > 0 ? allStartDates.sort()[0] : null;
             let overallCagr = calculateCAGR(inv, cur + divEff + realEff + taxEff, overallStartDate);
             if (overallCagr !== null) {
