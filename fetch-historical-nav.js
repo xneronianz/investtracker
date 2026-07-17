@@ -2,6 +2,17 @@
  * fetch-historical-nav.js — bulk backfill of historical NAV data (default: up to
  * 10 years) for every fund in FUND_MAP + fund-overrides.json.
  *
+ * Reliability hardening (2026-07-16): added retry-with-backoff (up to 3 attempts)
+ * per paginated page, plus explicit logging of any page failure or truncation —
+ * previously a single failed page silently broke pagination with zero visibility.
+ * Output now includes a "truncated_funds" list flagging anything that may still
+ * be incomplete after retries. NOTE: this does NOT explain a bounded gap (data
+ * missing for a specific historical window with data present before AND after) —
+ * that pattern, especially if consistent across multiple unrelated funds, points
+ * toward a genuine gap in SEC's own historical data for that period rather than
+ * a pagination bug in this script. Verify against the live API directly before
+ * assuming a script fix will resolve it.
+ *
  * FUND_MAP synced 2026-07-15 with fetch-nav.js v25 — all 36 class-filtered fund
  * entries now match exactly (was previously stuck at an older copy with only 18
  * class filters, meaning historical backfills for the other 18 funds were still
@@ -117,7 +128,7 @@ function dateStr(daysAgo) {
   return d.toISOString().split('T')[0];
 }
 
-async function fetchFullHistory(projId, className, yearsBack) {
+async function fetchFullHistory(projId, className, yearsBack, fundNameForLogging) {
   const endDate = dateStr(0);
   const startD = new Date();
   startD.setFullYear(startD.getFullYear() - yearsBack);
@@ -127,6 +138,8 @@ async function fetchFullHistory(projId, className, yearsBack) {
   let cursor = '';
   let page = 0;
   const MAX_PAGES = 60; // safety cap: 60 * page_size(100) = 6000 entries — comfortably covers 10yrs even of dense data
+  const MAX_RETRIES_PER_PAGE = 3;
+  let truncated = false;
 
   while (page < MAX_PAGES) {
     let path = `/v2/fund/daily-info/nav?proj_id=${encodeURIComponent(projId)}` +
@@ -134,14 +147,40 @@ async function fetchFullHistory(projId, className, yearsBack) {
     if (className) path += `&fund_class_name=${encodeURIComponent(className)}`;
     if (cursor) path += `&next_cursor=${encodeURIComponent(cursor)}`;
 
-    const r = await get(path);
-    if (r.status !== 200 || !r.data || !Array.isArray(r.data.items)) break;
+    // PERF/RELIABILITY FIX: previously, ANY failed page request (transient network
+    // blip, momentary rate limit, etc.) silently broke pagination entirely — with
+    // no logging of what failed, when, or that the result was truncated. Across
+    // 54 funds needing many sequential paginated calls over 10-20+ minutes, this
+    // made a silent, undetectable historical data gap very plausible. Now each
+    // page gets retried with backoff before giving up, and any failure is logged
+    // explicitly so it's visible in the workflow output instead of vanishing.
+    let r = null;
+    let attempt = 0;
+    while (attempt < MAX_RETRIES_PER_PAGE) {
+      r = await get(path);
+      if (r.status === 200 && r.data && Array.isArray(r.data.items)) break;
+      attempt++;
+      if (attempt < MAX_RETRIES_PER_PAGE) {
+        console.log(`    ⚠ ${fundNameForLogging || projId}: page ${page} failed (status ${r.status}), retry ${attempt}/${MAX_RETRIES_PER_PAGE}...`);
+        await sleep(500 * attempt); // backoff: 500ms, 1000ms
+      }
+    }
+    if (!r || r.status !== 200 || !r.data || !Array.isArray(r.data.items)) {
+      console.log(`    ✗ ${fundNameForLogging || projId}: page ${page} FAILED after ${MAX_RETRIES_PER_PAGE} attempts (status ${r ? r.status : 'no response'}) — history may be TRUNCATED from this point`);
+      truncated = true;
+      break;
+    }
 
     allItems = allItems.concat(r.data.items);
     cursor = r.data.next_cursor || '';
     page++;
     if (!cursor) break;
     await sleep(120); // pace paginated calls to stay well under API rate limits
+  }
+
+  if (page >= MAX_PAGES) {
+    console.log(`    ⚠ ${fundNameForLogging || projId}: hit the ${MAX_PAGES}-page safety cap — history may be truncated if this fund has more data than that`);
+    truncated = true;
   }
 
   // Same defense-in-depth as fetch-nav.js: never trust the server's date/class
@@ -163,7 +202,10 @@ async function fetchFullHistory(projId, className, yearsBack) {
     if (d && nav > 0) byDate[d] = nav;
   });
 
-  return Object.keys(byDate).sort().map(date => ({ date, nav: byDate[date] }));
+  return {
+    history: Object.keys(byDate).sort().map(date => ({ date, nav: byDate[date] })),
+    truncated: truncated
+  };
 }
 
 async function main() {
@@ -194,14 +236,17 @@ async function main() {
   console.log('Start:', new Date().toISOString());
 
   const result = {};
+  const truncatedFunds = [];
   let okCount = 0, failCount = 0;
 
   for (const [name, projId, className] of effectiveMap) {
     try {
-      const history = await fetchFullHistory(projId, className, YEARS_BACK);
+      const { history, truncated } = await fetchFullHistory(projId, className, YEARS_BACK, name);
       if (history.length > 0) {
         result[name.toUpperCase()] = history;
-        console.log(`  ✓ ${name}: ${history.length} entries (${history[0].date} → ${history[history.length - 1].date})`);
+        const flag = truncated ? '  ⚠ POSSIBLY TRUNCATED' : '';
+        console.log(`  ✓ ${name}: ${history.length} entries (${history[0].date} → ${history[history.length - 1].date})${flag}`);
+        if (truncated) truncatedFunds.push(name);
         okCount++;
       } else {
         console.log(`  ✗ ${name}: no historical data returned`);
@@ -215,11 +260,15 @@ async function main() {
   }
 
   console.log(`\nDone: ${okCount} funds fetched, ${failCount} failed`);
+  if (truncatedFunds.length > 0) {
+    console.log(`⚠ ${truncatedFunds.length} fund(s) had a page failure or hit the page cap — re-run may be needed for: ${truncatedFunds.join(', ')}`);
+  }
   console.log('End:', new Date().toISOString());
 
   fs.writeFileSync('nav-history-bulk.json', JSON.stringify({
     generated_at: new Date().toISOString(),
     years_back: YEARS_BACK,
+    truncated_funds: truncatedFunds,
     funds: result
   }));
   console.log('nav-history-bulk.json written');
