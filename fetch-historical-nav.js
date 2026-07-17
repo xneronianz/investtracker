@@ -2,6 +2,25 @@
  * fetch-historical-nav.js — bulk backfill of historical NAV data (default: up to
  * 10 years) for every fund in FUND_MAP + fund-overrides.json.
  *
+ * Reliability hardening v4 (2026-07-17): after the v3 fix, ABGDD-SSF's entry
+ * count was STILL unchanged (1032, same as before any of these fixes) despite
+ * a completely clean run. Root cause found: 6-month chunks were still often
+ * exceeding page_size=100 for dense funds (~108 entries/6mo for ABGDD-SSF),
+ * meaning most chunks STILL required following next_cursor to a second page —
+ * v2/v3 shortened the sequence length but never actually eliminated cursor
+ * continuation. Separately, re-examining the user's own manual test: it also
+ * had a non-empty next_cursor (>100 items existed for that window), but only
+ * page 1 was ever checked — page 2 of that "proof" was never actually
+ * verified either. This points at next_cursor continuation ITSELF as the
+ * likely culprit, not sequence length. Fixed by shrinking chunks to 2 months
+ * (~35-40 entries even for the densest funds, verified against actual entry
+ * counts) — small enough that virtually every chunk should complete in a
+ * single page, never invoking next_cursor at all. Added explicit logging
+ * whenever a chunk DOES need a second page, to directly observe whether
+ * cursor usage correlates with any remaining gaps. This roughly triples the
+ * chunk count (67 vs 23 for an 11-year range) and will take noticeably
+ * longer to run.
+ *
  * Reliability hardening v3 (2026-07-17): the v2 chunking approach exposed a
  * NEW bug — chunks entirely before a fund's inception date (or "today" before
  * that day's NAV publishes) legitimately return HTTP 204 "No Content", which
@@ -194,6 +213,14 @@ async function fetchChunk(projId, className, startDate, endDate, fundNameForLogg
     allItems = allItems.concat(r.data.items);
     cursor = r.data.next_cursor || '';
     page++;
+    if (cursor) {
+      // DIAGNOSTIC: with 2-month chunks this should be rare/never for most
+      // funds — if this fires, it directly confirms whether next_cursor
+      // continuation itself (not just long sequences) correlates with any
+      // remaining data gaps, since we can now see exactly which chunks
+      // needed it and cross-reference against what's missing afterward.
+      console.log(`    ↪ ${fundNameForLogging || projId} [${chunkLabel}]: page ${page} returned ${r.data.items.length} items, following cursor to page ${page + 1}...`);
+    }
     if (!cursor) break;
     await sleep(120);
   }
@@ -232,7 +259,7 @@ async function fetchFullHistory(projId, className, yearsBack, fundNameForLogging
   const finalEnd = new Date(endDate);
   while (chunkStart <= finalEnd) {
     const chunkEnd = new Date(chunkStart);
-    chunkEnd.setMonth(chunkEnd.getMonth() + 6);
+    chunkEnd.setMonth(chunkEnd.getMonth() + 2); // 2 months, not 6 — see comment above fetchFullHistory
     chunkEnd.setDate(chunkEnd.getDate() - 1);
     const actualEnd = chunkEnd > finalEnd ? finalEnd : chunkEnd;
     chunks.push({
