@@ -2,7 +2,18 @@
  * fetch-historical-nav.js — bulk backfill of historical NAV data (default: up to
  * 10 years) for every fund in FUND_MAP + fund-overrides.json.
  *
- * Reliability hardening (2026-07-16): added retry-with-backoff (up to 3 attempts)
+ * Reliability hardening v2 (2026-07-17): a clean re-run (0 HTTP failures per
+ * the v1 retry hardening below) STILL came back with a specific ~5-month
+ * window essentially empty for a fund confirmed via manual API testing to have
+ * complete data there. That means the server can return valid 200 responses
+ * with a chunk of records silently missing partway through a LONG continuous
+ * cursor sequence — undetectable by HTTP-failure-only retry logic. Fixed by
+ * splitting each fund's full date range into independent ~6-month chunks, each
+ * with its own short (~1-2 page) pagination sequence, mirroring the narrow
+ * query proven to work. This will take somewhat longer overall (more total
+ * HTTP round-trips), trading some speed for actual data completeness.
+ *
+ * Reliability hardening v1 (2026-07-16): added retry-with-backoff (up to 3 attempts)
  * per paginated page, plus explicit logging of any page failure or truncation —
  * previously a single failed page silently broke pagination with zero visibility.
  * Output now includes a "truncated_funds" list flagging anything that may still
@@ -128,16 +139,14 @@ function dateStr(daysAgo) {
   return d.toISOString().split('T')[0];
 }
 
-async function fetchFullHistory(projId, className, yearsBack, fundNameForLogging) {
-  const endDate = dateStr(0);
-  const startD = new Date();
-  startD.setFullYear(startD.getFullYear() - yearsBack);
-  const startDate = startD.toISOString().split('T')[0];
-
+// Fetches one page (with retry) for a single, bounded sub-window. Kept separate
+// from fetchFullHistory so each chunk gets its own independent, short pagination
+// sequence — see the comment on fetchFullHistory for why this matters.
+async function fetchChunk(projId, className, startDate, endDate, fundNameForLogging, chunkLabel) {
   let allItems = [];
   let cursor = '';
   let page = 0;
-  const MAX_PAGES = 60; // safety cap: 60 * page_size(100) = 6000 entries — comfortably covers 10yrs even of dense data
+  const MAX_PAGES = 15; // a 6-month chunk needs at most a couple of pages normally
   const MAX_RETRIES_PER_PAGE = 3;
   let truncated = false;
 
@@ -147,13 +156,6 @@ async function fetchFullHistory(projId, className, yearsBack, fundNameForLogging
     if (className) path += `&fund_class_name=${encodeURIComponent(className)}`;
     if (cursor) path += `&next_cursor=${encodeURIComponent(cursor)}`;
 
-    // PERF/RELIABILITY FIX: previously, ANY failed page request (transient network
-    // blip, momentary rate limit, etc.) silently broke pagination entirely — with
-    // no logging of what failed, when, or that the result was truncated. Across
-    // 54 funds needing many sequential paginated calls over 10-20+ minutes, this
-    // made a silent, undetectable historical data gap very plausible. Now each
-    // page gets retried with backoff before giving up, and any failure is logged
-    // explicitly so it's visible in the workflow output instead of vanishing.
     let r = null;
     let attempt = 0;
     while (attempt < MAX_RETRIES_PER_PAGE) {
@@ -161,12 +163,12 @@ async function fetchFullHistory(projId, className, yearsBack, fundNameForLogging
       if (r.status === 200 && r.data && Array.isArray(r.data.items)) break;
       attempt++;
       if (attempt < MAX_RETRIES_PER_PAGE) {
-        console.log(`    ⚠ ${fundNameForLogging || projId}: page ${page} failed (status ${r.status}), retry ${attempt}/${MAX_RETRIES_PER_PAGE}...`);
-        await sleep(500 * attempt); // backoff: 500ms, 1000ms
+        console.log(`    ⚠ ${fundNameForLogging || projId} [${chunkLabel}]: page ${page} failed (status ${r.status}), retry ${attempt}/${MAX_RETRIES_PER_PAGE}...`);
+        await sleep(500 * attempt);
       }
     }
     if (!r || r.status !== 200 || !r.data || !Array.isArray(r.data.items)) {
-      console.log(`    ✗ ${fundNameForLogging || projId}: page ${page} FAILED after ${MAX_RETRIES_PER_PAGE} attempts (status ${r ? r.status : 'no response'}) — history may be TRUNCATED from this point`);
+      console.log(`    ✗ ${fundNameForLogging || projId} [${chunkLabel}]: page ${page} FAILED after ${MAX_RETRIES_PER_PAGE} attempts (status ${r ? r.status : 'no response'})`);
       truncated = true;
       break;
     }
@@ -175,26 +177,76 @@ async function fetchFullHistory(projId, className, yearsBack, fundNameForLogging
     cursor = r.data.next_cursor || '';
     page++;
     if (!cursor) break;
-    await sleep(120); // pace paginated calls to stay well under API rate limits
+    await sleep(120);
   }
 
   if (page >= MAX_PAGES) {
-    console.log(`    ⚠ ${fundNameForLogging || projId}: hit the ${MAX_PAGES}-page safety cap — history may be truncated if this fund has more data than that`);
+    console.log(`    ⚠ ${fundNameForLogging || projId} [${chunkLabel}]: hit the ${MAX_PAGES}-page cap for this chunk`);
     truncated = true;
+  }
+
+  return { items: allItems, truncated };
+}
+
+// RELIABILITY FIX (2026-07-17): previously fetched the ENTIRE date range (up to
+// 11 years) as ONE continuous cursor-paginated sequence. A manual test proved
+// the SEC API has complete data for a specific window (June-Nov 2024) when
+// queried narrowly and directly — but a full historical bulk run still came
+// back with that window essentially empty, DESPITE reporting "0 failed" (no
+// HTTP-level errors). That means the server can return valid 200 responses
+// with a chunk of records silently missing partway through a LONG cursor
+// sequence — something our old retry logic (which only checks for HTTP
+// failures, not data completeness) could never detect or catch.
+//
+// The fix: split the full range into independent ~6-month chunks, each fetched
+// with its OWN short, bounded pagination sequence (typically just 1-2 pages) —
+// exactly mirroring the narrow query that was proven to work. If any one
+// chunk's cursor sequence has an issue, it can't affect any other chunk.
+async function fetchFullHistory(projId, className, yearsBack, fundNameForLogging) {
+  const endDate = dateStr(0);
+  const startD = new Date();
+  startD.setFullYear(startD.getFullYear() - yearsBack);
+  const overallStartDate = startD.toISOString().split('T')[0];
+
+  // Build ~6-month chunk boundaries from overallStartDate to endDate
+  const chunks = [];
+  let chunkStart = new Date(overallStartDate);
+  const finalEnd = new Date(endDate);
+  while (chunkStart <= finalEnd) {
+    const chunkEnd = new Date(chunkStart);
+    chunkEnd.setMonth(chunkEnd.getMonth() + 6);
+    chunkEnd.setDate(chunkEnd.getDate() - 1);
+    const actualEnd = chunkEnd > finalEnd ? finalEnd : chunkEnd;
+    chunks.push({
+      start: chunkStart.toISOString().split('T')[0],
+      end: actualEnd.toISOString().split('T')[0]
+    });
+    chunkStart = new Date(actualEnd);
+    chunkStart.setDate(chunkStart.getDate() + 1);
+  }
+
+  let allItems = [];
+  let truncated = false;
+  for (const chunk of chunks) {
+    const label = `${chunk.start}→${chunk.end}`;
+    const result = await fetchChunk(projId, className, chunk.start, chunk.end, fundNameForLogging, label);
+    allItems = allItems.concat(result.items);
+    if (result.truncated) truncated = true;
+    await sleep(100); // brief pause between chunks
   }
 
   // Same defense-in-depth as fetch-nav.js: never trust the server's date/class
   // filtering blindly — re-validate every item client-side.
   let filtered = allItems.filter(item => {
     const d = (item.nav_date || '').substring(0, 10);
-    return d >= startDate && d <= endDate;
+    return d >= overallStartDate && d <= endDate;
   });
   if (className) {
     const wanted = className.toUpperCase();
     filtered = filtered.filter(item => (item.fund_class_name || '').toUpperCase() === wanted);
   }
 
-  // Dedupe by date (last-seen wins in case of any overlap across pages)
+  // Dedupe by date (last-seen wins in case of any overlap across chunks/pages)
   const byDate = {};
   filtered.forEach(item => {
     const d = (item.nav_date || '').substring(0, 10);
