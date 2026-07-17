@@ -2,6 +2,16 @@
  * fetch-historical-nav.js — bulk backfill of historical NAV data (default: up to
  * 10 years) for every fund in FUND_MAP + fund-overrides.json.
  *
+ * Reliability hardening v3 (2026-07-17): the v2 chunking approach exposed a
+ * NEW bug — chunks entirely before a fund's inception date (or "today" before
+ * that day's NAV publishes) legitimately return HTTP 204 "No Content", which
+ * the retry logic was wrongly treating as a failure, burning 3 retries per
+ * empty pre-inception chunk across every fund and falsely flagging them all
+ * as "POSSIBLY TRUNCATED". 204 is now treated as a clean, successful "no data
+ * here" result — no retry, no truncation flag. Verified against mocked
+ * pre-inception, transient-failure-then-recovery, and persistent-failure
+ * scenarios.
+ *
  * Reliability hardening v2 (2026-07-17): a clean re-run (0 HTTP failures per
  * the v1 retry hardening below) STILL came back with a specific ~5-month
  * window essentially empty for a fund confirmed via manual API testing to have
@@ -160,6 +170,13 @@ async function fetchChunk(projId, className, startDate, endDate, fundNameForLogg
     let attempt = 0;
     while (attempt < MAX_RETRIES_PER_PAGE) {
       r = await get(path);
+      // HTTP 204 = "No Content" — a legitimate, successful response meaning
+      // there's genuinely no data for this window (e.g. a chunk entirely
+      // before the fund's inception date, or querying "today" before that
+      // day's NAV has been published yet). This is NOT a failure and must
+      // never be retried or flagged as truncated — doing so wasted 3 retries
+      // per legitimately-empty chunk across every fund's pre-inception years.
+      if (r.status === 204) break;
       if (r.status === 200 && r.data && Array.isArray(r.data.items)) break;
       attempt++;
       if (attempt < MAX_RETRIES_PER_PAGE) {
@@ -167,6 +184,7 @@ async function fetchChunk(projId, className, startDate, endDate, fundNameForLogg
         await sleep(500 * attempt);
       }
     }
+    if (r && r.status === 204) break; // clean, legitimate end of data for this chunk
     if (!r || r.status !== 200 || !r.data || !Array.isArray(r.data.items)) {
       console.log(`    ✗ ${fundNameForLogging || projId} [${chunkLabel}]: page ${page} FAILED after ${MAX_RETRIES_PER_PAGE} attempts (status ${r ? r.status : 'no response'})`);
       truncated = true;
