@@ -2,6 +2,30 @@
  * fetch-historical-nav.js — bulk backfill of historical NAV data (default: up to
  * 10 years) for every fund in FUND_MAP + fund-overrides.json.
  *
+ * Reliability hardening v5 (2026-07-17): with pagination now fully eliminated
+ * (2-month chunks, zero cursor usage confirmed via logging) the gap STILL
+ * persisted. Direct inspection of the actual output file pinpointed the real
+ * gap precisely: ABGDD-SSF data present through 2024-06-25, resumes at
+ * 2024-11-14. Critically, this does NOT align with any single chunk's
+ * boundaries — the tail of one chunk, the entirety of the next, and the head
+ * of the one after are all missing, while chunks clearly before and after
+ * are fine. A per-chunk bug would align with chunk (date) boundaries; this
+ * instead spans a TIME window of requests, consistent with undocumented rate
+ * limiting silently returning HTTP 200 with an empty items array (rather
+ * than an explicit 429) once request volume crosses some threshold during
+ * the long 54-fund run. Manually re-querying the exact failing chunk in
+ * isolation returned complete data — confirming the API itself works fine
+ * for this request; something about running many requests back-to-back is
+ * the trigger. Fixed by: (1) increasing pacing between chunk requests from
+ * 100ms to 250ms, (2) detecting chunks that come back fully empty while
+ * bracketed by chunks that DID have data (suspicious — a real gap in an
+ * active fund's reporting wouldn't cleanly bracket itself like that) and
+ * re-fetching those specific chunks after a longer 2s delay. NOTE: this does
+ * NOT catch PARTIAL data loss within a chunk that still returns some
+ * non-empty result (e.g. the tail-end gap within an otherwise-successful
+ * chunk) — only chunks that come back completely empty. If gaps persist
+ * after this fix, that's the next thing to address specifically.
+ *
  * Reliability hardening v4 (2026-07-17): after the v3 fix, ABGDD-SSF's entry
  * count was STILL unchanged (1032, same as before any of these fixes) despite
  * a completely clean run. Root cause found: 6-month chunks were still often
@@ -270,15 +294,53 @@ async function fetchFullHistory(projId, className, yearsBack, fundNameForLogging
     chunkStart.setDate(chunkStart.getDate() + 1);
   }
 
-  let allItems = [];
-  let truncated = false;
+  let chunkResults = [];
   for (const chunk of chunks) {
     const label = `${chunk.start}→${chunk.end}`;
     const result = await fetchChunk(projId, className, chunk.start, chunk.end, fundNameForLogging, label);
-    allItems = allItems.concat(result.items);
-    if (result.truncated) truncated = true;
-    await sleep(100); // brief pause between chunks
+    chunkResults.push({ chunk, label, items: result.items, truncated: result.truncated });
+    await sleep(250); // increased from 100ms — see note below on suspected rate limiting
   }
+
+  // SUSPICIOUS-EMPTY-CHUNK RE-CHECK: a real, precisely-bounded gap was found
+  // (2024-06-26 to 2024-11-13 for one fund) that did NOT align with any single
+  // chunk's date boundaries — the tail of one chunk, the entirety of the next,
+  // and the head of the one after that were all silently empty, while chunks
+  // clearly before and after all had normal data. A genuine per-chunk bug
+  // would align with chunk boundaries; this instead looks like a TIME window
+  // of suppressed responses cutting across chunks — consistent with
+  // undocumented rate limiting returning HTTP 200 with an empty items array
+  // (indistinguishable from "genuinely no data" without wider context) rather
+  // than an explicit 429 error. Re-check any chunk that came back empty WHILE
+  // sitting between two chunks that both had data — that combination is far
+  // more likely to be a suppressed response than genuine inactivity, since a
+  // real gap in an active fund's reporting wouldn't cleanly bracket itself
+  // between two normal periods like that.
+  for (let i = 0; i < chunkResults.length; i++) {
+    const cur = chunkResults[i];
+    if (cur.items.length > 0) continue;
+    const prevHasData = i > 0 && chunkResults[i - 1].items.length > 0;
+    const nextHasData = i < chunkResults.length - 1 && chunkResults[i + 1].items.length > 0;
+    if (prevHasData && nextHasData) {
+      console.log(`    🔁 ${fundNameForLogging || projId} [${cur.label}]: empty but bracketed by data on both sides — re-checking with longer delay...`);
+      await sleep(2000); // give any rate limit window time to clear
+      const retryResult = await fetchChunk(projId, className, cur.chunk.start, cur.chunk.end, fundNameForLogging, cur.label + ' (recheck)');
+      if (retryResult.items.length > 0) {
+        console.log(`    ✅ ${fundNameForLogging || projId} [${cur.label}]: recheck recovered ${retryResult.items.length} items that were missing on the first pass`);
+        cur.items = retryResult.items;
+      } else {
+        console.log(`    ⚠ ${fundNameForLogging || projId} [${cur.label}]: still empty after recheck — likely genuinely no data`);
+      }
+      await sleep(250);
+    }
+  }
+
+  let allItems = [];
+  let truncated = false;
+  chunkResults.forEach(r => {
+    allItems = allItems.concat(r.items);
+    if (r.truncated) truncated = true;
+  });
 
   // Same defense-in-depth as fetch-nav.js: never trust the server's date/class
   // filtering blindly — re-validate every item client-side.
