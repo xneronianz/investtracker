@@ -1,43 +1,115 @@
 {
-  "updated": "2026-07-19T09:04:01.693Z",
+  "updated": "2026-07-19T14:23:09.032Z",
   "items": [
+    {
+      "title": "The ‘Bad Blood’ Between Polymarket’s Shayne Coplan and Kalshi’s Tarek Mansour",
+      "body": "Shayne Coplan of Polymarket and Tarek Mansour of Kalshi are young billionaires intent on dominating prediction markets. It’s more than a battle. It’s “bad blood.”",
+      "link": "https://www.nytimes.com/2026/07/19/technology/polymarket-kalshi-rivalry-coplan-mansour.html",
+      "date": "2026-07-19T14:07:55.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "US launches strikes to 'punish' Iran after troops killed",
+      "body": "TEHRAN - The United States carried out airstrikes on Sunday to \"punish\" Iran after the first US military deaths since open hostilities rekindled the Middle East war.",
+      "link": "https://www.bangkokpost.com/world/3288384/us-launches-strikes-to-punish-iran-after-troops-killed",
+      "date": "2026-07-19T13:45:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Earnings playbook: Alphabet and Tesla are among the big companies set to report this week",
+      "body": "The earnings season heats up this week with two megacaps set to release their latest results.",
+      "link": "https://www.cnbc.com/2026/07/19/earnings-playbook-alphabet-tesla-headline-this-weeks-big-reports.html",
+      "date": "2026-07-19T13:17:17.000Z",
+      "source": "CNBC US",
+      "badge": "us"
+    },
+    {
+      "title": "Ministry of Finance points out inadequacies in regulations on supplementary pension insurance - Laodong.vn",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMirwFBVV95cUxQREdsT1hyV3ZLRHJub3JuQ2dZX1NKZloxY280Z20yaXk2Q0QyUXFpNVQza0NqV1FucVZrY2pNWFBwTlo1RlRib1pSc011OXh2UEVYSGs2Z3RrdGZKNnVyTFltM1BuNUdBYktGR1liX0k5SmFMa0hfUnF1V2d0dG...",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQREdsT1hyV3ZLRHJub3JuQ2dZX1NKZloxY280Z20yaXk2Q0QyUXFpNVQza0NqV1FucVZrY2pNWFBwTlo1RlRib1pSc011OXh2UEVYSGs2Z3RrdGZKNnVyTFltM1BuNUdBYktGR1liX0k5SmFMa0hfUnF1V2d0dGRZWEZmcVR4TzRabkZDYUcxaFJhX2JZQl9vNDg2Vm1ZRGFzNXRjZGtiR2pYUkhIeVRj?oc=5",
+      "date": "2026-07-19T13:13:39.000Z",
+      "source": "Google News",
+      "badge": "vietnam"
+    },
+    {
+      "title": "Step Into the ‘Zone of Genius’ (Before A.I. Takes Your Job)",
+      "body": "A decades-old self-help concept is gaining new purchase among people searching for meaningful work in the age of artificial intelligence.",
+      "link": "https://www.nytimes.com/2026/07/19/business/step-into-the-zone-of-genius-before-ai-takes-your-job.html",
+      "date": "2026-07-19T12:56:30.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Adidas Hopes Its World Cup Moment Can Drive U.S. Sales",
+      "body": "Nearly everything on the field on Sunday will bear the German company’s logo. Bjorn Gulden, the chief executive, says he “couldn’t have scripted it better.”",
+      "link": "https://www.nytimes.com/2026/07/18/business/adidas-world-cup-bjorn-gulden.html",
+      "date": "2026-07-19T12:51:40.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Kalshi adds 3 million new users as prediction market capitalizes on the World Cup",
+      "body": "The prediction market has launched some ads featuring soccer players, as well as formed a partnership to display its brand in more places during the tournament.",
+      "link": "https://www.cnbc.com/2026/07/19/kalshi-adds-3-million-new-users-as-company-capitalizes-on-world-cup.html",
+      "date": "2026-07-19T12:42:30.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "China roadshow pays off",
+      "body": "Thailand has secured more than 70 billion baht in investment commitments from leading Chinese corporations following a high-level roadshow in Chengdu, Finance Minister Ekniti Nitithanprapas said on Sunday.",
+      "link": "https://www.bangkokpost.com/business/investment/3288374/china-roadshow-pays-off",
+      "date": "2026-07-19T12:25:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Chinese firm seeks compensation over British Steel nationalisation",
+      "body": "Jingye said it will take action \"through legal means to the very end\" after the UK government nationalised British Steel.",
+      "link": "https://www.bbc.co.uk/news/articles/cwyj4ppqn41o?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-07-19T10:59:07.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Is Burnham promising a new dawn for North Sea oil and gas?",
+      "body": "The incoming PM is expected to announce fresh support for the North Sea from day one of his premiership.",
+      "link": "https://www.bbc.co.uk/news/articles/c4g3l22ry6wo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-07-19T09:52:48.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Hotel head chef seen assaulting inept intern",
+      "body": "PHUKET - A head chef was seen slapping a 20-year-old intern's head, striking her arm with a spatula and forcing her to eat undercooked rice in front of other workers in security camera footage from inside a hotel kitchen...",
+      "link": "https://www.bangkokpost.com/thailand/general/3288360/hotel-head-chef-seen-assaulting-inept-intern",
+      "date": "2026-07-19T09:37:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Pub fire death toll rises as another succumbs to injuries",
+      "body": "The death toll in the Rong Beer Na Ladprao beer hall fire in Chatuchak district, Bangkok, has risen to 34, with another of the hospitalised victims succumbing to injuries.",
+      "link": "https://www.bangkokpost.com/thailand/general/3288357/pub-fire-death-toll-rises-as-another-succumbs-to-injuries",
+      "date": "2026-07-19T09:03:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "The Case of the 3:30 Emails",
+      "body": "Plus: Are you really paying attention to me on Zoom?",
+      "link": "https://www.nytimes.com/2026/07/19/business/delayed-email-glitch.html",
+      "date": "2026-07-19T09:00:54.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
     {
       "title": "Japan ranks lowest among 6 nations in survey on expectations of AI use",
       "body": "Japan ranked the lowest among six countries in a private-sector survey of companies about their use of generative intelligence, with only 9% saying they found the technology to have exceeded their expectations.",
       "link": "https://www.bangkokpost.com/business/general/3288355/japan-ranks-lowest-among-6-nations-in-survey-on-expectations-of-ai-use",
       "date": "2026-07-19T08:19:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Roads partially reopen at Bangkok tunnel leak site",
-      "body": "Roads were partially reopened to traffic near Bangkok's Wongwian Yai on Sunday as repairs continued underground to the leaking Purple Line rail tunnel in Klong San district, which earlier caused a subsidence.",
-      "link": "https://www.bangkokpost.com/thailand/general/3288329/roads-partially-reopen-at-bangkok-tunnel-leak-site",
-      "date": "2026-07-19T04:51:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Corrupt officials blamed for businesses illegally run by foreigners",
-      "body": "Corrupt government officials were viewed as the main factor allowing foreigners to illegally operate businesses in Thailand, a Nida poll showed on Sunday.",
-      "link": "https://www.bangkokpost.com/thailand/general/3288327/corrupt-officials-blamed-for-businesses-illegally-run-by-foreigners",
-      "date": "2026-07-19T04:18:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Madison Square Garden Sues Wired Magazine Over L.G.B.T.Q. Tracking Report",
-      "body": "The Manhattan venue claims a July article from the technology magazine falsely implied that it tracked information about some celebrities’ sexual orientation for “discriminatory purposes.”",
-      "link": "https://www.nytimes.com/2026/07/18/business/media/msg-entertainment-sues-wired-magazine.html",
-      "date": "2026-07-19T02:34:10.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Messi's Argentina face Spain's cool machine in World Cup final rich with personal twists",
-      "body": "NEW YORK - Argentina and Spain were supposed to settle a score in Qatar ​earlier this year, in the Finalissima between the champions of South America and Europe, &zwnj;before US-Israeli strikes on Iran forced the match t...",
-      "link": "https://www.bangkokpost.com/sports/3288297/messis-argentina-face-spains-cool-machine-in-world-cup-final-rich-with-personal-twists",
-      "date": "2026-07-19T02:11:00.000Z",
       "source": "Bangkok Post",
       "badge": "thai"
     },
@@ -58,51 +130,11 @@
       "badge": "thai"
     },
     {
-      "title": "England survive France fightback to secure third place in Miami goalfest",
-      "body": "MIAMI: England held off a stunning France fightback to claim a 6-4 victory in a madcap Miami thriller on Saturday, securing third place for their best World Cup finish since their sole title triumph in 1966.",
-      "link": "https://www.bangkokpost.com/sports/3288280/england-survive-france-fightback-to-secure-third-place-in-miami-goalfest",
-      "date": "2026-07-19T00:19:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "The hidden cost of the night shift and how to sleep it off",
-      "body": "More than three million people in the UK work night shifts, which can greatly impact their health. What can be done to help them?",
-      "link": "https://www.bbc.co.uk/news/articles/cp9errxl97go?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-07-19T00:01:55.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
-      "title": "Adidas Hopes Its World Cup Moment Can Drive U.S. Sales",
-      "body": "Nearly everything on the field on Sunday will bear the German company’s logo. Bjørn Gulden, the chief executive, says he ‘couldn’t have scripted it better.’",
-      "link": "https://www.nytimes.com/2026/07/18/business/adidas-world-cup-bjorn-gulden.html",
-      "date": "2026-07-18T23:13:26.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "America Caught World Cup Fever. His Job Is to Capitalize on It.",
-      "body": "Don Garber, the M.L.S. commissioner, has been planning for this moment for eight years.",
-      "link": "https://www.nytimes.com/2026/07/18/business/dealbook/mls-don-garber-world-cup.html",
-      "date": "2026-07-18T22:28:17.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
       "title": "&apos;WarshGPT&apos;: How Wall Street is adapting to the Fed&apos;s new era of communication",
       "body": "Investment firms are readying for an era with less public commentary from the U.S. central bank. Some are relying on AI for an edge.",
       "link": "https://www.cnbc.com/2026/07/18/warshgpt-federal-reserve-communications-task-force-warsh.html",
       "date": "2026-07-18T18:16:42.000Z",
       "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "World Cup Final Drives Billions in Bets on Kalshi and Polymarket",
-      "body": "The soccer tournament has helped propel the prediction markets to new user records, creating what may be the largest gambling event in history.",
-      "link": "https://www.nytimes.com/2026/07/18/business/world-cup-kalshi-polymarket.html",
-      "date": "2026-07-18T09:01:54.000Z",
-      "source": "NY Times",
       "badge": "global"
     },
     {
@@ -130,14 +162,6 @@
       "badge": "thai"
     },
     {
-      "title": "Tech sell-off takes toll on Asian equities",
-      "body": "RECAP: Most Asian stock markets fell sharply on Friday, with equity benchmarks in Japan and Taiwan falling as much as 6%, as a global rout in technology stocks accelerated. The resumption of US-Iran hostilities and highe...",
-      "link": "https://www.bangkokpost.com/business/general/3287645/tech-selloff-takes-toll-on-asian-equities",
-      "date": "2026-07-17T23:15:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "Netflix stock falls as earnings forecast disappoints, company says it will give fewer engagement updates",
       "body": "The streaming giant said it would cut back on the frequency of its \"What We Watched\" reports, which provide a picture of engagement.",
       "link": "https://www.cnbc.com/2026/07/16/netflix-nflx-earnings-q2-2026.html",
@@ -152,14 +176,6 @@
       "date": "2026-07-17T18:13:22.000Z",
       "source": "Google News",
       "badge": "bond"
-    },
-    {
-      "title": "The financial winners and losers from the World Cup",
-      "body": "Big bucks are being made from the 2026 tournament off the field, but who is raking in the most, and who is losing out?",
-      "link": "https://www.bbc.co.uk/news/articles/cgrkek8lrzvo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-07-17T11:36:11.000Z",
-      "source": "BBC Business",
-      "badge": "global"
     },
     {
       "title": "New Aom Plus bonds offer low entry and yields up to 2.8% - Nation Thailand",
@@ -186,6 +202,14 @@
       "badge": "us"
     },
     {
+      "title": "U.S. Dollar to Thai Baht - USD/THB Exchange Rate Chart - FOREX.com",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiX0FVX3lxTE5yTG5SODhoS1R5OU5WV043bnpTalJnaUhnSXFNQzNjMkU2SjFialp1NjZnWThlb1Rtam51T0RQTXNUdlpjXy1VV1hCTWNHTFRGN1BTb0FnS1E2WU1Za0Jr?oc=5\" target=\"_blank\">U.S. Dollar to Thai...",
+      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5yTG5SODhoS1R5OU5WV043bnpTalJnaUhnSXFNQzNjMkU2SjFialp1NjZnWThlb1Rtam51T0RQTXNUdlpjXy1VV1hCTWNHTFRGN1BTb0FnS1E2WU1Za0Jr?oc=5",
+      "date": "2026-07-17T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "thai"
+    },
+    {
       "title": "Treasury Yields Snapshot: July 17, 2026 - Advisor Perspectives",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxNSmZZa25xbVV5VjMxTWx4MW83SFlXajNuZUlsVUxsMmVVd0dBSjZYcnVCWFpGUnRXMXYtdE50TkI4aTJ4aUgwV0pvYUtHTmpXMnhMamlRRW12VDk5ek9HYzRwS1dRdVlCTjhocnVmQkprUTdrY3ZjMlZRTHJMaW...",
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNSmZZa25xbVV5VjMxTWx4MW83SFlXajNuZUlsVUxsMmVVd0dBSjZYcnVCWFpGUnRXMXYtdE50TkI4aTJ4aUgwV0pvYUtHTmpXMnhMamlRRW12VDk5ek9HYzRwS1dRdVlCTjhocnVmQkprUTdrY3ZjMlZRTHJMaW9uUjV4a1FrSVYtYndMRTQ5TGpJOFJUeDB4OFNUWFYzVjBp?oc=5",
@@ -208,6 +232,14 @@
       "date": "2026-07-16T23:11:00.000Z",
       "source": "CNBC US",
       "badge": "us"
+    },
+    {
+      "title": "Treasury Rates Today: July 16, 2026 - Forbes",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5\" target=\"_blank\">Treasury...",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5",
+      "date": "2026-07-16T20:20:00.000Z",
+      "source": "Google News",
+      "badge": "bond"
     },
     {
       "title": "Wall Street ends lower as chip weakness offsets solid earnings, economic data - Reuters",
@@ -234,28 +266,12 @@
       "badge": "global"
     },
     {
-      "title": "Short sellers load up against SpaceX as stock drops below IPO price",
-      "body": "About 185 million SpaceX shares are now sold short, representing roughly 29% of the company's publicly tradable float, according to S3.",
-      "link": "https://www.cnbc.com/2026/07/16/short-sellers-load-up-against-spacex-as-stock-retreats-back-to-ipo-price.html",
-      "date": "2026-07-16T18:12:21.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
       "title": "Elevated Treasury yields signal strong entry point for bond investors, FTSE Russell finds - InvestmentNews",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMi1gFBVV95cUxPM2JJU2o4U1FfS0tOSVNVUFA0aTFlN3lwUkJld1BtTVNZN2tGdHBHTzluU0htRE9XTFJFT2UybXVCOUxueGJiRGJaSGhwSVgtbTVnLTloMWFxQ2dSYlMtUDYzc1pJSUM4X3VROU9WczV4TkZmVFlEc0dtdHowZH...",
       "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPM2JJU2o4U1FfS0tOSVNVUFA0aTFlN3lwUkJld1BtTVNZN2tGdHBHTzluU0htRE9XTFJFT2UybXVCOUxueGJiRGJaSGhwSVgtbTVnLTloMWFxQ2dSYlMtUDYzc1pJSUM4X3VROU9WczV4TkZmVFlEc0dtdHowZHJWZXE2djBvOENQNkpzcWhVSzVQb0RGS3RzUXFKUnNtUnRlTlFLSVRSUE5GSWVYOGRBa2JGUTdVTjZzaXRXTEkzX29jYTJoRk0zYXVCaEJoc05lSHU1NGJB?oc=5",
       "date": "2026-07-16T10:31:41.000Z",
       "source": "Google News",
       "badge": "bond"
-    },
-    {
-      "title": "TSMC to invest additional $100 billion in Arizona after second-quarter profit soars 77%",
-      "body": "TSMC announced a second-quarter profit, following its June revenue figures released earlier this week.",
-      "link": "https://www.cnbc.com/2026/07/16/tsmc-second-quarter-profit-.html",
-      "date": "2026-07-16T08:24:49.000Z",
-      "source": "CNBC US",
-      "badge": "us"
     },
     {
       "title": "Global institutions forecast Indonesia’s economy to grow around 5% in 2026 - Independent Observer",
@@ -306,28 +322,12 @@
       "badge": "us"
     },
     {
-      "title": "Massive data center buildout poses latest inflation threat for consumers - PBS",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMirgFBVV95cUxNRG1hS3RoTnFiVzl0a09xVkpLdDFqQWlhekhLSXEwNGlsdmpoTlVxMk5SN3V3dExqSThPdG5RLWNDdC0wTlY4azVqLTNlUjlPRks1RHZ5OVBEZlpOeXVOdFh3SzJqV2FQZ1o0bG4yVkRxOXp3WTBKNkZnbFd6dF...",
-      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNRG1hS3RoTnFiVzl0a09xVkpLdDFqQWlhekhLSXEwNGlsdmpoTlVxMk5SN3V3dExqSThPdG5RLWNDdC0wTlY4azVqLTNlUjlPRks1RHZ5OVBEZlpOeXVOdFh3SzJqV2FQZ1o0bG4yVkRxOXp3WTBKNkZnbFd6dFQ5Nk9mU0RabVpCQVhtbzhhVV81eFVvUkw3N1Z0RkdPd04zN1p2eEtKcGd1OXBFZ0HSAbMBQVVfeXFMT1J4WlZsRXMzeWZ1dU9fRDUwd3pvR0ZYd2lnaDVES2d6OHRzS1g5RllNbGZMZGszQjRuTE02MTVUX2ZfMDNsUTdXZ19qSnFfN2hjQ1dyVHRqS3lmeUFIeTlxSjYtY2VwVk5wVmpNRjJ1LTJjRzFuaWxHQm9GUVhmMWJPMVpLeTQzSFZ0czUtWkVqcExqaVNaWG9reXpQT3dSand5TUlYN2hlNE5NYUpSWUVNN28?oc=5",
-      "date": "2026-07-14T18:21:59.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
       "title": "Commodity Markets Rotate in 2026 as Lithium and Oil Lead, Gold Cools - Crux Investor",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMipAFBVV95cUxQWXZPeE9rWVFvWWEwcGI1LWVBRWptYlZHYVlZbGlfeUhVZ043RU1aay1IeEJZRVZpSnlrVFZLMVZoWDVLYk02eEJxV0tPY0Z3YzNqM0lXbmdFQjIzY1p5bk9aeXNnLXBGc1dxQXdzOUlzb2RyTnBMN0hSUlBjVm...",
       "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQWXZPeE9rWVFvWWEwcGI1LWVBRWptYlZHYVlZbGlfeUhVZ043RU1aay1IeEJZRVZpSnlrVFZLMVZoWDVLYk02eEJxV0tPY0Z3YzNqM0lXbmdFQjIzY1p5bk9aeXNnLXBGc1dxQXdzOUlzb2RyTnBMN0hSUlBjVm11NHNHTVktWGRfVkRmQXVCU3UzQjZaS1lKaWVZM254b0V4Q05rZw?oc=5",
       "date": "2026-07-14T14:25:32.000Z",
       "source": "Google News",
       "badge": "commodity"
-    },
-    {
-      "title": "Corporate Bonds Have the Best Yields in Years. They Still Aren’t Enough. - WSJ",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMitwFBVV95cUxNeUNhYzI4VnNGdTZKdFd4Ym5nOWVzZl94aFBMb1IzZmV0aldQaHBsWTdwTElTblhHSEhRRndwTl9qVG1vTUNQUmxTaTRJT3E2RGphdDQtUVhDUmlMNU5IMVh6elM0ZlNYQ1M3ci1Nbnhsczk0QXktYW1GcWs0Z1...",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNeUNhYzI4VnNGdTZKdFd4Ym5nOWVzZl94aFBMb1IzZmV0aldQaHBsWTdwTElTblhHSEhRRndwTl9qVG1vTUNQUmxTaTRJT3E2RGphdDQtUVhDUmlMNU5IMVh6elM0ZlNYQ1M3ci1Nbnhsczk0QXktYW1GcWs0Z1k2Zy13X3pYYjR1eGVySU1QVkR0bThDM05NdmRHaGswLXhhUEg5V2NSOWlBYXI5WGZ5MEEzLUNNRnM?oc=5",
-      "date": "2026-07-14T09:30:00.000Z",
-      "source": "Google News",
-      "badge": "bond"
     },
     {
       "title": "What’s Ahead in 2027 and Beyond for Inflation, Fed Rate Cuts, and More - Morningstar",
@@ -350,14 +350,6 @@
       "body": "<a href=\"https://news.google.com/rss/articles/CBMi0wFBVV95cUxObGZnYVRlbmRrWEVoTzVXd01lc0diYm1LdDFOSTlzNmtZVnJibHBIQUFLcVpETnJGR2NLUS1wcE5reWJYY3V0dVExdjJJN2JWbEFCVWZJcTRCZE90bU01aWRPc1FZOF9vRkZnYU5nSUhCbUh4eERDa1Z1VUFSYW...",
       "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxObGZnYVRlbmRrWEVoTzVXd01lc0diYm1LdDFOSTlzNmtZVnJibHBIQUFLcVpETnJGR2NLUS1wcE5reWJYY3V0dVExdjJJN2JWbEFCVWZJcTRCZE90bU01aWRPc1FZOF9vRkZnYU5nSUhCbUh4eERDa1Z1VUFSYWtGRm5VWXdqd2tZS3RaTDNxNjVUWGlsNkpGaV9QeFp6SUhDdlZsU3lnSTNuOVA4aUIxRFdUbThRVXhvRTlWTzVyYmJPZ3g5N015aUEyd0FBRHFEVzRZ?oc=5",
       "date": "2026-07-13T14:53:04.000Z",
-      "source": "Google News",
-      "badge": "thai"
-    },
-    {
-      "title": "Thai Banks Flag USDT as $3.4B Scam-Center Proceeds Enter Financial System - Tech Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiwAFBVV95cUxPZEZWQm9HVmpvS21lT2VPYUZ2QVhUZGRtOEk2R3diSWk0bWEyUWk5X3A4T2ZPbk5VUzlONWs4cTAyS3A3RHF4dU9JT1p6dnNyQ0s4T1FjOVBqZ3FpSDhDVWpJY2NDcEx6Zkw4U2NZYndzNW5YZk5WM0VxaU9fMj...",
-      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPZEZWQm9HVmpvS21lT2VPYUZ2QVhUZGRtOEk2R3diSWk0bWEyUWk5X3A4T2ZPbk5VUzlONWs4cTAyS3A3RHF4dU9JT1p6dnNyQ0s4T1FjOVBqZ3FpSDhDVWpJY2NDcEx6Zkw4U2NZYndzNW5YZk5WM0VxaU9fMjVKbmRzbGNyWHFmQzUtOGpwaVk4clBmQU9ZZHQ4YjhvVGdUbDJUdUFfYUtRUVl0QkFnb0Y1elVoZjVTMEY2ZXhjLVQ?oc=5",
-      "date": "2026-07-13T14:40:53.000Z",
       "source": "Google News",
       "badge": "thai"
     },
@@ -394,12 +386,20 @@
       "badge": "vietnam"
     },
     {
-      "title": "Capital flows still lag green investment needs in Vietnam: BlackRock Switzerland chair - Theinvestor",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMivAFBVV95cUxQaXVzM0JtYlQ0WXpsdjZnLUtvdm1Hc3FSRGFzNTJEV21EdmQtNWQ0TEtqWk1UYmxXY2YxWXl1SU4yOU9NMENvcEVRRDFZZ1N5bzRJRDEyNnpWTDRNR1BYNGUzUzYzQ3Fzd3I1QzVQX3ViSHR6dEV3ejQ4TnRlb0...",
-      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQaXVzM0JtYlQ0WXpsdjZnLUtvdm1Hc3FSRGFzNTJEV21EdmQtNWQ0TEtqWk1UYmxXY2YxWXl1SU4yOU9NMENvcEVRRDFZZ1N5bzRJRDEyNnpWTDRNR1BYNGUzUzYzQ3Fzd3I1QzVQX3ViSHR6dEV3ejQ4TnRlb0hnMFMyLUFIYmlzMms4Sm9rUkxKTFNfYWRJWHlGMEJhRnpUancwWXdPRm9TSVBtcWl5VTNoVnhyMXhlVkRwdw?oc=5",
-      "date": "2026-07-12T10:57:00.000Z",
+      "title": "Thai central bank rules out QE, interest rate hikes due to economic fragility - Thai PBS World",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxPYWgtQk1WNktmcFBzRE9PeHJMMTJleDVZelc4aGh4SVhmLXFUOHBHdlVlUTRFeEhmLTlZSFQxVnhPUnYyYVZObWdrS2dyQU94NlFaaDltSUxJd0RYQ3JqSkdjdjllQWNja3dmeEo4TnY2U01jOFl3QnFnemZzUl...",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPYWgtQk1WNktmcFBzRE9PeHJMMTJleDVZelc4aGh4SVhmLXFUOHBHdlVlUTRFeEhmLTlZSFQxVnhPUnYyYVZObWdrS2dyQU94NlFaaDltSUxJd0RYQ3JqSkdjdjllQWNja3dmeEo4TnY2U01jOFl3QnFnemZzUldnWTc4bFFkVEdnemdQclF2eVN3YS0yZVpXTWhKRVYxdDlLLXdvZU1WVlMwU2RVeE5YUThuMll3VVJk?oc=5",
+      "date": "2026-07-11T10:23:11.000Z",
       "source": "Google News",
-      "badge": "vietnam"
+      "badge": "economic"
+    },
+    {
+      "title": "Federal Funds Rate History 1990 to 2026 - Forbes",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMidEFVX3lxTFBsNEtLYjBNb05hZjBmRkV5NDctYTNrTTF1a0FwQzlpdG42Y3ROZmNVdmROTHRMbTBobHFhTnBzUVVDZEwxdGk5cm9HRWlWMTBCYk5EM0doODFNNnFPb0JfRDR1VVFwSzlsYnV0MUVfeldlTGpw?oc=5\" target=...",
+      "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBsNEtLYjBNb05hZjBmRkV5NDctYTNrTTF1a0FwQzlpdG42Y3ROZmNVdmROTHRMbTBobHFhTnBzUVVDZEwxdGk5cm9HRWlWMTBCYk5EM0doODFNNnFPb0JfRDR1VVFwSzlsYnV0MUVfeldlTGpw?oc=5",
+      "date": "2026-07-10T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "us"
     }
   ]
 }
