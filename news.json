@@ -1,51 +1,155 @@
 {
-  "updated": "2026-07-22T09:24:56.112Z",
+  "updated": "2026-07-22T15:02:39.272Z",
   "items": [
     {
-      "title": "See How Houthis Put the Red Sea at Risk as an Alternative Oil Route",
-      "body": "Saudi Arabia has diverted huge amounts of oil to the Red Sea since the Iran war began, but now the Iranian-backed Houthi militants say that they intend to block that route.",
-      "link": "https://www.nytimes.com/2026/07/22/business/energy-environment/red-sea-saudi-arabia-houthis.html",
-      "date": "2026-07-22T09:02:31.000Z",
+      "title": "A.I. Is Lifting Markets and the Economy and Raising Risks for Both",
+      "body": "Investment in artificial intelligence and related companies is lifting the stock market and spending across the economy.",
+      "link": "https://www.nytimes.com/2026/07/22/business/economy/stocks-economy-ai.html",
+      "date": "2026-07-22T14:15:41.000Z",
       "source": "NY Times",
       "badge": "global"
     },
     {
-      "title": "Laredo’s Future Rides on Trump’s Next Trade Move",
-      "body": "The economy of Laredo, Texas, has boomed under the president’s global tariffs. Now, his demands may threaten its success.",
-      "link": "https://www.nytimes.com/2026/07/22/business/economy/trump-tariffs-laredo-trade-mexico.html",
-      "date": "2026-07-22T09:01:47.000Z",
-      "source": "NY Times",
-      "badge": "global"
+      "title": "Oil at 6-week high as war intensifies",
+      "body": "Oil prices rose to their highest in almost six weeks on Wednesday, with Brent crude surpassing $95 a barrel, on mounting concerns about disruptions to Middle Eastern supply routes because of escalating hostilities betwee...",
+      "link": "https://www.bangkokpost.com/business/general/3290067/oil-at-6week-high-as-war-intensifies",
+      "date": "2026-07-22T14:13:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
     },
     {
-      "title": "How Donald Trump Jr.’s 1789 Capital Is Cashing In Without Apology",
-      "body": "The fledgling firm, run by the president’s oldest son and his partner Omeed Malik, has made investments in A.I. and defense technology that have tripled in value in just months.",
-      "link": "https://www.nytimes.com/2026/07/22/business/donald-trump-jr-1789-capital.html",
-      "date": "2026-07-22T09:00:13.000Z",
-      "source": "NY Times",
-      "badge": "global"
+      "title": "Proxies buying Bangkok houses for ‘annoying’ Chinese occupants",
+      "body": "Police have found that a Chinese man used a Thai woman and her mother as proxies to set up companies that bought luxury houses in Bangkok for Chinese occupants who reportedly annoyed neighbours.",
+      "link": "https://www.bangkokpost.com/thailand/general/3290064/proxies-buying-bangkok-houses-for-annoying-chinese-occupants",
+      "date": "2026-07-22T14:08:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
     },
     {
       "title": "Kalshi launches election hub for prediction markets ahead of midterms",
       "body": "The company said the page gives viewers of its event contracts a central place to see speculators' outlook for the midterm elections.",
       "link": "https://www.cnbc.com/2026/07/22/kalshi-launches-election-hub-for-prediction-markets-ahead-of-midterms.html",
-      "date": "2026-07-22T09:00:02.000Z",
+      "date": "2026-07-22T14:07:47.000Z",
       "source": "CNBC Markets",
       "badge": "global"
     },
     {
-      "title": "Most bus fares in England to be capped at £2 from January",
-      "body": "The government says the policy will \"help with the cost of living and give people the breathing space they need\"",
-      "link": "https://www.bbc.co.uk/news/articles/cz64l78n5vpo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-07-22T08:41:20.000Z",
+      "title": "Global Oil Price Jumps as War Threats Intensify",
+      "body": "But stock investors shrug off Iran developments as they await crucial earnings reports from tech firms including Alphabet and Tesla.",
+      "link": "https://www.nytimes.com/2026/07/22/business/oil-prices-iran-war.html",
+      "date": "2026-07-22T13:59:35.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Stock market today: Dow, S&P 500, Nasdaq diverge with Alphabet, Tesla earnings on deck - Yahoo! Finance Canada",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiugFBVV95cUxOay1lTzNkWnR6MEhwaUVzeEZVVTd6QnBKeXZSdUJ2UVlkb2lLcmtnX1JjQjB2bkR1aC1EeEFVMlZLY1dlZ1hMVFdwT0ZwUHZMb0djQXh0RXVILTdrYXRsTlhQMUV4YkxZM1BjQ1laSDB1bkh3Wm1xMVZTQnJOQ0...",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOay1lTzNkWnR6MEhwaUVzeEZVVTd6QnBKeXZSdUJ2UVlkb2lLcmtnX1JjQjB2bkR1aC1EeEFVMlZLY1dlZ1hMVFdwT0ZwUHZMb0djQXh0RXVILTdrYXRsTlhQMUV4YkxZM1BjQ1laSDB1bkh3Wm1xMVZTQnJOQ0lnZ1U0d1dEcWU5STVDZXh4di1wUE1aaXlpa0FkRldOazdKRHM5WDhWRDJiYXVhR2ItU3UwUlJyY1Y1cEE?oc=5",
+      "date": "2026-07-22T13:41:16.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "S&P 500, Nasdaq open lower as caution builds ahead of Big Tech earnings - Reuters",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMivgFBVV95cUxQUExYckI5WDktV0NlZUUwblh5V3ZHRXFEWFdqY09sdlZXOEFNc2loZGJWS1phRGdzZ2VfR042TWNhTU9Gc1VwRlVReUZTbDM3UllKVktGcFlGSnJxcFBNR1ZHc2tvcTh2Ui1lbmJhRE9LakhkV3ZyekNJU2ZuRm...",
+      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQUExYckI5WDktV0NlZUUwblh5V3ZHRXFEWFdqY09sdlZXOEFNc2loZGJWS1phRGdzZ2VfR042TWNhTU9Gc1VwRlVReUZTbDM3UllKVktGcFlGSnJxcFBNR1ZHc2tvcTh2Ui1lbmJhRE9LakhkV3ZyekNJU2ZuRmVVZ3R6dXJicFBkcnJQTFZZWkl2TjhvQnV1eE5QN29qSnk2SjU0UVhiaVdyR3VKSVEtdXFSNVdlQUJ3MDU3OEd3?oc=5",
+      "date": "2026-07-22T13:37:44.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "I travel four hours on a bus per day - the bus fare cap will save me £500 a year",
+      "body": "The BBC speaks to people around the country about their view on the newly-announced bus fare cap.",
+      "link": "https://www.bbc.co.uk/news/articles/clyv4y3xdvgo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-07-22T12:58:55.000Z",
       "source": "BBC Business",
       "badge": "global"
+    },
+    {
+      "title": "Bank of America Says the Fed Should Raise Rates Now: 4 Dividend Inflation-Resistant Stocks - 24/7 Wall St.",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxPa1YxcE1aOTVCNXd6UHhiUWRhcHNadTJTUm1HQzJiQy0ybVFlUV90dlpNY1ZQM1U1cXphcGtPcHNHVlhSSlF2cS1SREhOUHlJc2c4WFNKYnFVX0w4dl9BME93Y1dXZDJxSEwwa0s3UHByZVBsT3RyYkY0T2hRbz...",
+      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPa1YxcE1aOTVCNXd6UHhiUWRhcHNadTJTUm1HQzJiQy0ybVFlUV90dlpNY1ZQM1U1cXphcGtPcHNHVlhSSlF2cS1SREhOUHlJc2c4WFNKYnFVX0w4dl9BME93Y1dXZDJxSEwwa0s3UHByZVBsT3RyYkY0T2hRbzlsaGEwekNaVDlqS254V0dFYVJVS1RTa25XY3ROMVNSbkFCelN1OWhOb0xsaDRMVjhMRW5iaTBoRUU0QW1vZzdyY0dwMlNsS2dJS0pBVXdKZw?oc=5",
+      "date": "2026-07-22T12:40:26.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Stock Market Today: Dow, S&P 500, Nasdaq 100 Futures Fall As Chip Stocks Cool Down and Tesla, Alphabet Ge - Benzinga",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMitgJBVV95cUxOREExazM3R0xScTE4eVhlUlB2Q0wzUWpNM1BQMkNSQ2xVVDR4MFFOMjB4bktyRFJlT2gxNFY2Rll4QVk3cndqNlNLMFNhSE92UmVuT1MwYzZxelNsdmNnUUllMVcteTRYakRlMW9tWDJkb1FRbTZCcHoya2xwWH...",
+      "link": "https://news.google.com/rss/articles/CBMitgJBVV95cUxOREExazM3R0xScTE4eVhlUlB2Q0wzUWpNM1BQMkNSQ2xVVDR4MFFOMjB4bktyRFJlT2gxNFY2Rll4QVk3cndqNlNLMFNhSE92UmVuT1MwYzZxelNsdmNnUUllMVcteTRYakRlMW9tWDJkb1FRbTZCcHoya2xwWHhueDhZTFJoa240Ql9oNVR2XzNXb0xoVDhWcEtJZTRTOXJRb0x4cjR2bS15bThEUWk3Q0x3SS0tX25Mb2N1Z2RhdjBxMEZkZmJCWVhuc2FoLTg3di1uWk1zY1RHZjF3b1l2UWdJM2dydjhSbzhnT3IteDc0Mmp0MWFQWHlmUG5KT09aa2xkcFh6YUx1VXpGbG95UzYzakt4dm9jUjlQMWNtSzA3V09tWXVHMXExTnJTT3RZYjhTQW1B?oc=5",
+      "date": "2026-07-22T12:30:00.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Samran Nualma named Thailand’s next police chief",
+      "body": "Pol Gen Samran Nualma has been selected unanimously as Thailand&rsquo;s next national police chief, succeeding Pol Gen Kittharath Punpetch when he retires on Sept 30.",
+      "link": "https://www.bangkokpost.com/thailand/general/3290039/samran-nualma-named-thailands-next-police-chief",
+      "date": "2026-07-22T12:21:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "See How Houthis Put the Red Sea at Risk as an Alternative Oil Route",
+      "body": "Saudi Arabia has diverted huge amounts of oil to the Red Sea since the Iran war began, but now the Iranian-backed Houthi militants say that they intend to block that route.",
+      "link": "https://www.nytimes.com/2026/07/22/business/energy-environment/red-sea-saudi-arabia-houthis.html",
+      "date": "2026-07-22T12:17:51.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Trump’s New Trade Fights (and Deals)",
+      "body": "President Trump has resumed his approach of big threats against some trading partners and generous pacts with others. Experts see new risks.",
+      "link": "https://www.nytimes.com/2026/07/22/business/dealbook/trump-trade-saudi-canada.html",
+      "date": "2026-07-22T12:01:47.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "OpenAI says its AI went rogue and launched 'unprecedented' cyber-attack",
+      "body": "It is one of the first publicly disclosed cyber-attacks carried out by AI without direct human involvement.",
+      "link": "https://www.bbc.co.uk/news/articles/c3ek3gvdnj3o?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-07-22T11:40:11.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Airport Rail Link delays stretch into evening",
+      "body": "Services on the Airport Rail Link that connects Suvarnabhumi airport and inner Bangkok were still reduced to one train per hour on Wednesday evening after a derailment at the Khlong Tan depot.",
+      "link": "https://www.bangkokpost.com/thailand/general/3289907/airport-rail-link-delays-stretch-into-evening",
+      "date": "2026-07-22T11:30:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Inflation and Interest Rates' Outlook Ceded After U.S.-Iran Ceasefire. It Is Going Up Again As it Resumes - International Business Times",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMivAFBVV95cUxQQW5fT2IzckR6NkpwQkZCd0NIOXhFVDNyT1QtWU5qVkhpanRackZsNHJFNGpSaGp3YmYzUTllY2ZBSWRMVmZtcUwxSVRMZ21vQ05MTWhtdi1NaWFZLTVmVUJqSXB6eDFIeE5sNmJGUFU3b0VHT2NjRk9kNGRzQU...",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQQW5fT2IzckR6NkpwQkZCd0NIOXhFVDNyT1QtWU5qVkhpanRackZsNHJFNGpSaGp3YmYzUTllY2ZBSWRMVmZtcUwxSVRMZ21vQ05MTWhtdi1NaWFZLTVmVUJqSXB6eDFIeE5sNmJGUFU3b0VHT2NjRk9kNGRzQUpOenlNT25oT0Nza0xzRVNRbzdiTFNkTmFTNWxCZU5WbDJJMXF1M1FsRTBlVi1QYURDZUNyTXJBSFJlcm5VeQ?oc=5",
+      "date": "2026-07-22T10:46:01.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Some food prices have fallen – but inflation expected to rise from here",
+      "body": "June's fall in inflation will be welcomed by the new prime minister but analysts warn the fall is temporary.",
+      "link": "https://www.bbc.co.uk/news/articles/ckg4xj8j5vjo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-07-22T10:10:01.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "PM to sue over Senate collusion claim",
+      "body": "Prime Minister Anutin Charnvirakul has vowed to file a defamation lawsuit against the head of the election-monitoring group iLaw over allegations linking him and eight other senior Bhumjaithai Party figures to involvemen...",
+      "link": "https://www.bangkokpost.com/thailand/politics/3290012/pm-to-sue-over-senate-collusion-claim",
+      "date": "2026-07-22T09:15:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
     },
     {
       "title": "US Stock Market Today: S&P 500 Futures Rise On Rate Jitters And Tech Earnings - simplywall.st",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiywFBVV95cUxNVk01UmR3MzFLSVJUMFF4eTRJVUxidDN6d2ZtMG1PdDdHQV9vSzB5SUl1X0VSZnQ3Zlh4XzNMVkxtc0FFZzFzR284WmRhYnZLUlFISWVTU1N5T3lIczhUWmtVdkNvV3h5LVE4U2R5eXJmSkRONlo4MjM0SkdicF...",
       "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNVk01UmR3MzFLSVJUMFF4eTRJVUxidDN6d2ZtMG1PdDdHQV9vSzB5SUl1X0VSZnQ3Zlh4XzNMVkxtc0FFZzFzR284WmRhYnZLUlFISWVTU1N5T3lIczhUWmtVdkNvV3h5LVE4U2R5eXJmSkRONlo4MjM0SkdicFFmVERHMlpJUEpBZW1seE5PcVU3Xy01ZWZWNTM2eEZFdF9HUV9NLS15eVVoLTN6bzBBSjk3ek1mQXhna2RhX1ZMWGNKc0hsVmRvaU9iMNIB0AFBVV95cUxQVkhvQXBrbktzaG9uSU5icHEtOThwd29ncVRBTnFSSWliWnNWZ1JMa1M5aHRRVmxpbEpVMW5pdVdhVXljMDRLWFpuZ3BoUDgzaEFkeFBoYVhBTWNZam45QnkwbUM3YWNpS0gyUm9mOWQyZEZCQVZCVHUtSDYtWXhsZXdTUjJILW9pRWhWQjZqWEhZLWRBUUNuajlLRVhXVlpDYUF6Zk1BNGs1Tlg3LTZGdnY3dnRFdUhnbDYzU2MzMDNXekJZZ2NnSGw4S0VwNkpn?oc=5",
-      "date": "2026-07-22T08:37:48.000Z",
+      "date": "2026-07-22T09:06:07.000Z",
       "source": "Google News",
       "badge": "us"
     },
@@ -58,30 +162,6 @@
       "badge": "global"
     },
     {
-      "title": "Airport Rail Link service at one hour intervals",
-      "body": "The Airport Rail Link that connects Suvarnabhumi International Airport, Thailand&rsquo;s main airport, and inner Bangkok is operating only one train as its railway turntable broke down on Wednesday. The train is operatin...",
-      "link": "https://www.bangkokpost.com/thailand/general/3289907/airport-rail-link-service-at-one-hour-intervals",
-      "date": "2026-07-22T07:30:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Food prices have fallen – but inflation expected to rise from here",
-      "body": "June's fall in inflation will be welcomed by the new prime minister but analysts warn the fall is temporary.",
-      "link": "https://www.bbc.co.uk/news/articles/ckg4xj8j5vjo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-07-22T07:27:04.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
-      "title": "Land bridge plan revised, China-Singapore route accelerated",
-      "body": "Prime Minister Anutin Charnvirakul has ordered officials concerned to revise the land bridge project of the government while speeding up other transport projects linking Thailand, China, Laos, Malaysia and Singapore, acc...",
-      "link": "https://www.bangkokpost.com/thailand/general/3289959/land-bridge-plan-revised-chinasingapore-route-accelerated",
-      "date": "2026-07-22T07:08:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "Gold futures rise on commodity markets - Apa.az",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiiwFBVV95cUxNd2M0OThNXzJfM3U5RDRnYk16aWRPTXNMa3ZkU2VVak9pdzZWanhMVTczQ0J5TThjRkFNZjJPQmRfVkVxRkVzSU1NWElyeUlZLUlrUk14TmxqRDh0aFZ2TldoeFhLWU1iY3FBUkt4Q3k3OWh4QjZ5eXN3UnA3X2...",
       "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNd2M0OThNXzJfM3U5RDRnYk16aWRPTXNMa3ZkU2VVak9pdzZWanhMVTczQ0J5TThjRkFNZjJPQmRfVkVxRkVzSU1NWElyeUlZLUlrUk14TmxqRDh0aFZ2TldoeFhLWU1iY3FBUkt4Q3k3OWh4QjZ5eXN3UnA3X2M2REhhTHJNWG9obEUw?oc=5",
@@ -90,44 +170,12 @@
       "badge": "commodity"
     },
     {
-      "title": "Six Vietnamese detained for Tokyo-bound 'ice' in tamarind paste",
-      "body": "Six Vietnamese nationals were arrested at a Bangkok house as metropolitan police expanded investigations into Tokyo-bound crystal methamphetamine concealed in tamarind paste.",
-      "link": "https://www.bangkokpost.com/thailand/general/3289910/six-vietnamese-detained-for-tokyobound-ice-in-tamarind-paste",
-      "date": "2026-07-22T05:20:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Moving car bomb hits far South once again",
-      "body": "NARATHIWAT - Tanyong police station in Muang district of Narathiwat was hit by a moving car bomb Tuesday night in an attack authorities said was similar to two prior incidents in the region last year.",
-      "link": "https://www.bangkokpost.com/thailand/general/3289874/moving-car-bomb-hits-far-south-once-again",
-      "date": "2026-07-22T03:29:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Trump Plans to Impose Tariffs on Generic Drugs",
-      "body": "The administration has repeatedly said it will impose steep pharmaceutical tariffs but has not followed through on them.",
-      "link": "https://www.nytimes.com/2026/07/21/business/trump-tariffs-generic-drugs.html",
-      "date": "2026-07-22T01:24:53.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Gold has fallen over 20% since 2026’s peak but is it a ‘buy’? Here are the latest target prices - The Business Times",
+      "title": "Gold has fallen over 20% since 2026’s peak, but is it a ‘buy’? Here are the latest target prices - The Business Times",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMi2AFBVV95cUxQVF9OSUZFTW8wdXdWRUJ4UDNpejZLYlFDc29aOHIyZGJyVVh5bUY3QWJxOGE2SXo2ZXZpVVZoNEVIT3pkQ19wb0t6dUU1dWxIcElUNWZXcVd4bHdDZThBc2xHVUNfSU5UeUZObHhjRlNzbWFHNFh6V0JLSWUyOG...",
       "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQVF9OSUZFTW8wdXdWRUJ4UDNpejZLYlFDc29aOHIyZGJyVVh5bUY3QWJxOGE2SXo2ZXZpVVZoNEVIT3pkQ19wb0t6dUU1dWxIcElUNWZXcVd4bHdDZThBc2xHVUNfSU5UeUZObHhjRlNzbWFHNFh6V0JLSWUyOG9JeDdWTllGSjNiM2hHMFNnbUZmaDE0UXJiQVIyajdEblhPcUZYUkRXSS1tTFN0STR0RWR2b3BpeEg3bWM3R2UtZjQ5Rm15cndvOGtoanpMelU3eWZrVXJzR2U?oc=5",
       "date": "2026-07-22T00:00:00.000Z",
       "source": "Google News",
       "badge": "commodity"
-    },
-    {
-      "title": "'I can't afford to turn the oven on': 7.4m households struggling to buy essentials",
-      "body": "As Andy Burnham promises “breathing space” for households, millions are unable to buy items such as clothing, heating and food.",
-      "link": "https://www.bbc.co.uk/news/articles/cglj9685nj0o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-07-21T23:57:49.000Z",
-      "source": "BBC Business",
-      "badge": "global"
     },
     {
       "title": "Finance ministers & central bank governors from 191 countries to gather for Spring Meetings of IMF, World Bank - News On AIR",
@@ -143,14 +191,6 @@
       "link": "https://www.cnbc.com/2026/07/21/capital-one-earnings-were-good-enough-but-didnt-answer-our-biggest-question.html",
       "date": "2026-07-21T23:31:47.000Z",
       "source": "CNBC US",
-      "badge": "us"
-    },
-    {
-      "title": "Wall St ends higher on chip stocks recovery; earnings in focus - Reuters",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiowFBVV95cUxOUDZOb0lyeDNtSHo4bVQ4MlJ3RnhPUUR2WmxYT2xqaWRVNFFVNkNUdHBNUUIxWm5kZGpVaVc0SFZicnBmN1F0RWI3RXpqNUpCbjQ3RHhPZEJkTmlaeGI3YXp3MUlSSXN2RGdBZ3dfekVaQzQxbFJzeHhuNU9veG...",
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOUDZOb0lyeDNtSHo4bVQ4MlJ3RnhPUUR2WmxYT2xqaWRVNFFVNkNUdHBNUUIxWm5kZGpVaVc0SFZicnBmN1F0RWI3RXpqNUpCbjQ3RHhPZEJkTmlaeGI3YXp3MUlSSXN2RGdBZ3dfekVaQzQxbFJzeHhuNU9veGtKMzdidFZ1N2QwbFE3Z3B1VmxoY1VuTUFtU3Rfa09XMlRMWl9B?oc=5",
-      "date": "2026-07-21T23:24:18.000Z",
-      "source": "Google News",
       "badge": "us"
     },
     {
@@ -178,14 +218,6 @@
       "badge": "thai"
     },
     {
-      "title": "Finance minister vows to raise Thai competitiveness",
-      "body": "The government wants Thailand to break into the top 20 in a global competitiveness ranking over the next four years, rising from 26th.",
-      "link": "https://www.bangkokpost.com/business/general/3289495/finance-minister-vows-to-raise-thai-competitiveness",
-      "date": "2026-07-21T23:04:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "Super Micro surges 15% on new order and margin disclosure after SpaceX announcement",
       "body": "Many server makers are seeing faster growth as companies race to deploy artificial intelligence servers.",
       "link": "https://www.cnbc.com/2026/07/21/super-micro-stock-spacex-announcement.html",
@@ -202,10 +234,10 @@
       "badge": "global"
     },
     {
-      "title": "JPMorgan's Jamie Dimon made bearish call on treasury bond market. Many investors already acted on it - CNBC",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxObFUwRE5YZnYzWEttOVFiNE8zZjdKVjJhaG5fazduRUlUWkZ1U1M5NXhYMzdhMXZKeW5HNXdvakc1bXp1N1dZVTVvZ1RjVm9vbm5lS2twOXhvYVBWcm13cTRpbDBzaWhOZEh3YnIyYlMxVUtxQUc5TXZPTGpOTk...",
-      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxObFUwRE5YZnYzWEttOVFiNE8zZjdKVjJhaG5fazduRUlUWkZ1U1M5NXhYMzdhMXZKeW5HNXdvakc1bXp1N1dZVTVvZ1RjVm9vbm5lS2twOXhvYVBWcm13cTRpbDBzaWhOZEh3YnIyYlMxVUtxQUc5TXZPTGpOTkZxeEh3WFJZV1Bibk9PTTVB0gGTAUFVX3lxTE05Q0N6S1NYb1FHQ2lEUkJDeXhaelRaekV0Vy0yMENGVFRBcmtjT3ozOVdobmk3R1Jqc0lqMkg3bVBmWHhPa1RtV0hsVUZxY2RodUExM2doclFkWlNWeXZwbHZiak13Tk5PaEluLWZWZG9YNWpHUzIxbmJ6REQ3YzdhYkZRRlpNbUlDcm9kaUoxTzBUaw?oc=5",
-      "date": "2026-07-21T20:37:26.000Z",
+      "title": "Treasury Rates Today: July 21, 2026 - Forbes",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5\" target=\"_blank\">Treasury...",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5",
+      "date": "2026-07-21T20:24:00.000Z",
       "source": "Google News",
       "badge": "bond"
     },
@@ -218,28 +250,12 @@
       "badge": "us"
     },
     {
-      "title": "U.S. stocks inch up after investors assess strong earnings, higher oil - Seeking Alpha",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiigFBVV95cUxOVU96SnBRWmpVZ0pRSlU0Y1pyZGUyT2RPSmgtazlJMElyVTJkV1ZrZGF1SUZSOExMeTU2U1VzRHVkakpxRzhFR0ZjTWlHYTNvMXpHN2VPNzFkTUJ3a0NZYzU3dDYtQk1kU3lSZUROd2k3M3RLUnh0UVdQaXRMMW...",
-      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOVU96SnBRWmpVZ0pRSlU0Y1pyZGUyT2RPSmgtazlJMElyVTJkV1ZrZGF1SUZSOExMeTU2U1VzRHVkakpxRzhFR0ZjTWlHYTNvMXpHN2VPNzFkTUJ3a0NZYzU3dDYtQk1kU3lSZUROd2k3M3RLUnh0UVdQaXRMMWY3bDI5U3JudE5MOEE?oc=5",
-      "date": "2026-07-21T20:02:00.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
       "title": "Bets against SpaceX grow to 32% of float as Elon Musk warns short sellers won&apos;t survive",
       "body": "About 206 million SpaceX shares are now sold short, representing roughly 32% of the company's publicly tradable float, according to S3.",
       "link": "https://www.cnbc.com/2026/07/21/bets-against-spacex-grow-to-32percent-of-float-as-elon-musk-warns-short-sellers-wont-survive.html",
       "date": "2026-07-21T20:01:39.000Z",
       "source": "CNBC Markets",
       "badge": "global"
-    },
-    {
-      "title": "Bank of America CEO warns inflation will back Fed into a corner - thestreet.com",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMimwFBVV95cUxNMTJrZE02ZlNXN3FMTGlwNTJYSTV3YjJOcURxOHkwcmJIXzY5eWx6U1FBU2RqOVBIRXBmS1hzTElZSkRyeW5RRHVZdjFhTmlzU3Myb2R0NnkzdmRKaC1yenI0TlRtcEhPWmhhNXBDNXgyNHoxWDlaY0NiWFFwV2...",
-      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNMTJrZE02ZlNXN3FMTGlwNTJYSTV3YjJOcURxOHkwcmJIXzY5eWx6U1FBU2RqOVBIRXBmS1hzTElZSkRyeW5RRHVZdjFhTmlzU3Myb2R0NnkzdmRKaC1yenI0TlRtcEhPWmhhNXBDNXgyNHoxWDlaY0NiWFFwV25Dc2xjVl9udFdvMHZYNVl0Z1RnMzFBbEV1clQ4QQ?oc=5",
-      "date": "2026-07-21T16:46:51.000Z",
-      "source": "Google News",
-      "badge": "us"
     },
     {
       "title": "U.S. Dollar/Vietnam Dong (FOREX: USDVND) Quote - The Globe and Mail",
@@ -282,6 +298,14 @@
       "badge": "vietnam"
     },
     {
+      "title": "Treasury yields edge higher as investors map geopolitical risks - CNBC",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMigAFBVV95cUxOS1pfTkUxQVMzSUp1XzhBXzRYWUhzenZwX1NCNmVwMmtPc3hSaFhTOXdOVE10Vk50U0tVSU5PeGRhNTl0LVBWUE1VbFF1d1AwNmdnNXJPZXBRaTFOUnBRd29Wc1lOVGRyY002ZUY1TDZGaGpBTGJUdWZKVVVmRG...",
+      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOS1pfTkUxQVMzSUp1XzhBXzRYWUhzenZwX1NCNmVwMmtPc3hSaFhTOXdOVE10Vk50U0tVSU5PeGRhNTl0LVBWUE1VbFF1d1AwNmdnNXJPZXBRaTFOUnBRd29Wc1lOVGRyY002ZUY1TDZGaGpBTGJUdWZKVVVmRGZTWNIBhgFBVV95cUxOcWVOdTU5QkFKbTh0YUlYSzFNQmlNeEhuMDgxdVBwNEZvNFBuNktNcnh1N2hOemdJc29ValAxN2Ezb2JFZGFHS3RBd1pVQmhYXzY2REpyd0d0bDk4VjV5SF9ndERfeVktdkNtbEFqaDZ3b0xyQlVmODhKMDFwQ3hmQmVWZ0ExUQ?oc=5",
+      "date": "2026-07-21T08:25:56.000Z",
+      "source": "Google News",
+      "badge": "bond"
+    },
+    {
       "title": "USD/THB Nears 34: Why Is the Thai Baht So Weak in 2026? - EBC Financial Group",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMibkFVX3lxTE8tQ3RYejNKZDFlZVBaS054SkVqNC1ZTzJRay1SNVE5WEN1SDh6Z3p4aGdaVFgyNGdVZDVkaGZyVzBoYkJNTHNWcG9hakRLd2hTNUEtaldFdmZJMEEzZ2c0cS1tR2ZnbHMxaTgxUUJn?oc=5\" target=\"_blank\"...",
       "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE8tQ3RYejNKZDFlZVBaS054SkVqNC1ZTzJRay1SNVE5WEN1SDh6Z3p4aGdaVFgyNGdVZDVkaGZyVzBoYkJNTHNWcG9hakRLd2hTNUEtaldFdmZJMEEzZ2c0cS1tR2ZnbHMxaTgxUUJn?oc=5",
@@ -304,14 +328,6 @@
       "date": "2026-07-21T01:49:34.000Z",
       "source": "Google News",
       "badge": "china"
-    },
-    {
-      "title": "Stock market today: Dow, S&P 500, Nasdaq rally fizzles as chip stock momentum fades, oil rises - Yahoo Finance",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiqAFBVV95cUxPT2ZVWlFvSkNRM3pBSzN6Vy1scXBZQzNfUGZXenUzTHNSSWtTVURVVUk1S1RQYWxTVEJOb2t6WG1LOEFMVXNuVWVndUdYZnNfb21KSVdmT2tJQ1lRXzVuWVliX3YwLWk3VDVGdU9BMUJYR3YxM0xOSHlwUlgtRD...",
-      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPT2ZVWlFvSkNRM3pBSzN6Vy1scXBZQzNfUGZXenUzTHNSSWtTVURVVUk1S1RQYWxTVEJOb2t6WG1LOEFMVXNuVWVndUdYZnNfb21KSVdmT2tJQ1lRXzVuWVliX3YwLWk3VDVGdU9BMUJYR3YxM0xOSHlwUlgtRDB3cjEzdWJ4ejRneUpxM2ZsMGRDMDVTODdWTlNERERUaGc3R2E2cHNwaUQ?oc=5",
-      "date": "2026-07-20T22:14:59.000Z",
-      "source": "Google News",
-      "badge": "us"
     },
     {
       "title": "Ryanair says &apos;no shortage&apos; of travelers despite Iran war denting profit",
@@ -362,14 +378,6 @@
       "badge": "bond"
     },
     {
-      "title": "Elevated Treasury yields signal strong entry point for bond investors, FTSE Russell finds - InvestmentNews",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMi1gFBVV95cUxPM2JJU2o4U1FfS0tOSVNVUFA0aTFlN3lwUkJld1BtTVNZN2tGdHBHTzluU0htRE9XTFJFT2UybXVCOUxueGJiRGJaSGhwSVgtbTVnLTloMWFxQ2dSYlMtUDYzc1pJSUM4X3VROU9WczV4TkZmVFlEc0dtdHowZH...",
-      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPM2JJU2o4U1FfS0tOSVNVUFA0aTFlN3lwUkJld1BtTVNZN2tGdHBHTzluU0htRE9XTFJFT2UybXVCOUxueGJiRGJaSGhwSVgtbTVnLTloMWFxQ2dSYlMtUDYzc1pJSUM4X3VROU9WczV4TkZmVFlEc0dtdHowZHJWZXE2djBvOENQNkpzcWhVSzVQb0RGS3RzUXFKUnNtUnRlTlFLSVRSUE5GSWVYOGRBa2JGUTdVTjZzaXRXTEkzX29jYTJoRk0zYXVCaEJoc05lSHU1NGJB?oc=5",
-      "date": "2026-07-16T10:31:41.000Z",
-      "source": "Google News",
-      "badge": "bond"
-    },
-    {
       "title": "Commodity Markets Rotate in 2026 as Lithium and Oil Lead, Gold Cools - Crux Investor",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMipAFBVV95cUxQWXZPeE9rWVFvWWEwcGI1LWVBRWptYlZHYVlZbGlfeUhVZ043RU1aay1IeEJZRVZpSnlrVFZLMVZoWDVLYk02eEJxV0tPY0Z3YzNqM0lXbmdFQjIzY1p5bk9aeXNnLXBGc1dxQXdzOUlzb2RyTnBMN0hSUlBjVm...",
       "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQWXZPeE9rWVFvWWEwcGI1LWVBRWptYlZHYVlZbGlfeUhVZ043RU1aay1IeEJZRVZpSnlrVFZLMVZoWDVLYk02eEJxV0tPY0Z3YzNqM0lXbmdFQjIzY1p5bk9aeXNnLXBGc1dxQXdzOUlzb2RyTnBMN0hSUlBjVm11NHNHTVktWGRfVkRmQXVCU3UzQjZaS1lKaWVZM254b0V4Q05rZw?oc=5",
@@ -392,14 +400,6 @@
       "date": "2026-07-12T13:00:34.000Z",
       "source": "Google News",
       "badge": "vietnam"
-    },
-    {
-      "title": "Thai central bank rules out QE, interest rate hikes due to economic fragility - Thai PBS World",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxPYWgtQk1WNktmcFBzRE9PeHJMMTJleDVZelc4aGh4SVhmLXFUOHBHdlVlUTRFeEhmLTlZSFQxVnhPUnYyYVZObWdrS2dyQU94NlFaaDltSUxJd0RYQ3JqSkdjdjllQWNja3dmeEo4TnY2U01jOFl3QnFnemZzUl...",
-      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPYWgtQk1WNktmcFBzRE9PeHJMMTJleDVZelc4aGh4SVhmLXFUOHBHdlVlUTRFeEhmLTlZSFQxVnhPUnYyYVZObWdrS2dyQU94NlFaaDltSUxJd0RYQ3JqSkdjdjllQWNja3dmeEo4TnY2U01jOFl3QnFnemZzUldnWTc4bFFkVEdnemdQclF2eVN3YS0yZVpXTWhKRVYxdDlLLXdvZU1WVlMwU2RVeE5YUThuMll3VVJk?oc=5",
-      "date": "2026-07-11T10:23:11.000Z",
-      "source": "Google News",
-      "badge": "economic"
     }
   ]
 }
