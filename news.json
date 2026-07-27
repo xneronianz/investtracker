@@ -1,21 +1,77 @@
 {
-  "updated": "2026-07-27T10:40:37.580Z",
+  "updated": "2026-07-27T15:41:03.346Z",
   "items": [
     {
-      "title": "Businessman and philanthropist Sir Ian Wood dies aged 84",
-      "body": "The Aberdeen-based businessman turned his family's boat repair firm into an oil and gas engineering giant.",
-      "link": "https://www.bbc.co.uk/news/articles/ce3qv0p9105o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-07-27T10:33:08.000Z",
+      "title": "Even China’s A.I. Powerhouses Can’t Figure Out How to Profit Off A.I.",
+      "body": "Chinese A.I. models are gaining ground. But the companies behind them do not have a clear strategy to make money from that success.",
+      "link": "https://www.nytimes.com/2026/07/27/business/china-ai-alibaba-bytedance.html",
+      "date": "2026-07-27T15:35:31.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Oil price dives as US and Iran pause attacks",
+      "body": "The US says attacks on Iran have been halted to give \"talks some space\", raising hopes of a resolution to the conflict.",
+      "link": "https://www.bbc.co.uk/news/articles/clyj834jn5lo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-07-27T15:08:37.000Z",
       "source": "BBC Business",
       "badge": "global"
     },
     {
-      "title": "Chinese chipmaker shares surge nearly 470% in blockbuster stock market debut",
-      "body": "The company's shares soared by nearly 470% in its market debut, as the AI boom drives chip demand.",
-      "link": "https://www.bbc.co.uk/news/articles/c9q9w3x9qn2o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-07-27T10:19:36.000Z",
+      "title": "Why Restarting a Nuclear Power Plant Can Be Much Harder Than Expected",
+      "body": "The first U.S. attempt at reopening a shuttered reactor has been held back by run-down equipment and a lack of planning.",
+      "link": "https://www.nytimes.com/2026/07/27/business/energy-environment/nuclear-power-palisades-michigan.html",
+      "date": "2026-07-27T14:21:53.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Fed July Meeting Preview: Rate Hike Still Possible As Markets Await Impact on US Stocks, Dollar, and Gold - TradingKey",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMihAJBVV95cUxNa3RMOEg2RkdMMHVYQ2p2VERud3JUbDFCN2l4Z2EzLUtHcXlnbl82a3JqMU9KTHBTNGR1X09mSjlLaS1XRXBPb0xxbU5tdHVNeUxDV3JnQ1pUM1J5T2RUQVNOQ0JhSTUzZTlBYlNUOHROS3NZdFhOUlpjUGlDcj...",
+      "link": "https://news.google.com/rss/articles/CBMihAJBVV95cUxNa3RMOEg2RkdMMHVYQ2p2VERud3JUbDFCN2l4Z2EzLUtHcXlnbl82a3JqMU9KTHBTNGR1X09mSjlLaS1XRXBPb0xxbU5tdHVNeUxDV3JnQ1pUM1J5T2RUQVNOQ0JhSTUzZTlBYlNUOHROS3NZdFhOUlpjUGlDcjFZS21ZRjhuVEc1RDYtT3NwVmV6eFZSMi1JN0NoZTRzNkhvR3dKSkU5ZkMwazBHVll5SlhUOE5mdE1NV0tuWThEdkp1NllBeTcydTFLRGZ6ajJ3NjJNRmppdDBhXzFIbEFQQWhZcVlXRnBPc3pwVDFmR0tDUndlS2pfWGNIc0VVLVBsdzluNg?oc=5",
+      "date": "2026-07-27T13:41:34.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "How wildfires in France and Spain might affect your travel plans",
+      "body": "For those who have upcoming holidays to the affected regions, here is what you should know about how it might impact your plans.",
+      "link": "https://www.bbc.co.uk/news/articles/ce3qv0ggndno?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-07-27T13:21:49.000Z",
       "source": "BBC Business",
       "badge": "global"
+    },
+    {
+      "title": "Stock Market Today: S&P 500, Dow Jones, Nasdaq 100 Futures Rise as US-Iran Halt Retaliatory Strikes—Micro - Benzinga",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMijgJBVV95cUxQRXZqSjMwaEdaM0YxRWtDRHc2djhkbzlGWGhEOWxCRFZSNVl1SmJtaVlGbEZTdkF3S0RINlJHN3dGMGc2M3p1YVFVMUNRTEtmT2dOUTVsQkdZSFdZYUpETS1Gc1ZMN3kwUVJNRXkzbzRrREtVaEd2Z2VoS1ZKUH...",
+      "link": "https://news.google.com/rss/articles/CBMijgJBVV95cUxQRXZqSjMwaEdaM0YxRWtDRHc2djhkbzlGWGhEOWxCRFZSNVl1SmJtaVlGbEZTdkF3S0RINlJHN3dGMGc2M3p1YVFVMUNRTEtmT2dOUTVsQkdZSFdZYUpETS1Gc1ZMN3kwUVJNRXkzbzRrREtVaEd2Z2VoS1ZKUHRVV3R6blVzMEFyclR0bG05REpLYjFOWXMwRzNKcjZiRGRwcVhCVUVjTkhuTkJkRUZTRjNTTF94UnVsZjJZdWlPQ2Q4T3Yya3pwSTJ4VnJFZGxjdy1yRk1HZm0xMHpSU1hUM1dhNWFCTnd6a0l4S096aV9wWmduaFM0djJnRC15VWxIRUswU193b1dFQzktblE?oc=5",
+      "date": "2026-07-27T12:57:00.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "The A.I. Debate That’s Driving a Wedge Through Big Tech",
+      "body": "Investors and policymakers must contend with the competing camps that view open and closed artificial intelligence models as key to the sector’s future.",
+      "link": "https://www.nytimes.com/2026/07/27/business/dealbook/open-closed-ai-debate.html",
+      "date": "2026-07-27T12:18:30.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Federal Reserve is likely to hold interest rates steady. Here's what that means for consumers - CNBC",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMibEFVX3lxTE5kR3lXVW0teFY1aGxteXlZRzRvVlJBbDVpQ2MxbHkzSThtY0txbkJHNmdLSmctRUJVcDJlUXJVcHlNdDhKcHNrNjVZVXhvSzdxanN1eWZaMmo2NXRnSHJrVWlFNHFPVEdodnVlTdIBckFVX3lxTE80TE5EaWozeE...",
+      "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5kR3lXVW0teFY1aGxteXlZRzRvVlJBbDVpQ2MxbHkzSThtY0txbkJHNmdLSmctRUJVcDJlUXJVcHlNdDhKcHNrNjVZVXhvSzdxanN1eWZaMmo2NXRnSHJrVWlFNHFPVEdodnVlTdIBckFVX3lxTE80TE5EaWozeEYtMVY2ZEZMb214S21qMXlNZHpIQ05nMmNCVnVtaXBWMDZEVVdwaTdEYm5iYlRHZE9HbmoxV2xlalR3OUhqbFhrbFUyeVFNR1ExOXZJWkJfTVVmS2pnOC1BaEZoUzI3QXBQQQ?oc=5",
+      "date": "2026-07-27T12:15:01.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "TSD investor data breach cue for SEC action",
+      "body": "The Securities and Exchange Commission (SEC) is monitoring Thailand Securities Depository Co (TSD) after the central securities depository detected unauthorised access to personal data stored on its TSD Investor Portal.",
+      "link": "https://www.bangkokpost.com/business/investment/3292494/tsd-investor-data-breach-cue-for-sec-action",
+      "date": "2026-07-27T10:47:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
     },
     {
       "title": "Two senior officials face charges in civil service exam rigging scandal",
@@ -26,42 +82,18 @@
       "badge": "thai"
     },
     {
-      "title": "Stock Market Today: S&P 500, Dow Jones Futures Rise as US-Iran Halt Retaliatory Strikes—Microchip Technol - Benzinga",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMijgJBVV95cUxQRXZqSjMwaEdaM0YxRWtDRHc2djhkbzlGWGhEOWxCRFZSNVl1SmJtaVlGbEZTdkF3S0RINlJHN3dGMGc2M3p1YVFVMUNRTEtmT2dOUTVsQkdZSFdZYUpETS1Gc1ZMN3kwUVJNRXkzbzRrREtVaEd2Z2VoS1ZKUH...",
-      "link": "https://news.google.com/rss/articles/CBMijgJBVV95cUxQRXZqSjMwaEdaM0YxRWtDRHc2djhkbzlGWGhEOWxCRFZSNVl1SmJtaVlGbEZTdkF3S0RINlJHN3dGMGc2M3p1YVFVMUNRTEtmT2dOUTVsQkdZSFdZYUpETS1Gc1ZMN3kwUVJNRXkzbzRrREtVaEd2Z2VoS1ZKUHRVV3R6blVzMEFyclR0bG05REpLYjFOWXMwRzNKcjZiRGRwcVhCVUVjTkhuTkJkRUZTRjNTTF94UnVsZjJZdWlPQ2Q4T3Yya3pwSTJ4VnJFZGxjdy1yRk1HZm0xMHpSU1hUM1dhNWFCTnd6a0l4S096aV9wWmduaFM0djJnRC15VWxIRUswU193b1dFQzktblE?oc=5",
-      "date": "2026-07-27T09:35:49.000Z",
+      "title": "JCI and rupiah weaken as investors fret over BI leadership transition - IDNFinancials",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMirwFBVV95cUxNZ2dSMTg2a3A5ZGd1VzZRdFNLWmhVVDMyeElTNF9UdmhhU0xoa2trbDd4UHF3b01HWU1VRDlwcV9IZWdUb1hnMGRaYjhxY3dXaG5iZlViLUxfd0R3eVB0QjB2ZUl0R1NJcmwyM1FvUm9YRXp4SDRkRTZwbDhtUX...",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNZ2dSMTg2a3A5ZGd1VzZRdFNLWmhVVDMyeElTNF9UdmhhU0xoa2trbDd4UHF3b01HWU1VRDlwcV9IZWdUb1hnMGRaYjhxY3dXaG5iZlViLUxfd0R3eVB0QjB2ZUl0R1NJcmwyM1FvUm9YRXp4SDRkRTZwbDhtUXliV3RKWHpqc09fNjhES3ItS3JYdDh2dVhUT1dQQXA2cDJOa2l0S2RQWFBrTW1Vd1R3?oc=5",
+      "date": "2026-07-27T09:45:00.000Z",
       "source": "Google News",
-      "badge": "us"
-    },
-    {
-      "title": "The Fed’s New Chairman Faces His Biggest Test Yet",
-      "body": "Kevin M. Warsh, who has said the Federal Reserve has “no tolerance” for elevated inflation, must decide whether he wants to push for an interest-rate increase at this week’s policy meeting.",
-      "link": "https://www.nytimes.com/2026/07/27/business/the-feds-new-chairman-faces-his-biggest-test-yet.html",
-      "date": "2026-07-27T09:13:52.000Z",
-      "source": "NY Times",
-      "badge": "global"
+      "badge": "thai"
     },
     {
       "title": "5 New Hotels in Vintage Buildings",
       "body": "From a restored warehouse in Seattle to a former prison in Nara, Japan, these accommodations offer intriguing surroundings with modern comforts.",
       "link": "https://www.nytimes.com/2026/07/27/travel/new-hotels-historical-buildings.html",
       "date": "2026-07-27T09:06:34.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "5 Things to Know About Meta’s Giant Data Center in Louisiana",
-      "body": "The road to the giant project was paved with secret meetings and an ever-expanding building plan.",
-      "link": "https://www.nytimes.com/2026/07/27/business/5-things-to-know-about-metas-giant-data-center-in-louisiana.html",
-      "date": "2026-07-27T09:03:30.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Paramount is Betting Johnny Depp Can Make a Comeback With ‘Ebenezer: A Christmas Carol’",
-      "body": "Paramount is betting that audiences will re-embrace the star a decade after allegations of domestic abuse and a defamation trial.",
-      "link": "https://www.nytimes.com/2026/07/27/movies/johnny-depp-ebenezer-a-christmas-carol-paramount.html",
-      "date": "2026-07-27T09:00:41.000Z",
       "source": "NY Times",
       "badge": "global"
     },
@@ -114,20 +146,20 @@
       "badge": "thai"
     },
     {
-      "title": "Centara Reserve Krabi opens at year-end",
-      "body": "Centara Hotels &amp; Resorts has announced the launch of Centara Reserve Krabi, set to open in December 2026 following a multi-billion-baht development.",
-      "link": "https://www.bangkokpost.com/business/general/3292274/centara-reserve-krabi-opens-at-yearend",
-      "date": "2026-07-27T01:14:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "Would you choose £50,000 over the chance of £1m?",
       "body": "The vast majority of people - particularly women - answer a survey saying they'd take the certainty over chance.",
       "link": "https://www.bbc.co.uk/news/articles/cn0njd4e2evo?at_medium=RSS&amp;at_campaign=rss",
       "date": "2026-07-26T23:11:36.000Z",
       "source": "BBC Business",
       "badge": "global"
+    },
+    {
+      "title": "Finance ministers & central bank governors from 191 countries to gather for Spring Meetings of IMF, World Bank - News On AIR",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxOd3pCSk13R2w3RU5id2M4R1Z4Z18xZjNYOURITFA0WVQ0dlVqZHU4cC15eDhROWNUS2FRbVRMeGVmeC1oYjAtejU0eFRXdEtoNV9Ub25kYWpOQVJHbWp2aHNJaE5ZZHN2RnB2TENCMXJpRG9TU0R3R1VXeWEzMW...",
+      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOd3pCSk13R2w3RU5id2M4R1Z4Z18xZjNYOURITFA0WVQ0dlVqZHU4cC15eDhROWNUS2FRbVRMeGVmeC1oYjAtejU0eFRXdEtoNV9Ub25kYWpOQVJHbWp2aHNJaE5ZZHN2RnB2TENCMXJpRG9TU0R3R1VXeWEzMWFNWktfZjRnZ3lqM0l3aXB2dnRzQ1NGbkRPN0FwNGtlbklGTHdxanBNZG10bUdsbE1lRGlSVkxRZ3lsUkhQMGxHblNMb1VwWUVOWTN6dE5vQQ?oc=5",
+      "date": "2026-07-26T21:17:30.000Z",
+      "source": "Google News",
+      "badge": "economic"
     },
     {
       "title": "Rising inflation turns July Fed meeting into rate-hike showdown - thestreet.com",
@@ -166,6 +198,14 @@
       "body": "<a href=\"https://news.google.com/rss/articles/CBMipgFBVV95cUxPRVFoS0pPSjU4OTY3YzBVSFdHN3kzZWd2UjZ0WGRiX0pEUXhzNnZ1UjU2eDBnN3hlZHdhWnJvSWhEMEpJbUVhM01ETXdrbTFkSGVoX2ktUVVhckI5Qmlha2wzcDZmbkZmc0dZeGhnb0tYZW5RS29tUGlYWU5sal...",
       "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPRVFoS0pPSjU4OTY3YzBVSFdHN3kzZWd2UjZ0WGRiX0pEUXhzNnZ1UjU2eDBnN3hlZHdhWnJvSWhEMEpJbUVhM01ETXdrbTFkSGVoX2ktUVVhckI5Qmlha2wzcDZmbkZmc0dZeGhnb0tYZW5RS29tUGlYWU5salVBOFRkYmQ2enhOcktIYmx5UHBUNjlVSUF5b3RyTDgwS0NvVmlJQ0hn?oc=5",
       "date": "2026-07-24T22:32:28.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "The New York Stock Exchange | NYSE - NYSE",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiP0FVX3lxTE93UWVlU3g1TVNpdTNEcjI2Yk9kSHU2Tnh5Y0stVFBGRWVkLW9wbU1EbHhQaHdIOE56d2V5NXVhSQ?oc=5\" target=\"_blank\">The New York Stock Exchange | NYSE</a>  <font color=\"#6f6f6f\"...",
+      "link": "https://news.google.com/rss/articles/CBMiP0FVX3lxTE93UWVlU3g1TVNpdTNEcjI2Yk9kSHU2Tnh5Y0stVFBGRWVkLW9wbU1EbHhQaHdIOE56d2V5NXVhSQ?oc=5",
+      "date": "2026-07-24T22:00:00.000Z",
       "source": "Google News",
       "badge": "us"
     },
@@ -242,14 +282,6 @@
       "badge": "thai"
     },
     {
-      "title": "How Is the Economy Doing Right Now? - NerdWallet",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMibkFVX3lxTE1nRU1VZTZjeXA1TTdRU1g5d1Zha0RvU1phVU1LaGIwVmN6Wk5wTk5WRG5fTHMxZUZCZkdrb0oyVk1DU1VhM05Felp2WXNmbHktdzEwSTNYOTlTWmNtMmYyMjV6RkFTYUYwSVEtRWZn?oc=5\" target=\"_blank\"...",
-      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1nRU1VZTZjeXA1TTdRU1g5d1Zha0RvU1phVU1LaGIwVmN6Wk5wTk5WRG5fTHMxZUZCZkdrb0oyVk1DU1VhM05Felp2WXNmbHktdzEwSTNYOTlTWmNtMmYyMjV6RkFTYUYwSVEtRWZn?oc=5",
-      "date": "2026-07-24T07:00:00.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
       "title": "Treasury Yields Snapshot: July 24, 2026 - Advisor Perspectives",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxPZlFoNXZlbnJwYUN4R2NnUVJBcE9DMHVNbkZ0V0F5ZC1DTW4wQ0xUbUdrNmZvLWVLZHJyUDdQcXJkUDZ4bWpzakJxaHRtN3lqd0gzTC1EODdBaEQ3Z2lXSUlZLWZfQkZtQXItVmUtZXB4YXUzMXUzRzlnU3NscG...",
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPZlFoNXZlbnJwYUN4R2NnUVJBcE9DMHVNbkZ0V0F5ZC1DTW4wQ0xUbUdrNmZvLWVLZHJyUDdQcXJkUDZ4bWpzakJxaHRtN3lqd0gzTC1EODdBaEQ3Z2lXSUlZLWZfQkZtQXItVmUtZXB4YXUzMXUzRzlnU3NscGlJX0s1TWU4b01PVF94alEtNzBZRnlEeS1ZVUdOMnRBVVlp?oc=5",
@@ -290,14 +322,6 @@
       "badge": "bond"
     },
     {
-      "title": "Wall Street hits a record as S&P 500 continues its two-week rally - Investment Executive",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMixgFBVV95cUxPZk5oQkVDd1lwMW9uWDNoTDhJZy1EcGM3SHh4TElaeWotaWxrajZxV0FfUlEyd3hsWmJzNy1nSDRIeTBwcHYzWVFmMUl4bU4xdVRPejhJT2xvaU93cXl3OWZhVHlPbjR5M2NXUkxrV3hFWGp3cHNWNW9CSXk5V1...",
-      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPZk5oQkVDd1lwMW9uWDNoTDhJZy1EcGM3SHh4TElaeWotaWxrajZxV0FfUlEyd3hsWmJzNy1nSDRIeTBwcHYzWVFmMUl4bU4xdVRPejhJT2xvaU93cXl3OWZhVHlPbjR5M2NXUkxrV3hFWGp3cHNWNW9CSXk5V1NFNHVycG54cXI0OWFIRmxIc2daVnBfVXpZclhKZVlRSE9od1JGLVRBZThMNldYXzBuaTBEN2NnOERoYTUtcld1eVM1NDU1Qmc?oc=5",
-      "date": "2026-07-23T07:00:00.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
       "title": "30-year Treasury yields stick above 5% - marketplace.org",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiqgFBVV95cUxPR09FbUdJSUhucGRsalo3eEd5aVgtd2paTTJqVlUwSUpLUUNvc0o0Q29FbWVQNEdLS0hXTC1FUUlmSDRhUDdaUDcxdmozTU92b1FGbGtBNkNacGs0NzhWajdKQnBsaVR0czE0Ym9WNC1pZzFkSW84UXF5TWlzYT...",
       "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPR09FbUdJSUhucGRsalo3eEd5aVgtd2paTTJqVlUwSUpLUUNvc0o0Q29FbWVQNEdLS0hXTC1FUUlmSDRhUDdaUDcxdmozTU92b1FGbGtBNkNacGs0NzhWajdKQnBsaVR0czE0Ym9WNC1pZzFkSW84UXF5TWlzYTZiRVlqWHNvME5MMTBabUlUcE1mbVd0SDE0V1o3MGFHaUhuT21hS1UwdXVZZw?oc=5",
@@ -314,15 +338,7 @@
       "badge": "em"
     },
     {
-      "title": "Omio raises €8.7 million strategic investment for Asian expansion - EU-Startups",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMipAFBVV95cUxORU1LYWo1aW9pZEVqMGJWQTRSV0dlLVFIdVhKLXVhV3A5SUM3UElidmpTMUxxb1FZM0J1SDZkSHhnS2FjN0g1MGg4OFhnZmhHWGtoV291QTAyRVdrbmFsbmVZdXJFVV9OQWpzTXcyaElpMkhCUUNzaUJObjdwS2...",
-      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxORU1LYWo1aW9pZEVqMGJWQTRSV0dlLVFIdVhKLXVhV3A5SUM3UElidmpTMUxxb1FZM0J1SDZkSHhnS2FjN0g1MGg4OFhnZmhHWGtoV291QTAyRVdrbmFsbmVZdXJFVV9OQWpzTXcyaElpMkhCUUNzaUJObjdwS2R1WWpkZnZvQi1xMFdMZlRrQTlWOEYwMHZJMG43VnZSU3hPWHJtbQ?oc=5",
-      "date": "2026-07-21T11:36:16.000Z",
-      "source": "Google News",
-      "badge": "em"
-    },
-    {
-      "title": "The Commodities Feed: Oil stabilises despite Houthis’ Red Sea threat - ING Think",
+      "title": "The Commodities Feed: Oil stabilises despite Houthis��� Red Sea threat - ING Think",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMipgFBVV95cUxQME9DTjFvbVJicWFiaVU4NVI3VUprV2wxNUZMUjBvQXJWTFZJbGlQVEZvSmlDS2JtVmVFcE9na2M1dUJVMXRDNzdvUHluVTVuWTFSNUNlMkZ6cl9XMVpnUllVZUNacVhLY18yZGc2NW9hRm1Sa3IwcmRJcFpaQy...",
       "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQME9DTjFvbVJicWFiaVU4NVI3VUprV2wxNUZMUjBvQXJWTFZJbGlQVEZvSmlDS2JtVmVFcE9na2M1dUJVMXRDNzdvUHluVTVuWTFSNUNlMkZ6cl9XMVpnUllVZUNacVhLY18yZGc2NW9hRm1Sa3IwcmRJcFpaQy12T2NMRnFvTjJFNGk5M0dHUkNSRkJSSHF1MnYyb3dtUkE3OEltYTZn?oc=5",
       "date": "2026-07-21T02:40:57.000Z",
@@ -336,14 +352,6 @@
       "date": "2026-07-17T10:22:00.000Z",
       "source": "Google News",
       "badge": "bond"
-    },
-    {
-      "title": "Cooler Inflation May Not Be Enough to Stave Off Fed Rate Increases - The New York Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMinAFBVV95cUxQdWEtaWpPWjlNUjVUOHZWV21TazFJX1pIa2hVeTBLOEg2VExUeHlha3ZQdWtGZ0d3bDFQdlE0ZzhYdHliMHdsd29RRUFqY0hTeTlsWGhrTjgxYUR4YWRVTDkwcUhUYmNSSW5TNm5mRko5aHZpSzFRcno5dW1BaG...",
-      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQdWEtaWpPWjlNUjVUOHZWV21TazFJX1pIa2hVeTBLOEg2VExUeHlha3ZQdWtGZ0d3bDFQdlE0ZzhYdHliMHdsd29RRUFqY0hTeTlsWGhrTjgxYUR4YWRVTDkwcUhUYmNSSW5TNm5mRko5aHZpSzFRcno5dW1BaGNkaXg4YzR2VnlleTFZbkZwVW9TRnNEU0dxRThHN2I?oc=5",
-      "date": "2026-07-17T07:00:00.000Z",
-      "source": "Google News",
-      "badge": "us"
     },
     {
       "title": "Emerging Markets Without the China Drag: Up 38% While Broad EM Lagged - 24/7 Wall St.",
@@ -378,25 +386,17 @@
       "badge": "commodity"
     },
     {
-      "title": "Renewables are now the clear solution to Asia’s energy trilemma - Institute for Energy Economics and Financial Analysis (IEEFA)",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiiwFBVV95cUxNcm01NFBGWnVRUXJFTFhFdDFmblRJSGtmaWdEZ1JiZWFHQkJEV1E1UnJBa0FNT0pxUTNxQ1ZxY0FqOVpmbkhYMkRQSUQtWEJZejJpRTJyY25adnVPV1FsMkExTldNZG5NeDFHMGRyRk1uNkc2SjFWUml2RGJhQm...",
-      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNcm01NFBGWnVRUXJFTFhFdDFmblRJSGtmaWdEZ1JiZWFHQkJEV1E1UnJBa0FNT0pxUTNxQ1ZxY0FqOVpmbkhYMkRQSUQtWEJZejJpRTJyY25adnVPV1FsMkExTldNZG5NeDFHMGRyRk1uNkc2SjFWUml2RGJhQmtSYlRBaW8xa0lxTUxr?oc=5",
-      "date": "2026-07-09T07:12:28.000Z",
-      "source": "Google News",
-      "badge": "em"
-    },
-    {
-      "title": "Economic Forecasts: Asian Development Outlook July 2026 - Asian Development Bank",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hU3BfT0hBXzZlVnFBeFZ5MUZBNmZ2OFI1Skw4Zk05dFhhLU1RalBJVW1CM21kaElnR0x1d3BWd1hRcEJIeGd1SmRyUno0YkVyQVNsNHNwOS1Udw?oc=5\" target=\"_blank\">Economic Forecasts: Asian...",
-      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hU3BfT0hBXzZlVnFBeFZ5MUZBNmZ2OFI1Skw4Zk05dFhhLU1RalBJVW1CM21kaElnR0x1d3BWd1hRcEJIeGd1SmRyUno0YkVyQVNsNHNwOS1Udw?oc=5",
-      "date": "2026-07-08T17:27:07.000Z",
-      "source": "Google News",
-      "badge": "em"
-    },
-    {
       "title": "Press Briefing Transcript: World Economic Outlook (WEO) Update, July 8, 2026 - International Monetary Fund | IMF",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMinwFBVV95cUxOMUZJd2J1RDhuMTUyblAyazFHSldDVWJMOGhJTjg0SUt0ZEVIQ1FMNnRxdWhYbThBYk9QMFFNZTF0MnRFc3FqUG91MElaaU5YWGN0WWN6RDdVbXFDaHZUdHUtR2k0LUdacHF4S3dIcVZtQklVRmJVZDFTd0xka1...",
       "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMUZJd2J1RDhuMTUyblAyazFHSldDVWJMOGhJTjg0SUt0ZEVIQ1FMNnRxdWhYbThBYk9QMFFNZTF0MnRFc3FqUG91MElaaU5YWGN0WWN6RDdVbXFDaHZUdHUtR2k0LUdacHF4S3dIcVZtQklVRmJVZDFTd0xka1N2aThKREpibzU3R0xPUjlObzRKUjhFU1dhRlZPOHJmbnM?oc=5",
+      "date": "2026-07-08T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "economic"
+    },
+    {
+      "title": "Global Economy, Hit by Iran War and Inflation, Faces Sharp Slowdown - The New York Times",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMijAFBVV95cUxQMktxdXlJWExWLTFHUkkzY25IRzdfM3ZvNE5XLWlLdzdxMGdZVWRhMUhjaUwzRjdwcGpVMFp6MkZYMGtwTzVSOG00Ml9IVV93QjR4Tm80cG9xdC1LdHFJME9XOG1odnRsQU15bUtqeEFoN1VEeXE4VGlncHlLWk...",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQMktxdXlJWExWLTFHUkkzY25IRzdfM3ZvNE5XLWlLdzdxMGdZVWRhMUhjaUwzRjdwcGpVMFp6MkZYMGtwTzVSOG00Ml9IVV93QjR4Tm80cG9xdC1LdHFJME9XOG1odnRsQU15bUtqeEFoN1VEeXE4VGlncHlLWkUzR0g5LWFQNkx6VG51MA?oc=5",
       "date": "2026-07-08T07:00:00.000Z",
       "source": "Google News",
       "badge": "economic"
