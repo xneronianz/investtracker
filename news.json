@@ -1,6 +1,62 @@
 {
-  "updated": "2026-08-02T04:21:53.519Z",
+  "updated": "2026-08-02T09:07:18.318Z",
   "items": [
+    {
+      "title": "Trump, Paul Weiss and the Capitulation of Big Law: 5 Takeaways",
+      "body": "The law firm Paul Weiss led the legal resistance against President Trump. Then it led a sudden retreat across the legal industry. A Times investigation examined how it caved to White House pressure.",
+      "link": "https://www.nytimes.com/2026/08/02/us/politics/trump-paul-weiss-takeaways.html",
+      "date": "2026-08-02T09:01:05.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "More Young College Graduates Are Living At Home. Is That a Bad Thing?",
+      "body": "More young adults are living with their parents. The development suggests that they face a weak job market, but also that fewer face stigma in returning to the roost.",
+      "link": "https://www.nytimes.com/2026/08/02/business/college-graduates-living-at-home.html",
+      "date": "2026-08-02T09:00:53.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "The Ultra-Rich Are Moving to Miami, and Want Their Money Managers There, Too",
+      "body": "Tax incentives, among other benefits, have drawn the ultrawealthy to the city. And they need space for the firms that manage their money.",
+      "link": "https://www.nytimes.com/2026/08/02/business/family-offices-miami.html",
+      "date": "2026-08-02T09:00:40.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "How a Top Law Firm Went From Standing Up to Trump to Bending the Knee",
+      "body": "Paul Weiss was a progressive stalwart for decades and led the legal resistance against President Trump in his first term. Then it surrendered without a fight. This is the inside story of its transformation.",
+      "link": "https://www.nytimes.com/2026/08/02/us/politics/paul-weiss-trump.html",
+      "date": "2026-08-02T09:00:28.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Alleged gunman ‘took his own life’ after temple murder",
+      "body": "A man is believed to have killed himself in a rented flat under siege by police after allegedly shooting another man dead and wounding two others at a temple in Bangkok.",
+      "link": "https://www.bangkokpost.com/thailand/general/3295329/alleged-gunman-took-his-own-life-after-temple-murder",
+      "date": "2026-08-02T04:03:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Two severely injured in pickup plunge from elevated expressway",
+      "body": "A man and a girl were seriously injured when their pickup truck crashed through a barrier  and plummeted from an elevated expressway in Ratchathewi district, Bangkok, early Sunday morning.",
+      "link": "https://www.bangkokpost.com/thailand/general/3295297/two-severely-injured-in-pickup-plunge-from-elevated-expressway",
+      "date": "2026-08-02T01:43:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Cabinet backs faster removal of foreigners",
+      "body": "A cabinet-backed draft regulation will allow authorities to remove foreigners whose conduct is deemed incompatible with Thai morals and social norms, Deputy Prime Minister for Legal Affairs Pakorn Nilprapunt said.",
+      "link": "https://www.bangkokpost.com/thailand/general/3295235/cabinet-backs-faster-removal-of-foreigners",
+      "date": "2026-08-01T22:16:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
     {
       "title": "Sadao crossing upgrades to drive growth",
       "body": "SONGKHLA: The Sadao Border Checkpoint is again set to handle more than six million travellers this year as authorities seek to expand cross-border trade and improve links with Malaysia, visiting senators said.",
@@ -10,43 +66,11 @@
       "badge": "thai"
     },
     {
-      "title": "Super El Niño to arrive in Thailand next year",
-      "body": "Thailand is unlikely to escape the impact of a Super El Ni&ntilde;o expected to hit the country in October and last through the early part of the 2027 rainy season, affecting crops, rice plantations and water consumption...",
-      "link": "https://www.bangkokpost.com/thailand/general/3295280/super-el-niño-to-arrive-in-thailand-next-year",
-      "date": "2026-08-01T21:37:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Anutin vows justice over murders",
-      "body": "Prime Minister Anutin Charnvirakul has expressed condolences to the family of two Russian siblings killed in a high-profile murder case and apologised to Russian tourists and the Russian people over the incident.",
-      "link": "https://www.bangkokpost.com/thailand/general/3295070/anutin-vows-justice-over-murders",
-      "date": "2026-08-01T21:21:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "Goldman traders are on pace for a record year. A close-up look at how they&apos;re doing it",
       "body": "In a new interview with CNBC, a Goldman exec breaks down what's driving stocks, where markets are headed, and how the bank’s equities desk fuels its growth.",
       "link": "https://www.cnbc.com/2026/08/01/goldman-traders-are-on-pace-for-a-record-year-a-close-up-look-at-how-theyre-doing-it.html",
       "date": "2026-08-01T20:22:15.000Z",
       "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "‘Spider-Man: Brand New Day’ Heads for $875 Million Opening at Global Box Office",
-      "body": "The movie, the 11th big-budget Spider-Man movie since 2002, was on pace to have one of the biggest domestic first weekends ever.",
-      "link": "https://www.nytimes.com/2026/08/01/business/media/spider-man-box-office-superhero.html",
-      "date": "2026-08-01T20:00:51.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "The High-Stakes Battle for Invisible Real Estate in Space",
-      "body": "As radio spectrum becomes more valuable, companies like SpaceX are jostling alongside governments to control more of it.",
-      "link": "https://www.nytimes.com/2026/08/01/business/dealbook/spacex-spectrum-battle.html",
-      "date": "2026-08-01T13:43:04.000Z",
-      "source": "NY Times",
       "badge": "global"
     },
     {
@@ -63,38 +87,6 @@
       "link": "https://www.cnbc.com/2026/08/01/from-a-fed-decision-to-big-tech-earnings-what-drove-last-weeks-volatile-market.html",
       "date": "2026-08-01T12:16:13.000Z",
       "source": "CNBC US",
-      "badge": "us"
-    },
-    {
-      "title": "Wat Pho: Beyond the Reclining Buddha",
-      "body": "Most visitors to Wat Pho come for one thing: the 46-metre-long, gold-plated Reclining Buddha. Its massive spectacle never fails to impress, but beyond the temple&rsquo;s most photographed landmark lie centuries of histor...",
-      "link": "https://www.bangkokpost.com/life/travel/3294999/wat-pho-beyond-the-reclining-buddha",
-      "date": "2026-08-01T09:48:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "The Fight Over the World’s Oldest Bank",
-      "body": "Founded in 1472, Banca Monte dei Paschi di Siena has survived wars, pandemics and scandals. But a hostile takeover bid has Tuscans on edge.",
-      "link": "https://www.nytimes.com/2026/08/01/business/dealbook/italy-oldest-bank-takeover-battle.html",
-      "date": "2026-08-01T09:43:00.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Is A.I. ‘Scheming’ Against Us?",
-      "body": "Researchers are sounding the alarm on sneaky artificial intelligence models that stray from humans’ directions to do their own thing.",
-      "link": "https://www.nytimes.com/2026/08/01/business/ai-scheming.html",
-      "date": "2026-08-01T09:01:46.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Trump wanted interest rate cuts to be 'Rocket Fuel' for the economy. He is losing that fight so far - ABC News - Breaking News, Latest News and Videos",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMimgFBVV95cUxQdnVkTm1TbUFoLTdFOC0ySHQtbExkcnRWZmRQQ25yWWU2WGJBRXdYeVB3MUY0OGRhbENpdmJ6VkRpT0dXZW5mLXVBRlNnVlRPaG1LVnl0cDdJT01McDF3YjBvU0pCNmZNdGI5THdFbGsyZVY5SUVOTFdEd1Y4Nl...",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQdnVkTm1TbUFoLTdFOC0ySHQtbExkcnRWZmRQQ25yWWU2WGJBRXdYeVB3MUY0OGRhbENpdmJ6VkRpT0dXZW5mLXVBRlNnVlRPaG1LVnl0cDdJT01McDF3YjBvU0pCNmZNdGI5THdFbGsyZVY5SUVOTFdEd1Y4NlFjR0hsNEhVcnRwTkpKbGoyeHB0UXQ5WWxqSFN30gGfAUFVX3lxTE5pQ0Q0Q3czMzhtWHk0S28tVFEtWVc4dVFXZTZzM3lpdk1iV3ZPbjBWV0NPR1RFLWlDUmota0FNS2lKeXR3ejNuNmNLRDlSSU1FNVBZU3RzX2RkTll4OG4zR3FfaEV6ZndXcmRYM0JYRFR1V1JZTEtIcVh5cndCMmRNUFRsd0x6V2N6UG5KSmNiVnlPZWd1M3NndkZ2bnRVVQ?oc=5",
-      "date": "2026-08-01T07:07:56.000Z",
-      "source": "Google News",
       "badge": "us"
     },
     {
@@ -226,7 +218,7 @@
       "badge": "us"
     },
     {
-      "title": "Treasury Yields Snapshot: July 31, 2026 - Advisor Perspectives",
+      "title": "Treasury Yields Snapshot: July 31, 2026 - advisorperspectives.com",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxPUS1xUE1JLXRZU29lbUh1ZzF3QVhtdnRIcVhQWW0wTExhekdTREplbnJlZ1F2N2hpZ2JGY3ZmVFdGMlFhQWpzM1RxQ1Y4QmhFQ1J3LUFwTXlBbG96X0tid0FfVjJhUUpQZ1NUdmlpNDBDWE1Kb3VnQXc5Z1FQb1...",
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPUS1xUE1JLXRZU29lbUh1ZzF3QVhtdnRIcVhQWW0wTExhekdTREplbnJlZ1F2N2hpZ2JGY3ZmVFdGMlFhQWpzM1RxQ1Y4QmhFQ1J3LUFwTXlBbG96X0tid0FfVjJhUUpQZ1NUdmlpNDBDWE1Kb3VnQXc5Z1FQb1BPY0NxQ2NXSF9FTzlGc2UwZk1pdHE4QnVqT1ZuNi1GVVJs?oc=5",
       "date": "2026-07-31T07:00:00.000Z",
@@ -234,12 +226,20 @@
       "badge": "bond"
     },
     {
-      "title": "Treasury Bond Yields Are Soaring. Pensions, Take Note. - Governing",
+      "title": "Treasury Bond Yields Are Soaring. Pensions, Take Note. - governing.com",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxQTnNHLVFiNngyajk4UTl1Q0RPTE5NcTlUaDZnVlprY19xenM2VzVBaEhvcjJYUV9zSnp0cG0yc1pwRURuRjBScUh2czRYQnlYMXY2anF6RGFPQkFacXBLVGt0QUg2YndBMnVrdm5TLW1EeFBOeTdZMllKNkQtU0...",
       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQTnNHLVFiNngyajk4UTl1Q0RPTE5NcTlUaDZnVlprY19xenM2VzVBaEhvcjJYUV9zSnp0cG0yc1pwRURuRjBScUh2czRYQnlYMXY2anF6RGFPQkFacXBLVGt0QUg2YndBMnVrdm5TLW1EeFBOeTdZMllKNkQtU0ZsV2dWbHB1XzNtajdFSlJB?oc=5",
       "date": "2026-07-31T04:00:56.000Z",
       "source": "Google News",
       "badge": "bond"
+    },
+    {
+      "title": "Fed Leaves Interest Rates Unchanged, Despite Three Votes for an Increase - The New York Times",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMihAFBVV95cUxQSjRrRUxlNThOWnExWlRiZTI4V2lnM25iMnA3VWktU3dmclZvc1VTd2M0eEd5Vk1nRkpIYUNuNTJ5VC14YVVIVXotQ3dMbEdtb3NLb2F5Z28tMlpUUDlLYmhXZ1VZcWcxZHdja1dYQUExMlVmVHVuZENWNktvak...",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQSjRrRUxlNThOWnExWlRiZTI4V2lnM25iMnA3VWktU3dmclZvc1VTd2M0eEd5Vk1nRkpIYUNuNTJ5VC14YVVIVXotQ3dMbEdtb3NLb2F5Z28tMlpUUDlLYmhXZ1VZcWcxZHdja1dYQUExMlVmVHVuZENWNktvakRjazlLUXM?oc=5",
+      "date": "2026-07-30T14:52:06.000Z",
+      "source": "Google News",
+      "badge": "us"
     },
     {
       "title": "What soaring Treasury yields mean for your finances - Yahoo Finance",
@@ -354,14 +354,6 @@
       "badge": "vietnam"
     },
     {
-      "title": "Omio raises €8.7 million strategic investment for Asian expansion - EU-Startups",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMipAFBVV95cUxORU1LYWo1aW9pZEVqMGJWQTRSV0dlLVFIdVhKLXVhV3A5SUM3UElidmpTMUxxb1FZM0J1SDZkSHhnS2FjN0g1MGg4OFhnZmhHWGtoV291QTAyRVdrbmFsbmVZdXJFVV9OQWpzTXcyaElpMkhCUUNzaUJObjdwS2...",
-      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxORU1LYWo1aW9pZEVqMGJWQTRSV0dlLVFIdVhKLXVhV3A5SUM3UElidmpTMUxxb1FZM0J1SDZkSHhnS2FjN0g1MGg4OFhnZmhHWGtoV291QTAyRVdrbmFsbmVZdXJFVV9OQWpzTXcyaElpMkhCUUNzaUJObjdwS2R1WWpkZnZvQi1xMFdMZlRrQTlWOEYwMHZJMG43VnZSU3hPWHJtbQ?oc=5",
-      "date": "2026-07-21T11:36:16.000Z",
-      "source": "Google News",
-      "badge": "em"
-    },
-    {
       "title": "New Aom Plus bonds offer low entry and yields up to 2.8% - Nation Thailand",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiYkFVX3lxTFAtLTlzclpQeEo4ZlhFWFcweS1HcTlPaHRMNUdhTEloME9BSVNrYzBnMUN5YXZWUWxieUl1V3FHSU9kYm1DSWNDajI2Q1RaelFkeWlyeUVOQVh2cnUwc0hpRHFB?oc=5\" target=\"_blank\">New Aom Plus bo...",
       "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFAtLTlzclpQeEo4ZlhFWFcweS1HcTlPaHRMNUdhTEloME9BSVNrYzBnMUN5YXZWUWxieUl1V3FHSU9kYm1DSWNDajI2Q1RaelFkeWlyeUVOQVh2cnUwc0hpRHFB?oc=5",
@@ -394,12 +386,20 @@
       "badge": "em"
     },
     {
-      "title": "Economic Forecasts: Asian Development Outlook July 2026 - Asian Development Bank",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hU3BfT0hBXzZlVnFBeFZ5MUZBNmZ2OFI1Skw4Zk05dFhhLU1RalBJVW1CM21kaElnR0x1d3BWd1hRcEJIeGd1SmRyUno0YkVyQVNsNHNwOS1Udw?oc=5\" target=\"_blank\">Economic Forecasts: Asian...",
-      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9hU3BfT0hBXzZlVnFBeFZ5MUZBNmZ2OFI1Skw4Zk05dFhhLU1RalBJVW1CM21kaElnR0x1d3BWd1hRcEJIeGd1SmRyUno0YkVyQVNsNHNwOS1Udw?oc=5",
-      "date": "2026-07-08T17:27:07.000Z",
+      "title": "Press Briefing Transcript: World Economic Outlook (WEO) Update, July 8, 2026 - imf.org",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMinwFBVV95cUxOMUZJd2J1RDhuMTUyblAyazFHSldDVWJMOGhJTjg0SUt0ZEVIQ1FMNnRxdWhYbThBYk9QMFFNZTF0MnRFc3FqUG91MElaaU5YWGN0WWN6RDdVbXFDaHZUdHUtR2k0LUdacHF4S3dIcVZtQklVRmJVZDFTd0xka1...",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMUZJd2J1RDhuMTUyblAyazFHSldDVWJMOGhJTjg0SUt0ZEVIQ1FMNnRxdWhYbThBYk9QMFFNZTF0MnRFc3FqUG91MElaaU5YWGN0WWN6RDdVbXFDaHZUdHUtR2k0LUdacHF4S3dIcVZtQklVRmJVZDFTd0xka1N2aThKREpibzU3R0xPUjlObzRKUjhFU1dhRlZPOHJmbnM?oc=5",
+      "date": "2026-07-08T07:00:00.000Z",
       "source": "Google News",
-      "badge": "em"
+      "badge": "economic"
+    },
+    {
+      "title": "Global Economy, Hit by Iran War and Inflation, Faces Sharp Slowdown - The New York Times",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMijAFBVV95cUxQMktxdXlJWExWLTFHUkkzY25IRzdfM3ZvNE5XLWlLdzdxMGdZVWRhMUhjaUwzRjdwcGpVMFp6MkZYMGtwTzVSOG00Ml9IVV93QjR4Tm80cG9xdC1LdHFJME9XOG1odnRsQU15bUtqeEFoN1VEeXE4VGlncHlLWk...",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQMktxdXlJWExWLTFHUkkzY25IRzdfM3ZvNE5XLWlLdzdxMGdZVWRhMUhjaUwzRjdwcGpVMFp6MkZYMGtwTzVSOG00Ml9IVV93QjR4Tm80cG9xdC1LdHFJME9XOG1odnRsQU15bUtqeEFoN1VEeXE4VGlncHlLWkUzR0g5LWFQNkx6VG51MA?oc=5",
+      "date": "2026-07-08T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "economic"
     }
   ]
 }
