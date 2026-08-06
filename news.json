@@ -1,37 +1,133 @@
 {
-  "updated": "2026-08-06T09:38:04.033Z",
+  "updated": "2026-08-06T15:16:28.872Z",
   "items": [
     {
-      "title": "SoftBank gets $8.2 billion boost from Intel as OpenAI takes a backseat",
-      "body": "SoftBank on Thursday reported profit for its fiscal first quarter that beat market expectations.",
-      "link": "https://www.cnbc.com/2026/08/06/softbank-q1-earnings-intel-bytedance-stakes.html",
-      "date": "2026-08-06T09:11:15.000Z",
+      "title": "Fox advertising, streaming service Tubi get boost from World Cup",
+      "body": "Fox advertising revenue increased 78% during the quarter primarily due to the FIFA Men's World Cup and growth at ad-supported streaming service Tubi.",
+      "link": "https://www.cnbc.com/2026/08/06/fox-advertising-streaming-service-tubi-get-boost-from-world-cup.html",
+      "date": "2026-08-06T15:13:03.000Z",
       "source": "CNBC US",
+      "badge": "us"
+    },
+    {
+      "title": "EasyJet agrees to £5.7bn takeover by US firm",
+      "body": "The no-frills carrier agrees to be bought by US firm Apollo after a rival suitor drops out.",
+      "link": "https://www.bbc.co.uk/news/articles/cjejzjpy98wo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-08-06T15:01:56.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "China’s Unitree Prices IPO in Bet Investors Are Ready for Humanoid Robots",
+      "body": "Unitree Robotics wants to raise about $900 million in an I.P.O. that tests market interest in humanoid robots, a technology that wows but has yet to prove its viability.",
+      "link": "https://www.nytimes.com/2026/08/06/business/china-unitree-ipo-robot.html",
+      "date": "2026-08-06T14:51:22.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Cashing in on SpaceX: 'Every chance I get, I'll sell a little more'",
+      "body": "Andre Lavoie joined SpaceX in 2009 as an engineer, now he's looking to cash in his shares in the company.",
+      "link": "https://www.bbc.co.uk/news/articles/cm2g0j3y339o?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-08-06T14:50:54.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Traders on Kalshi now think it&apos;s likely that the S&P 500 will hit 8,000 in 2026",
+      "body": "The rise in odds come after the broad index hit record highs in a more than 5% four-day rally that ended Wednesday.",
+      "link": "https://www.cnbc.com/2026/08/06/traders-on-kalshi-say-its-likely-sp-500-will-hit-8000-in-2026.html",
+      "date": "2026-08-06T14:48:42.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "Peloton posts first-ever annual net profit, but shares drop as outlook disappoints",
+      "body": "Peloton delivered its first-ever annual profit in fiscal 2026 but it's still working to generate sales growth as consumers pull back on big ticket purchases.",
+      "link": "https://www.cnbc.com/2026/08/06/peloton-pton-q4-2026-earnings.html",
+      "date": "2026-08-06T13:42:48.000Z",
+      "source": "CNBC US",
+      "badge": "us"
+    },
+    {
+      "title": "Applovin stock tanks on Q2 revenue miss",
+      "body": "Shares of Applovin tanked 17% Thursday off a second-quarter earnings miss, falling short of analysts' expectations for revenue.",
+      "link": "https://www.cnbc.com/2026/08/06/applovin-stock-q2-earnings-revenue.html",
+      "date": "2026-08-06T13:36:05.000Z",
+      "source": "CNBC US",
+      "badge": "us"
+    },
+    {
+      "title": "Bank of America spends $250 million a year on GLP-1 drugs for its employees, CEO says",
+      "body": "Employers have grappled with soaring demand for GLP-1 drugs such as Ozempic and Wegovy, which can cost thousands of dollars per patient annually.",
+      "link": "https://www.cnbc.com/2026/08/05/bank-of-america-ceo-glp-1-drugs-cost.html",
+      "date": "2026-08-06T13:25:12.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "The ‘Heated Rivalry’ Star Hudson Williams Uplifts a Canadian Tire Bag",
+      "body": "After the actor Hudson Williams was photographed carrying a plaid reusable shopping bag, priced under $2, the tote has become a viral fashion accessory.",
+      "link": "https://www.nytimes.com/2026/08/06/world/canada/hudson-williams-heated-rivalry-canadian-tire.html",
+      "date": "2026-08-06T13:09:56.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Shorts, strappy tops and sandals: What is acceptable to wear to work?",
+      "body": "Here's how to style for success while keeping your cool - and where you and your boss stand on your wardrobe.",
+      "link": "https://www.bbc.co.uk/news/articles/cre49389g1qo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-08-06T12:45:22.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Warner Bros. Discovery reports 10% jump in streaming revenue ahead of proposed Paramount combination",
+      "body": "Warner Bros. Discovery's streaming segment surpassed $3 million in revenue for the second quarter, marking a 10% increase from the year prior",
+      "link": "https://www.cnbc.com/2026/08/06/warner-bros-discovery-streaming-revenue-paramount-combination.html",
+      "date": "2026-08-06T12:13:37.000Z",
+      "source": "CNBC US",
+      "badge": "us"
+    },
+    {
+      "title": "What’s Behind the A.I. Shake-Up at Google",
+      "body": "A new role for Demis Hassabis, the head of Google’s artificial intelligence unit, reflects reality at the tech giant. Investors remain worried.",
+      "link": "https://www.nytimes.com/2026/08/06/business/dealbook/hassabis-google-ai.html",
+      "date": "2026-08-06T12:10:48.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Ex-department chief faces six charges in recruitment exam fraud probe",
+      "body": "The Crime Suppression Division (CSD) has filed six serious charges against Theerut Suphawiboonphol, former director-general of the Department of Local Administration (DLA), over his alleged role in a local government rec...",
+      "link": "https://www.bangkokpost.com/thailand/general/3297537/exdepartment-chief-faces-six-charges-in-recruitment-exam-fraud-probe",
+      "date": "2026-08-06T10:09:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Heart failure may have killed Hlun Solo, poisoning not ruled out",
+      "body": "The Central Institute of Forensic Science (CIFS), under the Justice Ministry, conducted an autopsy on the body of popular travel YouTuber Hlun Solo on Thursday and found that heart failure could be a cause while poison h...",
+      "link": "https://www.bangkokpost.com/thailand/general/3297527/heart-failure-may-have-killed-hlun-solo-poisoning-not-ruled-out",
+      "date": "2026-08-06T09:48:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Stock Market Today: Dow Futures Gain, Nasdaq 100 Slips as Hormuz Deal Talks Progress—SpaceX, SanDisk, App - Benzinga",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiggJBVV95cUxPNktfeUd5WFY4TXhPSzlSd08zMm0tSWlIcTFvZWV4S0QtUkJWZ05kZXFwOHByTmt5M05jS0JXRUYyMmV3bVYzT1Y4M1Z6R2F2RUZqLW1GYU5pQmZrNTYybV9aVGN4TjB6bGpvc09mRThKUEJ5Qy1LZFNhRFJGTl...",
+      "link": "https://news.google.com/rss/articles/CBMiggJBVV95cUxPNktfeUd5WFY4TXhPSzlSd08zMm0tSWlIcTFvZWV4S0QtUkJWZ05kZXFwOHByTmt5M05jS0JXRUYyMmV3bVYzT1Y4M1Z6R2F2RUZqLW1GYU5pQmZrNTYybV9aVGN4TjB6bGpvc09mRThKUEJ5Qy1LZFNhRFJGTlJFME1sYXpXRUdsNWNnbjBkNmR1WHJYWlpELVZWZ0UtaVFEYXYtdlFyX0xDalE0ZjNFYm14WnFVODN6NTQ1Qjd2NlJaZkJUa1M2THpSUVBONEw2ZUFvU21LODF1VW8wRE52dW4tdk9QcVNwNEJuWXFrYUhVRDQzcjJXY2l2ODRnMThGcEE?oc=5",
+      "date": "2026-08-06T09:19:46.000Z",
+      "source": "Google News",
       "badge": "us"
     },
     {
       "title": "Follow the Markets and Track Stocks With These Free Apps",
       "body": "Google Finance and Apple’s Stocks app have added new features over the years to make them more useful for tracking the markets and your investments.",
-      "link": "https://www.nytimes.com/2026/08/06/technology/personaltech/carry-wall-street-in-your-pocket-with-these-free-apps.html",
+      "link": "https://www.nytimes.com/2026/08/06/technology/personaltech/finance-stocks-apps.html",
       "date": "2026-08-06T09:03:19.000Z",
       "source": "NY Times",
       "badge": "global"
-    },
-    {
-      "title": "Why So Many C.E.O.s Are Getting a Chief of Staff",
-      "body": "The position as a trusted sounding board is in high demand as business gets more complex — and everyone wants to get in on the latest bureaucratic fad.",
-      "link": "https://www.nytimes.com/2026/08/06/business/ceos-chief-of-staff.html",
-      "date": "2026-08-06T09:01:04.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Rheinmetall stock volatile after trimming guidance as Germany&apos;s F126 warship cancellation hits sales outlook",
-      "body": "The company's sales grew 39% and profits grew 74% in the first half of the year.",
-      "link": "https://www.cnbc.com/2026/08/06/rheinmetall-stock-earnings-guidance-frigate.html",
-      "date": "2026-08-06T08:57:01.000Z",
-      "source": "CNBC US",
-      "badge": "us"
     },
     {
       "title": "Myanmar working on Dawei project to connect with Thailand",
@@ -40,14 +136,6 @@
       "date": "2026-08-06T08:54:00.000Z",
       "source": "Bangkok Post",
       "badge": "thai"
-    },
-    {
-      "title": "Nintendo&apos;s fiscal first-quarter profit and revenue beat estimates, despite Switch 2 sales slump",
-      "body": "Nintendo reported fiscal first-quarter earnings Thursday.",
-      "link": "https://www.cnbc.com/2026/08/06/nintendo-first-quarter-earnings-switch2.html",
-      "date": "2026-08-06T07:43:19.000Z",
-      "source": "CNBC US",
-      "badge": "us"
     },
     {
       "title": "UOB and Allianz Global Investors Ink Strategic Wealth Management Partnership in Southeast Asia - FF News",
@@ -66,14 +154,6 @@
       "badge": "thai"
     },
     {
-      "title": "Meta becomes latest firm to say its AI hacked another company",
-      "body": "Meta is the latest company to disclose an AI agent breach, raising cyber-security concerns.",
-      "link": "https://www.bbc.co.uk/news/articles/cx2kgdnyk2po?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-08-06T05:53:58.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
       "title": "Gold prices surpass $4,300 on commodity markets - Apa.az",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMigwFBVV95cUxOd0JvRkhRc2NnZklpLVdMbnZzUzN1RzF6cUpVcWplbU9fU251WjNJczNocmRoeE5md2tndDBneDMzNFpsVmZaSW12bWN5WXlrYXpiOG9qQXJuQXJITGd4NDZsZzZST1pZMVJNS19VSWxWTzJJN1MtR3JYMXYzeW...",
       "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOd0JvRkhRc2NnZklpLVdMbnZzUzN1RzF6cUpVcWplbU9fU251WjNJczNocmRoeE5md2tndDBneDMzNFpsVmZaSW12bWN5WXlrYXpiOG9qQXJuQXJITGd4NDZsZzZST1pZMVJNS19VSWxWTzJJN1MtR3JYMXYzeW5lTmFQMA?oc=5",
@@ -90,28 +170,12 @@
       "badge": "us"
     },
     {
-      "title": "Cashing in on SpaceX: 'Every chance I get, I'll sell a little more'",
-      "body": "Andre Lavoie joined SpaceX in 2009 as an engineer, now he's looking to cash in his shares in the company.",
-      "link": "https://www.bbc.co.uk/news/articles/cm2g0j3y339o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-08-06T05:00:54.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
       "title": "Body of popular Thai YouTuber Hlun Solo returns home",
       "body": "The body of the popular Thai travel YouTuber Hlun Solo was returned to Thailand early Thursday morning, as his family prepared to seek an autopsy to find the cause of his death in Georgia last month.",
       "link": "https://www.bangkokpost.com/thailand/general/3297472/body-of-popular-thai-youtuber-hlun-solo-returns-home",
       "date": "2026-08-06T03:41:00.000Z",
       "source": "Bangkok Post",
       "badge": "thai"
-    },
-    {
-      "title": "F.D.A. Approves Moderna’s mRNA Flu Vaccine",
-      "body": "The agency had initially refused to even review the application but reversed course after a public outcry.",
-      "link": "https://www.nytimes.com/2026/08/05/health/mrna-flu-vaccine-moderna.html",
-      "date": "2026-08-06T02:24:28.000Z",
-      "source": "NY Times",
-      "badge": "global"
     },
     {
       "title": "Federal Reserve’s Lisa Cook tells Anchorage business crowd she’s ‘firmly committed’ to bringing down inflation - Anchorage Daily News",
@@ -154,46 +218,6 @@
       "badge": "thai"
     },
     {
-      "title": "TikTok Is Laying Off 250 Employees in Its Nashville Office",
-      "body": "The office was home to members of the app’s content moderation team.",
-      "link": "https://www.nytimes.com/2026/08/05/technology/tiktok-layoffs-nashville.html",
-      "date": "2026-08-06T00:24:06.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "We&apos;re downgrading Honeywell Aerospace after a shockingly bad earnings debut",
-      "body": "The company slashed its full-year guidance on key metrics in its first earnings report since separating from the Honeywell conglomerate in June.",
-      "link": "https://www.cnbc.com/2026/08/05/were-downgrading-honeywell-aerospace-after-a-shockingly-bad-earnings-debut.html",
-      "date": "2026-08-06T00:09:36.000Z",
-      "source": "CNBC US",
-      "badge": "us"
-    },
-    {
-      "title": "Shorts, strappy tops and sandals: What is acceptable to wear in the office?",
-      "body": "Here's how to style for success while keeping your cool - and where you and your boss stand on your wardrobe.",
-      "link": "https://www.bbc.co.uk/news/articles/cre49389g1qo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-08-05T23:22:17.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
-      "title": "Rising yen set to boost Japanese tourism",
-      "body": "A stronger yen as a result of US-Japan currency interventions could incentivise more Japanese to travel overseas, especially to short-haul destinations such as Thailand, while Thai travellers should not be discouraged fr...",
-      "link": "https://www.bangkokpost.com/business/general/3297167/rising-yen-set-to-boost-japanese-tourism",
-      "date": "2026-08-05T23:19:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "NBTC deadlock imperils several projects",
-      "body": "Turmoil at the National Broadcasting and Telecommunications Commission (NBTC) is continuing as its board meeting on Wednesday was aborted, just like last month, after four commissioners boycotted the session over the cha...",
-      "link": "https://www.bangkokpost.com/business/general/3297182/nbtc-deadlock-imperils-several-projects",
-      "date": "2026-08-05T23:11:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "As Warsh and the Fed contemplate fewer meetings, markets brace for potential volatility ahead",
       "body": "Since taking office in May, Warsh has implemented several measures that reverse decades of Fed culture.",
       "link": "https://www.cnbc.com/2026/08/05/as-warsh-and-the-fed-contemplate-fewer-meetings-markets-brace-for-potential-volatility-ahead.html",
@@ -224,22 +248,6 @@
       "date": "2026-08-05T18:58:18.000Z",
       "source": "Google News",
       "badge": "bond"
-    },
-    {
-      "title": "Bank of America spends $250 million a year on GLP-1 drugs for its employees, CEO says",
-      "body": "Employers have grappled with soaring demand for GLP-1 drugs such as Ozempic and Wegovy, which can cost thousands of dollars per patient annually.",
-      "link": "https://www.cnbc.com/2026/08/05/bank-of-america-ceo-glp-1-drugs-cost.html",
-      "date": "2026-08-05T16:18:29.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "Situational Awareness hedge fund meltdown was a warning shot for leveraged markets, BofA CEO says",
-      "body": "Bank of America was among the prime brokers for the hedge fund, which is run by Leopold Aschenbrenner.",
-      "link": "https://www.cnbc.com/2026/08/05/bofa-brian-moynihan-situational-awareness-meltdown-was-a-warning-shot.html",
-      "date": "2026-08-05T15:55:01.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
     },
     {
       "title": "Bangkok Business Summit 2026 to Rally State and Business Leaders Ahead of IMF-World Bank Meetings - Nation Thailand",
@@ -274,14 +282,6 @@
       "badge": "thai"
     },
     {
-      "title": "US stock market hits record highs as AI profits pile and oil prices ease - The Guardian",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMinAFBVV95cUxPYkxGTktpd3RhcFI2bzdDWDc0OU5XdlpQdU4xSWtOaVdzZVgtc3VLbXg0NHM2ZkVocVRLam5rVXFuV1FPYmRoY1hqdGFWdWdWYTFvMUhWVExIbHlXc0tJc2lVVjhIODVaRDhFMHdHU05hSElLQ0dqWHg3ODAtcT...",
-      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPYkxGTktpd3RhcFI2bzdDWDc0OU5XdlpQdU4xSWtOaVdzZVgtc3VLbXg0NHM2ZkVocVRLam5rVXFuV1FPYmRoY1hqdGFWdWdWYTFvMUhWVExIbHlXc0tJc2lVVjhIODVaRDhFMHdHU05hSElLQ0dqWHg3ODAtcTloYTl4LVFLSEo4ZHl4QnY2aVF4X1Y4TjNYT1h5T08?oc=5",
-      "date": "2026-08-04T22:03:00.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
       "title": "Trump Fed chair’s inflation strategy: leave it to the market | Eduardo Porter - The Guardian",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiekFVX3lxTE5vanhmVlcyZExqNUlXblV5WS1GTjBjYV9iLUF2R2prbkpuNXg2U19KcmZMU2tiVmZjclNuZi1oVlRBMXU0dGUzbGJwX1JEdjNiMjBsbms2ZENfT2NxR2hHNzVyM3RyYWlFLXgyelBKdTFxZUkwQ1lpaDRB?oc=5\"...",
       "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5vanhmVlcyZExqNUlXblV5WS1GTjBjYV9iLUF2R2prbkpuNXg2U19KcmZMU2tiVmZjclNuZi1oVlRBMXU0dGUzbGJwX1JEdjNiMjBsbms2ZENfT2NxR2hHNzVyM3RyYWlFLXgyelBKdTFxZUkwQ1lpaDRB?oc=5",
@@ -314,14 +314,6 @@
       "badge": "vietnam"
     },
     {
-      "title": "Thai Baht Hits 15-Month Low as Oil Prices and Dovish BoT Weigh on THB - Thailand Business News",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMixAFBVV95cUxNY1RMR2FXNk9VMmZMdkNIcUNGaDJHTU1GcGZnY3A2TW0zUGhFS1FOQWtvclUzZEwtbTRGcHdhdGlwZHhwLUJMOVh3TGgyZGg0dTRxX1FBVThaRjRJZlVCREZPZ3hNbVY4MFZEbk13OUtGSmUyTVBkb2JIT3RwdX...",
-      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNY1RMR2FXNk9VMmZMdkNIcUNGaDJHTU1GcGZnY3A2TW0zUGhFS1FOQWtvclUzZEwtbTRGcHdhdGlwZHhwLUJMOVh3TGgyZGg0dTRxX1FBVThaRjRJZlVCREZPZ3hNbVY4MFZEbk13OUtGSmUyTVBkb2JIT3RwdXQtX2ZXRnItM1ZOMWRmQzJwVl85V0xYUWE3M19BTEZCQVQ5NmFxVUlzUWNVNmV1UDhhcFBPNUh6NVhtQnh2THhzRVNoUzdD?oc=5",
-      "date": "2026-08-03T00:55:00.000Z",
-      "source": "Google News",
-      "badge": "thai"
-    },
-    {
       "title": "Weekly market commentary - BlackRock",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiogFBVV95cUxORkJPa3I0ekJyVEI0RFJhY210TmplVHJZQ0xJNy1qenNkc0lMMHk0TmZwdDV1TEVZNmJoV3dfVlNTT3UyZHE5Q01SdmQ4eDd4WjAzZVhFMFB3VUd5QjlYXzZ5MWFRYzdIQVRVM1JMZXNyQ05aTExrejM4cHdBSk...",
       "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxORkJPa3I0ekJyVEI0RFJhY210TmplVHJZQ0xJNy1qenNkc0lMMHk0TmZwdDV1TEVZNmJoV3dfVlNTT3UyZHE5Q01SdmQ4eDd4WjAzZVhFMFB3VUd5QjlYXzZ5MWFRYzdIQVRVM1JMZXNyQ05aTExrejM4cHdBSktKSlJOOWxkY0V4YkNRRDZZTzlDZUYzZHlUWXdhTFUxNXJSNXc?oc=5",
@@ -338,20 +330,20 @@
       "badge": "bond"
     },
     {
-      "title": "Gold Price Prediction for August 2026: Bear Market or Cycle Low? - BeInCrypto",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTE9jTy15YnN1TE5DQVRselBLX0J4d2lEZWpXYUZqaGprQVFrQVdxNEU0MnE0TWFrbkxPczdaaG5VczBfZlVGdzdHZkMzbXFSQzFLaHVhR1ZPUGttSXA5eUlmZ19ZaVM?oc=5\" target=\"_blank\">Gold Price P...",
-      "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9jTy15YnN1TE5DQVRselBLX0J4d2lEZWpXYUZqaGprQVFrQVdxNEU0MnE0TWFrbkxPczdaaG5VczBfZlVGdzdHZkMzbXFSQzFLaHVhR1ZPUGttSXA5eUlmZ19ZaVM?oc=5",
-      "date": "2026-07-29T13:00:00.000Z",
-      "source": "Google News",
-      "badge": "commodity"
-    },
-    {
       "title": "A divided Federal Reserve holds interest rates steady despite high inflation - NPR",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxQbXhqTkhuVFhZUVVRaFdXYXp2OTJ2TXJtVEFFNEp6YVFLbUZKS25KT2JDaGdCbjdGWnVqRVN6NVBfMjI5SEwwU2F1VDF0VndmYWE0U1JzQnRwMjJhZjFNWU1vbjJ2WjduQ1F3cFQ1TVBSQllFUVotX2R4MEw2UX...",
       "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQbXhqTkhuVFhZUVVRaFdXYXp2OTJ2TXJtVEFFNEp6YVFLbUZKS25KT2JDaGdCbjdGWnVqRVN6NVBfMjI5SEwwU2F1VDF0VndmYWE0U1JzQnRwMjJhZjFNWU1vbjJ2WjduQ1F3cFQ1TVBSQllFUVotX2R4MEw2UXBtTWF1eEdUYjRjc1pBSU9n?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
       "source": "Google News",
       "badge": "us"
+    },
+    {
+      "title": "Gold Price Prediction for August 2026: Bear Market or Cycle Low? - BeInCrypto",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTE9jTy15YnN1TE5DQVRselBLX0J4d2lEZWpXYUZqaGprQVFrQVdxNEU0MnE0TWFrbkxPczdaaG5VczBfZlVGdzdHZkMzbXFSQzFLaHVhR1ZPUGttSXA5eUlmZ19ZaVM?oc=5\" target=\"_blank\">Gold Price P...",
+      "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9jTy15YnN1TE5DQVRselBLX0J4d2lEZWpXYUZqaGprQVFrQVdxNEU0MnE0TWFrbkxPczdaaG5VczBfZlVGdzdHZkMzbXFSQzFLaHVhR1ZPUGttSXA5eUlmZ19ZaVM?oc=5",
+      "date": "2026-07-29T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
     },
     {
       "title": "European Natural Resources Fund: September rate hike expectations resurface; among commodities, copper and uranium remain relatively bullish for now. ",
@@ -394,10 +386,18 @@
       "badge": "bond"
     },
     {
-      "title": "BoT: Headline inflation likely below projection - Bangkok Post",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxOOEktOVZsSTZaLWJWYmxfWEtnRDNXdkJiZmRDWkU0TmZEWUQwY21raXZqMXZscU9JUjNZQl9RUUx1ZWJiUDRpUWNsUFdsdHhUSXMzSHdZVEpOMlV5OUx6cTBfTFhyMVhHTWR1YlU5U211VWkzZjJyUGZyZ3FRLT...",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOOEktOVZsSTZaLWJWYmxfWEtnRDNXdkJiZmRDWkU0TmZEWUQwY21raXZqMXZscU9JUjNZQl9RUUx1ZWJiUDRpUWNsUFdsdHhUSXMzSHdZVEpOMlV5OUx6cTBfTFhyMVhHTWR1YlU5U211VWkzZjJyUGZyZ3FRLTBoekdIRnpGYzdDQTMxOFU1SGhxeDEzemY3ZlRnLWt6REdE?oc=5",
-      "date": "2026-07-09T07:00:00.000Z",
+      "title": "Press Briefing Transcript: World Economic Outlook (WEO) Update, July 8, 2026 - International Monetary Fund | IMF",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMinwFBVV95cUxOMUZJd2J1RDhuMTUyblAyazFHSldDVWJMOGhJTjg0SUt0ZEVIQ1FMNnRxdWhYbThBYk9QMFFNZTF0MnRFc3FqUG91MElaaU5YWGN0WWN6RDdVbXFDaHZUdHUtR2k0LUdacHF4S3dIcVZtQklVRmJVZDFTd0xka1...",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMUZJd2J1RDhuMTUyblAyazFHSldDVWJMOGhJTjg0SUt0ZEVIQ1FMNnRxdWhYbThBYk9QMFFNZTF0MnRFc3FqUG91MElaaU5YWGN0WWN6RDdVbXFDaHZUdHUtR2k0LUdacHF4S3dIcVZtQklVRmJVZDFTd0xka1N2aThKREpibzU3R0xPUjlObzRKUjhFU1dhRlZPOHJmbnM?oc=5",
+      "date": "2026-07-08T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "economic"
+    },
+    {
+      "title": "Joint Statement by the Heads of the International Energy Agency, International Monetary Fund,World Bank Group, and World Trade Organization - World Ba",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMihgJBVV95cUxNd3c5b2k1aXNoMVVOVVJuaTdtNGluR0haZkF6cDVoZUlYTG81NEQ0alVvLU5HXzVrNmlxNVA0VW8yY0JnMFZ1eUsyZHNRdExGRmhCRmhfeUVrend1VzFlY1RTdWwtUWo1MGZ6emV1Nk5IcVlUSzdDbTVVanBDYl...",
+      "link": "https://news.google.com/rss/articles/CBMihgJBVV95cUxNd3c5b2k1aXNoMVVOVVJuaTdtNGluR0haZkF6cDVoZUlYTG81NEQ0alVvLU5HXzVrNmlxNVA0VW8yY0JnMFZ1eUsyZHNRdExGRmhCRmhfeUVrend1VzFlY1RTdWwtUWo1MGZ6emV1Nk5IcVlUSzdDbTVVanBDYlB2RDYyM3NwMDU2NTJYWjZaOWZNam4xT291YVpOMXBxYVBNMFBwWUltUTVTQnMteTNENnRmTzBjTUxGWGNxeGpza0xDRmQ2STJPYU1hdXczaFFqcDVpWmhXWkNYZHpZcG1tUVd0bDlMMmgxOFgzLUFpeDRTeGFjTTJTN1RtT0lRbDBiN1kzX1pB?oc=5",
+      "date": "2026-07-08T07:00:00.000Z",
       "source": "Google News",
       "badge": "economic"
     }
