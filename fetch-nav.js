@@ -1,4 +1,17 @@
 /**
+ * fetch-nav.js v26 — fixed a real bug in fetchNAV(): it made exactly ONE
+ * request (page_size=50) and never followed next_cursor, unlike
+ * fetch-historical-nav.js which always paginated correctly. For proj_ids
+ * shared by multiple classes (most of FUND_MAP), a 10-day window's combined
+ * item count across all classes can exceed 50 before our own class filter is
+ * applied — silently truncating the response. If the desired class's most
+ * recent entry landed on a second page, it was discarded, producing a stale
+ * or missing "latest" NAV. This is likely why bulk historical re-fetches
+ * appeared to "correct" values the daily fetch had gotten wrong — bulk
+ * always paginated properly, daily didn't. Verified with a reproduction test:
+ * old logic returns a stale entry when the true latest is on page 2, new
+ * logic (follows cursor) returns the correct one.
+ *
  * fetch-nav.js v25 — fixed 10 more funds found via systematic pass: KKP US500-UH-SSF,
  * ONE-UGG-ASSF, PRINCIPAL GOPP-SSF, PRINCIPAL iPROPEN-SSF, TISCOCHA-SSF, UGIS-SSF,
  * UOBSA-SSF, UOBSD-SSF, MEGA10CHINA-SSF, TDSThaiESG-A — all confirmed multi-class
@@ -175,21 +188,39 @@ async function fetchNAV(projId, className) {
   // A 10-day lookback comfortably covers weekends + most Thai public holidays.
   const startDate = dateStr(10);
   const endDate   = dateStr(0);
-  let path = `/v2/fund/daily-info/nav?proj_id=${encodeURIComponent(projId)}` +
-             `&start_nav_date=${startDate}&end_nav_date=${endDate}&page_size=50`;
-  // Some proj_ids cover MULTIPLE share classes at once (confirmed: SCBS&P500's
-  // proj_id M0643_2555 mixes 6 distinct classes — SSFA, SSFE, A, P, E, -SSF —
-  // with genuinely different NAVs, not just fee-drift). When a fund needs a
-  // specific class, pin the query to it so we never pick up a sibling class's
-  // value by mistake.
-  if (className) {
-    path += `&fund_class_name=${encodeURIComponent(className)}`;
+
+  // BUG FIX: this function previously made exactly ONE request (page_size=50)
+  // and never checked or followed next_cursor — unlike fetch-historical-nav.js,
+  // which always paginated correctly. For a proj_id shared by multiple classes
+  // (most of FUND_MAP's class-filtered funds), a 10-day window's COMBINED item
+  // count across all classes can exceed 50 before our own class filter is even
+  // applied — silently truncating the response. If the desired class's most
+  // recent entries happened to land on a second page, they were discarded,
+  // producing a stale or missing "latest" NAV — exactly the kind of wrong-value
+  // bug that made bulk historical fetches (which DO paginate) look "more
+  // correct" than the daily fetch for the same fund/date. Now follows
+  // next_cursor properly, same as the historical script.
+  let allItems = [];
+  let cursor = '';
+  let page = 0;
+  const MAX_PAGES = 5; // a 10-day window should never need more than 1-2 pages even for the busiest multi-class proj_ids; this is a generous safety cap
+  while (page < MAX_PAGES) {
+    let path = `/v2/fund/daily-info/nav?proj_id=${encodeURIComponent(projId)}` +
+               `&start_nav_date=${startDate}&end_nav_date=${endDate}&page_size=50`;
+    if (className) path += `&fund_class_name=${encodeURIComponent(className)}`;
+    if (cursor) path += `&next_cursor=${encodeURIComponent(cursor)}`;
+
+    const r = await get(path, KEY_DI);
+    if (r.status === 204) break; // legitimately no (more) data — not a failure
+    if (r.status !== 200 || !r.data || !Array.isArray(r.data.items)) break;
+
+    allItems = allItems.concat(r.data.items);
+    cursor = r.data.next_cursor || '';
+    page++;
+    if (!cursor) break;
   }
 
-  const r = await get(path, KEY_DI);
-  if (r.status !== 200 || !r.data || !Array.isArray(r.data.items) || r.data.items.length === 0) {
-    return null;
-  }
+  if (allItems.length === 0) return null;
 
   // SAFETY NET 1: never trust that the server actually honored start_nav_date/end_nav_date.
   // If it silently ignores the filter (some government APIs document params they don't
@@ -197,7 +228,7 @@ async function fetchNAV(projId, className) {
   // e.g. dates from 2010 — and blindly picking "the latest of whatever came back" would
   // apply a wildly outdated NAV as if it were current. So we always re-filter client-side
   // to only entries genuinely within our intended recent window before picking anything.
-  let candidates = r.data.items.filter(item => {
+  let candidates = allItems.filter(item => {
     const d = (item.nav_date || '').substring(0, 10);
     return d >= startDate && d <= endDate;
   });
