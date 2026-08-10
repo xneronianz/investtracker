@@ -3818,7 +3818,15 @@
 
             // NAV Performance Panel
             const currentNAV = f.nav;
-            document.getElementById('histCurrentNAV').innerText = '฿' + currentNAV.toFixed(4);
+            const currentNavEl = document.getElementById('histCurrentNAV');
+            if ((!history || history.length === 0) && currentNAV) {
+                // History was cleared but f.nav/navDate are intentionally left
+                // untouched until the next Auto NAV / Bulk Historical sync — make
+                // that explicit here so this doesn't look like leftover stale data.
+                currentNavEl.innerHTML = '฿' + currentNAV.toFixed(4) + ' <span class="text-amber-500 font-normal text-[10px]">(⚠ pre-clear value — re-sync to refresh)</span>';
+            } else {
+                currentNavEl.innerText = '฿' + currentNAV.toFixed(4);
+            }
             function getNavOnOrBefore(cutoffDate) {
                 const past = history.filter(h => h.date <= cutoffDate);
                 return past.length > 0 ? past[past.length-1] : null;
@@ -3940,7 +3948,31 @@
         // always paying the cost of plotting the full history by default.
         function setHistChartRange(years) {
             const full = _histFullData;
-            if (!full || full.length === 0) return;
+            if (!full || full.length === 0) {
+                // BUG FIX: previously this just returned here, leaving whatever
+                // chart was drawn from a PREVIOUS fund/state still visible on the
+                // canvas — since Chart.js draws onto a persistent element, nothing
+                // was telling it to clear. After clearing a fund's history, the
+                // graph kept showing the old data as if it still existed. Now
+                // explicitly destroys any existing chart and shows a clear
+                // empty-state message instead.
+                if (navChartObj) { navChartObj.destroy(); navChartObj = null; }
+                document.querySelectorAll('.hist-range-btn').forEach(btn => {
+                    btn.className = 'hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all bg-white text-slate-300 border-slate-200 cursor-not-allowed';
+                });
+                const canvas = document.getElementById('navChart');
+                if (canvas) {
+                    const ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.save();
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.font = '13px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('No historical data — chart will populate once NAV entries exist.', canvas.width / 2, canvas.height / 2);
+                    ctx.restore();
+                }
+                return;
+            }
 
             let windowed;
             if (years === null) {
