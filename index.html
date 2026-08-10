@@ -1219,7 +1219,10 @@
             <input type="hidden" id="histCurrentFundId">
             <div class="flex justify-between items-center mb-2">
                 <h2 class="text-3xl font-black text-slate-800" id="histFundName">TLA-GEQ</h2>
-                <button onclick="closeModal('historyModal')" class="text-slate-400 hover:text-rose-500 font-black text-xl px-2 py-1">✕ CLOSE</button>
+                <div class="flex items-center gap-3">
+                    <button onclick="clearAllHistoryForFund()" class="text-rose-500 hover:text-rose-700 font-black text-[10px] px-3 py-1.5 rounded-lg border border-rose-200 hover:bg-rose-50 transition-all">🗑 Clear All History</button>
+                    <button onclick="closeModal('historyModal')" class="text-slate-400 hover:text-rose-500 font-black text-xl px-2 py-1">✕ CLOSE</button>
+                </div>
             </div>
             <div id="histFinnomenaLink" class="mb-6"></div>
             <div class="mb-6 p-4 bg-slate-50 rounded-2xl border border-slate-100">
@@ -1761,7 +1764,11 @@
                 </div>
                 <div><label class="text-[10px] font-black uppercase mb-1 text-violet-600">SEC Fund Class <span class="text-slate-400 normal-case font-normal">(override, optional)</span></label>
                     <input type="text" id="in_sec_fundclass" autocomplete="off" placeholder="usually identical to Fund Name above" class="w-full p-3 bg-slate-50 rounded-xl border font-mono text-xs">
-                    <p class="text-[9px] text-slate-400 mt-1 leading-relaxed">Both fields blank → this fund uses whatever's already hardcoded in fetch-nav.js, unchanged. Fund Class must be the <strong>exact, full</strong> class name from the SEC API's <code>fund_class_name</code> field — NOT a shortened suffix (e.g. use the whole string "K-GOLD-A(A)", not just "A(A)"). In practice this is almost always identical to the Fund Name field above, character-for-character. Leave Fund Class blank only if you've confirmed this fund's Project ID has just one share class.</p>
+                    <p class="text-[9px] text-slate-400 mt-1 leading-relaxed">Don't guess this — use <strong>🔍 Discover Fund Classes</strong> below to see the real, exact class names for your Project ID and pick the right one. A mismatched class silently breaks fetching with no error shown anywhere.</p>
+                </div>
+                <div class="col-span-2">
+                    <button type="button" onclick="discoverFundClasses()" class="w-full bg-amber-500 hover:bg-amber-600 text-white py-2.5 rounded-xl text-xs font-black transition-all">🔍 Discover Fund Classes for this Project ID</button>
+                    <div id="fundClassDiscoveryResults" class="mt-2 hidden"></div>
                 </div>
             </div>
             <div class="mt-2 flex justify-end">
@@ -3759,6 +3766,33 @@
         // ==========================================
         var _histFullData = []; // full (already sorted) history for the fund currently open in the modal
         var _histFundId = null;
+        // Wipes a fund's ENTIRE history array. Exists because the bulk-apply
+        // merge only REPLACES a date if it already exists in both the current
+        // history and the fresh fetch — any date that exists ONLY in a wrong
+        // baseline (e.g. history populated under a previously-incorrect proj_id
+        // override) gets silently PRESERVED forever, since there's no correct
+        // data at that exact date to replace it with. Clearing history first
+        // means the next bulk-historical Apply repopulates everything as fresh
+        // "added" entries instead of trying to selectively patch a wrong baseline.
+        function clearAllHistoryForFund() {
+            const fundId = document.getElementById('histCurrentFundId').value;
+            const f = allFunds.find(x => (x.name + "||" + x.portfolio) === fundId);
+            if (!f) return;
+            const entryCount = (f.history || []).length;
+            const confirmed = confirm(
+                '⚠️ This will permanently delete all ' + entryCount + ' history entries for "' + f.name + '".\n\n' +
+                'Use this when a fund\'s entire history came from a wrong source (e.g. an incorrect Project ID that has since been fixed) and re-applying bulk historical data hasn\'t been able to fully correct it — clearing first lets a fresh Apply repopulate everything cleanly.\n\n' +
+                'The fund\'s current NAV/date will stay as-is until you next run Auto NAV or Apply Bulk Historical NAV — do that right after this for best results.\n\n' +
+                'This cannot be undone except by restoring from a backup. Proceed?'
+            );
+            if (!confirmed) return;
+
+            f.history = [];
+            saveToLocalStorage();
+            openHistory(fundId); // refresh the modal to show the now-empty history
+            alert('✓ History cleared for "' + f.name + '". Now run Bulk Historical NAV (trigger + apply) to repopulate it with correct data.');
+        }
+
         function openHistory(id) {
             const f = allFunds.find(x => (x.name + "||" + x.portfolio) === id);
             document.getElementById('histFundName').innerText = f.name;
@@ -6036,6 +6070,149 @@
         // ============================================================
         // SEC THAILAND NAV AUTO-SYNC
         // ============================================================
+        // ============================================================
+        // FUND CLASS DISCOVERY — removes guesswork when adding a new fund.
+        // Triggers a lightweight, on-demand GitHub Action that checks a
+        // Project ID against the live SEC API and reports every real class
+        // name found, so the Fund Class override is always verified, never
+        // typed from assumption.
+        // ============================================================
+        var _fundClassCheckTriggeredAt = null;
+        var _fundClassCheckPollTimer = null;
+
+        function discoverFundClasses() {
+            const projId = document.getElementById('in_sec_projid').value.trim();
+            if (!projId) {
+                alert('Enter a SEC Project ID first, then tap Discover Fund Classes.');
+                return;
+            }
+            const token = pagesCfg.token, user = pagesCfg.user, repo = pagesCfg.repo;
+            if (!token || !user || !repo) {
+                alert('GitHub Pages isn\'t set up yet. Open Settings → GitHub Pages, fill in your token/username/repo, and save once — this reuses the same connection.');
+                openPagesModal();
+                return;
+            }
+
+            const resultsEl = document.getElementById('fundClassDiscoveryResults');
+            resultsEl.classList.remove('hidden');
+            resultsEl.innerHTML = '<div class="p-3 rounded-xl bg-amber-50 border border-amber-100 text-amber-700 text-xs font-bold">🔄 Checking ' + projId + ' against the live SEC API... this usually takes 15-30 seconds.</div>';
+
+            fetch('https://api.github.com/repos/' + user + '/' + repo + '/actions/workflows/check-fund-class.yml/dispatches', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Accept': 'application/vnd.github+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ref: 'main', inputs: { proj_id: projId } })
+            })
+            .then(function(r) {
+                if (r.status === 204) {
+                    _fundClassCheckTriggeredAt = Date.now();
+                    setTimeout(function() { pollFundClassCheck(projId, 0); }, 12000); // give the Action a moment to start + run
+                    return null;
+                }
+                return r.text().then(function(txt) {
+                    let hint = '';
+                    if (r.status === 404) hint = ' — check check-fund-class.yml has been uploaded to .github/workflows/ in your repo.';
+                    else if (r.status === 401 || r.status === 403) hint = ' — your token needs the "workflow" scope in addition to "repo".';
+                    throw new Error('HTTP ' + r.status + hint);
+                });
+            })
+            .catch(function(e) {
+                if (e) resultsEl.innerHTML = '<div class="p-3 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold">Failed to trigger check: ' + e.message + '</div>';
+            });
+        }
+
+        function pollFundClassCheck(projId, attempt) {
+            const resultsEl = document.getElementById('fundClassDiscoveryResults');
+            const MAX_ATTEMPTS = 12; // ~12 * 5s = 60s of polling after the initial 12s wait
+            if (attempt >= MAX_ATTEMPTS) {
+                resultsEl.innerHTML = '<div class="p-3 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold">Still no result after 90+ seconds. Check the Actions tab on GitHub — the check may still be running, or something went wrong. You can also just tap Discover again.</div>';
+                return;
+            }
+
+            var navUrl = '/fund-class-check.json';
+            if (location.hostname.endsWith('github.io')) {
+                var pathParts = location.pathname.split('/').filter(Boolean);
+                if (pathParts.length > 0) navUrl = '/' + pathParts[0] + '/fund-class-check.json';
+            }
+            navUrl += '?t=' + Date.now();
+
+            fetch(navUrl)
+            .then(function(r) { return r.ok ? r.json() : null; })
+            .then(function(data) {
+                // Only accept a result that's for THIS proj_id and genuinely fresh
+                // (generated after we triggered) — otherwise we'd show a stale
+                // leftover from a previous check.
+                var isFresh = data && data.proj_id === projId && data.checked_at &&
+                    (new Date(data.checked_at).getTime() > _fundClassCheckTriggeredAt - 5000);
+                if (!isFresh) {
+                    _fundClassCheckPollTimer = setTimeout(function() { pollFundClassCheck(projId, attempt + 1); }, 5000);
+                    return;
+                }
+                renderFundClassResults(data);
+            })
+            .catch(function() {
+                _fundClassCheckPollTimer = setTimeout(function() { pollFundClassCheck(projId, attempt + 1); }, 5000);
+            });
+        }
+
+        var _fundClassDiscoveryClasses = []; // stores discovered class names, referenced by index to avoid quote-escaping issues in onclick attributes
+
+        function useFundClass(idx) {
+            var cls = _fundClassDiscoveryClasses[idx];
+            if (cls !== undefined) document.getElementById('in_sec_fundclass').value = cls;
+        }
+
+        function renderFundClassResults(data) {
+            const resultsEl = document.getElementById('fundClassDiscoveryResults');
+            if (data.error) {
+                resultsEl.innerHTML = '<div class="p-3 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold"></div>';
+                resultsEl.firstChild.textContent = data.error; // textContent, not string concat — avoids HTML injection from API-derived error text
+                return;
+            }
+            const classes = data.classes || [];
+            if (classes.length === 0) {
+                resultsEl.innerHTML = '<div class="p-3 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold">No classes found — double-check the Project ID.</div>';
+                return;
+            }
+            _fundClassDiscoveryClasses = classes.map(c => c.name);
+            if (classes.length === 1) {
+                const c = classes[0];
+                resultsEl.innerHTML = '<div class="p-3 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs">' +
+                    '<div class="font-black mb-1">✓ Single class confirmed</div>' +
+                    '<div>Latest: ฿' + c.latest_nav.toFixed(4) + ' on ' + c.latest_date + '</div>' +
+                    '<div class="mt-2 text-emerald-600">No class filter needed — leave Fund Class blank.</div>' +
+                    '<button type="button" onclick="document.getElementById(\'in_sec_fundclass\').value=\'\';" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-[10px] font-bold">Clear Fund Class field</button>' +
+                    '</div>';
+                // Class name shown separately via textContent to safely handle any special characters
+                var nameSpan = document.createElement('span');
+                nameSpan.textContent = ' "' + c.name + '"';
+                resultsEl.querySelector('.font-black').appendChild(nameSpan);
+                return;
+            }
+            let html = '<div class="p-3 rounded-xl bg-blue-50 border border-blue-100">' +
+                '<div class="font-black text-blue-700 text-xs mb-2">⚠ ' + classes.length + ' classes share this Project ID — pick the one matching your holding:</div>';
+            classes.forEach(function(c, i) {
+                html += '<div class="flex items-center justify-between gap-2 bg-white rounded-lg p-2 mb-1.5 border border-blue-100">' +
+                    '<div class="text-[10px] font-class-name" data-idx="' + i + '"><span class="font-mono font-bold text-slate-700"></span>' +
+                    '<span class="text-slate-400 ml-2">฿' + c.latest_nav.toFixed(4) + ' (' + c.latest_date + ')</span></div>' +
+                    '<button type="button" onclick="useFundClass(' + i + ')" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded-md text-[9px] font-bold whitespace-nowrap">Use this</button>' +
+                    '</div>';
+            });
+            html += '<div class="text-[9px] text-blue-500 mt-1">Compare the NAV against Finnomena/your broker to confirm which class you actually hold.</div></div>';
+            resultsEl.innerHTML = html;
+            // Fill in each class name via textContent (not string concat) so special
+            // characters like parentheses can never break the HTML or collide with
+            // the onclick attribute's quoting.
+            resultsEl.querySelectorAll('.font-class-name').forEach(function(el) {
+                var idx = parseInt(el.getAttribute('data-idx'), 10);
+                el.querySelector('span').textContent = classes[idx].name;
+            });
+        }
+
+
         function openSecNavModal() {
             var cb = document.getElementById('sec_auto_on_load');
             if (cb) cb.checked = secNavCfg.autoOnLoad || false;
