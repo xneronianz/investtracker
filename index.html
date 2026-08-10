@@ -5876,6 +5876,38 @@
 
             const payload = buildFundOverridesPayload();
             const fundCount = Object.keys(payload.overrides).length;
+
+            // SAFEGUARD: show exactly what's about to be pushed before sending
+            // anything. This exists because a real, hard-to-diagnose bug happened
+            // silently before: an override was typed into the form but never
+            // actually saved to the fund object, so a push went out with ZERO
+            // overrides — wiping out fund-overrides.json without any visible
+            // error, and neither daily nor bulk fetches picked up the intended
+            // override for a long time as a result. Now every push requires
+            // explicitly confirming the exact list first.
+            if (fundCount === 0) {
+                const proceedEmpty = confirm(
+                    '⚠️ WARNING: this will push ZERO fund overrides.\n\n' +
+                    'If you expected at least one override to be included (e.g. you just set a Project ID for a fund), this means it was never actually saved — go back, open that fund, and make sure you clicked "Save Changes" before pushing.\n\n' +
+                    'Proceeding now will erase ALL existing overrides in fund-overrides.json on GitHub, if any exist. Only continue if you genuinely intend to clear every override.\n\n' +
+                    'Push zero overrides anyway?'
+                );
+                if (!proceedEmpty) return;
+            } else {
+                const fundList = Object.entries(payload.overrides)
+                    .map(function(entry) {
+                        var name = entry[0], ov = entry[1];
+                        return '• ' + name + ' → ' + ov.proj_id + (ov.fund_class ? ' (class: ' + ov.fund_class + ')' : ' (no class filter)');
+                    })
+                    .join('\n');
+                const proceed = confirm(
+                    'About to push ' + fundCount + ' fund override' + (fundCount === 1 ? '' : 's') + ':\n\n' +
+                    fundList +
+                    '\n\nDouble-check this list matches what you intended — especially the Project ID and whether Fund Class should be blank or filled in. Proceed?'
+                );
+                if (!proceed) return;
+            }
+
             const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
             const apiUrl = 'https://api.github.com/repos/' + user + '/' + repo + '/contents/fund-overrides.json';
 
