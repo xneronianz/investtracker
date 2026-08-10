@@ -1,0 +1,39 @@
+name: Check Fund Class (on-demand discovery)
+
+# Manual-only, single-fund lookup — takes a Project ID and reports every real
+# fund_class_name found for it, so a class name never has to be guessed when
+# adding a new fund. Triggered from the app's "Discover Fund Classes" button,
+# or manually here: Actions tab -> Check Fund Class -> Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      proj_id:
+        description: 'SEC Project ID to check (e.g. M0213_2561)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  check-fund-class:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check fund class
+        env:
+          SEC_KEY_DAILYINFO: ${{ secrets.SEC_KEY_DAILYINFO }}
+          PROJ_ID: ${{ github.event.inputs.proj_id }}
+        run: node check-fund-class.js
+
+      - name: Commit fund-class-check.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add fund-class-check.json
+          git diff --staged --quiet || git commit -m "Fund class check: ${{ github.event.inputs.proj_id }}"
+          git push
