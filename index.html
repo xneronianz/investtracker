@@ -2323,8 +2323,26 @@
         loadFromLocalStorage();
         applyFavNames();
         setTimeout(fitFundTable, 100); // after DOM fully painted
-        gistAutoSync(); // auto-pull from Gist if configured
-        secNavAutoSync(); // auto-update NAV from SEC Thailand if configured
+        // BUG FIX: secNavAutoSync() previously ran immediately after gistAutoSync()
+        // without waiting for it — but gistAutoSync() is asynchronous (a real
+        // network round-trip to GitHub). If this device's local cache only has a
+        // PARTIAL fund list and the true full portfolio lives in the Gist, Auto
+        // NAV (whether auto-triggered on load, or clicked manually right after a
+        // page refresh) could run against the stale, incomplete local set before
+        // the Gist pull had actually finished merging in the real data. Now
+        // explicitly waits for the Gist pull to settle (success, failure, or
+        // skipped — .finally covers all of them) before Auto NAV evaluates
+        // anything, so allFunds is always fully hydrated first.
+        //
+        // Also briefly disables the Auto NAV button itself during this same
+        // window, so a fast MANUAL click right after a page refresh can't hit
+        // the identical race — this is exactly what happened in practice.
+        var secNavBtnEl = document.getElementById('secNavBtn');
+        if (secNavBtnEl) { secNavBtnEl.disabled = true; secNavBtnEl.title = 'Waiting for cloud sync to finish...'; secNavBtnEl.style.opacity = '0.6'; }
+        gistAutoSync().finally(function() {
+            if (secNavBtnEl) { secNavBtnEl.disabled = false; secNavBtnEl.title = ''; secNavBtnEl.style.opacity = ''; }
+            secNavAutoSync(); // auto-update NAV from SEC Thailand if configured
+        });
 
         // Capture raw HTML source at load time for reliable backup
         // (outerHTML is unreliable on Android — script contents may be altered)
@@ -5660,19 +5678,19 @@
 
         // Auto-pull on startup if configured
         function gistAutoSync() {
-            if (!gistCfg || !gistCfg.token || !gistCfg.gistId) return;
+            if (!gistCfg || !gistCfg.token || !gistCfg.gistId) return Promise.resolve();
             // Skip auto-pull once after factory reset (user must pull manually)
             if (localStorage.getItem('skipGistAutoSync') === '1') {
                 localStorage.removeItem('skipGistAutoSync');
                 gistSyncStatusUI('☁ Ready — Pull when ready', '#6366f1');
-                return;
+                return Promise.resolve();
             }
             // Respect the auto-sync toggle
             if (localStorage.getItem('gistAutoSyncEnabled') === '0') {
                 gistSyncStatusUI('☁ Auto-sync OFF', '#94a3b8');
-                return;
+                return Promise.resolve();
             }
-            fetch('https://api.github.com/gists/' + gistCfg.gistId, {
+            return fetch('https://api.github.com/gists/' + gistCfg.gistId, {
                 headers: {
                     'Authorization': 'Bearer ' + gistCfg.token,
                     'Accept': 'application/vnd.github+json'
