@@ -1,85 +1,221 @@
 {
-  "updated": "2026-08-11T14:18:23.927Z",
+  "updated": "2026-08-12T03:21:25.345Z",
   "items": [
     {
-      "title": "Polymarket makes moves to get house in order before expected boom times for prediction markets this fall",
-      "body": "The marketing changes come amid an investigation by the Commodity Futures Trading Commission into the company's promotional practices.",
-      "link": "https://www.cnbc.com/2026/08/11/polymarket-revamps-marketing-expands-us-hiring-ahead-of-fall-events.html",
-      "date": "2026-08-11T14:15:33.000Z",
+      "title": "Government Pension Fund backs AI growth, Thai market recovery with portfolio",
+      "body": "The Government Pension Fund (GPF) plans to focus on investments in artificial intelligence (AI) and Thai equities, which it views as safe havens amid global market volatility.",
+      "link": "https://www.bangkokpost.com/business/investment/3300392/government-pension-fund-backs-ai-growth-thai-market-recovery-with-portfolio",
+      "date": "2026-08-12T02:23:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "EV bus conversions to be subsidised by public loans",
+      "body": "The Finance Ministry is using funds available under the emergency borrowing decree to subsidise the replacement of internal combustion engine (ICE) public service vehicles with electric vehicles (EVs).",
+      "link": "https://www.bangkokpost.com/business/general/3300387/ev-bus-conversions-to-be-subsidised-by-public-loans",
+      "date": "2026-08-12T02:14:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "BLS predicts bull run for Thai equities",
+      "body": "Thailand's stock market is expected to benefit from a global manufacturing recovery, returning foreign capital and growth in artificial intelligence (AI) and data centre investments, says Bualuang Securities (BLS), with ...",
+      "link": "https://www.bangkokpost.com/business/investment/3300272/bls-predicts-bull-run-for-thai-equities",
+      "date": "2026-08-12T02:03:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "BLS predicts bull run for Thai equities - Bangkok Post",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMimwFBVV95cUxNOTdrMGVfQm4wcElja2RTOU9LQnBNYnpNTVNMOFRHUjBrTFp4ejZNeW1xRWJtMlJIMmlfOUdNVHBFLWtLc0NjZFhxdzE3X1paRERpVV9jc3FUZjJZaTA2YnRocUZOakNlWHM3Y1dEQWk0SGkwSEFVWHZaQVo3MV...",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNOTdrMGVfQm4wcElja2RTOU9LQnBNYnpNTVNMOFRHUjBrTFp4ejZNeW1xRWJtMlJIMmlfOUdNVHBFLWtLc0NjZFhxdzE3X1paRERpVV9jc3FUZjJZaTA2YnRocUZOakNlWHM3Y1dEQWk0SGkwSEFVWHZaQVo3MVVoTDM4MHRWNmp3eFc4SFFQbzE1aHZGUUFhU0xiVQ?oc=5",
+      "date": "2026-08-12T02:03:00.000Z",
+      "source": "Google News",
+      "badge": "thai"
+    },
+    {
+      "title": "Consumer loan demand set to rise this quarter",
+      "body": "Demand for consumer loans is expected to rise in the third quarter of 2026, driven primarily by household liquidity needs, according to the Bank of Thailand's latest survey.",
+      "link": "https://www.bangkokpost.com/business/general/3300307/consumer-loan-demand-set-to-rise-this-quarter",
+      "date": "2026-08-12T02:01:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Troubled NBTC head presents new evidence",
+      "body": "Dr Sarana Boonbaichaiyapruck, chairman of the National Broadcasting and Telecommunications Commission (NBTC), unveiled new evidence on Tuesday to counter the verdict of the selection committee, which voted to disqualify ...",
+      "link": "https://www.bangkokpost.com/business/general/3300297/troubled-nbtc-head-presents-new-evidence",
+      "date": "2026-08-12T01:51:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "EVs dominate China’s car market: 5 takeaways from the country&apos;s latest auto sales data",
+      "body": "The China Passenger Car Association released data Tuesday showing penetration of new energy vehicles rose in July. Tesla's Model Y remained popular.",
+      "link": "https://www.cnbc.com/2026/08/12/china-car-sales-data-byd-tesla-geely-vw.html",
+      "date": "2026-08-12T01:20:13.000Z",
       "source": "CNBC Markets",
       "badge": "global"
     },
     {
-      "title": "Wall Street just endorsed Jensen Huang&apos;s &apos;big concept&apos; for AI. What now?",
-      "body": "The first three-plus years of the AI build-out have been funded by record amounts of equity and debt issued by leading tech companies. Nvidia has a new idea.",
-      "link": "https://www.cnbc.com/2026/08/11/wall-street-endorsed-jensen-huangs-big-concept-for-ai-what-now.html",
-      "date": "2026-08-11T14:11:05.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "G.M’s ‘Car Guy’ Talks Electrics, China and Nepotism",
-      "body": "Mark Reuss became the automaker’s president seven years ago, ascending to a role his father was fired from decades before. We got the chance to speak with him.",
-      "link": "https://www.nytimes.com/2026/08/11/business/general-motors-mark-reuss.html",
-      "date": "2026-08-11T13:54:23.000Z",
+      "title": "David Ellison Floats Hollywood Exit as States Threaten His Warner Bros. Deal",
+      "body": "Mr. Ellison told Paramount executives that he was considering pulling the company out of California amid a lawsuit brought by state attorneys general.",
+      "link": "https://www.nytimes.com/2026/08/11/business/media/david-ellison-hollywood-paramount-warner-bros.html",
+      "date": "2026-08-12T00:33:00.000Z",
       "source": "NY Times",
       "badge": "global"
     },
     {
-      "title": "Robots That Walk and Talk Are Coming to Car Factories",
-      "body": "But experts warn they may not deliver the gains in efficiency that proponents claim.",
-      "link": "https://www.nytimes.com/2026/08/11/business/humanoid-robots-car-factories.html",
-      "date": "2026-08-11T13:45:34.000Z",
+      "title": "CSD submits exam fraud files to NACC",
+      "body": "Crime Suppression Division (CSD) investigators have submitted more than 3,000 pages of documents in the civil service exam fraud case to the National Anti-Corruption Commission (NACC) for consideration in legal action.",
+      "link": "https://www.bangkokpost.com/thailand/general/3300227/csd-submits-exam-fraud-files-to-nacc",
+      "date": "2026-08-12T00:23:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Judge Awards $250,000 to Musician Who Fled Trump-Led Kennedy Center Gig",
+      "body": "The center had sued Chuck Redd when he canceled a free concert last year, citing the addition of the Trump name to the venue. But a judge dismissed the case.",
+      "link": "https://www.nytimes.com/2026/08/11/arts/music/chuck-redd-kennedy-center.html",
+      "date": "2026-08-11T23:56:25.000Z",
       "source": "NY Times",
       "badge": "global"
     },
     {
-      "title": "S&P 500, Nasdaq open higher as investors weigh report of fresh U.S.-Iran peace deal - Reuters",
+      "title": "Court sets Nov 23 for Facebook lawsuits",
+      "body": "A legal battle brought by the Thailand Consumers Council against businesses allegedly involved in online scams conducted through Facebook has moved forward, with the Bangkok South Civil Court scheduling the next hearing ...",
+      "link": "https://www.bangkokpost.com/thailand/general/3300157/court-sets-nov-23-for-facebook-lawsuits",
+      "date": "2026-08-11T23:27:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Wall Street ends down as US-Iran peace optimism fades - Reuters",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxNVjkzU2JZemo3b1RFMlU3SU1qeTE0NEY0eHBaakpscDY4blhsX3c5VFdFUmxkWVk2Yk9ab040Z1dRbEN4SDMwQU9fSnFrWUN2SkZHNzZqOFRJc0FXWUNOZTFRTnRvX0hqRTFfMGdBMnh2S2lPMjlqZ01kSFNyT0...",
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNVjkzU2JZemo3b1RFMlU3SU1qeTE0NEY0eHBaakpscDY4blhsX3c5VFdFUmxkWVk2Yk9ab040Z1dRbEN4SDMwQU9fSnFrWUN2SkZHNzZqOFRJc0FXWUNOZTFRTnRvX0hqRTFfMGdBMnh2S2lPMjlqZ01kSFNyT0dqLVZMNDBZcm13a01lQWdScHVhSUFXQ215cjJGWXg2T180?oc=5",
-      "date": "2026-08-11T13:36:31.000Z",
+      "date": "2026-08-11T23:17:51.000Z",
       "source": "Google News",
       "badge": "us"
     },
     {
-      "title": "Ari Emanuel’s Company to Acquire 7 Broadway Theaters and 10 in the West End",
-      "body": "The purchase of ATG Entertainment, which operates dozens of venues worldwide, will require regulatory approval.",
-      "link": "https://www.nytimes.com/2026/08/11/theater/ari-emanuel-atg-entertainment.html",
-      "date": "2026-08-11T13:00:07.000Z",
-      "source": "NY Times",
-      "badge": "global"
+      "title": "Dual nationality issues set for talks",
+      "body": "Thailand will seek Malaysia's cooperation in addressing long-standing problems involving dual nationals along the border amid concerns over its potential security implications in the southern border provinces, National S...",
+      "link": "https://www.bangkokpost.com/thailand/general/3300122/dual-nationality-issues-set-for-talks",
+      "date": "2026-08-11T23:09:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
     },
     {
-      "title": "Stock Market Today: Dow, S&P 500, Nasdaq 100 Futures Rise as Trump Demands Compensation From Iran— Rocket - Benzinga",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMingJBVV95cUxNOU0xMUtaSDVMQVk5QmphSE91dWZ6ODR5V3lrZWZZVUxpWEZJT2ZkVjFEbVJFc1ZNVlIxTm1uak56ckJZNWpBRF9SVmsxdEs4Uzh2OU9yb0N1b2dLLUkyZ2cwRjdheC13bk9MalN0bndOc3VvSmRLd0lHSGZkSG...",
-      "link": "https://news.google.com/rss/articles/CBMingJBVV95cUxNOU0xMUtaSDVMQVk5QmphSE91dWZ6ODR5V3lrZWZZVUxpWEZJT2ZkVjFEbVJFc1ZNVlIxTm1uak56ckJZNWpBRF9SVmsxdEs4Uzh2OU9yb0N1b2dLLUkyZ2cwRjdheC13bk9MalN0bndOc3VvSmRLd0lHSGZkSGttN25qU1M2RUhzZ2JaOVNhT1BFdXlJNjFHcE82UkxOek53NnE2SVpGM0F2b0VONjNUSUllQ3VCS3VycHdFN2NCbXJaV3hGVkRSVFlJS0g0LWl5YW9LdEVOdGhnN0xldm5lLUdMYWROMDRfUElYSGVraEx3YW9UdkpYMVBOUl9EaXlrbm02WkhCTF8wZ1NBSlk0VC1JRWpWR0RXdDh2TWpR?oc=5",
-      "date": "2026-08-11T12:32:00.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
-      "title": "AI agent hacks gym to get its owner spot in pilates class",
-      "body": "The incident is being seen as the latest example of the AI tools going to any lengths to complete their tasks.",
-      "link": "https://www.bbc.co.uk/news/articles/cn0nww2qlp7o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-08-11T12:09:26.000Z",
+      "title": "First 'pounds for pylons' energy bill discount sites revealed",
+      "body": "Households living within 1600ft of upgraded pylons will get £250 a year off their electricity bills.",
+      "link": "https://www.bbc.co.uk/news/articles/c8rn42jp7d6o?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-08-11T23:03:04.000Z",
       "source": "BBC Business",
       "badge": "global"
     },
     {
-      "title": "The Perils of Wall St.’s Race to Pour Billions More Into A.I.",
-      "body": "Investors including BlackRock have committed an eye-popping amount to lend to the artificial intelligence industry. That enthusiasm isn’t shared by everyone.",
-      "link": "https://www.nytimes.com/2026/08/11/business/dealbook/ai-lending-nvidia-blackrock.html",
-      "date": "2026-08-11T11:59:33.000Z",
+      "title": "Sun-tanned cauliflowers and knobbly spuds - the heatwave veg that's good to eat",
+      "body": "British shoppers should expect to see more wonky vegetables due to repeated heatwaves.",
+      "link": "https://www.bbc.co.uk/news/articles/c4g360z8d2lo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-08-11T23:00:26.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "CoreWeave stock pops 14% as revenue doubles on accelerating AI infrastructure demand",
+      "body": "CoreWeave's revenue is surging as the AI boom continues, but the company is also sitting on $35 billion in debt.",
+      "link": "https://www.cnbc.com/2026/08/11/coreweave-crwv-q2-earnings-report-2026.html",
+      "date": "2026-08-11T22:51:06.000Z",
+      "source": "CNBC US",
+      "badge": "us"
+    },
+    {
+      "title": "Why Jensen Huang’s $500 billion AI financing plan faces a big risk from China",
+      "body": "Nvidia CEO Jensen Huang is pitching GPUs as long-term collateral to unlock $500 billion in funding. The question is how fast will his chips depreciate?",
+      "link": "https://www.cnbc.com/2026/08/11/nvidia-ai-funding-jensen-huang-china-risk.html",
+      "date": "2026-08-11T21:01:13.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "Thai Baht: Benign inflation keeps BoT on hold – Commerzbank - FXStreet",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxOcXkwcnRYNDlFVUZUMmNHS2JwR01IUVdJQkhaS0tOelM3WlJNdW9nMkhSdHZRWXRsTklnbkZoYzZHVm1rbjhQcmF6SmFtVXVqb1ZWTFZRVzN2bnpyN3VwQ3ZOLUlTRzRMSXlMX0dsQ0s5aThvOEcwX29lTzZ5OV...",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOcXkwcnRYNDlFVUZUMmNHS2JwR01IUVdJQkhaS0tOelM3WlJNdW9nMkhSdHZRWXRsTklnbkZoYzZHVm1rbjhQcmF6SmFtVXVqb1ZWTFZRVzN2bnpyN3VwQ3ZOLUlTRzRMSXlMX0dsQ0s5aThvOEcwX29lTzZ5OVh2MzVfRFdxZDZEdDkzNDdjX21TTTliNGMwWWgxeEl1czBj?oc=5",
+      "date": "2026-08-11T20:28:00.000Z",
+      "source": "Google News",
+      "badge": "thai"
+    },
+    {
+      "title": "Tributes to co-founder of John Pye auction house",
+      "body": "A statement issued by the firm said \"John lived a fantastic life full of laughter and hard work\".",
+      "link": "https://www.bbc.co.uk/news/articles/c8xn7k2ldzxo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-08-11T20:22:40.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "We&apos;re lifting our price target on Cardinal Health after issuing rosy profit guidance",
+      "body": "The quarter wasn't totally clean, but strong profitability matters the most.",
+      "link": "https://www.cnbc.com/2026/08/11/were-lifting-our-price-target-on-cardinal-health-after-issuing-rosy-profit-guidance-.html",
+      "date": "2026-08-11T20:05:46.000Z",
+      "source": "CNBC US",
+      "badge": "us"
+    },
+    {
+      "title": "Fed’s Hammack says multiple rate hikes may be needed to tame inflation - Fox Business",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxOZS1nd3g0OXlfRDdwcXpIbEwwMVZidl93TzUwUWlZdk9EeVVaazVPMThhNXlHRlJBZ21rdU1zc1BiVWNIbWJvR3JiczVYNDdXLVpXQzBScEVCbzliZTRLNUt0Qjhyd1FCUnFLekpsSk44WkdreXltMHpKQnBqXz...",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOZS1nd3g0OXlfRDdwcXpIbEwwMVZidl93TzUwUWlZdk9EeVVaazVPMThhNXlHRlJBZ21rdU1zc1BiVWNIbWJvR3JiczVYNDdXLVpXQzBScEVCbzliZTRLNUt0Qjhyd1FCUnFLekpsSk44WkdreXltMHpKQnBqXzQtMF94SmFmU3VyN1ZTTFpnRWdfMmtjUzFWS2txck1WczRy0gGmAUFVX3lxTE84UzVBbHEyTHQwV1pDQjU5OFRHOFNwTVFVTFE5S0h2dE9sM05zQlNKb0dJTkY5UHllakhvTFRaXzNBZENqazh1Y29BTzFBdHBDdkRYU1lmcjQ3Ul9NQjBacU9qeXBsanR2UEwzX2ZyY3lDMkpLbngxazJPSzc4b3JWUnY3REZiODJMWXNFREFLRndoUXVZQUpULVlMTl80bDZvbFJqZ2c?oc=5",
+      "date": "2026-08-11T19:58:00.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Is betting on elections using prediction markets illegal? Many states are unsure as midterms approach",
+      "body": "Twenty-three states have laws banning betting on elections, according to Pew Research. Not every state is sure these rules apply to prediction market trades.",
+      "link": "https://www.cnbc.com/2026/08/11/do-state-election-betting-bans-apply-to-prediction-markets.html",
+      "date": "2026-08-11T18:44:16.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "AI computing power is becoming a tradable asset class as CME launches futures contracts",
+      "body": "The exchange is partnering with Silicon Data to introduce two compute futures contracts on Oct. 5, pending regulatory review.",
+      "link": "https://www.cnbc.com/2026/08/11/ai-computing-power-becomes-a-tradable-asset-class-as-cme-starts-futures.html",
+      "date": "2026-08-11T18:09:08.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "G.M.’s ‘Car Guy’ Talks Electrics, China and Nepotism",
+      "body": "Mark Reuss became the automaker’s president seven years ago, ascending to a role his father was fired from decades before. We got the chance to speak with him.",
+      "link": "https://www.nytimes.com/2026/08/11/business/general-motors-mark-reuss.html",
+      "date": "2026-08-11T16:39:47.000Z",
       "source": "NY Times",
       "badge": "global"
     },
     {
-      "title": "Minor acquiring Bonchon Korean chicken chain",
-      "body": "SET-listed Minor International Plc (MINT) has announced plans to acquire 100% of Bonchon International Inc and its Korean fried chicken restaurant business.",
-      "link": "https://www.bangkokpost.com/business/general/3300033/minor-acquiring-bonchon-korean-chicken-chain",
-      "date": "2026-08-11T10:22:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
+      "title": "Frenzy for Solar Eclipse Glasses Takes Over London",
+      "body": "Ahead of Wednesday’s rare cosmic event, thousands of people in London are searching for protective eyewear, as prices surge and stocks sell out.",
+      "link": "https://www.nytimes.com/2026/08/11/world/europe/solar-eclipse-glasses-uk.html",
+      "date": "2026-08-11T15:22:49.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "⚫Commodity wrap - Oil, Gold, Natgas, Emiss (11.08.2026) - XTB.com",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMijwFBVV95cUxQSFhTTkVmcS1PSHpYY2tWd3R5N3BlNW9kM2tLdWVWQ1JsX0NkWF9EYnZMTzdNRlRmeEJUamJnNE5LLUc4a1BVQVdwREpkTnNRN243S2hGTmxzclZCdnRPV2gyZjFycnJLd2U0RHFZQ2s3QlRRSjF0WUtyNU1mU0...",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQSFhTTkVmcS1PSHpYY2tWd3R5N3BlNW9kM2tLdWVWQ1JsX0NkWF9EYnZMTzdNRlRmeEJUamJnNE5LLUc4a1BVQVdwREpkTnNRN243S2hGTmxzclZCdnRPV2gyZjFycnJLd2U0RHFZQ2s3QlRRSjF0WUtyNU1mU0ZaVTEtS05ocjUyYURLbFZ1UQ?oc=5",
+      "date": "2026-08-11T15:01:50.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
+      "title": "Bonds Are the ‘One Wrinkle on the Horizon.’ They’re a Threat to Stock Market’s Summer Party. - Barron's",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMikwFBVV95cUxONkV2MF9oeHExamtqR0VHMnI3UWVQUVp6VEhxUmktM2tMMTZ3MFVZV29lbDBOTnRrWFBudUF0M0ozbUg0d3JGbjlCTWxuUWlZUHpaYVMydG9SZF9nb3JwTnRXWUdTSkhBbkVSMDlxOFhyZXAxQUFjc3diajhvSG...",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxONkV2MF9oeHExamtqR0VHMnI3UWVQUVp6VEhxUmktM2tMMTZ3MFVZV29lbDBOTnRrWFBudUF0M0ozbUg0d3JGbjlCTWxuUWlZUHpaYVMydG9SZF9nb3JwTnRXWUdTSkhBbkVSMDlxOFhyZXAxQUFjc3diajhvSGpnNjRtRkpJNXI2Y0RQN2VfN0wwakk?oc=5",
+      "date": "2026-08-11T10:55:00.000Z",
+      "source": "Google News",
+      "badge": "bond"
     },
     {
       "title": "Hotel giant says ‘growing middle class’ boosted hotel demand despite Middle East hit",
@@ -90,22 +226,6 @@
       "badge": "us"
     },
     {
-      "title": "Thai PM suspends firearm purchase licences after school shooting",
-      "body": "Prime Minister Anutin Charnvirakul ​on Tuesday suspended the issuance of permits ​to buy firearms and &zwnj;said existing licences would be reviewed, days after a 14-year-old gunman killed nine people.",
-      "link": "https://www.bangkokpost.com/thailand/general/3300020/thai-pm-suspends-firearm-purchase-licences-after-school-shooting",
-      "date": "2026-08-11T09:33:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Wall Street giants hand Nvidia $500bn to fund boom in AI projects",
-      "body": "The money will be used to develop new data centres to house, operate, and cool miles of stacked computer chips that process AI data and actions.",
-      "link": "https://www.bbc.co.uk/news/articles/c78gr0jv0mdo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-08-11T08:44:52.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
       "title": "US Stock Market Today: S&P 500 Futures Edge Higher On Cooler Jobs And Oil Jitters - simplywall.st",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMizAFBVV95cUxNWHN6Z091QWFGblFodkFRVmhsVl9EN3BoMkdvbzhZb3h1eGw0emViZGpYcnoyTlZETDR6MEM1aTB6UURMaHFfREU3SVhvMVQ1QzREVXFfVVZLVjFYOU9oSmJNLTl4Z0E5Qzhrdzl3LXdUd3lIQXppNnhONkc4SW...",
       "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNWHN6Z091QWFGblFodkFRVmhsVl9EN3BoMkdvbzhZb3h1eGw0emViZGpYcnoyTlZETDR6MEM1aTB6UURMaHFfREU3SVhvMVQ1QzREVXFfVVZLVjFYOU9oSmJNLTl4Z0E5Qzhrdzl3LXdUd3lIQXppNnhONkc4SWtidnJpRHIza0NzSHM0dy11aVN2SWdRZEhyOXpWa2dXaFBCOU1OdHBEMDB6bjU0cjdVWUd2bzJld3lGZGc3aG05ckNtQm5JaFYwMjBySGLSAdIBQVVfeXFMUE1ydnd0enRXc3pNTXZPY0s0enJzNFVEZEhmeHJqVzZnS1RWRkJiQkdxWmM2eFUzdFQ1N1ljQzRpZGNjTktZYXQ1Zlc3TVhRS2JSdEM1VDNnQlBmNXdZRzZCN0xKQlJXdldxS0N6ekxXaFFkSHJrNFFDN3B6eWNJVEE2T2R6ZXlpTFRDSmdna19PemlLQ3RPM0thaEluX0NiS0xCWnh1OFRvWHo5dGRnaVRJRnIzN1ZBMVBJZm5VOHlaQ0F5djlwQmpPOFM1eWk4d1B3?oc=5",
@@ -114,71 +234,15 @@
       "badge": "us"
     },
     {
-      "title": "More than 10 firms pay up to $100,000 a month for fast access to Truth Social posts",
-      "body": "Trump Media expects the controversial service, which launched this month, to provide a new revenue stream, as it posts a quarterly loss.",
-      "link": "https://www.bbc.co.uk/news/articles/ce3q5nxpgk1o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-08-11T08:08:30.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
-      "title": "PM Anutin seeks royal order to remove embattled NBTC chief",
-      "body": "Prime Minister Anutin Charnvirakul has signed a request for a royal order to remove National Broadcasting and Telecommunications Commission (NBTC) chairman Sarana Boonbaichaiyapruck from his position, insisting the move ...",
-      "link": "https://www.bangkokpost.com/business/general/3299995/pm-anutin-seeks-royal-order-to-remove-embattled-nbtc-chief",
-      "date": "2026-08-11T07:50:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Jealous adult son stabs, shoots mother’s boyfriend",
-      "body": "SONGKHLA - A 29-year-old man who stabbed his mother&rsquo;s new partner at least 10 times before shooting him dead with his own handgun during a street brawl on Monday night surrendered to police on Tuesday.",
-      "link": "https://www.bangkokpost.com/thailand/general/3299925/jealous-adult-son-stabs-shoots-mothers-boyfriend",
-      "date": "2026-08-11T07:27:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Singapore stocks hit record high; Asian FX subdued",
-      "body": "SINGAPORE &mdash; Singapore stocks raced to ​a record high on Tuesday after the city-state &zwnj;lifted its annual growth forecast on an AI-powered boost, while rising oil prices and fading peace-deal hopes kept Southeas...",
-      "link": "https://www.bangkokpost.com/business/investment/3299960/singapore-stocks-hit-record-high-on-strong-gross-domestic-product-gdp-outlook-while-foreign-exchange-in-asia-is-subdued",
-      "date": "2026-08-11T05:46:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Gold and silver prices rise further on commodity markets - Apa.az",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiowFBVV95cUxNVE51VlV5WXMwWDg0bGlYMVZWNjZJZ1R0czlXQVJDUkthcEczeUNvMkZjRl9rUE5KZmk2QnlKeUJpNTJsR3RxNHlYUDdoS0pjRkdpQzRZYzhWZnlhYUxhaldNNExHVHo0eDF4YWh5dVd1VWRXQWdseWFvM19YNm...",
-      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNVE51VlV5WXMwWDg0bGlYMVZWNjZJZ1R0czlXQVJDUkthcEczeUNvMkZjRl9rUE5KZmk2QnlKeUJpNTJsR3RxNHlYUDdoS0pjRkdpQzRZYzhWZnlhYUxhaldNNExHVHo0eDF4YWh5dVd1VWRXQWdseWFvM19YNmRLZ2FRY1BlRHFwcUFLSTNGMzBTQ3FGQWlra09NTHNhVThnX280?oc=5",
-      "date": "2026-08-11T05:35:00.000Z",
+      "title": "Wall Street Today: DJIA, S&P 500, Nasdaq Comp Fall as Oil Gains and SPCX, GOOGL, APP, AMZN Drop - Moomoo",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiogFBVV95cUxOREd4bHNSX2tVTmV2b1doeVJTcE9jOUk1SFIxdnBVUE9jRndiM2lDMU9BaEpXVzNhckE3VGE2NUhtVEFqenZzNlR3b1JHZHY5eklmZFNFU05RdGtmR3MteG1nWDMweHRyMk5EWUpLNUxBeVRpR1hieGpST0RCRn...",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOREd4bHNSX2tVTmV2b1doeVJTcE9jOUk1SFIxdnBVUE9jRndiM2lDMU9BaEpXVzNhckE3VGE2NUhtVEFqenZzNlR3b1JHZHY5eklmZFNFU05RdGtmR3MteG1nWDMweHRyMk5EWUpLNUxBeVRpR1hieGpST0RCRnFIYWNVTFJYbHBIVTVHb01WeDRYNjFvRVF2VXlHUUExUWt0Q0E?oc=5",
+      "date": "2026-08-11T07:00:00.000Z",
       "source": "Google News",
-      "badge": "commodity"
+      "badge": "us"
     },
     {
-      "title": "Accused murderer Chalong in court, denied bail",
-      "body": "Police have charged politician Chalong Riewraeng with premeditated murder and other serious offences in the shooting death of the Nonthaburi provincial administration chief, and he was denied release on bail by the provi...",
-      "link": "https://www.bangkokpost.com/thailand/general/3299943/accused-murderer-chalong-in-court-denied-bail",
-      "date": "2026-08-11T05:20:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Vietnam's VinSpace signs SpaceX launch deal",
-      "body": "HANOI &mdash; VinSpace, a ​unit of Vietnamese conglomerate Vingroup, ​has signed &zwnj;a launch contract with SpaceX for its satellite missions, the company said on Tuesday.",
-      "link": "https://www.bangkokpost.com/business/general/3299942/vietnams-vinspace-signs-spacex-launch-deal-for-2027",
-      "date": "2026-08-11T04:48:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Getting to the heart of the matter",
-      "body": "Heart failure is often seen as the point of no return, but new approaches to diagnosis, mechanical circulatory support and heart transplants are changing the outlook for patients once considered beyond saving.",
-      "link": "https://www.bangkokpost.com/business/general/3299758/getting-to-the-heart-of-the-matter",
-      "date": "2026-08-11T00:10:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Inflation Reports Could Test Warsh’s Tough Talk - WSJ",
+      "title": "Inflation Reports Could Test Warsh’s Tough Talk - wsj.com",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxOTTd1ZUE0ajFvVXlDSENJcExxWVpFSlBJWXkzSmF5X1N1OFlJbU9yNFBZUnM1dXk5R1VaaEp0SlNOSlMya0hYcFI4VVd4LTM5ZmZGMDNIVi04SmhVMi1fOFdLc2xIdjhCRUlTc0U3Uk1JNDZxNGxjREoxZk5LeE...",
       "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOTTd1ZUE0ajFvVXlDSENJcExxWVpFSlBJWXkzSmF5X1N1OFlJbU9yNFBZUnM1dXk5R1VaaEp0SlNOSlMya0hYcFI4VVd4LTM5ZmZGMDNIVi04SmhVMi1fOFdLc2xIdjhCRUlTc0U3Uk1JNDZxNGxjREoxZk5LeEd5RE9FYlFGQlRuTFRwZGJ5bTM5ZnFkcFFtRzVZZXFqcHRx?oc=5",
       "date": "2026-08-11T00:00:00.000Z",
@@ -218,44 +282,12 @@
       "badge": "us"
     },
     {
-      "title": "Nvidia lines up $500 billion in financing as CEO Jensen Huang tells CNBC his chips are ‘investable asset’",
-      "body": "Nvidia CEO Jensen Huang argued that because its hardware is broadly adopted, flexible and transferable, lenders can underwrite compute as revenue-generating.",
-      "link": "https://www.cnbc.com/2026/08/10/nvidia-wall-street-asset-managers-500-billion-ai-push.html",
-      "date": "2026-08-10T22:09:00.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "Treasury Rates Today: August 10, 2026 - forbes.com",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5\" target=\"_blank\">Treasury...",
-      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5",
-      "date": "2026-08-10T20:39:00.000Z",
+      "title": "TA FUND to Vietnamese Dong Price Today | Live TA to VND Converter & Exchange Rate - CryptoRank",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiUEFVX3lxTE5JSW82eGJ2UlhSQXdzQ3MzbS1qUnhjQUFBcGJEU2hJYkZzUmZUNXFaZkZYQ00xNzVpRk16Mk53Qkxid3M4aWh4R0xheV9Ic2ZK?oc=5\" target=\"_blank\">TA FUND to Vietnamese Dong Price Today ...",
+      "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5JSW82eGJ2UlhSQXdzQ3MzbS1qUnhjQUFBcGJEU2hJYkZzUmZUNXFaZkZYQ00xNzVpRk16Mk53Qkxid3M4aWh4R0xheV9Ic2ZK?oc=5",
+      "date": "2026-08-10T21:55:35.000Z",
       "source": "Google News",
-      "badge": "bond"
-    },
-    {
-      "title": "Finance ministers & central bank governors from 191 countries to gather for Spring Meetings of IMF, World Bank - News On AIR",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxOd3pCSk13R2w3RU5id2M4R1Z4Z18xZjNYOURITFA0WVQ0dlVqZHU4cC15eDhROWNUS2FRbVRMeGVmeC1oYjAtejU0eFRXdEtoNV9Ub25kYWpOQVJHbWp2aHNJaE5ZZHN2RnB2TENCMXJpRG9TU0R3R1VXeWEzMW...",
-      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOd3pCSk13R2w3RU5id2M4R1Z4Z18xZjNYOURITFA0WVQ0dlVqZHU4cC15eDhROWNUS2FRbVRMeGVmeC1oYjAtejU0eFRXdEtoNV9Ub25kYWpOQVJHbWp2aHNJaE5ZZHN2RnB2TENCMXJpRG9TU0R3R1VXeWEzMWFNWktfZjRnZ3lqM0l3aXB2dnRzQ1NGbkRPN0FwNGtlbklGTHdxanBNZG10bUdsbE1lRGlSVkxRZ3lsUkhQMGxHblNMb1VwWUVOWTN6dE5vQQ?oc=5",
-      "date": "2026-08-10T18:40:04.000Z",
-      "source": "Google News",
-      "badge": "economic"
-    },
-    {
-      "title": "Three reasons Goldman&apos;s co-head of global banking and markets says to stay invested",
-      "body": "Goldman Sachs' Ashok Varadhan pointed to three reasons for his constructive outlook.",
-      "link": "https://www.cnbc.com/2026/08/10/three-reasons-goldmans-co-head-of-global-banking-and-markets-says-to-stay-invested.html",
-      "date": "2026-08-10T18:36:26.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "World&apos;s biggest chipmaker TSMC&apos;s sales surge 45% amid buoyant AI demand",
-      "body": "TSMC makes chips for Big Tech customers like Nvidia and Google, so the firm's financial figures are closely watched as a sign of AI semiconductor demand.",
-      "link": "https://www.cnbc.com/2026/08/10/tsmc-revenue-surge-ai-chip-big-tech.html",
-      "date": "2026-08-10T13:39:56.000Z",
-      "source": "CNBC US",
-      "badge": "us"
+      "badge": "vietnam"
     },
     {
       "title": "Interest rates may stay higher for longer. What that means for consumers - CNBC",
@@ -266,20 +298,20 @@
       "badge": "us"
     },
     {
+      "title": "Gold price exceeds $4,400 on commodity markets - Apa.az",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiggFBVV95cUxPRjhZNUVpbzlQak1uTTBIbVEzcUxacFJzUDJUUGpVXzJJTlFaLXFPcElfQVI0SVlzaVlQc3NOYmUySUZydnZ4VWVJR0RwOERIa1dqWHpvN2RLZzljYmttOGpseDR1LWVkOHVRcWVCSTZ4NjEydWFlaVp5RWVhYX...",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPRjhZNUVpbzlQak1uTTBIbVEzcUxacFJzUDJUUGpVXzJJTlFaLXFPcElfQVI0SVlzaVlQc3NOYmUySUZydnZ4VWVJR0RwOERIa1dqWHpvN2RLZzljYmttOGpseDR1LWVkOHVRcWVCSTZ4NjEydWFlaVp5RWVhYXNXbTV3?oc=5",
+      "date": "2026-08-10T06:12:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
       "title": "Commodities Roundup: Oil Holds Steady, Copper Dips Slightly, Gold Surges - Sunsirs",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEX0UwVVNNc25aTEdnVjFTNDQwN3pfTHZPUUNqMm12YUtIeWhGY2R4c3ZqeHVrQkE3VWVZQ3dZN3djMlhacXNxcDQyRFJpSFF1VkN5YVpxendlNU1WdHc?oc=5\" target=\"_blank\">Commodities Roundup:...",
       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEX0UwVVNNc25aTEdnVjFTNDQwN3pfTHZPUUNqMm12YUtIeWhGY2R4c3ZqeHVrQkE3VWVZQ3dZN3djMlhacXNxcDQyRFJpSFF1VkN5YVpxendlNU1WdHc?oc=5",
       "date": "2026-08-10T01:32:16.000Z",
       "source": "Google News",
       "badge": "commodity"
-    },
-    {
-      "title": "The Federal Reserve Just Released Its August Inflation Forecast, and It Could Put the FOMC on a Collision Course for Its September Meeting - Yahoo Fin",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMipgFBVV95cUxQU0FfOGZQTThHdmNEWF82S1JlMHZ1VGdnQTZ0S1lSaHZneWMzNEM5Nzl5V1Y2VEZUd3hSTHBveUtWaGlMNm9IMDFnQWtxWUFIX1dUbXZhVUFMaF9yS3Z1ZWtFSV9aZ01PZ2htZmN0YnZZSFRyRlc1b2NKbGpJbz...",
-      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQU0FfOGZQTThHdmNEWF82S1JlMHZ1VGdnQTZ0S1lSaHZneWMzNEM5Nzl5V1Y2VEZUd3hSTHBveUtWaGlMNm9IMDFnQWtxWUFIX1dUbXZhVUFMaF9yS3Z1ZWtFSV9aZ01PZ2htZmN0YnZZSFRyRlc1b2NKbGpJbzZMNzJvNmZPSGcyWHFUdGZydTZjMjdlSTkzTGtmc0QzOWxpSWZjRFBB?oc=5",
-      "date": "2026-08-09T23:28:24.000Z",
-      "source": "Google News",
-      "badge": "us"
     },
     {
       "title": "Weekly market commentary - BlackRock",
@@ -290,23 +322,7 @@
       "badge": "bond"
     },
     {
-      "title": "Berkshire earnings rose last quarter and CEO Greg Abel is starting to deploy Buffett&apos;s massive cash hoard",
-      "body": "Strength across its energy, railroad and manufacturing businesses more than offset weaker insurance results.",
-      "link": "https://www.cnbc.com/2026/08/08/berkshire-hathaway-earnings-q2-2026.html",
-      "date": "2026-08-08T13:28:00.000Z",
-      "source": "CNBC US",
-      "badge": "us"
-    },
-    {
-      "title": "SET executives upbeat on renewed investor confidence - Bangkok Post",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTUhVLXBqWXVQWUpuU3RFMVVrRE04RVJyVmV3bFBhNzdIRURfT1p2V1lfS0FxMklEMEpkdjBfVDUwM0k0OUpiWWlIU2xVbkEyYS0xRGs5ZXROZjRGb0dWbllGYzFpTGowT1IzNGljZjd3ajdyTHRXVkpHVnN5ZW...",
-      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTUhVLXBqWXVQWUpuU3RFMVVrRE04RVJyVmV3bFBhNzdIRURfT1p2V1lfS0FxMklEMEpkdjBfVDUwM0k0OUpiWWlIU2xVbkEyYS0xRGs5ZXROZjRGb0dWbllGYzFpTGowT1IzNGljZjd3ajdyTHRXVkpHVnN5ZWdrT3Q4enFhMGRmZ215bnctU3JlNVYzMVVkZFpMbFdkQnVLOW04WTg5NUc?oc=5",
-      "date": "2026-08-08T02:15:00.000Z",
-      "source": "Google News",
-      "badge": "thai"
-    },
-    {
-      "title": "The Bond Market Is Signaling Rising Risks. Investors Should Listen. - nytimes.com",
+      "title": "The Bond Market Is Signaling Rising Risks. Investors Should Listen. - The New York Times",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMilwFBVV95cUxNZlhBejhhZWNUdDRiX05LWHFRaGJhX0ltazRRWTFPZWdvazNWX0U1WDg4NmpIb0swb1dsR21KTzg2MUc5Z21ORnJXdWFxX2xybjdsOG1lUnV4aWs3TWw3QmR5TUFfMDZ5Qkc5WVhxSWVXT2dUZDVneUxqRms3V1...",
       "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNZlhBejhhZWNUdDRiX05LWHFRaGJhX0ltazRRWTFPZWdvazNWX0U1WDg4NmpIb0swb1dsR21KTzg2MUc5Z21ORnJXdWFxX2xybjdsOG1lUnV4aWs3TWw3QmR5TUFfMDZ5Qkc5WVhxSWVXT2dUZDVneUxqRms3V1dBeDJvUzJtT1R4Z01NYlZNbXBBNnVBWWdF?oc=5",
       "date": "2026-08-07T13:00:06.000Z",
@@ -354,17 +370,17 @@
       "badge": "commodity"
     },
     {
-      "title": "European Natural Resources Fund: September rate hike expectations resurface; among commodities, copper and uranium remain relatively bullish for now. ",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMivwFBVV95cUxOcjdOTGs5Z1NhNEN0blNoc1hnR0FGNms5NXVWbk1rTVVmNHFuMmlCSHA5d2Y0THFaSnliTEJmOTkwSGpsWFBHSnJYbGs5RUJ5azhndUoxUkxGY1l4SEJZYXI5LUhEUkJSWm14T1loTkRwdFhPWUdNTDZobHRPR1...",
-      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOcjdOTGs5Z1NhNEN0blNoc1hnR0FGNms5NXVWbk1rTVVmNHFuMmlCSHA5d2Y0THFaSnliTEJmOTkwSGpsWFBHSnJYbGs5RUJ5azhndUoxUkxGY1l4SEJZYXI5LUhEUkJSWm14T1loTkRwdFhPWUdNTDZobHRPR1hvLS15V0E1NVZTWHpLVW1zVml0ZlRVcWNOWWYtQS1XaHNFTjRTQkRQZ0I1VXBxUXhiQy0zbmJ5dmdRNEx1N0tXUQ?oc=5",
-      "date": "2026-07-29T06:29:08.000Z",
-      "source": "Google News",
-      "badge": "commodity"
-    },
-    {
       "title": "30-year Treasury yields stick above 5% - marketplace.org",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiqgFBVV95cUxPR09FbUdJSUhucGRsalo3eEd5aVgtd2paTTJqVlUwSUpLUUNvc0o0Q29FbWVQNEdLS0hXTC1FUUlmSDRhUDdaUDcxdmozTU92b1FGbGtBNkNacGs0NzhWajdKQnBsaVR0czE0Ym9WNC1pZzFkSW84UXF5TWlzYT...",
       "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPR09FbUdJSUhucGRsalo3eEd5aVgtd2paTTJqVlUwSUpLUUNvc0o0Q29FbWVQNEdLS0hXTC1FUUlmSDRhUDdaUDcxdmozTU92b1FGbGtBNkNacGs0NzhWajdKQnBsaVR0czE0Ym9WNC1pZzFkSW84UXF5TWlzYTZiRVlqWHNvME5MMTBabUlUcE1mbVd0SDE0V1o3MGFHaUhuT21hS1UwdXVZZw?oc=5",
+      "date": "2026-07-22T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "bond"
+    },
+    {
+      "title": "Thai bonds beating Asian peers, analysts predict further gains - The Edge Singapore",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMivAFBVV95cUxNWTdjb1ZoS2NqVmsxZ2pLU0x1elhrT3ZRWkdpTGpsQmFtcGx4UkRDcTJBM3JZVzZydUFBUlpOZTl1SlNWSnhnZmlhWDgyS1hQd3JMdVZtUVhLQkRRMlFBVGoxeG16dUktNHdnVFlBcEd3anB4VVdiNm9lQkEyS2...",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNWTdjb1ZoS2NqVmsxZ2pLU0x1elhrT3ZRWkdpTGpsQmFtcGx4UkRDcTJBM3JZVzZydUFBUlpOZTl1SlNWSnhnZmlhWDgyS1hQd3JMdVZtUVhLQkRRMlFBVGoxeG16dUktNHdnVFlBcEd3anB4VVdiNm9lQkEyS2pqbUhXZDJ1WkZyb3JPeVZWaTZJcGNJeEhMbUdHTUd2YVdhVkllS2hEZko5MHFWQXFzS210TkFvYmRHVTUtTdIBwgFBVV95cUxQa0trc3RsWVZnMVVLY2ZKbkhMZEZtTlNQVktGRm56UHp3TFlTR0hTUEVFNEMydnJ6Q1FSOGtvd3hmNkNKOURlTmVMdjc1MTdzdVNobkRHWTBBakdSVHlvVFBnUG5ldThHTjhfWklQc29yNVhoeVFlbExxS2hhdnl2RHZBTnZURzhYRnZpVk5NR2dLaXZWWW81eDVCT181TGdLZ3JVWERJTXRCUFZfUk9EYXVoSWJlUTN3RTk5Tkl6aGFFdw?oc=5",
       "date": "2026-07-22T07:00:00.000Z",
       "source": "Google News",
       "badge": "bond"
@@ -378,28 +394,12 @@
       "badge": "economic"
     },
     {
-      "title": "Thai inflation likely below 2.8% for 2026, policy to remain accommodative: central bank chief - The Business Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMi0gFBVV95cUxNYWIwblhPd1FjSXByYlptbFRXVm9RQzlFQlVTeGdCSnJranJiZHNPWmZsbFAwSFdPVlVvbEh5c1hQYWFKMHdEckJmUVRIaGRPRkJlajEwTVdmMUVLMnlPX1lDSDE1amFVZDdGQUNSeGxVa3YtZVl1ZnptV1VROF...",
-      "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNYWIwblhPd1FjSXByYlptbFRXVm9RQzlFQlVTeGdCSnJranJiZHNPWmZsbFAwSFdPVlVvbEh5c1hQYWFKMHdEckJmUVRIaGRPRkJlajEwTVdmMUVLMnlPX1lDSDE1amFVZDdGQUNSeGxVa3YtZVl1ZnptV1VROFlZN0toMVBFWVdIYk9TR2wxcDJxNktiNlZkREVwNEFIRGthWkVacGJTeDlYNWZER1liVFFkRktKLUx6WTFveHNSQXFudFltdEVEQVJHRHpOSEwtNWc?oc=5",
-      "date": "2026-07-11T07:00:00.000Z",
+      "title": "New Aom Plus bonds offer low entry and yields up to 2.8% - Nation Thailand",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiYkFVX3lxTFAtLTlzclpQeEo4ZlhFWFcweS1HcTlPaHRMNUdhTEloME9BSVNrYzBnMUN5YXZWUWxieUl1V3FHSU9kYm1DSWNDajI2Q1RaelFkeWlyeUVOQVh2cnUwc0hpRHFB?oc=5\" target=\"_blank\">New Aom Plus bo...",
+      "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFAtLTlzclpQeEo4ZlhFWFcweS1HcTlPaHRMNUdhTEloME9BSVNrYzBnMUN5YXZWUWxieUl1V3FHSU9kYm1DSWNDajI2Q1RaelFkeWlyeUVOQVh2cnUwc0hpRHFB?oc=5",
+      "date": "2026-07-17T07:00:00.000Z",
       "source": "Google News",
-      "badge": "economic"
-    },
-    {
-      "title": "Carbon Pricing in the ASEAN Region: Moving from ambition to architecture - International Institute for Sustainable Development",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMimgFBVV95cUxOVHRRaEt5bXVURHRzNzR6eDBnbWZOUFVKUGw2cEV0d1hhSWozMXg1Z1paVVRVUTZzOWlNbjZDS3JUdks1R0N1RTdncHNHV0QyOGQ5NTdoaC1oOEctZ2VTOVR0WV9FV0c3NTAwT25yaGZ2M1BNNUVSQ0M5dHg4Tn...",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOVHRRaEt5bXVURHRzNzR6eDBnbWZOUFVKUGw2cEV0d1hhSWozMXg1Z1paVVRVUTZzOWlNbjZDS3JUdks1R0N1RTdncHNHV0QyOGQ5NTdoaC1oOEctZ2VTOVR0WV9FV0c3NTAwT25yaGZ2M1BNNUVSQ0M5dHg4TnFYN01Hc29DZTVxMDJSVHhLaElwSUFYR1VYanV3?oc=5",
-      "date": "2026-06-19T19:27:42.000Z",
-      "source": "Google News",
-      "badge": "em"
-    },
-    {
-      "title": "Executive summary – Southeast Asia Energy Outlook 2026 – Analysis - IEA – International Energy Agency",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMihwFBVV95cUxNdXA0NmV2RUkxVGNtXzVob1hvZzlVMGNUTUJWTzhSX3FLVE9yUFRvbE1lajRDM09zbWVCUlg0d0p4RmotYmFWZDI0YnBua0ZOZkNDa3gtNmJaMmVPcjVaMXhMVjZQeU5aR3MtZmRqd1RLTjFMM21KcFkzaFliYT...",
-      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNdXA0NmV2RUkxVGNtXzVob1hvZzlVMGNUTUJWTzhSX3FLVE9yUFRvbE1lajRDM09zbWVCUlg0d0p4RmotYmFWZDI0YnBua0ZOZkNDa3gtNmJaMmVPcjVaMXhMVjZQeU5aR3MtZmRqd1RLTjFMM21KcFkzaFliYTFMaFZGWUlXRkE?oc=5",
-      "date": "2026-06-16T09:00:53.000Z",
-      "source": "Google News",
-      "badge": "em"
+      "badge": "bond"
     }
   ]
 }
