@@ -1,19 +1,123 @@
 {
-  "updated": "2026-08-31T06:39:45.666Z",
+  "updated": "2026-08-31T14:50:26.209Z",
   "items": [
     {
-      "title": "Govt identifiies 767 factories operating unlawfully",
-      "body": "The government has identified 767 factories operating illegally nationwide, but mostly in the Eastern Economic Corridor (EEC),  with 131 already shutdown.",
-      "link": "https://www.bangkokpost.com/thailand/general/3311180/govt-identifiies-767-factories-operating-unlawfully",
-      "date": "2026-08-31T05:37:00.000Z",
+      "title": "G20 Finance Officials Gather in U.S. as Iran War Grips Global Economy",
+      "body": "The meeting, which China and Russia are attending, is focused on the ongoing economic shock from the war in Iran, which has driven up oil prices globally.",
+      "link": "https://www.nytimes.com/2026/08/31/business/g20-finance-iran-bessent.html",
+      "date": "2026-08-31T14:41:27.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "U.S. Start-Up and Saudi Arabia Form Data Center Partnership",
+      "body": "Together AI, which serves open-source artificial intelligence models, announced a deal to use compute from Humain in Saudi Arabia, where it can bypass U.S. backlash over data centers.",
+      "link": "https://www.nytimes.com/2026/08/31/business/dealbook/together-ai-humain-saudi-arabia-data-center.html",
+      "date": "2026-08-31T14:19:11.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Global Oil Price Rises to $90 a Barrel After U.S. and Iran Trade Attacks",
+      "body": "The first attacks in a month jolted energy markets. The average U.S. gasoline price remained 37 percent higher since the war began.",
+      "link": "https://www.nytimes.com/2026/08/31/business/oil-prices-iran-war.html",
+      "date": "2026-08-31T14:14:40.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "The &apos;choose your own adventure&apos; earnings: Why retailers are handling tariff refunds so differently",
+      "body": "Retailers have diverged on how they've reported tariff refunds in their earnings this quarter, with some choosing to lower prices and others boosting margins.",
+      "link": "https://www.cnbc.com/2026/08/30/trump-tariff-refunds-walmart-home-depot-target.html",
+      "date": "2026-08-31T14:12:05.000Z",
+      "source": "CNBC US",
+      "badge": "us"
+    },
+    {
+      "title": "Southern shortcut bridges get go-ahead",
+      "body": "Plans have been put into motion by the government to build two major bridges in the nation's southern region with an aim to improve transport connectivity, support tourism and stimulate local economic activity.",
+      "link": "https://www.bangkokpost.com/thailand/general/3311325/southern-shortcut-bridges-get-goahead",
+      "date": "2026-08-31T12:48:00.000Z",
       "source": "Bangkok Post",
       "badge": "thai"
     },
     {
-      "title": "Pattaya bar shooting leaves two wounded",
-      "body": "CHON BURI - A late-night dispute between two men in a Pattaya bar escalated into gunfire in the early hours of Monday, leaving both men wounded in the street after three shots were fired.",
-      "link": "https://www.bangkokpost.com/thailand/general/3311170/pattaya-bar-shooting-leaves-two-wounded",
-      "date": "2026-08-31T05:06:00.000Z",
+      "title": "Aon CEO says insurance broker seeks to build &apos;premiere middle market platform&apos; with purchase of rival USI",
+      "body": "The insurance broker said the merger will create the premiere U.S. middle-market platform.",
+      "link": "https://www.cnbc.com/2026/08/31/aon-ceo-says-usi-deal-seeks-to-build-premiere-middle-market-insurance-platform.html",
+      "date": "2026-08-31T12:35:32.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "Crypto exchange Gemini not at fault for collapse of Earn lending program, arbitrator says",
+      "body": "An arbitrator earlier this month said Gemini Space Station did not mislead users of its Earn program.",
+      "link": "https://www.cnbc.com/2026/08/31/gemini-not-at-fault-for-collapse-of-earn-lending-program-arbitrator-says.html",
+      "date": "2026-08-31T12:17:54.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "Kalshi partners with brokerage Alpaca as it tries to build its international audience",
+      "body": "The prediction market platform and the financial infrastructure and brokerage startup are working to get Kalshi's event contracts to global investors.",
+      "link": "https://www.cnbc.com/2026/08/31/kalshi-looks-international-partners-with-brokerage-alpaca.html",
+      "date": "2026-08-31T12:00:01.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "A $480,000-a-Year Pill Reflects a New Normal for Cancer Drugs",
+      "body": "Rasonque, the new pancreatic cancer treatment from Revolution Medicines, illustrates the huge inflation in cancer drug prices over the past two decades.",
+      "link": "https://www.nytimes.com/2026/08/31/business/pancreatic-cancer-drug-prices.html",
+      "date": "2026-08-31T09:03:03.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Thailand's trade account in balance in July, central bank says",
+      "body": "Thailand's trade account ​was in balance &zwnj;in July, the Bank of Thailand said on Monday.",
+      "link": "https://www.bangkokpost.com/business/general/3311278/thailands-trade-account-in-balance-in-july-central-bank-says",
+      "date": "2026-08-31T08:56:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "US Stock Market Today: S&P 500 Futures Slip As Inflation Worries And Tech Earnings Loom - simplywall.st",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMi2wFBVV95cUxQdHk3VXo3SlI0dEpUYmFVaGVFZE1lZF9NN3Y2cEJnbGtLSFRCR08zU3hxMlFhTTNZbmp3VXViV1FWUEU2RGZYZUQwdkplc01SUWlfNnA5dElSZlBHT3dzMGRibTI2NVJJWFNGNnEwMi1Kd1g5LXA5QjltRWIwdT...",
+      "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQdHk3VXo3SlI0dEpUYmFVaGVFZE1lZF9NN3Y2cEJnbGtLSFRCR08zU3hxMlFhTTNZbmp3VXViV1FWUEU2RGZYZUQwdkplc01SUWlfNnA5dElSZlBHT3dzMGRibTI2NVJJWFNGNnEwMi1Kd1g5LXA5QjltRWIwdTBzSUo2dkNGVENReGxFbUlwY1puNnN4dDlKdkFfSG5MU0ZoeEotSHRaLTV1cjJnczhzM0VybXFFQTJsUlIxY3lkWndialY3cEVVcXhlNG5Lb1RjUlhYSXpxdi1PYVHSAeABQVVfeXFMTnZGZ2pFVWNpNmhpLXFJaWhMM25GQVl4cjdpZnN5Vkg0azQxM0JJQTNRcmVPWVV3VldfV2tISl80aTUtSXVIWXY1ejNXSVlxdFFNRlF5eE5LUWxadGI2ZjFFenNBUmtFblpXUklLX0lTUE1VaUhZenZ3dHlZa3JBd29LR0JNbVRJamY4di1FcllQQWc1c0lQdURXOVlHVFN2Q2FPX0pmRmM4YW11bko3NTZ0QURsWjRDMUhWZjR5Qm1yMmhxU21jQjRIYUFWaHc1NEw5eHlCaTZYWm14blYzWHI?oc=5",
+      "date": "2026-08-31T08:21:35.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Upcoming tech trends",
+      "body": "Artificial intelligence is moving out of chat boxes and into glasses, rings, earphones, phones and household appliances, promising expatriates in Thailand practical assistance with language, navigation, health and domest...",
+      "link": "https://www.bangkokpost.com/life/tech/3311175/upcoming-tech-trends",
+      "date": "2026-08-31T08:12:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Nepal recovers bodies but presses on for trapped tunnel workers",
+      "body": "KATHMANDU (NEPAL) - Nepali rescuers raced on Monday in a bid to free dozens of hydropower workers believed trapped in tunnels after devastating floods as search efforts entered a sixth day, officials said.",
+      "link": "https://www.bangkokpost.com/world/3311208/nepal-recovers-bodies-but-presses-on-for-trapped-tunnel-workers",
+      "date": "2026-08-31T06:58:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "US carrier visit to Thailand's Pattaya lifts hope and sex-tourism risk",
+      "body": "After a long deployment in the Middle East, a US Navy aircraft carrier will dock in Thailand's resort city of Pattaya this week, raising hopes of an economic boost, even as local authorities cracked down on parts of the ...",
+      "link": "https://www.bangkokpost.com/thailand/general/3311214/us-carrier-visit-to-thailands-pattaya-lifts-hope-and-sextourism-risk",
+      "date": "2026-08-31T06:53:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "US hosts G20 finance talks with growth, Iran pressure on agenda",
+      "body": "ASHEVILLE (UNITED STATES) - Finance leaders from the Group of 20 major economies open talks Monday at a US-hosted gathering, as the Trump administration seeks consensus on lifting global growth while ramping up economic ...",
+      "link": "https://www.bangkokpost.com/business/general/3311203/us-hosts-g20-finance-talks-with-growth-iran-pressure-on-agenda",
+      "date": "2026-08-31T06:49:00.000Z",
       "source": "Bangkok Post",
       "badge": "thai"
     },
@@ -26,20 +130,12 @@
       "badge": "global"
     },
     {
-      "title": "Jackson Hole analyst roundup: Warsh&apos;s speech sends hike chances higher, may put Fed `at odds&apos; with Treasury",
-      "body": "Fed Chair Kevin Warsh's hawkish stance reinforced expectations of a relatively tighter stance at the Federal Open Market Committee meeting in September.",
-      "link": "https://www.cnbc.com/2026/08/31/jackson-hole-fed-chair-kevin-warsh-hawkish-rate-hikes-analysts.html",
-      "date": "2026-08-31T03:47:28.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "Thai volleyballers bringing home Asian title and Olympic ticket",
-      "body": "Thai spikers are due back in Bangkok on Monday night after their heroic performance, securing an automatic Olympic berth as the Asian champions.",
-      "link": "https://www.bangkokpost.com/sports/3311149/thai-volleyballers-bringing-home-asian-title-and-olympic-ticket",
-      "date": "2026-08-31T03:00:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
+      "title": "BYD shares slide as fierce China competition dents first-half earnings",
+      "body": "BYD shares slid after the automaker released its latest results on Friday, despite higher second-quarter profit and overseas growth.",
+      "link": "https://www.cnbc.com/2026/08/31/byd-shares-slide-as-fierce-china-competition-dents-first-half-earnings.html",
+      "date": "2026-08-31T04:01:47.000Z",
+      "source": "CNBC US",
+      "badge": "us"
     },
     {
       "title": "How the US-Canada trade war is being felt on both sides of the border",
@@ -66,34 +162,10 @@
       "badge": "thai"
     },
     {
-      "title": "How the 'Blue Senators' claim turned into a sprawling probe",
-      "body": "In late July, Internet Dialogue on Law Reform (iLaw) Director Yingcheep Atchanont presented evidence alleging that nine Bhumjaithai Party (BJT) figures, including party leader and Prime Minister Anutin Charnvirakul, mani...",
-      "link": "https://www.bangkokpost.com/thailand/politics/3310988/how-the-blue-senators-claim-turned-into-a-sprawling-probe",
-      "date": "2026-08-30T21:40:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "Smartphone demand shifts to more expensive models",
       "body": "Thailand's smartphone market is undergoing a sharp shift towards higher-priced devices as soaring memory costs squeeze entry-level models, pushing up average prices even as shipments decline.",
       "link": "https://www.bangkokpost.com/business/general/3311098/smartphone-demand-shifts-to-more-expensive-models",
       "date": "2026-08-30T20:51:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Call for robust reforms to spread full benefits of 5G",
-      "body": "While Thailand was an early regional leader in 5G rollout, unlocking the full potential of next-generation connectivity, the \"Industry 4.0\" stage will require bridging a substantial adoption gap among small businesses to...",
-      "link": "https://www.bangkokpost.com/business/general/3311028/call-for-robust-reforms-to-spread-full-benefits-of-5g",
-      "date": "2026-08-30T20:46:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Economist smirks at high-income aspiration",
-      "body": "It is almost impossible for Thailand to become a high-income economy within 12 years, according to the blunt analysis of an economist at Thailand Development Research Institute (TDRI).",
-      "link": "https://www.bangkokpost.com/business/general/3311048/economist-smirks-at-highincome-aspiration",
-      "date": "2026-08-30T20:41:00.000Z",
       "source": "Bangkok Post",
       "badge": "thai"
     },
@@ -104,46 +176,6 @@
       "date": "2026-08-30T14:55:00.000Z",
       "source": "Google News",
       "badge": "us"
-    },
-    {
-      "title": "U.A.E. To Review Banque Misr, Targeted by Iran Sanctions",
-      "body": "The Treasury Department accused Banque Misr’s branches in the United Arab Emirates of helping Iran. The Emirati central bank promised an examination.",
-      "link": "https://www.nytimes.com/2026/08/30/world/middleeast/uae-banque-misr-treasury-iran.html",
-      "date": "2026-08-30T14:49:15.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "The &apos;choose your own adventure&apos; earnings: Why retailers are handling tariff refunds so differently",
-      "body": "Retailers have diverged on how they've reported tariff refunds in their earnings this quarter, with some choosing to lower prices and others boosting margins.",
-      "link": "https://www.cnbc.com/2026/08/30/trump-tariff-refunds-walmart-home-depot-target.html",
-      "date": "2026-08-30T12:00:02.000Z",
-      "source": "CNBC US",
-      "badge": "us"
-    },
-    {
-      "title": "A Mortgage Servicer Sent a Letter About an Address Change. Was It Deed Theft?",
-      "body": "A letter arrived in the mail from PNC Bank about an address change on a mortgage account. Was a deed theft scheme in process?",
-      "link": "https://www.nytimes.com/2026/08/30/business/address-change-mortgage-scam.html",
-      "date": "2026-08-30T11:49:49.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "The Case of the Truly Incorrigible Cubicle Yakker",
-      "body": "Plus: Is it normal to video-interview for a job while the hiring panel’s cameras are all off?",
-      "link": "https://www.nytimes.com/2026/08/30/business/the-case-of-the-truly-incorrigible-cubicle-yakker.html",
-      "date": "2026-08-30T09:01:51.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Help Wanted: ‘Forward-Deployed’ Humans for the A.I. Era",
-      "body": "Start-ups are using the military-derived term to glorify customer-facing work as clients seek people to help set up artificial intelligence tools.",
-      "link": "https://www.nytimes.com/2026/08/30/business/forward-deployed-ai.html",
-      "date": "2026-08-30T09:00:55.000Z",
-      "source": "NY Times",
-      "badge": "global"
     },
     {
       "title": "US Copper Index Fund (Ondo Tokenized) - CryptoRank",
@@ -170,12 +202,12 @@
       "badge": "us"
     },
     {
-      "title": "U.S. appeals court rules against prediction markets, sets up likely fight at Supreme Court",
-      "body": "The 9th U.S. Circuit Court of Appeals ruled that sports-related event contracts are not swaps, contradicting a 3rd Circuit ruling from April.",
-      "link": "https://www.cnbc.com/2026/08/28/appeals-court-rules-against-prediction-markets-tees-up-scotus-fight.html",
-      "date": "2026-08-29T02:23:52.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
+      "title": "Thai Oil stock holds on lower crude prices and refinery margins - AD HOC NEWS",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMivwFBVV95cUxPYjZCUUQ2NFJmUjBTNzIwYUVTRnk3bXRQb0l3My1tZml0M3k2dVVLYTRQNk15dUlDZDRvOUxjSENRMVRfM2s1RWRXSF9kVmZHUVJ1amtrMFJtOHh5cjlzc2xlclpfQzlmSE14a2hBelk0VVdEZlh5VDVvSlNlSj...",
+      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPYjZCUUQ2NFJmUjBTNzIwYUVTRnk3bXRQb0l3My1tZml0M3k2dVVLYTRQNk15dUlDZDRvOUxjSENRMVRfM2s1RWRXSF9kVmZHUVJ1amtrMFJtOHh5cjlzc2xlclpfQzlmSE14a2hBelk0VVdEZlh5VDVvSlNlSjkzUDhHSE1jRHE3MC03bmZDa3RNVE5xU29zYWJKNC05NXZDaVpzZHgyaFF3MjFMWkZMVzExeDQ5N2NWZ3dTaEVwOA?oc=5",
+      "date": "2026-08-29T07:09:46.000Z",
+      "source": "Google News",
+      "badge": "thai"
     },
     {
       "title": "Wall Street ends lower after Fed Chair Warsh reaffirms inflation fight - Reuters",
@@ -192,14 +224,6 @@
       "date": "2026-08-28T20:09:13.000Z",
       "source": "CNBC US",
       "badge": "us"
-    },
-    {
-      "title": "Corn and wheat prices jump to highest prices in more than three years",
-      "body": "Corn and wheat futures have surged to their highest levels in more than three years. But the reasons for these recent rallies are notably different.",
-      "link": "https://www.cnbc.com/2026/08/28/corn-and-wheat-prices-jump-to-highest-prices-in-more-than-three-years.html",
-      "date": "2026-08-28T20:00:56.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
     },
     {
       "title": "Fed's Kevin Warsh warns inflation is too high, sparking bets rate hikes are coming - NPR",
@@ -250,30 +274,6 @@
       "badge": "us"
     },
     {
-      "title": "Marvell shares tumble 6% as outlook underwhelms despite 37% revenue growth",
-      "body": "Marvell Technology shares fell Friday despite a second-quarter revenue beat, as its fiscal 2028 outlook failed to meet investors' expectations.",
-      "link": "https://www.cnbc.com/2026/08/28/marvell-mrvl-q2-earnings-outlook.html",
-      "date": "2026-08-28T13:42:43.000Z",
-      "source": "CNBC US",
-      "badge": "us"
-    },
-    {
-      "title": "Opinion | Trump vs. the Bond Market - The New York Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxPY2ZrOEtDM1NLVU5mYW5jTTA5eEJfYVFUclg4TnRGSDNaSGE5QkY1d21vT1N0TUN0WTJaT2hoMUc3VDJhcU5qa29NblJyQmtEdDdOUGtoMVRYSkVSdUJvT3k3LWdIcjg2a21sbkVjRWl3SjNzalVYY296VEtja1...",
-      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPY2ZrOEtDM1NLVU5mYW5jTTA5eEJfYVFUclg4TnRGSDNaSGE5QkY1d21vT1N0TUN0WTJaT2hoMUc3VDJhcU5qa29NblJyQmtEdDdOUGtoMVRYSkVSdUJvT3k3LWdIcjg2a21sbkVjRWl3SjNzalVYY296VEtja1NSREpENUhtNU9waVBXTk9n?oc=5",
-      "date": "2026-08-28T09:03:50.000Z",
-      "source": "Google News",
-      "badge": "bond"
-    },
-    {
-      "title": "Stock Market Today: S&P 500, Dow Futures Rise, Nasdaq 100 Slips Ahead of Kevin Warsh's Jackson Hole Speec - Benzinga",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMihwJBVV95cUxQYTEzQnE4Q3F0bUYwSUZId3pFcjN3SmkwdUx4UU12U0pKNml2cG1FMF9HVHZON2MxY1hhbWZmcHEzcndpX0sxcUV2eUt1REpSSk5MNkF4R0F0Ulo2b1FackRWLTdjSVpfX09DREptSWFfdlh4M0wtbWYwLWh2Zk...",
-      "link": "https://news.google.com/rss/articles/CBMihwJBVV95cUxQYTEzQnE4Q3F0bUYwSUZId3pFcjN3SmkwdUx4UU12U0pKNml2cG1FMF9HVHZON2MxY1hhbWZmcHEzcndpX0sxcUV2eUt1REpSSk5MNkF4R0F0Ulo2b1FackRWLTdjSVpfX09DREptSWFfdlh4M0wtbWYwLWh2ZkE2dXpkRm5ER3FkV04yR3pCS0ktQnB0c0o0UktoRURmOXM2SUNCTVpiMkRYTUhzRnhwZU1kTENSd0ZyU0Z4Tk1PenBuQ1c0MTFqd3lkaGZDbTVrOGFUd25fbklFRDhBazV5SGczZ0J5eHRXekdPSEVKVFVrM2RkeXNUUjQyMEtaaDFPSEVOZTJWRQ?oc=5",
-      "date": "2026-08-28T08:48:35.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
       "title": "U.S. Dollar to Thai Baht - USD/THB Exchange Rate Chart - FOREX.com",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiX0FVX3lxTE5yTG5SODhoS1R5OU5WV043bnpTalJnaUhnSXFNQzNjMkU2SjFialp1NjZnWThlb1Rtam51T0RQTXNUdlpjXy1VV1hCTWNHTFRGN1BTb0FnS1E2WU1Za0Jr?oc=5\" target=\"_blank\">U.S. Dollar to Thai...",
       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5yTG5SODhoS1R5OU5WV043bnpTalJnaUhnSXFNQzNjMkU2SjFialp1NjZnWThlb1Rtam51T0RQTXNUdlpjXy1VV1hCTWNHTFRGN1BTb0FnS1E2WU1Za0Jr?oc=5",
@@ -298,20 +298,20 @@
       "badge": "bond"
     },
     {
-      "title": "USD/THB Drifts Lower as Bank of Thailand Holds Rates, Commerzbank Sees 32.50–33.00 Range - VT Markets",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxNd3JYMjZuX3dNSC1pNDdaMkhpX3JRb016ZF9yN1BmRDdMVmlrZWR1Zll5SE1FcUhfd0NrTjFJNXhZelB4cGV3bzFadncxcUpaeHNSN1pwSWFjWGRKaWhPRXgtMFRFZEdzTW5rcEcyMEdEX3g0bm5wUzA2a0J0T2...",
-      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNd3JYMjZuX3dNSC1pNDdaMkhpX3JRb016ZF9yN1BmRDdMVmlrZWR1Zll5SE1FcUhfd0NrTjFJNXhZelB4cGV3bzFadncxcUpaeHNSN1pwSWFjWGRKaWhPRXgtMFRFZEdzTW5rcEcyMEdEX3g0bm5wUzA2a0J0T2N5Ynl6eEQxX1Vpa0gteVdxR3ZpNF9FUm9LOUoxNmVtazdYTko4bFB6b1hDcEtKelQ4eFp2RlZHMW5jVXZvdHFRVTVwa2pKQ1RiX2VSNDY4UQ?oc=5",
-      "date": "2026-08-28T03:57:20.000Z",
-      "source": "Google News",
-      "badge": "thai"
-    },
-    {
       "title": "Solutions for mobilizing medium and long-term capital for the economy. - Vietnam.vn",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiiAFBVV95cUxNUDZuYURrU0h3dUViTDNDRXZxVzZ0MkJ5dkhabVRiUVVNeTQwX2FDZjdFV1lRRVd5MURJTDg1N0xWMnZaVHpESE5wU0RlTlN5ODlYZ3otMUFhNWp1WmVqLVkwSEtieW4tOTZ2VkNGTHkya3g0MDFyZzZQdVZsQl...",
       "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNUDZuYURrU0h3dUViTDNDRXZxVzZ0MkJ5dkhabVRiUVVNeTQwX2FDZjdFV1lRRVd5MURJTDg1N0xWMnZaVHpESE5wU0RlTlN5ODlYZ3otMUFhNWp1WmVqLVkwSEtieW4tOTZ2VkNGTHkya3g0MDFyZzZQdVZsQllGMzJXR0gzMEJK?oc=5",
       "date": "2026-08-28T01:04:31.000Z",
       "source": "Google News",
       "badge": "vietnam"
+    },
+    {
+      "title": "Thai equities catch the eye of more foreign brokerages - Bangkok Post",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiqwFBVV95cUxPejZjUjB0bVNMYW5tdC1MZHkyNllpRHRQS2JwaWlQMWVtSTNMN01OYmNBRHh6by1aeDBja2cwMlpTMm1rTV9pYXA5ODJHQlpKb25xNTBHVXN6UDJueVB0RlZxbU81b2h4VUtPRC1fLUhYV19qQUhGUVQ3VEdRSz...",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPejZjUjB0bVNMYW5tdC1MZHkyNllpRHRQS2JwaWlQMWVtSTNMN01OYmNBRHh6by1aeDBja2cwMlpTMm1rTV9pYXA5ODJHQlpKb25xNTBHVXN6UDJueVB0RlZxbU81b2h4VUtPRC1fLUhYV19qQUhGUVQ3VEdRSzlPSmJlQ2x2cG00My1CWmZwcGJLOHoySmluMGtpaEQ1UEZNNU5aTk9vMDhuQms?oc=5",
+      "date": "2026-08-27T21:50:00.000Z",
+      "source": "Google News",
+      "badge": "thai"
     },
     {
       "title": "Thai Baht: Consolidation expected in defined range against US Dollar – Commerzbank - tmgm.com",
@@ -322,20 +322,20 @@
       "badge": "thai"
     },
     {
+      "title": "The danger of hitting mute on US bond markets - Atlantic Council",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMisAFBVV95cUxNNVZ0RHNQRGlkU2FmMnF0LVdPbGI3T1VrTGtnNjF6MkJsUnFYbW4tTWJ0cFFwUlpLSkFmU3Q1ZURydG40dWpKbElKa2NRbHJ4Z1ZkaTRwZEVCaGFmY0M0c1FHbndmejlUTnVrTTFlVTljYzZXUndnX2N4SzF6RG...",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNNVZ0RHNQRGlkU2FmMnF0LVdPbGI3T1VrTGtnNjF6MkJsUnFYbW4tTWJ0cFFwUlpLSkFmU3Q1ZURydG40dWpKbElKa2NRbHJ4Z1ZkaTRwZEVCaGFmY0M0c1FHbndmejlUTnVrTTFlVTljYzZXUndnX2N4SzF6RGFqZEVCeHNsQm9xVHZ2N1BDNFFtRnpaTXpXYnVHMGlYX2FMTHhwdHhEWmtKWjJoSzIySg?oc=5",
+      "date": "2026-08-26T18:08:58.000Z",
+      "source": "Google News",
+      "badge": "bond"
+    },
+    {
       "title": "Asia Stock Market Today 27/08/2026 [UPDATE: 23:57 SGT] [Salesforce and Nvidia Lead KASE Global as Asia Closes Mixed] - TechStock²",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiZkFVX3lxTE00Wmt2WERER3BNZjZsbnQ1Z0JEdzhxOVdxY2pwSHhKRmp5RDVKcUE1LXRLa0t6Wl9oR2tlUVBHbHc5MG9xVW5wb0pQV09NUFVnYUJ0eXQyanhwdTJRYzNuX1RrWHp4dw?oc=5\" target=\"_blank\">Asia Stoc...",
       "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE00Wmt2WERER3BNZjZsbnQ1Z0JEdzhxOVdxY2pwSHhKRmp5RDVKcUE1LXRLa0t6Wl9oR2tlUVBHbHc5MG9xVW5wb0pQV09NUFVnYUJ0eXQyanhwdTJRYzNuX1RrWHp4dw?oc=5",
       "date": "2026-08-26T16:52:07.000Z",
       "source": "Google News",
       "badge": "china"
-    },
-    {
-      "title": "IMF: Global economy is more resilient than expected - idnfinancials.com",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMilgFBVV95cUxPaDBTZHBUdEhQRy0zb1ItZzNiQU9jcmRxVW9uTDNlclQ0TlRJSFJTb3d0cENIdUJ0TzNoUy1qbFJEU1NXaHlwZVhla2JBY3BrVUdqQmJiZHlCcTJobEI1ZzlnZks4bTdYOGlXQlpaU0J6VS1OSXVmWXpxYkVhTX...",
-      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPaDBTZHBUdEhQRy0zb1ItZzNiQU9jcmRxVW9uTDNlclQ0TlRJSFJTb3d0cENIdUJ0TzNoUy1qbFJEU1NXaHlwZVhla2JBY3BrVUdqQmJiZHlCcTJobEI1ZzlnZks4bTdYOGlXQlpaU0J6VS1OSXVmWXpxYkVhTXFuQV96R0ZNSVgxQlUxVFd5WWUxeV9rZnc?oc=5",
-      "date": "2026-08-26T08:20:00.000Z",
-      "source": "Google News",
-      "badge": "economic"
     },
     {
       "title": "IMF's Georgieva says global economy weathering energy shock, sees fiscal concerns - Reuters",
