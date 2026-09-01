@@ -1,45 +1,101 @@
 {
-  "updated": "2026-09-01T12:21:11.832Z",
+  "updated": "2026-09-01T17:08:56.056Z",
   "items": [
     {
-      "title": "UK long-term borrowing costs hit highest since 2008 ahead of October Budget",
-      "body": "The yield on 30-year gilts hit its highest level since 1998",
-      "link": "https://www.bbc.co.uk/news/articles/c8d39vq779no?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-09-01T12:11:13.000Z",
-      "source": "BBC Business",
+      "title": "At G20 Summit, Scott Bessent Says U.S. Has Support for Economic War Against Iran",
+      "body": "The Treasury secretary is also facing pushback on the Trump administration’s trade policies at the global gathering.",
+      "link": "https://www.nytimes.com/2026/09/01/business/economy/bessent-iran-g20.html",
+      "date": "2026-09-01T17:03:11.000Z",
+      "source": "NY Times",
       "badge": "global"
     },
     {
-      "title": "Global bond rout deepens as Japan yield hits key milestone - Reuters",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMirwFBVV95cUxOSl9GcExBdk5lb3U4c1NTalROY2NUNHE4SXdlbE5yemw4WkwteWNMdTZVTFdrcHhPUVF5Q181eTlxZ2xoUkV6Q3F4a19ldHJBdGFnaG9URjY3bXNTMDE0aV9mVDU1MUtxMTRXRl9pR2p2THVmc2JiWGlSb1prUE...",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOSl9GcExBdk5lb3U4c1NTalROY2NUNHE4SXdlbE5yemw4WkwteWNMdTZVTFdrcHhPUVF5Q181eTlxZ2xoUkV6Q3F4a19ldHJBdGFnaG9URjY3bXNTMDE0aV9mVDU1MUtxMTRXRl9pR2p2THVmc2JiWGlSb1prUElXTWtaNzBsb3Z5U2tCNXZlTlMtM3pHU3Y0dkVNWUhHWmVWUmJxbnZmVVFlNmVlMDR3?oc=5",
-      "date": "2026-09-01T12:02:00.000Z",
+      "title": "Two More Oil Tankers Are Attacked in the Strait of Hormuz",
+      "body": "The ships were hit near Oman on Monday, the latest attacks on vessels in the Persian Gulf. Oil prices rose more than 2 percent.",
+      "link": "https://www.nytimes.com/2026/09/01/business/ships-oil-hormuz-iran-war.html",
+      "date": "2026-09-01T16:54:34.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "What the Jump in Global Interest Rates Means for the Economy - The New York Times",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMidEFVX3lxTE1faUw2ZTJwa2ljbUpyTkFFbGRFYVlZd29pb24wVHFxM005UWl4RXFxX2pWckkyaGcyc09TdmlkczNmeXloWUo2blE3NGdyTU1DY0FjZUpOZUtURVNxakNaV3pibTJmdnZnSzhPcm1WM28zcWhq?oc=5\" target=...",
+      "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1faUw2ZTJwa2ljbUpyTkFFbGRFYVlZd29pb24wVHFxM005UWl4RXFxX2pWckkyaGcyc09TdmlkczNmeXloWUo2blE3NGdyTU1DY0FjZUpOZUtURVNxakNaV3pibTJmdnZnSzhPcm1WM28zcWhq?oc=5",
+      "date": "2026-09-01T16:47:54.000Z",
       "source": "Google News",
       "badge": "bond"
     },
     {
-      "title": "Wall Street Braces For Red Start: Spike In Yields Among Three Reasons Pushing US Stock Futures Lower - ndtvprofit.com",
+      "title": "Government borrowing costs rise again in fresh headache for global policymakers - Reuters",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMirwFBVV95cUxOSl9GcExBdk5lb3U4c1NTalROY2NUNHE4SXdlbE5yemw4WkwteWNMdTZVTFdrcHhPUVF5Q181eTlxZ2xoUkV6Q3F4a19ldHJBdGFnaG9URjY3bXNTMDE0aV9mVDU1MUtxMTRXRl9pR2p2THVmc2JiWGlSb1prUE...",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOSl9GcExBdk5lb3U4c1NTalROY2NUNHE4SXdlbE5yemw4WkwteWNMdTZVTFdrcHhPUVF5Q181eTlxZ2xoUkV6Q3F4a19ldHJBdGFnaG9URjY3bXNTMDE0aV9mVDU1MUtxMTRXRl9pR2p2THVmc2JiWGlSb1prUElXTWtaNzBsb3Z5U2tCNXZlTlMtM3pHU3Y0dkVNWUhHWmVWUmJxbnZmVVFlNmVlMDR3?oc=5",
+      "date": "2026-09-01T16:47:36.000Z",
+      "source": "Google News",
+      "badge": "bond"
+    },
+    {
+      "title": "UK long-term borrowing costs highest since 1998 ahead of October Budget",
+      "body": "Higher borrowing costs have piled fresh pressure on Andy Burnham ahead of his first Budget.",
+      "link": "https://www.bbc.co.uk/news/articles/c8d39vq779no?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-09-01T16:36:42.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Wall St kicks off September under pressure as higher yields, oil prices weigh - Reuters",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWjZiWGhvamxJTzU5Ync5V2xObHhDRk1PRlZFRkZnZVNqQzM0dHhuUnBMeGJDYW9YWmgxc29fRTNUaTVRT2xLWFZUOGJMWDU4MTlhQVVXRmFOQ3VGQnlNME9tQ09nUW0yMGNUR1c2amZkSVBQbHcwWDNQY0tfZH...",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWjZiWGhvamxJTzU5Ync5V2xObHhDRk1PRlZFRkZnZVNqQzM0dHhuUnBMeGJDYW9YWmgxc29fRTNUaTVRT2xLWFZUOGJMWDU4MTlhQVVXRmFOQ3VGQnlNME9tQ09nUW0yMGNUR1c2amZkSVBQbHcwWDNQY0tfZHZoREF4SzVqZ2pNYzlCQVFmSkJMNFFwMEptQi03WlZlZG82bDVNZWhnUm9KMnFDS1pqVWlHZDZ2MmE1?oc=5",
+      "date": "2026-09-01T16:07:32.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Satsuki Katayama, the Woman at the Center of Japan’s Currency Fight",
+      "body": "Japan’s finance minister, Satsuki Katayama, is under pressure to strengthen the yen while balancing competing demands from the prime minister and Washington.",
+      "link": "https://www.nytimes.com/2026/09/01/business/japan-finance-minister-yen.html",
+      "date": "2026-09-01T14:09:36.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Ozempic Maker Novo Nordisk’s Investors Are Nervously Looking Into the Future",
+      "body": "Novo Nordisk’s chief executive, Mike Doustdar, is a year into a corporate turnaround. He says investors are still underestimating the promise of the company’s drugs.",
+      "link": "https://www.nytimes.com/2026/09/01/business/novo-nordisk-ozempic-wegovy-glp1s-stocks.html",
+      "date": "2026-09-01T14:06:34.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Bond Sell-Off Threatens to Squeeze Borrowers Around the World - The New York Times",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMic0FVX3lxTE9GZlF0TVVUdVRWVDFlU1d3N29jRktkWFludDB3ZS1NM0ZuTVpFVl9laWg0blBLcjBaOXh0Rk5IdWsxckQ5Q295OVJYZWlhNHVkUG54WXFxNGkyMDJsOUZPUWVhMG9ZbXA5SnhHQmZKWWhNZmc?oc=5\" target=\"...",
+      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9GZlF0TVVUdVRWVDFlU1d3N29jRktkWFludDB3ZS1NM0ZuTVpFVl9laWg0blBLcjBaOXh0Rk5IdWsxckQ5Q295OVJYZWlhNHVkUG54WXFxNGkyMDJsOUZPUWVhMG9ZbXA5SnhHQmZKWWhNZmc?oc=5",
+      "date": "2026-09-01T14:01:45.000Z",
+      "source": "Google News",
+      "badge": "bond"
+    },
+    {
+      "title": "Fed Governor Barr says he&apos;ll support rate hike if inflation doesn&apos;t ease",
+      "body": "The policymaker said he's concerned about \"broader price pressures taking hold\" as inflation has prevailed above the Fed's 2% target.",
+      "link": "https://www.cnbc.com/2026/09/01/fed-governor-barr-says-hell-support-rate-hike-if-inflation-doesnt-ease.html",
+      "date": "2026-09-01T14:01:27.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "Gold prices today, Tuesday, September 1, 2026: Gold moves lower as rate-hike expectations grow - Yahoo Finance",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMi-gFBVV95cUxPSXN3cFgzNVl4VzNaREFaYUFOYXpTVFdnb2N2ZTB2ejhlNzJ5bDNQM0haUmFkUlNoZ0FWZTNxTWozZk8wZ09JSzhuUjJFQkNDZ3BXX1Y1N1FwaE9qU3A1QWh2U1dvTGwwTkkxSzlycHJoVGRCRmRPLXd0WXIzSl...",
+      "link": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPSXN3cFgzNVl4VzNaREFaYUFOYXpTVFdnb2N2ZTB2ejhlNzJ5bDNQM0haUmFkUlNoZ0FWZTNxTWozZk8wZ09JSzhuUjJFQkNDZ3BXX1Y1N1FwaE9qU3A1QWh2U1dvTGwwTkkxSzlycHJoVGRCRmRPLXd0WXIzSlhjNE1DT0c1TXJnLXFCWF9ub1h4RWJKTWZJbENPQ0NkNWw0ajJERzJGS0ozZGJsMnZwQWUxckN3UjBhWDh5SThDSWFwYWNBelFRaDRRVnhETHIwNkxnMTh3STlsbGRsYWRZZDJjM2tCQnloVHVHMmliUW1fM2FMaldYdDJR?oc=5",
+      "date": "2026-09-01T12:08:10.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
+      "title": "Wall Street Braces For Red Start: Spike In Yields Among Three Reasons Pushing US Stock Futures Lower - NDTV Profit",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMi2wFBVV95cUxNOUV1YWUtSjRMeXJTWU84eXJvVF85SlMwUVJiWDZRd0V0dmtxU0R2c2VYSUowZ2dwS3ZkRGlTV1UwcW9Lb0twU0l4UnJSM3RSZmRjcElyUzkySUQzM3lfZzRUYVJaTTBfWWxsb3FhQmQ3Tk8yN3hCZFBtVVg2d0...",
       "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNOUV1YWUtSjRMeXJTWU84eXJvVF85SlMwUVJiWDZRd0V0dmtxU0R2c2VYSUowZ2dwS3ZkRGlTV1UwcW9Lb0twU0l4UnJSM3RSZmRjcElyUzkySUQzM3lfZzRUYVJaTTBfWWxsb3FhQmQ3Tk8yN3hCZFBtVVg2d0oxbHlZM09IUDVKaUlGcUlZOVktRWlWeTdqczFNV2JBRnE4ZUpURmZibEktSjJnMkZleDRoT1pNcUtOU3pCXzRzN0YzTDgxWmdmWlBZd1VBbGhVdDhsUDlKOEVyNmPSAeMBQVVfeXFMTWg1Y3hBVEwycTRpeDFVdUFHMVpPYWxmRnNMOW9EdVp2c1V0ZkpVNU4tcXAxNVM3TE96YVVwOUctNzNSaE4wMlpTYXMtb0FLc1dxOEIzYlZBelVGdXhlRl9aVlZKYnR1elY1a3RIOVBjTGNQd3NkSnhubUswM2hzbXZhNjNULXlkT2hyUVdyYjQ0aUhKbUUwaVRpeTl3dVFvNnY1QTF4eXhPSGczR1ZRZEdzRHl4ZjJXN3h6cFpCVVdNQ2lPWlhaWVVrT0Q4RTNsakw2QmJHbmxyLUJIamhVRlFmMVU?oc=5",
       "date": "2026-09-01T11:19:00.000Z",
       "source": "Google News",
       "badge": "us"
-    },
-    {
-      "title": "Global Bond Sell-Off Puts Investors on Edge",
-      "body": "Government borrowing costs are hitting multi-decade highs around the world, reflecting anxiety about debt levels, deficits and inflation.",
-      "link": "https://www.nytimes.com/2026/09/01/business/bond-yields-debt.html",
-      "date": "2026-09-01T10:55:15.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Global Bond Sell-Off Puts Investors on Edge - The New York Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMic0FVX3lxTE9GZlF0TVVUdVRWVDFlU1d3N29jRktkWFludDB3ZS1NM0ZuTVpFVl9laWg0blBLcjBaOXh0Rk5IdWsxckQ5Q295OVJYZWlhNHVkUG54WXFxNGkyMDJsOUZPUWVhMG9ZbXA5SnhHQmZKWWhNZmc?oc=5\" target=\"...",
-      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9GZlF0TVVUdVRWVDFlU1d3N29jRktkWFludDB3ZS1NM0ZuTVpFVl9laWg0blBLcjBaOXh0Rk5IdWsxckQ5Q295OVJYZWlhNHVkUG54WXFxNGkyMDJsOUZPUWVhMG9ZbXA5SnhHQmZKWWhNZmc?oc=5",
-      "date": "2026-09-01T10:55:15.000Z",
-      "source": "Google News",
-      "badge": "bond"
     },
     {
       "title": "Intouch stock holds steady as Thai market edges higher - AD HOC NEWS",
@@ -74,14 +130,6 @@
       "badge": "bond"
     },
     {
-      "title": "Shein’s Lackluster Debut Shows a Fast-Fashion Model Left Behind",
-      "body": "Squeezed by new trade rules, shrinking market share and labor concerns, Shein’s share decline in Hong Kong on Tuesday is a sign investors have moved on.",
-      "link": "https://www.nytimes.com/2026/08/31/business/shein-ipo-china.html",
-      "date": "2026-09-01T08:30:25.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
       "title": "Hugging Face&apos;s new duck robot is selling fast. A Chinese chip powers it",
       "body": "The colorful \"Microduck\" robot from HuggingFace's French subsidiary Pollen Robotics has sold more than 10,000 units since launching on Thursday.",
       "link": "https://www.cnbc.com/2026/09/01/hugging-faces-new-duck-robot-is-selling-fast-a-chinese-chip-powers-it.html",
@@ -94,14 +142,6 @@
       "body": "<a href=\"https://news.google.com/rss/articles/CBMitwFBVV95cUxQNmM2dXpoY0hsZWVGaXptQVJFcGdzUlpNdG9ZdHdIaS1UREVXRkZ6b0paa2FVQkJXY1ZENmt6TGttRE5vSzJrZ1BxQUc1TG1zSXpycVAwVWhDanZybWFNZXMya2VHNEZJV210SVRhNzhqa2JCcjZ3UndNNkllVk...",
       "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQNmM2dXpoY0hsZWVGaXptQVJFcGdzUlpNdG9ZdHdIaS1UREVXRkZ6b0paa2FVQkJXY1ZENmt6TGttRE5vSzJrZ1BxQUc1TG1zSXpycVAwVWhDanZybWFNZXMya2VHNEZJV210SVRhNzhqa2JCcjZ3UndNNkllVkJxdzgyb240NXA3LVRXbFd2cU51V0t4dWFTZGJtbVpuR2FOb0tPa19aU0pYY2IySHdpUDVIMkZMTVE?oc=5",
       "date": "2026-09-01T07:11:58.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
-      "title": "Dow, S&P 500 and Nasdaq Post Their Worst Selloff Since the August 5 Crash - Startup Fortune",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMioAFBVV95cUxPa2I4Z3Rvd0xzVndiUG1DblFsRVlLMWFDelJwUGhWRjRFbjRITUk2dENEN1ZqNlQ1QktqdC1xREhyT1hGV0JLdG0tMzF0bTkzaHZSTHgxSnd0YjB0TTdobG1yOXROcXU2dV9COGJ2UUZhbGlYSlY1M1k5czVnZ0...",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPa2I4Z3Rvd0xzVndiUG1DblFsRVlLMWFDelJwUGhWRjRFbjRITUk2dENEN1ZqNlQ1QktqdC1xREhyT1hGV0JLdG0tMzF0bTkzaHZSTHgxSnd0YjB0TTdobG1yOXROcXU2dV9COGJ2UUZhbGlYSlY1M1k5czVnZ0E1VDVzeTE2cVI0S05GSDFTUGlSQV9SNXpwZ3JvcVBqZmls?oc=5",
-      "date": "2026-09-01T04:55:20.000Z",
       "source": "Google News",
       "badge": "us"
     },
@@ -122,36 +162,12 @@
       "badge": "thai"
     },
     {
-      "title": "Gold, silver prices today, September 1: Check 22K, 24K gold rates in Delhi, Mumbai and other cities - Upstox",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMigwJBVV95cUxOZFVGVUZsRkhqbERfLXJrck1ubDVuU0hpNGpBTGVWODNlbHZOeHRfaUhQNWxkMWdZTXp2bWdTT2k0ZWp0LXduMmwySHBveDlFUHlFNVBrMEJzRGlJdEt1S2hEX0FwUUpEMU9YVEs0Znpsa1NIMWxEVUl3RmtBY2...",
-      "link": "https://news.google.com/rss/articles/CBMigwJBVV95cUxOZFVGVUZsRkhqbERfLXJrck1ubDVuU0hpNGpBTGVWODNlbHZOeHRfaUhQNWxkMWdZTXp2bWdTT2k0ZWp0LXduMmwySHBveDlFUHlFNVBrMEJzRGlJdEt1S2hEX0FwUUpEMU9YVEs0Znpsa1NIMWxEVUl3RmtBY29wWGZQenBEQVlrZ0REaFBiWUZNN19mSERwSTZFVkZiQU1VY0ZlZy1lTHI2djlaNnhDcF80bXpBQTNfa19ya0h1bEM1cmVMZlBpLWU2U202RVpENTdtdzRTOHNVd1MxXzN2Q2lQY3JlZkZTY3J5Z0w4LXpfMmRQdTlhV0R5M0ZVQWNKN1M0?oc=5",
-      "date": "2026-09-01T03:11:46.000Z",
-      "source": "Google News",
-      "badge": "commodity"
-    },
-    {
-      "title": "How the Pentagon Is Getting Into the Venezuelan Oil Business Under Trump",
-      "body": "The Defense Department’s Office of Strategic Capital, founded by the Biden administration to give loans to bolster the U.S. defense industry, is helping lead President Trump’s oil deal.",
-      "link": "https://www.nytimes.com/2026/08/31/us/politics/pentagon-venezuela-oil.html",
-      "date": "2026-09-01T02:50:48.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
       "title": "Thai Baht vs USD Faces BoT Sensitivity, OCBC Says - Thailand Business News",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMipAFBVV95cUxOTWY4dURpYjh5Wml5bENEeG5WVG1uN3NYdHFpbkZsaTNxNEJNeEdhblNDd1o4NDY0VlpGZm1LYks1QlZoQklWQlFTa0hCbHRTQTJLc3o2Y2VGV1pZd0EyTGxsbmZPQUhOalNJYlFuUVYzb2ZBMlJTTEhGTk1BYk...",
       "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOTWY4dURpYjh5Wml5bENEeG5WVG1uN3NYdHFpbkZsaTNxNEJNeEdhblNDd1o4NDY0VlpGZm1LYks1QlZoQklWQlFTa0hCbHRTQTJLc3o2Y2VGV1pZd0EyTGxsbmZPQUhOalNJYlFuUVYzb2ZBMlJTTEhGTk1BYkRxanZuMDAxNXRPUWpRX2NJcGFNU0owaXFKWDE1WXZOd1dyV19OVQ?oc=5",
       "date": "2026-09-01T00:25:00.000Z",
       "source": "Google News",
       "badge": "thai"
-    },
-    {
-      "title": "Donald Trump Jr.’s Firm Leads $1 Billion Funding Round for Polymarket",
-      "body": "The new round values the prediction market at $21 billion, up from $15 billion. Mr. Trump’s firm, 1789 Capital, will invest around $300 million.",
-      "link": "https://www.nytimes.com/2026/08/31/business/polymarket-funding-trump.html",
-      "date": "2026-09-01T00:00:44.000Z",
-      "source": "NY Times",
-      "badge": "global"
     },
     {
       "title": "Feeling nostalgic for summer? How to beat the back-to-work blues",
@@ -210,20 +226,12 @@
       "badge": "thai"
     },
     {
-      "title": "Finance ministers & central bank governors from 191 countries to gather for Spring Meetings of IMF, World Bank - News On AIR",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxOd3pCSk13R2w3RU5id2M4R1Z4Z18xZjNYOURITFA0WVQ0dlVqZHU4cC15eDhROWNUS2FRbVRMeGVmeC1oYjAtejU0eFRXdEtoNV9Ub25kYWpOQVJHbWp2aHNJaE5ZZHN2RnB2TENCMXJpRG9TU0R3R1VXeWEzMW...",
-      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOd3pCSk13R2w3RU5id2M4R1Z4Z18xZjNYOURITFA0WVQ0dlVqZHU4cC15eDhROWNUS2FRbVRMeGVmeC1oYjAtejU0eFRXdEtoNV9Ub25kYWpOQVJHbWp2aHNJaE5ZZHN2RnB2TENCMXJpRG9TU0R3R1VXeWEzMWFNWktfZjRnZ3lqM0l3aXB2dnRzQ1NGbkRPN0FwNGtlbklGTHdxanBNZG10bUdsbE1lRGlSVkxRZ3lsUkhQMGxHblNMb1VwWUVOWTN6dE5vQQ?oc=5",
-      "date": "2026-08-31T21:44:34.000Z",
+      "title": "Trump says U.S. growth could hit 20%. It’s happened only once since WWII - CNBC",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMigAFBVV95cUxNYXh4bks3VlM2dUtucmhpMHpUcWJYdmdJNENVUzNiaXg3UEZNZG50YU9qWmpxRl8wdHBhenA1VHl3QjNFU0R2c2JyZHhUOVBRSmFNM3c0a3JkV0NhNXFRa2lTeVBEbGpSUFQ4aEJJYnc0VG1hMlVwcE5sWm9oM1...",
+      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNYXh4bks3VlM2dUtucmhpMHpUcWJYdmdJNENVUzNiaXg3UEZNZG50YU9qWmpxRl8wdHBhenA1VHl3QjNFU0R2c2JyZHhUOVBRSmFNM3c0a3JkV0NhNXFRa2lTeVBEbGpSUFQ4aEJJYnc0VG1hMlVwcE5sWm9oM1F0RNIBhgFBVV95cUxPSkRPZjZrS2Z3c01FRlhvQXdXQ01KcXBxaFBMaC1lSjI4Nk80ZU1mNmZ5VTJKSWZQdlRSUmRXMGY5UnhpUEFXa2Y4d3hrTkVCdWpmVENkelFNOGk3NVhiWldDWGVnb3ZIUGtuYy01RUdmMUU3UEc4QkxMR25hbERtQW9YdlZzQQ?oc=5",
+      "date": "2026-08-31T20:50:01.000Z",
       "source": "Google News",
-      "badge": "economic"
-    },
-    {
-      "title": "Treasury Rates Today: August 31, 2026 - Forbes",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5\" target=\"_blank\">Treasury...",
-      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5",
-      "date": "2026-08-31T21:09:00.000Z",
-      "source": "Google News",
-      "badge": "bond"
+      "badge": "us"
     },
     {
       "title": "Gold, Oil, and Copper: We Are at the Beginning of a Commodity Supercycle - The Market – Analysen und Hintergründe aus der Wirtschaft",
@@ -238,14 +246,6 @@
       "body": "The path toward the move still looks cluttered.",
       "link": "https://www.cnbc.com/2026/08/31/markets-see-warsh-endorsing-a-rate-hike-in-september-not-everyone-is-convinced.html",
       "date": "2026-08-31T19:38:38.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "Kalshi partners with brokerage Alpaca as it tries to build its international audience",
-      "body": "The prediction market platform and the financial infrastructure and brokerage startup are working to get Kalshi's event contracts to global investors.",
-      "link": "https://www.cnbc.com/2026/08/31/kalshi-looks-international-partners-with-brokerage-alpaca.html",
-      "date": "2026-08-31T18:22:51.000Z",
       "source": "CNBC Markets",
       "badge": "global"
     },
@@ -290,28 +290,12 @@
       "badge": "us"
     },
     {
-      "title": "US Copper Index Fund (Ondo Tokenized) - CryptoRank",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMie0FVX3lxTE5EaFFDanAzeDhFeGNWLVRaRlFqVTZCNk1KU09KVDhSWVBNZXJhenk0YllPWk5qY3Y1LVJndFBzMVJXYVZEYXVNM2UyQ1RCWVMxOTV4STI4SjA4UHNWOGZCeGh4VXBKSWZJbVkxTWRzLTdJM0hqbGI3VlhhNA?oc=...",
-      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5EaFFDanAzeDhFeGNWLVRaRlFqVTZCNk1KU09KVDhSWVBNZXJhenk0YllPWk5qY3Y1LVJndFBzMVJXYVZEYXVNM2UyQ1RCWVMxOTV4STI4SjA4UHNWOGZCeGh4VXBKSWZJbVkxTWRzLTdJM0hqbGI3VlhhNA?oc=5",
-      "date": "2026-08-30T05:52:16.000Z",
-      "source": "Google News",
-      "badge": "vietnam"
-    },
-    {
       "title": "High debt and rapid ageing increase Thailand’s Japanification risk - Nation Thailand",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5GTTlZTkh6UEVtR0IxMFBKN3d6VlV2dVZlUW9xdTlHemJWN0Z4WnYtemN5My02RC1LYnRDMzNoWkQ1N1ZIZkExSm5SWG9VNGFNdUNmdWEwYkhJSWdvNWhGeFgtNU1ia2s?oc=5\" target=\"_blank\">High deb...",
       "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5GTTlZTkh6UEVtR0IxMFBKN3d6VlV2dVZlUW9xdTlHemJWN0Z4WnYtemN5My02RC1LYnRDMzNoWkQ1N1ZIZkExSm5SWG9VNGFNdUNmdWEwYkhJSWdvNWhGeFgtNU1ia2s?oc=5",
       "date": "2026-08-30T00:01:00.000Z",
       "source": "Google News",
       "badge": "economic"
-    },
-    {
-      "title": "Warsh, After Talking Tough on Inflation, Faces a ‘No-Win Situation’ on Rates - The New York Times",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMihwFBVV95cUxNUkZFdlh5emdvLTJTbEVINkVEY1dRa2ZmMUkxNHZBZExGdFRLdkZWQ2hOQWJFNTZ6cXJUcTFEMERrbGg1ZmkyalBQNVdaVk9pODVLZVFZN24zX0pKdmxRalNNVjBxYmNMalRveVE0Z056VjNtV0JibF8yc3czUH...",
-      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNUkZFdlh5emdvLTJTbEVINkVEY1dRa2ZmMUkxNHZBZExGdFRLdkZWQ2hOQWJFNTZ6cXJUcTFEMERrbGg1ZmkyalBQNVdaVk9pODVLZVFZN24zX0pKdmxRalNNVjBxYmNMalRveVE0Z056VjNtV0JibF8yc3czUHE4U0xSU0NuOTA?oc=5",
-      "date": "2026-08-29T20:39:24.000Z",
-      "source": "Google News",
-      "badge": "us"
     },
     {
       "title": "The big lesson from this week&apos;s earnings: The AI buildout is not a zero-sum game",
@@ -330,10 +314,10 @@
       "badge": "us"
     },
     {
-      "title": "Fed chair says delivering ‘stable prices’ is central bank’s job as inflation persists - The Guardian",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMijwFBVV95cUxPbTVsRjRjQVhQS1Itd0hhY2JtenNTLWRENkNOaF9DVDJobXFrRFVsS1RLREFzdk1lV3NZNjU0WDJoRzNiVG40ZnlpeGx3Zy1lZ3ZhM0RkZjItSzNiVzd2c0Zkd3NSUTFJd0hlY3ZlNXJZWXhLRmFfYnpuZ0U3WU...",
-      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPbTVsRjRjQVhQS1Itd0hhY2JtenNTLWRENkNOaF9DVDJobXFrRFVsS1RLREFzdk1lV3NZNjU0WDJoRzNiVG40ZnlpeGx3Zy1lZ3ZhM0RkZjItSzNiVzd2c0Zkd3NSUTFJd0hlY3ZlNXJZWXhLRmFfYnpuZ0U3WUctQldQOGRnWDExb245TTB1cw?oc=5",
-      "date": "2026-08-28T16:05:00.000Z",
+      "title": "Fed's Warsh: Interest rate increases in play if inflation doesn't fall - Axios",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMifkFVX3lxTE5fU2NrT2pZRFlPeVdhWDNtNHZDNHJCa3FaZ0xXQnE1anlRRFNvZFVlZWRYdEV4cFkxSlU5eUZpMkZodXRPTjNNOHRJd3N3YjBWdkdYbi1sNi13Yk9fcDZaX0hmTTBoRGZJdlVBU0VxOGp4aTFNa1M0QVAwNmJ1QQ...",
+      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5fU2NrT2pZRFlPeVdhWDNtNHZDNHJCa3FaZ0xXQnE1anlRRFNvZFVlZWRYdEV4cFkxSlU5eUZpMkZodXRPTjNNOHRJd3N3YjBWdkdYbi1sNi13Yk9fcDZaX0hmTTBoRGZJdlVBU0VxOGp4aTFNa1M0QVAwNmJ1QQ?oc=5",
+      "date": "2026-08-28T14:02:11.000Z",
       "source": "Google News",
       "badge": "us"
     },
@@ -346,14 +330,6 @@
       "badge": "us"
     },
     {
-      "title": "U.S. Dollar to Thai Baht - USD/THB Exchange Rate Chart - forex.com",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiX0FVX3lxTE5yTG5SODhoS1R5OU5WV043bnpTalJnaUhnSXFNQzNjMkU2SjFialp1NjZnWThlb1Rtam51T0RQTXNUdlpjXy1VV1hCTWNHTFRGN1BTb0FnS1E2WU1Za0Jr?oc=5\" target=\"_blank\">U.S. Dollar to Thai...",
-      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5yTG5SODhoS1R5OU5WV043bnpTalJnaUhnSXFNQzNjMkU2SjFialp1NjZnWThlb1Rtam51T0RQTXNUdlpjXy1VV1hCTWNHTFRGN1BTb0FnS1E2WU1Za0Jr?oc=5",
-      "date": "2026-08-28T07:00:00.000Z",
-      "source": "Google News",
-      "badge": "thai"
-    },
-    {
       "title": "Solutions for mobilizing medium and long-term capital for the economy. - Vietnam.vn",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiiAFBVV95cUxNUDZuYURrU0h3dUViTDNDRXZxVzZ0MkJ5dkhabVRiUVVNeTQwX2FDZjdFV1lRRVd5MURJTDg1N0xWMnZaVHpESE5wU0RlTlN5ODlYZ3otMUFhNWp1WmVqLVkwSEtieW4tOTZ2VkNGTHkya3g0MDFyZzZQdVZsQl...",
       "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNUDZuYURrU0h3dUViTDNDRXZxVzZ0MkJ5dkhabVRiUVVNeTQwX2FDZjdFV1lRRVd5MURJTDg1N0xWMnZaVHpESE5wU0RlTlN5ODlYZ3otMUFhNWp1WmVqLVkwSEtieW4tOTZ2VkNGTHkya3g0MDFyZzZQdVZsQllGMzJXR0gzMEJK?oc=5",
@@ -362,7 +338,7 @@
       "badge": "vietnam"
     },
     {
-      "title": "Thai equities catch the eye of more foreign brokerages - bangkokpost.com",
+      "title": "Thai equities catch the eye of more foreign brokerages - Bangkok Post",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiqwFBVV95cUxPejZjUjB0bVNMYW5tdC1MZHkyNllpRHRQS2JwaWlQMWVtSTNMN01OYmNBRHh6by1aeDBja2cwMlpTMm1rTV9pYXA5ODJHQlpKb25xNTBHVXN6UDJueVB0RlZxbU81b2h4VUtPRC1fLUhYV19qQUhGUVQ3VEdRSz...",
       "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPejZjUjB0bVNMYW5tdC1MZHkyNllpRHRQS2JwaWlQMWVtSTNMN01OYmNBRHh6by1aeDBja2cwMlpTMm1rTV9pYXA5ODJHQlpKb25xNTBHVXN6UDJueVB0RlZxbU81b2h4VUtPRC1fLUhYV19qQUhGUVQ3VEdRSzlPSmJlQ2x2cG00My1CWmZwcGJLOHoySmluMGtpaEQ1UEZNNU5aTk9vMDhuQms?oc=5",
       "date": "2026-08-27T21:50:00.000Z",
@@ -378,6 +354,14 @@
       "badge": "thai"
     },
     {
+      "title": "Thai Baht’s Bullish Bias vs USD Faces BoT Sensitivity, OCBC Says - CryptoRank",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiiAFBVV95cUxQMHZ4N3luU1JkeFRxSmMzSFhtNXROcVJFV1UtUm43aDJZQmFnR0ZJaXJUTG90S1F5TUZkVWhPR0NNeHJXelZZY2wtYmxWSl9FSlRaUWo4ZnVrMWxpT3BuMEFQVXl0aUwyTlA3NnhFbXR4VlFPclkxSEttWnpUd2...",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQMHZ4N3luU1JkeFRxSmMzSFhtNXROcVJFV1UtUm43aDJZQmFnR0ZJaXJUTG90S1F5TUZkVWhPR0NNeHJXelZZY2wtYmxWSl9FSlRaUWo4ZnVrMWxpT3BuMEFQVXl0aUwyTlA3NnhFbXR4VlFPclkxSEttWnpUd2xDVG03RXFrdUtJ?oc=5",
+      "date": "2026-08-26T00:54:45.000Z",
+      "source": "Google News",
+      "badge": "thai"
+    },
+    {
       "title": "IMF's Georgieva says global economy weathering energy shock, sees fiscal concerns - Reuters",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiwgFBVV95cUxOUlNGTjR1THQ0R0s5N3VUYk1yNEpjMTY3NURXRkRHOWZHMzBRdi1EMDlieDJ0U180WTZMai1nVnVmWnlpZzNMUm1lV1F4a1R1UEU5bGRqb3BlVk00Wjh6ME10NEdwNE1McDdDNF9aM3pyeXZoNmJ4M01lMFZDZT...",
       "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOUlNGTjR1THQ0R0s5N3VUYk1yNEpjMTY3NURXRkRHOWZHMzBRdi1EMDlieDJ0U180WTZMai1nVnVmWnlpZzNMUm1lV1F4a1R1UEU5bGRqb3BlVk00Wjh6ME10NEdwNE1McDdDNF9aM3pyeXZoNmJ4M01lMFZDZTNUTXRYRkpldlFVNm1LRWd5MFZHYjRnUUw0ekREdHU0ODNiSEY4OEFFcXRhN2NvVlBLU285bkx1VHBYVVc5eUZtOXdXQQ?oc=5",
@@ -386,20 +370,36 @@
       "badge": "economic"
     },
     {
-      "title": "Thai Baht: Bullish bias against US Dollar faces BoT sensitivity – OCBC - FXStreet",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMirwFBVV95cUxNTE54bHdQU1BySm9oTVZ4RDVDaW9GU19kYVN5T0NCYldNOHRzYnQ4dWd6SWE5NkJUTldRcFpqbDd6RXh3OFEzeW1KXzY1SmJGaDJuRkVpZzRpd2p3M2JjTzBxLXZYUXVtRjdvcDBpY0IwRE9GUUJBaTFSa1FLVU...",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNTE54bHdQU1BySm9oTVZ4RDVDaW9GU19kYVN5T0NCYldNOHRzYnQ4dWd6SWE5NkJUTldRcFpqbDd6RXh3OFEzeW1KXzY1SmJGaDJuRkVpZzRpd2p3M2JjTzBxLXZYUXVtRjdvcDBpY0IwRE9GUUJBaTFSa1FLVUJNSjFnT0JudGxWVTVFOEZDQ0NzVzNiTWdBRm1KcTJIanhWdFpOM2g4alRqNDhLRktv?oc=5",
-      "date": "2026-08-25T21:54:00.000Z",
-      "source": "Google News",
-      "badge": "thai"
-    },
-    {
       "title": "Emerging Asia (ex China) government bonds monthly – August 2026 - LSEG",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMimAFBVV95cUxPa2hydGJnVE1lUmpuSXkzeTNtYjZuNF82MVdOd2dVcHVqMGxic0NXeldiNHJKV0cyQVNWRWtiazJKc190a0JfT3NMU28zNVp1bVZ0d2JFZTZxYWZPRjBha3djcWl2UVN2eUJYQnd4ZlpuNXpoSGFJYUhZazZGZk...",
       "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPa2hydGJnVE1lUmpuSXkzeTNtYjZuNF82MVdOd2dVcHVqMGxic0NXeldiNHJKV0cyQVNWRWtiazJKc190a0JfT3NMU28zNVp1bVZ0d2JFZTZxYWZPRjBha3djcWl2UVN2eUJYQnd4ZlpuNXpoSGFJYUhZazZGZktmQ0M3cUhoX0E5SzZUdDBmNzFBR282b25nSg?oc=5",
       "date": "2026-08-25T07:00:00.000Z",
       "source": "Google News",
       "badge": "bond"
+    },
+    {
+      "title": "Commodity Price Prediction Markets in 2026: Oil, Gold & More - SailGP",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiXkFVX3lxTE9TMjI0OXlXVzdfVmlJamx3dzlPdGZiOXpVWGpzRHI0RlZHTV95RkN3U2pRTVB6a0FtOXQwSU1BeXgtQzRHbFNuYUlzczU2QnlseFhBQTJhYktvYUNIRnc?oc=5\" target=\"_blank\">Commodity Price Pred...",
+      "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9TMjI0OXlXVzdfVmlJamx3dzlPdGZiOXpVWGpzRHI0RlZHTV95RkN3U2pRTVB6a0FtOXQwSU1BeXgtQzRHbFNuYUlzczU2QnlseFhBQTJhYktvYUNIRnc?oc=5",
+      "date": "2026-08-25T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
+      "title": "1st IPO on Thailand’s stock market in 2026 sees dismal performance - Thai Enquirer",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMimAFBVV95cUxPTDZsbm5WeTZNcWpLZWoxU095amJsaEhWNkFVci1DaVZtR3MyeXF5djVSRmpnQ0FYWWJyZUtkb2lQZHZGVXQ3UVBWSkdhX1BpWjZpSGZOeUhUQzhFNUxkTmhuUVlzQ2xGNzZ4ejRTNi1uakJ3Ym9yTGhydGtYQj...",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPTDZsbm5WeTZNcWpLZWoxU095amJsaEhWNkFVci1DaVZtR3MyeXF5djVSRmpnQ0FYWWJyZUtkb2lQZHZGVXQ3UVBWSkdhX1BpWjZpSGZOeUhUQzhFNUxkTmhuUVlzQ2xGNzZ4ejRTNi1uakJ3Ym9yTGhydGtYQjhiMWxBXzRWMWZfWVdsWFBocXBxeTBJbV9qZg?oc=5",
+      "date": "2026-08-20T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "thai"
+    },
+    {
+      "title": "Sea (SE) Heads To ASEAN Conference 2026 With Investors Watching Closely - Yahoo Finance",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMimgFBVV95cUxQV1lmYTFQdjZNeDZqOHp1djloTWJnQ2J3SjZRXzVvbHlodTFGeDl4bXc4dU02b2hlUWZFQXlOZEk2LWs2WXNlRjUtd18zalRmRGJfVUJWc3h0ejFZYUZoMU1WSmxVVkZPNzlkNV9fLTRSd1lCUmZvdmQyZElmNE...",
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQV1lmYTFQdjZNeDZqOHp1djloTWJnQ2J3SjZRXzVvbHlodTFGeDl4bXc4dU02b2hlUWZFQXlOZEk2LWs2WXNlRjUtd18zalRmRGJfVUJWc3h0ejFZYUZoMU1WSmxVVkZPNzlkNV9fLTRSd1lCUmZvdmQyZElmNEE5TWFGdVBkUjJWTUV1dVR4Y0g0ZExmRVljRHFn?oc=5",
+      "date": "2026-08-20T07:00:00.000Z",
+      "source": "Google News",
+      "badge": "em"
     }
   ]
 }
