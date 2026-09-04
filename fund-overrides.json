@@ -1,8 +1,12 @@
 {
-  "updated_at": "2026-08-10T08:39:16.124Z",
+  "updated_at": "2026-09-04T06:12:01.779Z",
   "overrides": {
     "B-INNOTECHRMF": {
       "proj_id": "M0213_2561",
+      "fund_class": ""
+    },
+    "KT-JAPANALL-A": {
+      "proj_id": "M0022_2567",
       "fund_class": ""
     }
   }
