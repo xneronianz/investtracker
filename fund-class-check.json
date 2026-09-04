@@ -1,12 +1,12 @@
 {
-  "checked_at": "2026-09-04T01:39:01.419Z",
+  "checked_at": "2026-09-04T04:49:38.445Z",
   "proj_id": "M0022_2567",
   "classes": [
     {
       "name": "KT-JAPANALL-A",
-      "latest_nav": 16.0154,
-      "latest_date": "2026-09-01",
-      "entries_seen": 8
+      "latest_nav": 15.8262,
+      "latest_date": "2026-09-02",
+      "entries_seen": 9
     }
   ]
 }
