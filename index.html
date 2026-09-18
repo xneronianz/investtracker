@@ -597,7 +597,7 @@
             </div>
 
 
-            <!-- FUND TRENDS: Top 3 Winners + Top 3 Losers -->
+            <!-- FUND TRENDS: Top 10 Winners + Top 10 Losers -->
             <div class="bg-white rounded-[3rem] shadow-xl border border-slate-100 p-6 mt-6 mb-8" id="fundTrendsCard">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">🏆 Fund Trends <span id="trendPeriodLabel" class="text-indigo-500 normal-case">(Selected period)</span></h3>
@@ -606,12 +606,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Winners -->
                     <div>
-                        <div class="text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-3 flex items-center gap-1">🚀 Top 3 Winners</div>
+                        <div class="text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-3 flex items-center gap-1">🚀 Top 10 Winners</div>
                         <div id="trendWinners" class="flex flex-col gap-2"></div>
                     </div>
                     <!-- Losers -->
                     <div>
-                        <div class="text-[10px] font-black text-rose-500 uppercase tracking-widest mb-3 flex items-center gap-1">📉 Top 3 Losers</div>
+                        <div class="text-[10px] font-black text-rose-500 uppercase tracking-widest mb-3 flex items-center gap-1">📉 Top 10 Losers</div>
                         <div id="trendLosers" class="flex flex-col gap-2"></div>
                     </div>
                 </div>
@@ -1964,7 +1964,7 @@
             // top/bottom 3 by rank position.
             function dedupeTop(arr, wantPositive) {
                 var seen = new Set(); var out = [];
-                for (var i = 0; i < arr.length && out.length < 3; i++) {
+                for (var i = 0; i < arr.length && out.length < 10; i++) {
                     var f = arr[i];
                     if (wantPositive && f.pct <= 0) continue;
                     if (!wantPositive && f.pct >= 0) continue;
