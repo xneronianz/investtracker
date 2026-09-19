@@ -4831,8 +4831,18 @@
                             callbacks: {
                                 title: items => items[0]?.label || '',
                                 label: function(context) {
-                                    if (context.datasetIndex === 0) return 'Invested: ' + fmtB(context.raw[1]);
-                                    if (context.datasetIndex === 1) { const d = renderData[context.dataIndex]; return 'Return: '+(d.tr>=0?'+':'-')+fmtB(Math.abs(d.tr)); }
+                                    // BUG FIX: this used to read context.raw[1] — the raw chart
+                                    // coordinate used to correctly draw the stacked bar (which
+                                    // deliberately swaps grey/colored segment order for a loss vs
+                                    // a gain, so the bar renders correctly either way). But in a
+                                    // LOSS scenario, that coordinate is actually d.current, not
+                                    // d.invested — so this tooltip line was silently showing the
+                                    // wrong number, identical to "Total Value", exactly matching
+                                    // what was reported. Now reads the real underlying value
+                                    // directly, unaffected by the chart's visual stacking order.
+                                    const d = renderData[context.dataIndex];
+                                    if (context.datasetIndex === 0) return 'Invested: ' + fmtB(d.invested);
+                                    if (context.datasetIndex === 1) return 'Return: '+(d.tr>=0?'+':'-')+fmtB(Math.abs(d.tr));
                                     return 'Return %: '+(context.raw>=0?'+':'')+context.raw.toFixed(2)+'%';
                                 },
                                 afterBody: function(context) {
