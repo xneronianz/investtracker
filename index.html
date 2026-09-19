@@ -4696,11 +4696,19 @@
                 }
 
                 const dailyTax = includeTaxInReturn ? (date === latestChartDate ? liveTotals.tax : taxSavings.filter(t => t.date <= date).reduce((s, t) => s + t.amount, 0)) : 0;
-                let dailyTR = dailyCurrent - dailyInvested;
+                // BUG FIX: dailyTR previously only used dailyCurrent - dailyInvested,
+                // omitting dividends/realized gains/tax savings — while the "current"
+                // field just below (labeled "Total Value" in the tooltip) DID include
+                // them. This meant Return and Total Value used two different formulas,
+                // so they could never reconcile (Invested + Return != Total Value) once
+                // accumulated div/realized/tax was non-trivial. Now matches the same
+                // formula the main dashboard headline uses: tr = cur + div + real + tax - inv.
+                const dailyTotalValue = dailyCurrent + dailyDividends + dailyRealized + dailyTax;
+                let dailyTR = dailyTotalValue - dailyInvested;
                 let dailyTRPercent = dailyInvested > 0 ? (dailyTR / dailyInvested) * 100 : 0;
                 // Skip dates where NO fund had started yet — avoids flat-zero leading bars
                 if (dailyInvested === 0 && dailyCurrent === 0 && date !== latestChartDate) return;
-                historyData.push({ date, invested: dailyInvested, current: dailyCurrent + dailyDividends + dailyRealized + dailyTax, tr: dailyTR, trPercent: dailyTRPercent });
+                historyData.push({ date, invested: dailyInvested, current: dailyTotalValue, tr: dailyTR, trPercent: dailyTRPercent });
             });
 
             // Handle Timeframe Filtering
