@@ -1,29 +1,197 @@
 {
-  "updated": "2026-09-22T17:31:13.408Z",
+  "updated": "2026-09-23T05:29:15.236Z",
   "items": [
     {
-      "title": "How Paramount Won Warner Bros.",
-      "body": "Inside the settlement talks between the media mogul David Ellison and the coalition of states seeking to block his $111 billion deal.",
-      "link": "https://www.nytimes.com/2026/09/22/business/paramount-warner-bros-ellison-bonta.html",
-      "date": "2026-09-22T17:17:55.000Z",
+      "title": "White House Defends Trump’s Ban on CNN, MS NOW and Politico in Court Filing",
+      "body": "President Trump determined that CNN, MS NOW and Politico were in  ‘violation of the standards of professionalism and decorum’ expected at the White House.",
+      "link": "https://www.nytimes.com/2026/09/23/business/trump-cnn-politico-ms-now-ban.html",
+      "date": "2026-09-23T05:06:39.000Z",
       "source": "NY Times",
       "badge": "global"
     },
     {
-      "title": "Fed hawkishness puts Vietnam's dong, inflation and interest rates in focus - theinvestor.vn",
+      "title": "Gold and silver prices rise in commodity markets - Apa.az",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMihwFBVV95cUxOSndjc2ZmQzBwaFRKeWdtcG5HSEFTN3g3Q2NUWm9HNE1nUlNsN0Vab1h5VlRpelVPTkxvVjhjdC0zLTVDQm9wSFRma0dISUZjY3UyWjJXNXJyWHFJQlVxdEVESng1R2JTU0E2OGFLSWhkdG1xdGVsTjg1b0pxYk...",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOSndjc2ZmQzBwaFRKeWdtcG5HSEFTN3g3Q2NUWm9HNE1nUlNsN0Vab1h5VlRpelVPTkxvVjhjdC0zLTVDQm9wSFRma0dISUZjY3UyWjJXNXJyWHFJQlVxdEVESng1R2JTU0E2OGFLSWhkdG1xdGVsTjg1b0pxYkF4UDFzU3Z0UG8?oc=5",
+      "date": "2026-09-23T04:56:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
+    },
+    {
+      "title": "US capital takes broader footprint in Vietnam - Theinvestor",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMihwFBVV95cUxOZmZxX3JTWDd3ZDVSdGk3bjhWdEN0OU5EZFJOMFFNTV9qcUFrT3FicXAwbTBJeUZwVVA1aXpob1NyeVdfSjFvZGJXZkRrVXprUjN0bVR3aVJnX1EzOGJLNmh0Ymt3cTAtM1lYMHU5RG1UbU53dDBkY0tHNGpDQm...",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOZmZxX3JTWDd3ZDVSdGk3bjhWdEN0OU5EZFJOMFFNTV9qcUFrT3FicXAwbTBJeUZwVVA1aXpob1NyeVdfSjFvZGJXZkRrVXprUjN0bVR3aVJnX1EzOGJLNmh0Ymt3cTAtM1lYMHU5RG1UbU53dDBkY0tHNGpDQmFKYlBGMVlsY3M?oc=5",
+      "date": "2026-09-23T03:58:40.000Z",
+      "source": "Google News",
+      "badge": "vietnam"
+    },
+    {
+      "title": "Nene Royal rocks AGT final with 'Seven Nation Army'",
+      "body": "Phuket local and rising global star Nene Royal lit up the stage with a rendition of The White Stripes' 'Seven Nation Army' in the final round of America's Got Talent 2026, as she vied for the competition's coveted title,...",
+      "link": "https://www.bangkokpost.com/life/arts-and-entertainment/3324705/nene-royal-rocks-agt-final-with-seven-nation-army",
+      "date": "2026-09-23T03:57:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Will Trump's AI rebrand to 'super intelligence' catch on?",
+      "body": "Some people close to the president have started to use the term but experts say it is unlikely to catch on.",
+      "link": "https://www.bbc.co.uk/news/articles/cqy4z9pv4w0po?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-09-23T03:20:30.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "UOB Thailand drives SME transition financing to bridge ecosystem gaps, meet ESG demands",
+      "body": "Pressures on Thailand to achieve its Net Zero ambitions are shifting decisively toward bridging transition gaps for small and medium-sized enterprises (SMEs). As global ESG regulations tighten across supply chains, SMEs ...",
+      "link": "https://www.bangkokpost.com/business/general/3323530/uob-thailand-drives-sme-transition-financing-to-bridge-ecosystem-gaps-meet-esg-demands",
+      "date": "2026-09-23T02:23:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "“Plastic Back to Value”: A Circular Economy Model",
+      "body": "Plastic is one of the environmental challenges that society can no longer afford to overlook. Yet plastic that has already been used does not necessarily have to end its journey as &ldquo;waste.&rdquo; When properly mana...",
+      "link": "https://www.bangkokpost.com/business/general/3323433/plastic-back-to-value-a-circular-economy-model",
+      "date": "2026-09-23T02:11:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "CFTC says prediction markets&apos; &apos;mentions&apos; contracts present a higher risk of manipulation",
+      "body": "The announcement comes after reports in August that the agency was conducting an internal review into the event contract type.",
+      "link": "https://www.cnbc.com/2026/09/22/cftc-prediction-markets-mentions-contracts-have-manipulation-risk.html",
+      "date": "2026-09-23T00:58:16.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "Delivery competition shifts up a gear",
+      "body": "Despite economic pressures and rising fuel costs, Thailand's express delivery market continues to expand, but the competitive battleground is shifting from price and scale towards faster, more reliable and specialised lo...",
+      "link": "https://www.bangkokpost.com/business/general/3324515/delivery-competition-shifts-up-a-gear",
+      "date": "2026-09-23T00:10:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Here&apos;s who we know is going to the Trump-Xi dinner so far",
+      "body": "Very little is known about which Chinese business executives, if any, are expected to attend.",
+      "link": "https://www.cnbc.com/2026/09/22/heres-who-we-know-is-going-to-the-trump-xi-dinner-so-far.html",
+      "date": "2026-09-22T23:43:43.000Z",
+      "source": "CNBC Markets",
+      "badge": "global"
+    },
+    {
+      "title": "'I don't have a buoyancy aid': Living without the Bank of Mum and Dad",
+      "body": "Three 20-somethings tell BBC News how they are navigating life without parental support.",
+      "link": "https://www.bbc.co.uk/news/articles/c8dx5p7gd4e9o?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-09-22T23:20:31.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Europe's car makers are in crisis. Will the threat of war rescue them?",
+      "body": "Auto executives across Europe hope rearmament can help them flex their industrial muscles once more.",
+      "link": "https://www.bbc.co.uk/news/articles/c6vgyq598k9po?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-09-22T23:11:33.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Telecom sector set to gain from mass adoption of AI",
+      "body": "Telecom operators are expected to benefit from mass artificial intelligence (AI) adoption, driven by the government's TH-AI Passport project and their promotion of mobile data packages designed to provide unlimited use o...",
+      "link": "https://www.bangkokpost.com/business/general/3324425/telecom-sector-set-to-gain-from-mass-adoption-of-ai",
+      "date": "2026-09-22T23:03:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Rich nations must cut debt as global shocks push up borrowing costs, IMF chief tells BBC",
+      "body": "In an interview with the BBC, Kristalina Georgieva says economic shocks had pushed \"debt levels up like a staircase not to heaven\".",
+      "link": "https://www.bbc.co.uk/news/articles/cx305ymq4ldqo?at_medium=RSS&amp;at_campaign=rss",
+      "date": "2026-09-22T23:01:28.000Z",
+      "source": "BBC Business",
+      "badge": "global"
+    },
+    {
+      "title": "Qantas’s New York-to-Sydney ‘Project Sunrise’ Flights to Take Off in 2028",
+      "body": "Qantas Airways said the 18-hour flights, part of its Project Sunrise program, would come months after its 22-hour direct flights from Sydney to London begin.",
+      "link": "https://www.nytimes.com/2026/09/22/travel/qantas-project-sunrise-flights.html",
+      "date": "2026-09-22T23:00:07.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Tisco ESU recommends equities, short-term bonds",
+      "body": "Tisco Economic Strategy Unit (ESU) is recommending investors prioritise equities, short-term bonds and commodities for their investments, while warning that a rapid rise in US bond yields could trigger a correction in ri...",
+      "link": "https://www.bangkokpost.com/business/general/3324380/tisco-esu-recommends-equities-shortterm-bonds",
+      "date": "2026-09-22T23:00:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Dates set for Queen Mother's cremation",
+      "body": "An official schedule for the royal cremation ceremony of Her Majesty Queen Sirikit The Queen Mother was issued on Tuesday by the Government Public Relations Department (PRD).",
+      "link": "https://www.bangkokpost.com/thailand/general/3324405/dates-set-for-queen-mothers-cremation",
+      "date": "2026-09-22T22:37:00.000Z",
+      "source": "Bangkok Post",
+      "badge": "thai"
+    },
+    {
+      "title": "Nasdaq reaches record high close, AI stocks rally - Reuters",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMipwFBVV95cUxOOUI2bTZ5ZFhnZUozYjg5LXM1WHhuT24xUS0zYmRRZkViWVBreE05ZTNMWFBDSGhHTXUyQ3ZyMWhsUFdxSUlxUXVUUXVHWGRVelg3Z2RuVXo3bndwaXJfRXhEUEFERFNSUVZoaDNERnFxdnhuNkxLdVhnNDRpRG...",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOOUI2bTZ5ZFhnZUozYjg5LXM1WHhuT24xUS0zYmRRZkViWVBreE05ZTNMWFBDSGhHTXUyQ3ZyMWhsUFdxSUlxUXVUUXVHWGRVelg3Z2RuVXo3bndwaXJfRXhEUEFERFNSUVZoaDNERnFxdnhuNkxLdVhnNDRpRGhxYndETzVJdVNnZXJESmpMNmw5QVFQODFGY2w2NzVCcFl0bXBSNjRaTQ?oc=5",
+      "date": "2026-09-22T22:25:27.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Wall Street holds near record after oil falls below $US100 - CommBank",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMirwFBVV95cUxOTVRyMDNMdjlCakx0eUdsUHFrc3N4MW9PS1lYemI5Q0RkdnpoTHFMVTZ3Q3FscHNDcDlDYUh0MDZDb1h3VUxPTVBBUzdnS0gtMzBXZ1ZYUTYxYTBSY3VRVW1NWHRVSEl5b1ZoaXZ0VWFRTC1tdm9CYWs4SkR0Zk...",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOTVRyMDNMdjlCakx0eUdsUHFrc3N4MW9PS1lYemI5Q0RkdnpoTHFMVTZ3Q3FscHNDcDlDYUh0MDZDb1h3VUxPTVBBUzdnS0gtMzBXZ1ZYUTYxYTBSY3VRVW1NWHRVSEl5b1ZoaXZ0VWFRTC1tdm9CYWs4SkR0Zkxnc0RqQ3RuQXRyWDkybk9JanR3YWtrSDN5RTNlb21ES2VRUUJwcVotdG0tVnVaOVRV?oc=5",
+      "date": "2026-09-22T21:59:50.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Billy Bush Joins Fox News a Decade After ‘Access Hollywood’ Tape Scandal",
+      "body": "He lost his job as a “Today” show anchor in 2016 after footage surfaced of Donald J. Trump joking with him about sexual assault. He will be a Fox contributor.",
+      "link": "https://www.nytimes.com/2026/09/22/business/billy-bush-fox-news-trump-access-hollywood.html",
+      "date": "2026-09-22T21:56:44.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Trump Says He Supports Banning Diesel Exports to Bring Down Prices",
+      "body": "Diesel prices have been setting records because of the war in Iran, but the oil industry say banning U.S. exports would not make the fuel cheaper.",
+      "link": "https://www.nytimes.com/2026/09/22/business/energy-environment/trump-diesel-exports-iran-war.html",
+      "date": "2026-09-22T21:12:26.000Z",
+      "source": "NY Times",
+      "badge": "global"
+    },
+    {
+      "title": "Treasury Rates Today: September 22, 2026 - Forbes",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5\" target=\"_blank\">Treasury...",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5",
+      "date": "2026-09-22T20:49:00.000Z",
+      "source": "Google News",
+      "badge": "bond"
+    },
+    {
+      "title": "Dow Drops 185, Nasdaq Rises 122, S&P 500 Ends Flat - TV News Check",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMikwFBVV95cUxPWkJUZDAtU0JmV3BqaXB5T3RoSjdoZzY2Y3pQSkpmUHA5RE5sa3V3WW15bklBLUoyQnl6ZGxybVp2Y0hIUnl3ZjA2T3VKYzd0Y2pOZWdxeExyTXdOY1dmV3ZtUkMyX0NOd1JhNUxfN19lYmM4MXBITlQxNl84Uz...",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPWkJUZDAtU0JmV3BqaXB5T3RoSjdoZzY2Y3pQSkpmUHA5RE5sa3V3WW15bklBLUoyQnl6ZGxybVp2Y0hIUnl3ZjA2T3VKYzd0Y2pOZWdxeExyTXdOY1dmV3ZtUkMyX0NOd1JhNUxfN19lYmM4MXBITlQxNl84UzVaM0Y0MjRSOEh1bWFTSFZCMkNib2s?oc=5",
+      "date": "2026-09-22T20:23:56.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "Fed hawkishness puts Vietnam's dong, inflation and interest rates in focus - Theinvestor",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiqwFBVV95cUxOSTJ5bWo3Si1zZFJvOXNSdzhVaXJPR3d2X2FlSTNmQ0FfbS1BS2JZZzRkaHFaVEM4MWNQYVNmRHdkbjgzUFpPQmpjZDQxT2d6TWtiWWEyM01kTHI4UGs3OW1oX19CaVlrZWJJRm9YVGtCRGFCbFRIakdOZ0J6M1...",
       "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOSTJ5bWo3Si1zZFJvOXNSdzhVaXJPR3d2X2FlSTNmQ0FfbS1BS2JZZzRkaHFaVEM4MWNQYVNmRHdkbjgzUFpPQmpjZDQxT2d6TWtiWWEyM01kTHI4UGs3OW1oX19CaVlrZWJJRm9YVGtCRGFCbFRIakdOZ0J6M1BRbGozMHF5WW1MUkZxX2xCVmZRRzg3RkJ1NWg4MU1oM0pxN25qUjJMRkNxRzQ?oc=5",
       "date": "2026-09-22T17:11:00.000Z",
       "source": "Google News",
       "badge": "vietnam"
-    },
-    {
-      "title": "Ella Langley’s ‘Choosin’ Texas’ Topples Mariah Carey’s Chart Record",
-      "body": "The country ballad holds the No. 1 spot on the Billboard chart for a 23rd nonconsecutive week, besting the record set by “All I Want for Christmas Is You.”",
-      "link": "https://www.nytimes.com/2026/09/22/arts/music/ella-langley-choosin-texas-chart-record.html",
-      "date": "2026-09-22T17:00:20.000Z",
-      "source": "NY Times",
-      "badge": "global"
     },
     {
       "title": "Fed's Barkin says economy may be firming, inflation not limited to energy, tariff shocks - Reuters",
@@ -34,52 +202,12 @@
       "badge": "us"
     },
     {
-      "title": "Davey promises tax cuts for millions if UK rejoins EU single market",
-      "body": "The Lib Dem leader vows to raise tax thresholds if he becomes PM, in a speech to his party conference.",
-      "link": "https://www.bbc.co.uk/news/articles/cj62e1wrpx73o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-09-22T16:50:29.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
-      "title": "'We screwed up': Doordash admits underpaying New York workers",
-      "body": "The food delivery giant will pay a $131.5m settlement following a city probe into wage violations.",
-      "link": "https://www.bbc.co.uk/news/articles/cjr4v72y6p4eo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-09-22T16:50:24.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
-      "title": "Trump Officials Eject 750,000 From Obamacare Markets, Claiming Fraud",
-      "body": "Vice President JD Vance said the measure would save the government $2.2 billion.",
-      "link": "https://www.nytimes.com/2026/09/22/health/aca-obamacare-vance-fraud.html",
-      "date": "2026-09-22T16:45:07.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Trump Is Back on TV, Briefly, as Many Networks Carry His U.N. Speech Live",
-      "body": "A suspension of pool coverage remains in effect. But the in-house United Nations broadcaster provided a feed of the president’s remarks.",
-      "link": "https://www.nytimes.com/2026/09/22/business/media/trump-tv-un-speech.html",
-      "date": "2026-09-22T16:21:14.000Z",
-      "source": "NY Times",
-      "badge": "global"
-    },
-    {
-      "title": "Here&apos;s who we know is going to the Trump-Xi dinner so far",
-      "body": "Very little is known about which Chinese business executives, if any, are expected to attend.",
-      "link": "https://www.cnbc.com/2026/09/22/heres-who-we-know-is-going-to-the-trump-xi-dinner-so-far.html",
-      "date": "2026-09-22T16:13:06.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
-    },
-    {
-      "title": "Sir Jim Ratcliffe suspends production at key UK plants blaming high gas prices",
-      "body": "Ineos said natural gas in the UK is twelve times more expensive than in the US.",
-      "link": "https://www.bbc.co.uk/news/articles/cw305ynd69n6o?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-09-22T15:43:14.000Z",
-      "source": "BBC Business",
-      "badge": "global"
+      "title": "Gold Price Forecast Today: Gold Slips to a 6-Week Low After Fed, BOJ Hikes, Can It Reclaim $4,769? - CoinDCX",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMicEFVX3lxTFB3TE93bDRnTVZhVmZyU2p2UVg2bHJhSktzeHpneW9NU1B4Z1hlNjIxNGxXaEk5aWd3WEt0Q2dncjNFS1NUMTdYLWZ0dFh1d0tjRWZtaTk1MHlPWjRWc1dhZmtiMDNkVDluanl6aHF1c2k?oc=5\" target=\"_bla...",
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTFB3TE93bDRnTVZhVmZyU2p2UVg2bHJhSktzeHpneW9NU1B4Z1hlNjIxNGxXaEk5aWd3WEt0Q2dncjNFS1NUMTdYLWZ0dFh1d0tjRWZtaTk1MHlPWjRWc1dhZmtiMDNkVDluanl6aHF1c2k?oc=5",
+      "date": "2026-09-22T16:20:00.000Z",
+      "source": "Google News",
+      "badge": "commodity"
     },
     {
       "title": "How Kevin Warsh's rate hike exposed a 2-speed U.S. economy, with AI and housing at the poles - Fortune",
@@ -90,36 +218,12 @@
       "badge": "us"
     },
     {
-      "title": "Stocks climb as oil slides, AI buzz returns",
-      "body": "LONDON - Stock markets advanced Tuesday as oil prices fell further on speculation the United States and Iran could make progress on talks to end the Mideast war this week, with enthusiasm about Meta&rsquo;s new AI agent ...",
-      "link": "https://www.bangkokpost.com/business/general/3324254/stocks-climb-as-oil-slides-ai-buzz-returns",
-      "date": "2026-09-22T14:45:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Fed’s Collins Says Rate Hike Will Help Return Inflation to Goal - Bloomberg.com",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMitAFBVV95cUxOUUg0S2c2bFdubmFVS09hZE9vYXgzSXg5SVQzU0pCMThjSHVlR0pCRlUwS0VCS0I0RWctN1NLdzJDZ2M5OFMtX2dpbjQ3WlJfMnc0VmFJUlV3U2RrdmIzY3JpdjdETXc4d0t0QkhFTXp0NXdORE5mUXlBZU94eV...",
-      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOUUg0S2c2bFdubmFVS09hZE9vYXgzSXg5SVQzU0pCMThjSHVlR0pCRlUwS0VCS0I0RWctN1NLdzJDZ2M5OFMtX2dpbjQ3WlJfMnc0VmFJUlV3U2RrdmIzY3JpdjdETXc4d0t0QkhFTXp0NXdORE5mUXlBZU94eVFHTWIxTGlsZkVVNDZORW5EQ0JaVE1tUFJjS3l0NHNGZlNMRFNDcE9CYkFzRVA0eHVyd2hJcXg?oc=5",
-      "date": "2026-09-22T14:41:15.000Z",
+      "title": "Pimco Trims Underweight on Long US Bonds as Yields Top 5% - Bloomberg.com",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNm01eGRFMkpHMUl2SFVfSmFPMWRWSHRyLW9QUkRUU3lHZkIxSVozbUVNYkRtNTZjbW5KRjc1M0kyTTNTSHc1c19yaGpXWTZJLU1rcGlSNTU3bnZHV2ltbDFaMUtaV25GQUF1YWtPWmxnVXdJa2c3UlF4dUpkcm...",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNm01eGRFMkpHMUl2SFVfSmFPMWRWSHRyLW9QUkRUU3lHZkIxSVozbUVNYkRtNTZjbW5KRjc1M0kyTTNTSHc1c19yaGpXWTZJLU1rcGlSNTU3bnZHV2ltbDFaMUtaV25GQUF1YWtPWmxnVXdJa2c3UlF4dUpkcmk2aEJmS2JFR2dYR3hnUTlQdU1RaTliMW1HN2pPVUROQ0htWFdqcTdtNnItb1k?oc=5",
+      "date": "2026-09-22T14:04:12.000Z",
       "source": "Google News",
-      "badge": "us"
-    },
-    {
-      "title": "New EU industry rules would damage UK, warns Burnham",
-      "body": "The prime minister says he will raise his concerns when he meets the European Commission President later.",
-      "link": "https://www.bbc.co.uk/news/articles/cv2dwylkl7weo?at_medium=RSS&amp;at_campaign=rss",
-      "date": "2026-09-22T13:10:23.000Z",
-      "source": "BBC Business",
-      "badge": "global"
-    },
-    {
-      "title": "New strategic plan aims to combat fuel crises",
-      "body": "The cabinet has endorsed a strategic plan for the Oil Fuel Fund and a fuel crisis response plan covering 2026-29 with wider use of biofuels made from domestic raw materials to help deal with volatility in global energy m...",
-      "link": "https://www.bangkokpost.com/business/general/3324228/new-strategic-plan-aims-to-combat-fuel-crisis",
-      "date": "2026-09-22T12:59:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
+      "badge": "bond"
     },
     {
       "title": "Kalshi asks CFTC to allow margin trading on its platform, letting users buy with borrowed funds",
@@ -130,60 +234,12 @@
       "badge": "global"
     },
     {
-      "title": "Thai badminton star challenges doping ruling",
-      "body": "Thailand&rsquo;s rising badminton star Pitchamon Opatniputh has moved swiftly to challenge her positive drug test, requesting an analysis of her B sample after becoming the first confirmed doping case of the Asian Games ...",
-      "link": "https://www.bangkokpost.com/sports/3324178/thai-badminton-star-challenges-doping-ruling",
-      "date": "2026-09-22T11:45:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
       "title": "Malaysia to grow 4.7% in 2026 as Southeast Asian outlook brightens — World Economic Forum - The Edge Malaysia",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiUEFVX3lxTFAtX1lZZTZTbWk4ZUZuc1Y5SV9vUXRpR3V5RzA5NTdnQlZ6V19oeDhIREdkUEtRNDNDOWtTNlFxYndKS2JTeDVvVkdUcVVvRGxU?oc=5\" target=\"_blank\">Malaysia to grow 4.7% in 2026 as Southe...",
       "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFAtX1lZZTZTbWk4ZUZuc1Y5SV9vUXRpR3V5RzA5NTdnQlZ6V19oeDhIREdkUEtRNDNDOWtTNlFxYndKS2JTeDVvVkdUcVVvRGxU?oc=5",
       "date": "2026-09-22T11:10:58.000Z",
       "source": "Google News",
       "badge": "em"
-    },
-    {
-      "title": "Developing fund products associated with the capital needs of the economy - Laodong.vn",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMirwFBVV95cUxNYzZuZGRWMEUyZWw5MmhWUlZFb1JwUWNmSC1Fa2U0YmZfTHlHQWpBWE5jLTFUUXltQUU1VkE5VnlBZmRldkJJSmt6dno0SlZBWno4TVA0a0JRYXRsMFZSaEhUbi02NXJVUjNOMXlmRGtGQ2Qxa3o2UWRPM0tVMl...",
-      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNYzZuZGRWMEUyZWw5MmhWUlZFb1JwUWNmSC1Fa2U0YmZfTHlHQWpBWE5jLTFUUXltQUU1VkE5VnlBZmRldkJJSmt6dno0SlZBWno4TVA0a0JRYXRsMFZSaEhUbi02NXJVUjNOMXlmRGtGQ2Qxa3o2UWRPM0tVMlB5dTJHLWFJc21OZkNpQkVIS2wzVTRDd183WEN3VlR6cG0yemc4Z00xak9UR2F0MGFr?oc=5",
-      "date": "2026-09-22T10:55:01.000Z",
-      "source": "Google News",
-      "badge": "vietnam"
-    },
-    {
-      "title": "Rising Treasury Yields Are Wreaking Havoc on the Bond Market. Here's How It Could Affect Stock Investors. - Currently.com",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMikgFBVV95cUxNNzFuRGxMVUNNWWNMX1pKaVZ4ZU14d1dBSHdtU2dUU29OMUJCYkhFdk9KVU05NVZXd2FjeFdoQUE3VEIwUTE1QWJCMGo2d3Jsdzd5d1hWcUpiVVNBVzQwUGdzRThvUkpvcVVzeEtWWXljVXhUakVmcDVWdHZzdE...",
-      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNNzFuRGxMVUNNWWNMX1pKaVZ4ZU14d1dBSHdtU2dUU29OMUJCYkhFdk9KVU05NVZXd2FjeFdoQUE3VEIwUTE1QWJCMGo2d3Jsdzd5d1hWcUpiVVNBVzQwUGdzRThvUkpvcVVzeEtWWXljVXhUakVmcDVWdHZzdEd3NHMwdFpOTTdaS3M2YTdSaGVUUQ?oc=5",
-      "date": "2026-09-22T10:11:00.000Z",
-      "source": "Google News",
-      "badge": "bond"
-    },
-    {
-      "title": "Stock Market Today: S&P 500 Futures Gain, Nasdaq 100 Slips as Trump Administration Targets Iranian Airlin - Benzinga",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMikAJBVV95cUxQYmF6b1BORVlCVExNdWpVVkFoc2VpTW9XdUdsMHFsUVNhZmxMbzJXS3YyNk5yejE4eDhCR1R0NGpoWDJLUTZEMUxibUxkVWpIX0dYTm1MQVNGZ3ljQi1BeFFlUER3dnh5dGxxNHhaLXFFN1hONTVPMzBZS1IzT0...",
-      "link": "https://news.google.com/rss/articles/CBMikAJBVV95cUxQYmF6b1BORVlCVExNdWpVVkFoc2VpTW9XdUdsMHFsUVNhZmxMbzJXS3YyNk5yejE4eDhCR1R0NGpoWDJLUTZEMUxibUxkVWpIX0dYTm1MQVNGZ3ljQi1BeFFlUER3dnh5dGxxNHhaLXFFN1hONTVPMzBZS1IzT0JWMVQtRm85RXRXZWVLR1VXMXRFdkFaY2wtNjVDWmhaRnIyTFkza01GT2JEbGM3U3VRdkcwbmdyQkc1aUhDMFZZbzhnN21CMHdHRDFfUk9UMU1iTmNqeV9OSEVsYlFKSFo0V0pSOG5pbEFfMmVjbThMOU1fSi1xVG9Xb0dadFhpNnI1SkFreDJabFJMVkRPT1Nyeg?oc=5",
-      "date": "2026-09-22T09:36:56.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
-      "title": "Cabinet approves ‘medical use only’ cannabis bill",
-      "body": "The cabinet on Tuesday approved a cannabis control bill that will restrict cannabis use for medical purposes only.",
-      "link": "https://www.bangkokpost.com/thailand/general/3324188/cabinet-approves-medical-use-only-cannabis-bill",
-      "date": "2026-09-22T09:35:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Thailand rallies behind Nene Royal in AGT final",
-      "body": "Thailand is rallying behind Nene Royal as the 16-year-old Phuket rocker prepares to take the stage in the live finals of &ldquo;America&rsquo;s Got Talent&rdquo;.",
-      "link": "https://www.bangkokpost.com/life/arts-and-entertainment/3324180/thailand-rallies-behind-nene-royal-in-agt-final",
-      "date": "2026-09-22T09:07:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
     },
     {
       "title": "Awakening savings: To have a large investment fund, you must first build trust. - Vietnam.vn",
@@ -194,52 +250,12 @@
       "badge": "vietnam"
     },
     {
-      "title": "Cabinet approves B43bn consumer subsidy extension",
-      "body": "The cabinet has approved a 43-billion-baht extension of the government&rsquo;s Thai Chuay Thai Plus (Thais help Thais plus) co-payment scheme for October and November, along with an additional 700-baht allowance for stat...",
-      "link": "https://www.bangkokpost.com/business/general/3324163/cabinet-approves-b43bn-consumer-subsidy-extension",
-      "date": "2026-09-22T07:19:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "The AI paradox: make your job obsolete",
-      "body": "In 2005, an online chess site ran a tournament with no restrictions on who &mdash; or what &mdash; could enter. Grandmasters entered. So did the strongest chess engines. So did teams of both. The winners were a pair of A...",
-      "link": "https://www.bangkokpost.com/business/general/3324159/the-ai-paradox-make-your-job-obsolete",
-      "date": "2026-09-22T07:00:00.000Z",
-      "source": "Bangkok Post",
-      "badge": "thai"
-    },
-    {
-      "title": "Gold prices continue to decline on commodity markets - Apa.az",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMingFBVV95cUxPbHBvZEdPMG9SRFM5VUw5eDNTUDVCUUNrNFlQTURaQlBKbTNtaXhXXzM0NUNfTmc3emtDQ1NhbTlnUUlvQkQzR2ZHdElvYnZjNUUzMGZpYllIY2tkckpzVVlrbXhOcjViZWdudzd4NnhrM3VDQ2pMeXFqOHdkcn...",
-      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPbHBvZEdPMG9SRFM5VUw5eDNTUDVCUUNrNFlQTURaQlBKbTNtaXhXXzM0NUNfTmc3emtDQ1NhbTlnUUlvQkQzR2ZHdElvYnZjNUUzMGZpYllIY2tkckpzVVlrbXhOcjViZWdudzd4NnhrM3VDQ2pMeXFqOHdkcng5a2J4TWJWVW9HSGp1WVZZQ3NjalJuTmN1ajhsaUFKdw?oc=5",
-      "date": "2026-09-22T05:53:00.000Z",
-      "source": "Google News",
-      "badge": "commodity"
-    },
-    {
       "title": "match.asia Builds AI-Native Investment Bank for Southeast Asian SMEs - The Manila Times",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMi2AFBVV95cUxQeERKUnZkVVQzNzBsbU5xbVlNNXBKcHZYMjdzQnVyUmlRZXROUXVmRGtZNVlvZWRHc3JLMGxRVFltZEwtRUZWbnVPNXJjOW1zS3Y4bUZJb09OZkp4MHVPUFZNRThOM3Bvckp2TS1HSG5taE80clJ6Zmw1M3ZFSj...",
       "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQeERKUnZkVVQzNzBsbU5xbVlNNXBKcHZYMjdzQnVyUmlRZXROUXVmRGtZNVlvZWRHc3JLMGxRVFltZEwtRUZWbnVPNXJjOW1zS3Y4bUZJb09OZkp4MHVPUFZNRThOM3Bvckp2TS1HSG5taE80clJ6Zmw1M3ZFSjB6OFhfVnNVMmt6TnZDQmhRbHFJQnR2YTltTmVYRXp1Rm00LWhVdkRxeDl2cThuOUtwdjRSS0N4M0VVX1FKWE0tUWMtckdkWVFzTkptV0FxZEdzOFZxamZhNjDSAd4BQVVfeXFMTzJjMjZYTnRJWWwxMnh5aU5zckpnS3lJUWR3TUNDUE96OUZLQTJNVWo1b3Y3ZWFLcDRlSE0yb2hCV3c2dEpxOEVqRkNKNUNUdzJYS3lKOEY4cDJjMW93d0hhZS1fUTlpNmFoMG9iXzNXY0J5NUlxd3QzWUY5VmppbXVZNzRfNktab29abHFVRExsUFpMeFVCWlI0NV9yUWtWOGRHbV9vNHhoRzcxZE9MaFFMUHZVT2xaVUpkRldqYzNPYmlXY0NWX2RDdEZJN1h4VUFPeDVnSFdueUozbkJ3?oc=5",
       "date": "2026-09-22T05:18:39.000Z",
       "source": "Google News",
       "badge": "em"
-    },
-    {
-      "title": "Thai PM Targets Global Investors in US Growth Push - Nation Thailand",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5oWjZza1JaOS1tRnJfMjlqS3VnOXpoWERrek40SHMwc2pVMHRfSVhVbldtcVY4eW9TYnpQUG8yYVY5aE9BcGdGdUxiMGgweWpXYU5NTjk4cG4zM3RObG5RLU9hR19hOTg?oc=5\" target=\"_blank\">Thai PM ...",
-      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5oWjZza1JaOS1tRnJfMjlqS3VnOXpoWERrek40SHMwc2pVMHRfSVhVbldtcVY4eW9TYnpQUG8yYVY5aE9BcGdGdUxiMGgweWpXYU5NTjk4cG4zM3RObG5RLU9hR19hOTg?oc=5",
-      "date": "2026-09-22T03:20:00.000Z",
-      "source": "Google News",
-      "badge": "thai"
-    },
-    {
-      "title": "S&P 500 Nears Highs Despite 60% of Stocks in Bear Market - 조선일보",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxOZjItM3g5bnAtX0REUDRqUk5Mc2tPSGsyd2pRUmZ0ak5raTF0UHlZcHpyeDc1bi1oRU90ejdmRFd0Q2NESXE2OXJnY3JXUnd6aDNUbzR5ZUtDaEh2NzdyRWlCTUxYcFNiSldEYWhxT0RfSERtSmNMWlg1UlcwWX...",
-      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOZjItM3g5bnAtX0REUDRqUk5Mc2tPSGsyd2pRUmZ0ak5raTF0UHlZcHpyeDc1bi1oRU90ejdmRFd0Q2NESXE2OXJnY3JXUnd6aDNUbzR5ZUtDaEh2NzdyRWlCTUxYcFNiSldEYWhxT0RfSERtSmNMWlg1UlcwWXdXWFZ5MXp6MzBiR0FtQzR3?oc=5",
-      "date": "2026-09-22T02:59:37.000Z",
-      "source": "Google News",
-      "badge": "us"
     },
     {
       "title": "Jamie Dimon says hyperscaler AI spending could hit $1 trillion next year",
@@ -250,6 +266,14 @@
       "badge": "global"
     },
     {
+      "title": "S&P 500 ends flat amid dip in oil, financial stocks; Nasdaq notches record close - Investing.com",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMivgFBVV95cUxNb2RxV3h6VGdyMW92ZWluWXlDUTVrQ1pIUURvQVp4YTVrcFVxNkl3NEg0UGZ5LVJTazByTTJGelBHRXRCVFFDNkxndG1wTE1aMlBFYmFtWnN3MlFqY1otNFNVNXdScjR4UEc4Y2RZX05NX0xrRlNRUXFXVHlHOE...",
+      "link": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNb2RxV3h6VGdyMW92ZWluWXlDUTVrQ1pIUURvQVp4YTVrcFVxNkl3NEg0UGZ5LVJTazByTTJGelBHRXRCVFFDNkxndG1wTE1aMlBFYmFtWnN3MlFqY1otNFNVNXdScjR4UEc4Y2RZX05NX0xrRlNRUXFXVHlHOENyM1ZMaHYzeGIycUY5dWZ5TFdSUzFndmdGZnE1cEVaMG85aW9aM0V0VzBHQkkxOHVQeVRhLXR6VmhobEV5blVn?oc=5",
+      "date": "2026-09-22T00:56:30.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
       "title": "Commodity Price Prediction Markets in 2026: Oil, Gold & More - SailGP",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiXkFVX3lxTE9TMjI0OXlXVzdfVmlJamx3dzlPdGZiOXpVWGpzRHI0RlZHTV95RkN3U2pRTVB6a0FtOXQwSU1BeXgtQzRHbFNuYUlzczU2QnlseFhBQTJhYktvYUNIRnc?oc=5\" target=\"_blank\">Commodity Price Pred...",
       "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9TMjI0OXlXVzdfVmlJamx3dzlPdGZiOXpVWGpzRHI0RlZHTV95RkN3U2pRTVB6a0FtOXQwSU1BeXgtQzRHbFNuYUlzczU2QnlseFhBQTJhYktvYUNIRnc?oc=5",
@@ -258,36 +282,12 @@
       "badge": "commodity"
     },
     {
-      "title": "Nasdaq notches record-high close, AI optimism reignites and Treasury yields retreat - Reuters",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMingFBVV95cUxQbUY0bG1IQkExN3pxSFZoX1VGN0hTNkluZ1hFd1F6VzZwdWtPRExzOXRnS0prRjV1M0I3U2tfUnhZcmJSQkV6STFKbUo2YXB6S1RhNUkycUFJUXg3UXA0WW9CWkRYaVVVUGRqRmRtUERCU1I4M3ZMYXhETmY1Q3...",
-      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQbUY0bG1IQkExN3pxSFZoX1VGN0hTNkluZ1hFd1F6VzZwdWtPRExzOXRnS0prRjV1M0I3U2tfUnhZcmJSQkV6STFKbUo2YXB6S1RhNUkycUFJUXg3UXA0WW9CWkRYaVVVUGRqRmRtUERCU1I4M3ZMYXhETmY1Q3FZQU9Ob1MtMzRONFc3NVFrNzVpcTQySVRzd1dENmcxdw?oc=5",
-      "date": "2026-09-21T23:12:31.000Z",
-      "source": "Google News",
-      "badge": "us"
-    },
-    {
       "title": "Stock exchange vows to continue its package of major reforms - Bangkok Post",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMitwFBVV95cUxQaHpsQW9XbUFqSmVxR0YxMEpCVGozdEJhRTV4amlDNG9OVmNhdHdrRmFOUVptMlhYVjhucVlQcVpzWW0zYWp5cEdqWlM3dnlaVWw2a0pPZ1BBa09mUUt2Q0ZrbUR2OUUwall6LVJEdzNtT0VuR0tFSWk2ZlVEdW...",
       "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQaHpsQW9XbUFqSmVxR0YxMEpCVGozdEJhRTV4amlDNG9OVmNhdHdrRmFOUVptMlhYVjhucVlQcVpzWW0zYWp5cEdqWlM3dnlaVWw2a0pPZ1BBa09mUUt2Q0ZrbUR2OUUwall6LVJEdzNtT0VuR0tFSWk2ZlVEdWc2SklTTkJ3aTNyclZ5ZzJ5U1lyNVNpcVlzekREUExjQy02Rk9VWHhvbHFPTzNVaXlqMm10dnZvV2s?oc=5",
       "date": "2026-09-21T22:38:00.000Z",
       "source": "Google News",
       "badge": "thai"
-    },
-    {
-      "title": "Treasury Rates Today: September 21, 2026 - Forbes",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5\" target=\"_blank\">Treasury...",
-      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9yck9yOUFWR0FpdE9oMU00NGZWMVVrb25MOWxBWmRuU3Ztc1FvdGJZZlBMXzZwUnpPQVp5Mlg4UzFwX2VZTG00SUFUa3p0VVoxRFZOY2M3V2N3R1ZlLXhCdVVpWHNKd2s?oc=5",
-      "date": "2026-09-21T20:32:00.000Z",
-      "source": "Google News",
-      "badge": "bond"
-    },
-    {
-      "title": "‘It&apos;s awful’: How tariffs, soaring fuel costs and higher interest rates are squeezing American companies",
-      "body": "Tariffs, fuel prices and interest rates are squeezing American companies, particularly manufacturers, auto suppliers, retailers and transportation businesses.",
-      "link": "https://www.cnbc.com/2026/09/20/tariffs-fuel-prices-and-interest-rates-squeeze-us-companies.html",
-      "date": "2026-09-21T15:04:04.000Z",
-      "source": "CNBC Markets",
-      "badge": "global"
     },
     {
       "title": "ASEAN shifts investment push toward high-value, innovation-driven industries - Philippine Canadian Inquirer",
@@ -322,7 +322,23 @@
       "badge": "bond"
     },
     {
-      "title": "U.S. Dollar to Thai Baht - USD/THB Exchange Rate Chart - forex.com",
+      "title": "Upgrading the stock market, raising the economic standard. - Vietnam.vn",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMiiAFBVV95cUxNX1FVTFR6eHNHTEVsX0MzYU9TYzBJcktta2t3ZUp0S25Fa2xxWnZ5SElOVUR4ekxCZlNacUljUGVnQWNzbThIVW1IdU53dUxyVUlVRXNqTDgtMkE3Z2NQZUVEM0w5X3hhSXNpOTh1YWZFYmtHQXFVQWxKZWhwLT...",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNX1FVTFR6eHNHTEVsX0MzYU9TYzBJcktta2t3ZUp0S25Fa2xxWnZ5SElOVUR4ekxCZlNacUljUGVnQWNzbThIVW1IdU53dUxyVUlVRXNqTDgtMkE3Z2NQZUVEM0w5X3hhSXNpOTh1YWZFYmtHQXFVQWxKZWhwLTRGNVJMSUxiV08t?oc=5",
+      "date": "2026-09-20T03:48:09.000Z",
+      "source": "Google News",
+      "badge": "vietnam"
+    },
+    {
+      "title": "Ever wonder how the Fed's interest rate actually works? We've got answers - NPR",
+      "body": "<a href=\"https://news.google.com/rss/articles/CBMilwFBVV95cUxNanRyTXM4ZE00RFhRWlRSYXlhNUx5cGxxRENEUTFSZmlyUU1rNmFGcmpQdVdleGtBNkRoRVZYVkY3ZEY1UU9McXZsQ0ZBNFllQWR2RXhSU0xsc0dCcDVIWUVOeUNZNU9xcTd3MHNJVE5fUE9KMHhxM2tGQ3NDam...",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNanRyTXM4ZE00RFhRWlRSYXlhNUx5cGxxRENEUTFSZmlyUU1rNmFGcmpQdVdleGtBNkRoRVZYVkY3ZEY1UU9McXZsQ0ZBNFllQWR2RXhSU0xsc0dCcDVIWUVOeUNZNU9xcTd3MHNJVE5fUE9KMHhxM2tGQ3NDam1CVnJxT0M4MEp3ZllkNEZnRmxWS19JOVBj?oc=5",
+      "date": "2026-09-19T09:00:00.000Z",
+      "source": "Google News",
+      "badge": "us"
+    },
+    {
+      "title": "U.S. Dollar to Thai Baht - USD/THB Exchange Rate Chart - FOREX.com",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMiX0FVX3lxTE1SVXBkc3FKdVdIZVhIaWtFUmVUaXhWM3dGZ29Kcmh4c211cjhicTE1Z29NTTNGN205VlM0MlFPWlBsSzl0Y1FqOGQtVXBSU1hxSE5fSGcyODBqUV8xUGtR?oc=5\" target=\"_blank\">U.S. Dollar to Thai...",
       "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1SVXBkc3FKdVdIZVhIaWtFUmVUaXhWM3dGZ29Kcmh4c211cjhicTE1Z29NTTNGN205VlM0MlFPWlBsSzl0Y1FqOGQtVXBSU1hxSE5fSGcyODBqUV8xUGtR?oc=5",
       "date": "2026-09-18T07:00:00.000Z",
@@ -338,27 +354,11 @@
       "badge": "economic"
     },
     {
-      "title": "Gold Price Forecast September 2026: Fed Hikes Rates, Gold Rebounds Above US$4,300 - Mitrade",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMijAFBVV95cUxNZDVYWkFVTXRzanlIS1lfUERjRmowVEtoZjdxLVZVUU9ZemQwTlhzUm5oWU94TXFseUxfMllXUDJRYW5EWnpyTDFrTnlWV2hhMHpEa0FiYW50VTFHZEF2VGVjb2tLWXdENjM4bmVXR2tBaEJPdTAtYWJUVWNNbG...",
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNZDVYWkFVTXRzanlIS1lfUERjRmowVEtoZjdxLVZVUU9ZemQwTlhzUm5oWU94TXFseUxfMllXUDJRYW5EWnpyTDFrTnlWV2hhMHpEa0FiYW50VTFHZEF2VGVjb2tLWXdENjM4bmVXR2tBaEJPdTAtYWJUVWNNbGVONTJPNFBHckR4emNnSw?oc=5",
-      "date": "2026-09-17T08:34:02.000Z",
-      "source": "Google News",
-      "badge": "commodity"
-    },
-    {
       "title": "Salesforce issues revenue target of over $63 billion for fiscal 2030, beating estimates",
       "body": "Salesforce issued some updated longer-term financials at its annual Dreamforce conference.",
       "link": "https://www.cnbc.com/2026/09/16/salesforce-issues-revenue-target-of-63-billion-for-fiscal-2030.html",
       "date": "2026-09-16T23:13:45.000Z",
       "source": "CNBC US",
-      "badge": "us"
-    },
-    {
-      "title": "U.S. stocks slip after the Fed raises interest rates, hints more hikes may be on the way - pbs.org",
-      "body": "<a href=\"https://news.google.com/rss/articles/CBMivwFBVV95cUxPQ0o4SEFnLXVuc0pFakhWQXNrNVdZOFBqTmZsR3dlMlFFZEluX2VWbEJPOGJkRkZ6a2tfaHZySVdpaVhYZk1aeGZFdjM2UExoOGMxc1BDbkcwUVFMaElEXzBUb2ItX1hmRVkxWjhHanJyV3ppMGJFcjhNY3BVYl...",
-      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPQ0o4SEFnLXVuc0pFakhWQXNrNVdZOFBqTmZsR3dlMlFFZEluX2VWbEJPOGJkRkZ6a2tfaHZySVdpaVhYZk1aeGZFdjM2UExoOGMxc1BDbkcwUVFMaElEXzBUb2ItX1hmRVkxWjhHanJyV3ppMGJFcjhNY3BVYlZMNFVCemRaSW94Z1hBZy0yNmd3R29KMEppZThtNmxWaERxa3hfZzZ4WU5BV3AzN19xSTY0OEZwQmwzdGVSWC1SNNIBxAFBVV95cUxNQ3ZKZVFHbHpRSEo2cGs4RjlfMG1UdURsamh2Y3ExeEVkZzdmaGQ3OElrd0FpclpvUGQ1MFlKSHZ2VGFOc1hVN3ZmSVc4aGhIY3hvVm5UUlY0emc2bFNyU3ZGU0RFckhMekh6WE5FeklHLU9uUGZNOVZCQWJPdnctcTNJTmpTOGp0Q3ZVUjEzSWROc0V6VE1lY2hLLWNJWUlwTkEwQkJ1SVVtRlZrYlg5QUxoZEZFOFFzMXgwbkNPNzgzdlRa?oc=5",
-      "date": "2026-09-16T21:32:36.000Z",
-      "source": "Google News",
       "badge": "us"
     },
     {
@@ -378,10 +378,10 @@
       "badge": "em"
     },
     {
-      "title": "Q&A: Why should you care about rising Treasury bond rates? - UVA Today",
+      "title": "Q&A: Why should you care about rising Treasury bond rates? - news.virginia.edu",
       "body": "<a href=\"https://news.google.com/rss/articles/CBMikwFBVV95cUxPWkUxbzdpUUw1RHF4d3pOMTdqczlhZkRMSE9tdGFNcGktZkVRX19Ccno2T0cyVWNKVUZRMU43ekZoS3AxcF9KWndGWnFvdWo4TnFwVC1fRTJqMVRCUWZsQW1TQXZzQUMyVHVtQnRJVEIzaFVTOW53ODVwOWVHRH...",
       "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPWkUxbzdpUUw1RHF4d3pOMTdqczlhZkRMSE9tdGFNcGktZkVRX19Ccno2T0cyVWNKVUZRMU43ekZoS3AxcF9KWndGWnFvdWo4TnFwVC1fRTJqMVRCUWZsQW1TQXZzQUMyVHVtQnRJVEIzaFVTOW53ODVwOWVHRHZQWFRaUk1FeldzMkxPdVptcHJPSXc?oc=5",
-      "date": "2026-09-14T17:33:46.000Z",
+      "date": "2026-09-14T07:00:00.000Z",
       "source": "Google News",
       "badge": "bond"
     },
