@@ -1234,11 +1234,17 @@
             </div>
             <div class="flex items-center justify-between mb-2">
                 <span class="text-xs font-black text-slate-500 uppercase tracking-widest">Chart Range</span>
-                <div class="flex gap-1" id="histChartRangeBtns">
-                    <button onclick="setHistChartRange(3)" data-range="3" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">3Y</button>
-                    <button onclick="setHistChartRange(5)" data-range="5" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">5Y</button>
-                    <button onclick="setHistChartRange(10)" data-range="10" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">10Y</button>
-                    <button onclick="setHistChartRange(null)" data-range="all" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">Since Inception</button>
+                <div class="flex gap-1 flex-wrap justify-end" id="histChartRangeBtns">
+                    <button onclick="setHistChartRange('1w')" data-range="1w" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">1W</button>
+                    <button onclick="setHistChartRange('1m')" data-range="1m" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">1M</button>
+                    <button onclick="setHistChartRange('3m')" data-range="3m" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">3M</button>
+                    <button onclick="setHistChartRange('6m')" data-range="6m" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">6M</button>
+                    <button onclick="setHistChartRange('ytd')" data-range="ytd" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">YTD</button>
+                    <button onclick="setHistChartRange('1y')" data-range="1y" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">1Y</button>
+                    <button onclick="setHistChartRange('3y')" data-range="3y" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">3Y</button>
+                    <button onclick="setHistChartRange('5y')" data-range="5y" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">5Y</button>
+                    <button onclick="setHistChartRange('10y')" data-range="10y" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">10Y</button>
+                    <button onclick="setHistChartRange('all')" data-range="all" class="hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all">Since Inception</button>
                 </div>
             </div>
             <div class="chart-wrapper"><canvas id="navChart" width="2006" height="510" style="display: block; box-sizing: border-box; height: 240px; width: 944px;"></canvas></div>
@@ -3881,7 +3887,7 @@
             // EVERY point regardless of count.
             _histFullData = history;
             _histFundId = id;
-            setHistChartRange(3); // default range — see user's own suggestion
+            setHistChartRange('3y'); // default range — see user's own suggestion
 
             const revHistory = history.slice().reverse();
             const formatRow = (h, monthKey) => `
@@ -3964,7 +3970,7 @@
         // full history — defaults to 3 years on open (see user's own suggestion),
         // with 5Y/10Y/Since Inception available as explicit opt-ins rather than
         // always paying the cost of plotting the full history by default.
-        function setHistChartRange(years) {
+        function setHistChartRange(range) {
             const full = _histFullData;
             if (!full || full.length === 0) {
                 // BUG FIX: previously this just returned here, leaving whatever
@@ -3993,11 +3999,22 @@
             }
 
             let windowed;
-            if (years === null) {
+            if (range === 'all') {
                 windowed = full; // Since Inception
             } else {
                 const cutoff = new Date();
-                cutoff.setFullYear(cutoff.getFullYear() - years);
+                switch (range) {
+                    case '1w':  cutoff.setDate(cutoff.getDate() - 7); break;
+                    case '1m':  cutoff.setMonth(cutoff.getMonth() - 1); break;
+                    case '3m':  cutoff.setMonth(cutoff.getMonth() - 3); break;
+                    case '6m':  cutoff.setMonth(cutoff.getMonth() - 6); break;
+                    case 'ytd': cutoff.setMonth(0); cutoff.setDate(1); break; // Jan 1 of current year
+                    case '1y':  cutoff.setFullYear(cutoff.getFullYear() - 1); break;
+                    case '3y':  cutoff.setFullYear(cutoff.getFullYear() - 3); break;
+                    case '5y':  cutoff.setFullYear(cutoff.getFullYear() - 5); break;
+                    case '10y': cutoff.setFullYear(cutoff.getFullYear() - 10); break;
+                    default:    cutoff.setFullYear(cutoff.getFullYear() - 3); break; // fallback matches prior default
+                }
                 const cutoffStr = cutoff.toISOString().split('T')[0];
                 windowed = full.filter(h => h.date >= cutoffStr);
                 if (windowed.length < 2) windowed = full; // window too sparse — fall back to everything available
@@ -4005,7 +4022,7 @@
 
             // Update range button active states
             document.querySelectorAll('.hist-range-btn').forEach(btn => {
-                const isActive = (years === null && btn.dataset.range === 'all') || (String(years) === btn.dataset.range);
+                const isActive = btn.dataset.range === range;
                 btn.className = 'hist-range-btn px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-all ' +
                     (isActive ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50');
             });
