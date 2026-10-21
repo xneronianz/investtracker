@@ -1,227 +1,227 @@
 {
-  "updated_at": "2026-10-20T18:20:54.062Z",
-  "date": "2026-10-20",
+  "updated_at": "2026-10-21T18:22:41.100Z",
+  "date": "2026-10-21",
   "count": 55,
   "funds": {
     "ABGDD-SSF": {
-      "nav": 11.8813,
-      "nav_date": "2026-10-15"
+      "nav": 11.9501,
+      "nav_date": "2026-10-19"
     },
     "ASP-THAIESG": {
-      "nav": 12.2703,
-      "nav_date": "2026-10-19"
+      "nav": 12.136,
+      "nav_date": "2026-10-20"
     },
     "B-FUTURESSF": {
-      "nav": 11.4483,
-      "nav_date": "2026-10-14"
+      "nav": 11.2139,
+      "nav_date": "2026-10-15"
     },
     "B-INNOTECHSSF": {
-      "nav": 19.5031,
-      "nav_date": "2026-10-14"
+      "nav": 19.5072,
+      "nav_date": "2026-10-15"
     },
     "ES-GINNO-SSF": {
-      "nav": 16.1138,
-      "nav_date": "2026-10-15"
+      "nav": 15.4392,
+      "nav_date": "2026-10-19"
     },
     "K-CHANGE-SSF": {
-      "nav": 20.6955,
-      "nav_date": "2026-10-15"
+      "nav": 20.6138,
+      "nav_date": "2026-10-19"
     },
     "KFCMEGASSF": {
-      "nav": 6.7704,
-      "nav_date": "2026-10-15"
+      "nav": 6.6458,
+      "nav_date": "2026-10-19"
     },
     "KFGGSSF": {
-      "nav": 7.355,
-      "nav_date": "2026-10-15"
+      "nav": 7.2658,
+      "nav_date": "2026-10-19"
     },
     "KF-LATAM": {
-      "nav": 10.8798,
-      "nav_date": "2026-10-15"
+      "nav": 10.9768,
+      "nav_date": "2026-10-19"
     },
     "K-GOLD-A(A)": {
-      "nav": 21.4439,
-      "nav_date": "2026-10-19"
+      "nav": 21.1428,
+      "nav_date": "2026-10-20"
     },
     "KKP EQ THAI ESG": {
-      "nav": 10.8788,
-      "nav_date": "2026-10-19"
+      "nav": 10.7762,
+      "nav_date": "2026-10-20"
     },
     "KKP GB THAI ESG": {
-      "nav": 11.0753,
-      "nav_date": "2026-10-19"
+      "nav": 11.059,
+      "nav_date": "2026-10-20"
     },
     "KT-BOND": {
-      "nav": 10.499,
-      "nav_date": "2026-10-15"
+      "nav": 10.4651,
+      "nav_date": "2026-10-19"
     },
     "K-VIETNAM-SSF": {
-      "nav": 12.2237,
-      "nav_date": "2026-10-19"
+      "nav": 12.2656,
+      "nav_date": "2026-10-20"
     },
     "MEGA10CHINA-SSF": {
-      "nav": 11.5933,
-      "nav_date": "2026-10-15"
+      "nav": 11.5459,
+      "nav_date": "2026-10-20"
     },
     "ONE-UGG-ASSF": {
-      "nav": 28.2953,
-      "nav_date": "2026-10-15"
+      "nav": 27.9674,
+      "nav_date": "2026-10-19"
     },
     "PRINCIPAL IPROPEN-SSF": {
-      "nav": 8.5409,
-      "nav_date": "2026-10-19"
+      "nav": 8.5503,
+      "nav_date": "2026-10-20"
     },
     "SCBAXJ(SSF)": {
-      "nav": 13.0631,
-      "nav_date": "2026-10-19"
+      "nav": 12.8457,
+      "nav_date": "2026-10-20"
     },
     "SCBCOMP": {
-      "nav": 8.5494,
-      "nav_date": "2026-10-14"
+      "nav": 8.5539,
+      "nav_date": "2026-10-15"
     },
     "SCBCTECH(SSFE)": {
-      "nav": 4.1937,
-      "nav_date": "2026-10-15"
+      "nav": 4.094,
+      "nav_date": "2026-10-19"
     },
     "SCBEUROPE(SSF)": {
-      "nav": 7.9297,
-      "nav_date": "2026-10-15"
+      "nav": 7.9173,
+      "nav_date": "2026-10-19"
     },
     "SCBEUROPE(SSFE)": {
-      "nav": 8.3052,
-      "nav_date": "2026-10-15"
+      "nav": 8.2932,
+      "nav_date": "2026-10-19"
     },
     "SCBNDQ(SSF)": {
-      "nav": 15.27,
-      "nav_date": "2026-10-15"
+      "nav": 15.0597,
+      "nav_date": "2026-10-19"
     },
     "SCBNEXT(SSFE)": {
-      "nav": 8.8821,
-      "nav_date": "2026-10-15"
+      "nav": 8.6234,
+      "nav_date": "2026-10-19"
     },
     "SCBVIET(SSFA)": {
-      "nav": 7.597,
-      "nav_date": "2026-10-19"
+      "nav": 7.6339,
+      "nav_date": "2026-10-20"
     },
     "SCBVIET(SSFE)": {
-      "nav": 8.1449,
-      "nav_date": "2026-10-19"
+      "nav": 8.1848,
+      "nav_date": "2026-10-20"
     },
     "SCBWORLD(SSFE)": {
-      "nav": 13.7267,
-      "nav_date": "2026-10-15"
+      "nav": 13.6257,
+      "nav_date": "2026-10-19"
     },
     "TDSTHAIESG-A": {
-      "nav": 14.8625,
-      "nav_date": "2026-10-19"
+      "nav": 14.7535,
+      "nav_date": "2026-10-20"
     },
     "TISCOCHA-SSF": {
-      "nav": 9.6748,
-      "nav_date": "2026-10-19"
+      "nav": 9.6449,
+      "nav_date": "2026-10-20"
     },
     "TLA-GEQ": {
-      "nav": 12.8663,
-      "nav_date": "2026-10-15"
+      "nav": 12.8272,
+      "nav_date": "2026-10-19"
     },
     "TLFVMR-ASIAX": {
-      "nav": 14.6017,
-      "nav_date": "2026-10-15"
+      "nav": 14.5047,
+      "nav_date": "2026-10-19"
     },
     "UCHINA-SSF": {
       "nav": 6.548,
       "nav_date": "2026-10-15"
     },
     "UGIS-SSF": {
-      "nav": 11.2956,
-      "nav_date": "2026-10-15"
+      "nav": 11.2388,
+      "nav_date": "2026-10-19"
     },
     "KKP EMXCN-H-SSF": {
-      "nav": 15.5409,
-      "nav_date": "2026-10-15"
+      "nav": 15.4098,
+      "nav_date": "2026-10-19"
     },
     "KKP US500-UH-SSF": {
-      "nav": 13.8049,
-      "nav_date": "2026-10-15"
+      "nav": 13.7401,
+      "nav_date": "2026-10-19"
     },
     "SCBGOLDH-SSF": {
-      "nav": 15.5973,
-      "nav_date": "2026-10-19"
+      "nav": 15.3847,
+      "nav_date": "2026-10-20"
     },
     "SCBCHA-SSF": {
-      "nav": 8.4873,
-      "nav_date": "2026-10-19"
+      "nav": 8.4579,
+      "nav_date": "2026-10-20"
     },
     "SCBCHA(SSFE)": {
-      "nav": 8.8758,
-      "nav_date": "2026-10-19"
+      "nav": 8.8453,
+      "nav_date": "2026-10-20"
     },
     "SCBS&P500(SSFA)": {
-      "nav": 38.1968,
-      "nav_date": "2026-10-15"
+      "nav": 37.9256,
+      "nav_date": "2026-10-19"
     },
     "UOBSA-SSF": {
-      "nav": 14.9257,
-      "nav_date": "2026-10-15"
+      "nav": 15.0495,
+      "nav_date": "2026-10-19"
     },
     "B-GLOBALRMF": {
-      "nav": 21.1551,
-      "nav_date": "2026-10-14"
+      "nav": 21.1501,
+      "nav_date": "2026-10-15"
     },
     "B-INNOTECHRMF": {
-      "nav": 35.64,
-      "nav_date": "2026-10-14"
+      "nav": 35.6468,
+      "nav_date": "2026-10-15"
     },
     "KKP CHINA-H-SSF": {
       "nav": 9.8419,
       "nav_date": "2026-10-15"
     },
     "KKP GNP RMF-UH": {
-      "nav": 23.1961,
-      "nav_date": "2026-10-15"
+      "nav": 23.0381,
+      "nav_date": "2026-10-19"
     },
     "TLAWSRMF": {
-      "nav": 12.6676,
-      "nav_date": "2026-10-15"
+      "nav": 12.6769,
+      "nav_date": "2026-10-19"
     },
     "UOBSD-SSF": {
-      "nav": 13.7182,
-      "nav_date": "2026-10-19"
+      "nav": 13.7185,
+      "nav_date": "2026-10-20"
     },
     "K-US500X-A(A)": {
-      "nav": 16.0944,
-      "nav_date": "2026-10-15"
-    },
-    "TLA-GFIX": {
-      "nav": 10.2111,
-      "nav_date": "2026-10-15"
-    },
-    "PRINCIPAL GOPP-SSF": {
-      "nav": 19.96,
-      "nav_date": "2026-10-15"
-    },
-    "SCBGOLDH(SSFE)": {
-      "nav": 15.9116,
+      "nav": 15.9806,
       "nav_date": "2026-10-19"
     },
+    "TLA-GFIX": {
+      "nav": 10.2336,
+      "nav_date": "2026-10-19"
+    },
+    "PRINCIPAL GOPP-SSF": {
+      "nav": 20.0206,
+      "nav_date": "2026-10-19"
+    },
+    "SCBGOLDH(SSFE)": {
+      "nav": 15.6949,
+      "nav_date": "2026-10-20"
+    },
     "SCBNDQ(SSFE)": {
-      "nav": 15.5727,
-      "nav_date": "2026-10-15"
+      "nav": 15.3591,
+      "nav_date": "2026-10-19"
     },
     "SCBS&P500(SSFE)": {
-      "nav": 34.9633,
-      "nav_date": "2026-10-15"
+      "nav": 34.7189,
+      "nav_date": "2026-10-19"
     },
     "SCBJAPAN(SSF)": {
-      "nav": 15.7473,
-      "nav_date": "2026-10-15"
+      "nav": 15.9884,
+      "nav_date": "2026-10-19"
     },
     "SCBJAPAN(SSFE)": {
-      "nav": 16.434,
-      "nav_date": "2026-10-15"
+      "nav": 16.6876,
+      "nav_date": "2026-10-19"
     },
     "KT-JAPANALL-A": {
-      "nav": 15.0944,
-      "nav_date": "2026-10-15"
+      "nav": 15.2975,
+      "nav_date": "2026-10-19"
     }
   }
 }
